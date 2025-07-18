@@ -1,0 +1,144 @@
+
+/* ini adalah file css yang tinggal di update di dalam file style.css. NAMUN PASTIKAN BAHWA CSS LAMANYA SUDAH DIHAPUS. 
+HARUS HATI-HATI JANGAN HAPUS SEMUA ISI FILENYA NANTI TAMPILAN CSSMU YANG TERGANGGU*/
+
+.navbar {
+  background-color: #3D2D13;
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Logo & Info */
+.kampung-info {
+  display: flex;
+  align-items: center;
+}
+
+.kampung-info .logo {
+  height: 65px;
+  margin-left: 20px;
+}
+
+.kampung-info .text-info {
+  color: #ffffff; /* putih */
+  font-family: 'Inter', sans-serif;
+  line-height: 1.5;
+}
+
+.kampung-info .text-info .text-bold {
+  font-weight: bold;
+  font-size: 20px;
+  color: white;
+}
+
+.kampung-info .text-info div:last-child {
+  font-size: 15px;
+   color: white;
+}
+
+/* Menu Tengah */
+.navbar-main-wrapper {
+  flex-grow: 1;
+  display: flex;
+  justify-content: right;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-direction: row;
+}
+
+.navbar-nav > li {
+  position: relative;
+  margin: 0 0px;
+}
+
+.navbar .nav-link {
+  color: #ffffff !important;
+  font-weight: 6000;
+  font-size: 14px;
+  text-transform: uppercase;
+  padding: 5px 0;
+  position: relative;
+  margin-right: 20px;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus,
+.navbar .nav-link.active {
+  color: #ffffff !important;
+  background-color: transparent;
+}
+
+.navbar-nav > li > a::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 3px solid transparent;
+  transform: scaleX(0);
+  transition: 0.4s ease;
+}
+
+.navbar-nav > li > a:hover::before,
+.navbar-nav > li > a.active::before {
+  border-color: #da0f32;
+  transform: scaleX(1);
+}
+
+/* Dropdown Menu */
+.navbar-nav .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #ffffffff;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  display: none;
+  min-width: 180px;
+  z-index: 1000;
+}
+
+.navbar-nav li:hover > .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu .dropdown-item {
+  color: #000000ff !important;
+  font-size: 14px;
+  padding: 10px 20px;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-menu .dropdown-item:hover {
+  background-color: #222;
+  color: #ffffff !important;
+}
+
+/* Tombol Logout */
+
+ .logout-wrapper {
+    margin-right: 20px;
+    margin-left: 10px;
+  }
+
+@media (min-width: 992px) {
+  .navbar-container {
+    flex-direction: row;
+    align-items: center;
+  }
