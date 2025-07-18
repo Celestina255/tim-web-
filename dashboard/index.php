@@ -315,7 +315,7 @@ error_reporting(0);
 
       <!--
       Javascript Files
-      ==================================================
+      ======================================================
       -->
       <!-- initialize jQuery Library-->
       <script type="text/javascript" src="js/jquery.js"></script>
