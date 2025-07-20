@@ -81,7 +81,34 @@
                </div>
             </section>
             <!-- ts-feature light end -->
-
+<section class="sambutan-section py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title" style="color: #2caa50;">SAMBUTAN KEPALA KAMPUNG</h2>
+    </div>
+    <div class="row d-flex align-items-start">
+      <!-- Foto di kiri -->
+      <div class="col-md-4 text-center mb-4 mb-md-0 d-flex justify-content-center align-items-start">
+        <img src="../img/orang.png" alt="Kepala Desa" class="img-fluid rounded shadow-sm" style="max-width: 100%; height: auto;">
+      </div>
+      <!-- Teks sambutan di kanan -->
+      <div class="col-md-8">
+        <p class="fw-bold text-uppercase mb-1" style="font-weight: bold;">SUDIRMAN</p>
+        <p class="mb-3" style="font-weight: bold;">Kepala Kampung Banjar Ausoy</p>
+        
+        <p>Assalamu `Alaikum Warahmatullahi Wabarakatuh</p>
+        <p>Sebuah kesyukuran yang tak terhingga kepada Allah SWT, karena di era digitalisasi sekarang ini, Pemerintah Desa Pincara mampu menghadirkan Aplikasi Website Desa yang akan mempermudah pelayanan di Kantor Desa Pincara dalam hal pelayanan Administrasi.</p>
+        <p>Tentunya keberadaan Aplikasi ini diharapkan juga dapat memberikan Informasi kepada Masyarakat yang ingin mengetahui Program atau Kegiatan Pemerintah Desa Pincara dengan mengakses melalui Fitur yang sudah disiapkan.</p>
+        <p>Besar harapan kami, untuk aplikasi ini nantinya dapat membawa perubahan signifikan dalam proses Pelayanan Pemerintahan Desa dan mampu menjadi Desa Digital yang merupakan salah satu program untuk mengurangi kesenjangan arus informasi yang terjadi di Desa.</p>
+        <p>Konsep Desa Digital merupakan Pemanfaatan Teknologi Informasi yang Terintegrasi dalam pelayanan Publik dan Kegiatan perekonomian di Desa Pincara</p>
+        <p>Salam Dari Desa</p>
+        <p>Sekian dan terima kasih<br>
+        Billahi Taufiq WalHidayah<br>
+        Wassalamu `Alaikum Warahmatullahi Wabarakatuh</p>
+      </div>
+    </div>
+  </div>
+</section>
             <section  class="ts-service-area service-area-pattern" id="ts-service-area">
              <div class="service-area-bg">
                <div class="container">
