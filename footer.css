@@ -1,0 +1,107 @@
+/* Footer
+================================================== */
+.footer {
+  background-color: #3D2D13;
+  padding: 55px  2px;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  padding-right: 195px;
+}
+
+.footer-logo-img {
+  width: 150px;
+  height: auto;
+}
+
+.footer-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+
+.footer-widget-kampung{
+padding-left: 30px;
+}
+
+.footer-widget-hubungi{
+padding-right: 30px;
+}
+
+
+.footer-widget-tlp{
+  padding-right: 1px;
+  padding-left: 1px;
+}
+
+.footer-title-tlp {
+  margin-bottom: 8px;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.footer-widget-tlp li a{
+  font-size: 14px;
+  color: #ffffff;
+  line-height: 1.5;
+}
+
+
+.footer-widget-jelajahi .footer-title {
+  padding-left: 100px;
+}
+
+
+.footer-links {
+padding-left:100px;
+}
+
+.footer-links li a {
+  color: #ffffff;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 2px;
+  transition: color 0.3s ease;
+}
+
+.footer-links li a:hover,
+.social-icons a:hover,
+.footer-widget-tlp li a:hover {
+  color: #41cc3cff;
+  font-weight: bold;
+}
+
+.footer-logo-alamat {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-info-text p {
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  font-size: 20px;
+  margin-top: 15px;
+  margin-right: 50px;
+  padding-right: 25px;
+}
+
+.social-icons a {
+  color: white;
+  transition: 0.3s ease;
+}
+
+.footer-bottom {
+  background-color: #3D2D13;
+  color: white;
+  text-align: center;
+  padding-top: 15px;
+  font-size: 13px;
+  border-top: 1px solid #4e3a20;
+  margin-left: 250px;
+}
+/*Footer End*/
