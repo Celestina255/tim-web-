@@ -1,88 +1,105 @@
-      <div class="carousel slide" id="main-slide" data-ride="carousel">
-         <!-- Indicators-->
-         <ol class="carousel-indicators visible-md visible-md">
-            <li class="active" data-target="#main-slide" data-slide-to="0"></li>
-            <li data-target="#main-slide" data-slide-to="1"></li>
-            <li data-target="#main-slide" data-slide-to="2"></li>
-         </ol>
-         <!-- Indicators end-->
-         <!-- Carousel inner-->
-         <div class="carousel-inner">
-            <?php 
-            $query = mysqli_query ($con, "SELECT * FROM tb_slider ORDER BY id ASC");
-            while ($r = mysqli_fetch_array($query)){
-               ?>
-               <div class="carousel-item <?php echo $r['class']; ?>" style="background-image:url(../img/slider/<?php echo $r['gambar'];?>);">
-                  <div class="container">
-                     <div class="slider-content text-left">
-                        <div class="col-md-12">
-                           <h3 class="slide-sub-title" style="text-shadow: 1px 1px 3px rgb(110 120 80);">"<?php echo $r['des']; ?>"</h3>
-                        </div>
-                        <!-- Col end-->
-                     </div>
-                     <!-- Slider content end-->
-                  </div>
-                  <!-- Container end-->
-                  </div><?php } ?>
+   <style>
+      * {
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+      }
 
-                  <!-- Carousel item 3 end-->
-               </div>
-               <!-- Carousel inner end-->
-               <!-- Controllers--><a class="left carousel-control carousel-control-prev" href="#main-slide" data-slide="prev"><span><i class="fa fa-angle-left"></i></span></a>
-               <a class="right carousel-control carousel-control-next" href="#main-slide" data-slide="next"><span><i class="fa fa-angle-right"></i></span></a>
+      body, html {
+         height: 100%;
+         font-family: 'Segoe UI', sans-serif;
+      }
+      .hero-section {
+         background: linear-gradient(rgba(106, 177, 106, 0.5), rgba(0, 128, 0, 0.5)),
+         url('../img/lb.jpg') center center / cover no-repeat; 
+         height: 100vh;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         text-align: center;
+         color: white;
+         padding: 80px 40px;
+         border-radius: 12px;
+         margin: 0 auto;
+      }
+
+      .hero-content h2 {
+         font-size: 22px;
+         font-weight: 400;
+          color: white;
+      }
+
+      .hero-content h1 {
+         font-size: 50px;
+         font-weight: 700;
+          color: white;
+      }
+
+      .hero-content p {
+         font-size: 14px;
+         margin-bottom: 30px;
+      }
+
+      .highlight {
+         background-color: #006400;
+         padding: 2px 6px;
+         border-radius: 4px;
+         font-weight: bold;
+      }
+
+      .menu-icons {
+         display: flex;
+         justify-content: center;
+         gap: 40px;
+         flex-wrap: wrap;
+      }
+
+      .icon-item {
+         background-color: #fff;
+         border-radius: 10px;
+         padding: 20px;
+         width: 140px;
+         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+         color: #000;
+         transition: transform 0.3s ease;
+      }
+
+      .icon-item img {
+         width: 60px;
+         height: 60px;
+         margin-bottom: 10px;
+      }
+
+      .icon-item p {
+         font-weight: bold;
+      }
+
+      .icon-item:hover {
+         transform: scale(1.05);
+      }
+   </style>
+
+   <main class="hero-section">
+      <div class="hero-content">
+         <h2>SELAMAT DATANG</h2>
+         <h1>KAMPUNG BANJAR AUSOY</h1>
+         <p><span class="highlight">Perluas Jangkauan Dan Percepat Pelayanan Dengan Smart System Terintegrasi</span></p>
+         <div class="menu-icons">
+            <div class="icon-item">
+               <img src="../img/profile.png" alt="profile">
+               <p>Profil Kampung</p>
             </div>
-            <!-- Carousel end-->
-
-            <section id="ts-features-light" class="ts-features-light">
-               <div class="container">
-                  <div class="row feature-light-row">
-                     <div class="col-md-4 text-center">
-                        <div class="ts-feature-box">
-                           <div class="ts-feature-info">
-                              <div class="feature-img">
-                                 <img src="../dashboard/images/icon/layanan.png" alt="" style="width:80px; height: 80px;"/>
-                              </div>
-                              <h3 class="ts-feature-title">Layanan</h3>
-                              <p>Kami siap melayani dengan sepenuh hati, bebas pungli, gratifikasi, korupsi, kolusi dan nepotisme.</p>
-                              <a class="slider btn btn-primary" href="#">Read More</a>
-                           </div>
-                        </div>
-                        <!-- feature box-1 end-->
-                     </div>
-                     <!-- col-1 end-->
-                     <div class="col-md-4 text-center border-left">
-                        <div class="ts-feature-box">
-                           <div class="ts-feature-info">
-                              <div class="feature-img">
-                                 <img src="../dashboard/images/icon/informasi.png" alt="" style="width:80px; height: 80px;" />
-                              </div>
-                              <h3 class="ts-feature-title">Informasi</h3>
-                              <p>Berbagai informasi terbaru terkait pelayanan Desa bisa anda akses disini.</p>
-                              <a class="slider btn btn-primary" href="#">Read More</a>
-                           </div>
-                        </div>
-                        <!-- feature box-2 end-->
-                     </div>
-                     <!-- col-2 end-->
-                     <div class="col-md-4 text-center border-left">
-                        <div class="ts-feature-box">
-                           <div class="ts-feature-info">
-                              <div class="feature-img">
-                                 <img src="../dashboard/images/icon/pelaporan.png" alt="" style="width:80px; height: 80px;"/>
-                              </div>
-                              <!--<i class="icon icon-clock3"></i>-->
-                              <h3 class="ts-feature-title">Pelaporan</h3>
-                              <p>Laporan kegiatan dan kinerja dapat dipertanggung jawaban, transfaran dan akuntable.</p>
-                              <a class="slider btn btn-primary" href="#">Read More</a>
-                           </div>
-                        </div>
-                        <!-- feature box-2 end-->
-                     </div>
-                     <!-- col-3 end-->
-                  </div>
-               </div>
-            </section>
-            <!-- ts-feature light end -->
+            <div class="icon-item">
+               <img src="../img/surat.png" alt="surat">
+               <p>Layanan Persuratan</p>
+            </div>
+            <div class="icon-item">
+               <img src="../img/transparasi.png" alt="transparansi">
+               <p>Transparansi</p>
+            </div>
+         </div>
+      </div>
+   </main>
 
             <section  class="ts-service-area service-area-pattern" id="ts-service-area">
              <div class="service-area-bg">
