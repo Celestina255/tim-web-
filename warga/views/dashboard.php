@@ -88,7 +88,7 @@
          <div class="menu-icons">
             <div class="icon-item">
                <img src="../img/profile.png" alt="profile">
-               <p>Profil Kampung</p>
+               <p>Informasi</p>
             </div>
             <div class="icon-item">
                <img src="../img/surat.png" alt="surat">
