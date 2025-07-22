@@ -53,7 +53,12 @@ error_reporting(0);
 </head>
 
 <body>
-
+               <?php 
+               $query = mysqli_query ($con, "SELECT * FROM tb_kelurahan LIMIT 1");
+               while ($r = mysqli_fetch_array($query)){
+               ?>
+              
+         <?php } ?>
 <link rel="stylesheet" href="../dashboard/css/style.css">
 <!-- ini adalah tempat dimana file cssnya harus diupdate, jangan ditambah jika sudah ada -->
 
@@ -116,19 +121,18 @@ error_reporting(0);
         
       </ul>
     </div>
-    
 
     <!-- KANAN -->
     <div class="logout-wrapper">
-      <a href="logout.php" class="top-right-btn btn btn-primary">Logout</a>
+       <a href="?page=login" class="top-right-btn btn btn-primary">Login</a>
     </div>
   </div>
 </nav>
 
 
-
+         </div>
          <!-- AKHIR NAVBAR -->
-          
+
 <!-- Letakkan di akhir body -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -136,11 +140,11 @@ error_reporting(0);
 <?php include 'load_file.php'; ?>
 
    <!-- Footer start-->
+
    <?php 
       $queryy = mysqli_query ($con, "SELECT * FROM tb_kelurahan LIMIT 1");
       while ($rr = mysqli_fetch_array($queryy)){
    ?>
-
    <footer class="footer" id="footer">
       <div class="footer-main bg-overlay">
          <div class="container">
@@ -246,7 +250,7 @@ error_reporting(0);
 
       <!--
       Javascript Files
-      ==================================================
+      ======================================================
       -->
       <!-- initialize jQuery Library-->
       <script type="text/javascript" src="js/jquery.js"></script>
