@@ -109,190 +109,45 @@
     </div>
   </div>
 </section>
-            <section  class="ts-service-area service-area-pattern" id="ts-service-area">
-             <div class="service-area-bg">
-               <div class="container">
-                  <div class="row text-center">
-                     <div class="col-md-12">
-                        <h2 class="section-title">Statistik</h2>
-                     </div>
-                  </div>
-                  <!-- Title row end-->
-                  <div class="row">
-                     <div class="col-lg-4 col-md-12">
-                        <div class="ts-service-wrapper">
-                         <div class="ts-service-box">
-                           <div class="ts-service-box-img">
-                              <img src="../img/icon/ktp.png" alt="" />
-                           </div>
-                           <?php 
-                           $queryw=mysqli_query($con, "SELECT COUNT(*) AS jw FROM tb_penduduk");
-                           while($rw=mysqli_fetch_array($queryw)){
-                              ?>
-                              <div class="ts-service-box-info">
-                                 <h3 class="service-box-title"><?php echo $rw['jw']; ?> Penduduk terdaftar</h3>
-                                 <p><br><br><br></p>
-                              </div>
-                           <?php } ?>
-                        </div><!-- Service 1 end -->
-                        <div class="gap-15"></div>
-                        <div class="ts-service-box">
-                           <div class="ts-service-box-img">
-                              <img src="../img/icon/jenissurat.png " alt="" />
-                           </div>
-                           <?php 
-                           $queryjs=mysqli_query($con, "SELECT COUNT(*) AS js FROM tb_jenissurat");
-                           while($rjs=mysqli_fetch_array($queryjs)){
-                              ?>
-                              <div class="ts-service-box-info">
-                                 <h3 class="service-box-title"><?php echo $rjs['js']; ?> Jenis surat</h3>
-                                 <p><br><br><br></p>
-                              </div>
-                           <?php } ?>
-                        </div><!-- Service 2 end -->
-                        <div class="gap-15"></div>
-                        <div class="ts-service-box">
-                           <div class="ts-service-box-img">
-                              <img src="../img/icon/jenissurat0.png" alt="" />
-                           </div>
-                           <?php 
-                           $queryds=mysqli_query($con, "SELECT COUNT(*) AS ds FROM tb_datasurat");
-                           while($rds=mysqli_fetch_array($queryds)){
-                              ?>
-                              <div class="ts-service-box-info">
-                                 <h3 class="service-box-title"><?php echo $rds['ds']; ?> Surat dibuat</h3>
-                                 <p><br><br><br></p>
-                              </div>
-                           <?php } ?>
-                        </div><!-- Service 5 end -->
-                     </div>
-                  </div><!-- Col end -->
-                  <div class="col-lg-4 col-md-12">
-                     <span class="service-img"><img class="img-fluid" src="../img/icon/statistik.png" alt="" /></span>
-                  </div>
-
-                  <div class="col-lg-4 col-md-12">
-                     <div class="ts-service-wrapper ml-lg-auto">
-                      <div class="ts-service-box">
-                        <div class="ts-service-box-img ">
-                           <img src="../img/icon/pengunjung.png" alt="" />
-                        </div>
-                        <?php 
-                        $querykj=mysqli_query($con, "SELECT COUNT(*) AS kj FROM tb_statistik");
-                        while($rkj=mysqli_fetch_array($querykj)){
-                           ?>
-                           <div class="ts-service-box-info">
-                              <h3 class="service-box-title"><?php echo $rkj['kj']; ?> Total Pengunjung</h3>
-                              <p><br><br><br></p>
-                           </div>
-                        <?php } ?>
-                     </div><!-- Service 4 end -->
-                     <div class="gap-15"></div>
-                     <div class="ts-service-box">
-                        <div class="ts-service-box-img ">
-                           <img src="../img/icon/hits.png" alt="" />
-                        </div>
-                        <?php 
-                         $tanggal = date("Ymd"); // Mendapatkan tanggal sekarang
-                         $queryhits=mysqli_query($con, "SELECT COUNT(*) AS hitstoday FROM tb_statistik WHERE tanggal='$tanggal' GROUP BY  tanggal");
-                         while($rh=mysqli_fetch_array($queryhits)){
-                           ?>
-                           <div class="ts-service-box-info">
-                              <h3 class="service-box-title"><?php echo $rh['hitstoday']; ?> Pengunjung hari ini</h3>
-                              <p><br><br><br></p>
-                           </div>
-                        <?php } ?>
-                     </div><!-- Service 4 end -->
-                     <div class="gap-15"></div>
-                     <div class="ts-service-box">
-                        <div class="ts-service-box-img ">
-                           <img src="../img/icon/totalhits.png" alt="" />
-                        </div>
-                        <?php 
-                         $tanggal = date("Ymd"); // Mendapatkan tanggal sekarang
-                         $queryhits=mysqli_query($con, "SELECT SUM(hits) AS hitstoday FROM tb_statistik WHERE tanggal='$tanggal' GROUP BY  tanggal");
-                         while($rh=mysqli_fetch_array($queryhits)){
-                           ?>
-                           <div class="ts-service-box-info">
-                              <h3 class="service-box-title"><?php echo $rh['hitstoday']; ?> Total Hits hari ini</h3>
-                              <p><br><br><br></p>
-                           </div>
-                        <?php } ?>
-                     </div><!-- Service 4 end -->
-                  </div>
-               </div><!-- Col end -->
-            </div><!-- Content row end -->
-            <!-- Content row end-->
-         </div>
-         <!-- Container end-->
-      </div>
-   </section>
    <!-- Service Section end-->
-   
-   <section class="news" id="news">
-      <div class="container">
-         <div class="row text-center">
-            <div class="col-md-12">
-               <h2 class="section-title">Berita Desa Terbaru</h2>
+
+   <!--Berita --->
+  <section class="news" id="news">
+   <div class="container">
+      <div class="row text-center mb-4">
+         <div class="col-md-12">
+            <h2 class="section-title" style="color: #2caa50;">BERITA DESA</h2>
+         </div>
+      </div>
+      <div class="row">
+         <?php 
+         $query = mysqli_query($con, "SELECT * FROM tb_berita JOIN tb_kategori ON tb_kategori.id_kategori=tb_berita.kategori ORDER BY tb_berita.id_berita DESC LIMIT 3");
+         while($r = mysqli_fetch_array($query)){
+         ?> 
+         <div class="col-lg-4 col-md-6 mb-4">
+            <div class="latest-post">
+               <div class="post-body">
+                  <a class="latest-post-img" href="../img/berita/<?php echo $r['gambar'];?>">
+                     <img class="img-fluid" src="../img/berita/<?php echo $r['gambar'];?>" alt="img">
+                  </a>
+                  <h4 class="post-title">
+                     <a href="?page=detail_berita&slug=<?php echo $r['slug']; ?>"><?php echo $r['judul'];?></a>
+                  </h4>
+                  <p class="post-item-date"><?php echo $r['tgl_posting'];?></p>
+                  <p class="post-text">
+                     <?php echo substr($r['isi'], 0, 100);?>...
+                  </p>
+                  <a class="btn-readmore" href="?page=detail_berita&slug=<?php echo $r['slug'];?>">Baca Selengkapnya</a>
+               </div>
             </div>
          </div>
-         <div class="row ">
-            <div class="col-lg-6 ">
-               <div class="latest-post post-large">
-                  <div class="latest-post-media">
-                     <?php 
-                     $query = mysqli_query ($con, "SELECT * FROM tb_berita JOIN tb_kategori ON tb_kategori.id_kategori=tb_berita.kategori ORDER BY tb_berita.id_berita DESC LIMIT 1");
-                     while($r=mysqli_fetch_array($query)){
-                        ?> 
-
-                        <a class="latest-post-img" href="../img/berita/<?php echo $r['gambar'];?>">
-                           <img class="img-fluid" src="../img/berita/<?php echo $r['gambar'];?>" alt="img">
-                        </a>
-
-                        <div class="post-body">
-                           <a class="post-cat" href="#">News</a>
-                           <h4 class="post-title"><a href="?page=detail_berita&slug=<?php echo $r['slug'];?>"><?php echo $r['judul'];?></a></h4>
-                           <span class="post-item-date"><?php echo $r['tgl_posting'];?></span>
-                           <a class="btn btn-primary" href="?page=detail_berita&slug=<?php echo $r['slug'];?>">Read More</a>
-                        </div>
-                        <!-- Post body end--><?php } ?>
-                     </div>
-
-                     <!-- Post media end-->
-                  </div>
-                  <!-- Latest post end-->
-               </div>
-               <!-- Col big news end-->
-               <div class="col-lg-6 ">
-                  <div class="row">
-                     <?php 
-                     $query = mysqli_query ($con, "SELECT * FROM tb_berita JOIN tb_kategori ON tb_kategori.id_kategori=tb_berita.kategori ORDER BY tb_berita.id_berita DESC LIMIT 2");
-                     while($rr=mysqli_fetch_array($query)){
-                        ?> 
-                        <div class="col-lg-6 col-md-6">
-                           <div class="latest-post">
-                              <div class="post-body"><a class="post-cat" href="#">News</a>
-                                 <h4 class="post-title"><a href="?page=detail_berita&slug=<?php echo $rr['slug'];?>"><?php echo $rr['judul'];?></a></h4><span class="post-item-date"><?php echo $rr['tgl_posting'];?></span>
-                                 <div class="post-text">
-                                    <p><?php echo substr($rr['isi'], 0,100);?></p>
-                                    <div class="text-left"><a class="btn btn-primary" href="?page=detail_berita&slug=<?php echo $rr['slug'];?>">Read More</a></div>
-                                 </div>
-                              </div>
-                           </div>
-                           <!-- Latest post end-->
-                        </div>
-                     <?php } ?>
-                     <!-- Col end-->
-
-                  </div>
-                  <!-- row end-->
-               </div>
-               <!-- Col small news end-->
-            </div>
-            <!-- Content row end-->
-         </div>
-         <!-- Container end-->
-      </section>
+         <?php } ?>
+      </div>
+      <div class="text-center">
+         <a class="btn btn-secondary" href="?page=berita" role="button">LIHAT BERITA LEBIH LENGKAP</a>
+      </div>
+   </div>
+</section>
       <!-- News end-->
 
       <section class="ts-services solid-bg" id="ts-services">
