@@ -13,7 +13,7 @@ include '../koneksi.php';
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>app-surdes</title>
+    <title>Tampilan Admin</title>
 
     <!-- Fontfaces CSS-->
     <link href="../css/font-face.css" rel="stylesheet" media="all">
@@ -146,6 +146,8 @@ include '../koneksi.php';
                         <li><a href='?page=galeri' title='Galeri'>Galeri</a></li>
                         <li><a href='?page=slider' title='Data Slider'>Slider</a></li>
                         <li><a href='?page=profil_desa' title='Profile Desa'>Profile</a></li>
+                        <li><a href='?page=transparansi' title='Transparansi'>Transparansi</a></li>
+                        <li><a href='?page=lembaga' title='Transparansi'>Transparansi</a></li>
                             </ul>
                         </li>
                         <li class="has-sub">
@@ -159,15 +161,7 @@ include '../koneksi.php';
                         <li><a href='?page=staff' title='Data Staff'>Staff</a></li>
                             </ul>
                         </li>
-
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-user"></i>Sistem</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="?page=tambah_staff">Register</a>
-                                </li>
-                                <li>
+                                 <li>
                                     <a href="logout.php">Keluar</a>
                                 </li>
                             </ul>
@@ -180,65 +174,73 @@ include '../koneksi.php';
 
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
-            <div class="logo">
-                <a href='?page=home'>
-                    <img src="../img/icon/logo.png" alt="app-surdes" />
+        <div class="logo kampung-logo text-left" style="background-color:#3D2D13; padding: 15px; display: flex; align-items: center;">
+    <a href='?page=home' style="display: flex; align-items: center; text-decoration: none;">
+        <img src="../img/logo.png" alt="Kampung Banjar Ausoy" style="height: 60px; margin-right: 10px;" />
+        <div style="line-height: 1.2;">
+            <span style="color: white; font-weight: 600; font-size: 16px;">Kampung Banjar Ausoy</span><br>
+            <span style="color: #ddd; font-size: 12px;">Kabupaten Teluk Bintuni</span>
+        </div>
+    </a>
+</div>
+
+
+<div class="menu-sidebar__content js-scrollbar1" style="background-color: #3D2D13;">
+    <nav class="navbar-sidebar">
+        <ul class="list-unstyled navbar__list">
+            <li><a href='?page=home' title='Dashboard' style="color: #fff;"> <i class="fas fa-home" style="color: #fff;"></i> Dashboard</a></li>
+
+            <li class="has-sub">
+                <a class="js-arrow" href="#" style="color: #fff;">
+                    <i class="fas fa-laptop" style="color: #fff;"></i> Pelayanan
                 </a>
-            </div>
+                <ul class="list-unstyled navbar__sub-list js-sub-list" style="background-color: #4a3920;">
+                    <li><a href='?page=tatausaha' style="color: #fff;">Tata Usaha</a></li>
+                    <li><a href='?page=umum' style="color: #fff;">Umum</a></li>
+                    <li><a href='?page=kependudukan' style="color: #fff;">Kependudukan</a></li>
+                    <li><a href='?page=pernikahan' style="color: #fff;">Pernikahan</a></li>
+                    <li><a href='?page=pertanahan' style="color: #fff;">Pertanahan</a></li>
+                    <li><a href='?page=lainnya' style="color: #fff;">Lainnya</a></li>
+                </ul>
+            </li>
 
-            <div class="menu-sidebar__content js-scrollbar1">
-                <nav class="navbar-sidebar">
-                    <ul class="list-unstyled navbar__list">
-                        <li><a href='?page=home' title='Dashboard'> <i class="fas fa-home"></i>Dashboard</a></li>
-                        <li class="has-sub">
-                        <a class="js-arrow" href="#"><i class="fas fa-laptop"></i>Pelayanan</a>
-                        <ul class="list-unstyled navbar__sub-list js-sub-list">
-                        <li><a href='?page=tatausaha' title='Surat Undangan'>Tata Usaha</a></li>
-                        <li><a href='?page=umum' title='Surat Pengantar'>Umum</a></li>
-                        <li><a href='?page=kependudukan' title='Surat Himbauan'>Kependudukan</a></li>
-                        <li><a href='?page=pernikahan' title='Surat Perjalanan Dinas'>Pernikahan</a></li>
-                        <li><a href='?page=pertanahan' title='Surat Jawaban'>Pertanahan</a></li>
-                        <li><a href='?page=lainnya' title='Surat Tugas'>Lainnya</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-cog"></i>Kelola Web</a>
-                        <ul class="list-unstyled navbar__sub-list js-sub-list">
-                        <li><a href='?page=berita' title='Berita Desa'>Berita Desa</a></li>
-                        <li><a href='?page=galeri' title='Galeri'>Galeri</a></li>
-                        <li><a href='?page=slider' title='Data Slider'>Slider</a></li>
-                        <li><a href='?page=profil_desa' title='Profile Desa'>Profile</a></li>
-                            </ul>
-                        </li>
-                         <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-list"></i>Data</a>
-                        <ul class="list-unstyled navbar__sub-list js-sub-list">
-                        <li><a href='?page=master_desa' title='Master Data Desa'>Master Desa</a></li>
-                        <li><a href='?page=penduduk' title='Data Penduduk'>Penduduk</a></li>
-                        <li><a href='?page=jenissurat' title='Dat Jenis Surat'>Jenis Surat</a></li>
-                        <li><a href='?page=klasifikasi' title='Data Klasifikasi Surat'>Klasifikasi</a></li>
-                        <li><a href='?page=staff' title='Data Staff'>Staff</a></li>
-                            </ul>
-                        </li>
-                        
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-user"></i>Sistem</a>
-                              <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="?page=tambah_staff">Register</a>
-                                </li>
-                                <li>
-                                    <a href="logout.php">Keluar</a>
-                                </li>
-                            </ul>
-                        </li>
+            <li class="has-sub">
+                <a class="js-arrow" href="#" style="color: #fff;">
+                    <i class="fas fa-cog" style="color: #fff;"></i> Kelola Web
+                </a>
+                <ul class="list-unstyled navbar__sub-list js-sub-list" style="background-color: #4a3920;">
+                    <li><a href='?page=berita' style="color: #fff;">Berita Desa</a></li>
+                    <li><a href='?page=galeri' style="color: #fff;">Galeri</a></li>
+                    <li><a href='?page=slider' style="color: #fff;">Slider</a></li>
+                    <li><a href='?page=profil_desa' style="color: #fff;">Profile Desa</a></li>
+                    <li><a href='?page=transparansi' style="color: #fff;">Transparansi</a></li>
+                    <li><a href='?page=lembaga_masyarakat' style="color: #fff;">Lembaga Masyarakat</a></li>
+                </ul>
+            </li>
 
-                    </ul>
-                </nav>
-            </div>
+            <li class="has-sub">
+                <a class="js-arrow" href="#" style="color: #fff;">
+                    <i class="fas fa-list" style="color: #fff;"></i> Data
+                </a>
+                <ul class="list-unstyled navbar__sub-list js-sub-list" style="background-color: #4a3920;">
+                    <li><a href='?page=master_desa' style="color: #fff;">Master Desa</a></li>
+                    <li><a href='?page=penduduk' style="color: #fff;">Penduduk</a></li>
+                    <li><a href='?page=jenissurat' style="color: #fff;">Jenis Surat</a></li>
+                    <li><a href='?page=klasifikasi' style="color: #fff;">Klasifikasi</a></li>
+                    <li><a href='?page=staff' style="color: #fff;">Staff</a></li>
+                </ul>
+            </li>
+
+            <li>
+    <a href="logout.php" style="color: #fff;">
+        <img src="../img/icon/keluar.png" alt="Logout" style="width:18px; height:18px; margin-right: 8px;"> Keluar
+    </a>
+</li>
+
+        </ul>
+    </nav>
+</div>
+
         </aside>
         <!-- END MENU SIDEBAR-->
 
@@ -249,12 +251,7 @@ include '../koneksi.php';
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
-                            <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
-                                <button class="au-btn--submit" type="submit">
-                                    <i class="zmdi zmdi-search"></i>
-                                </button>
-                            </form>
+                        <div class="header-button d-flex align-items-center" style="margin-left: auto;">
                             <?php 
                             $query = mysqli_query ($con, "SELECT count(*) AS jp FROM tb_permohonan WHERE status='onprocess' ORDER BY id ASC");
                             while ($r = mysqli_fetch_array($query)){
