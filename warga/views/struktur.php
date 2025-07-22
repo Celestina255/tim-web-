@@ -1,40 +1,56 @@
-      <div class="banner-area" id="banner-area" style="background-image:url(../dashboard/images/banner/struktur.jpg);">
-         <div class="container">
-            <div class="row justify-content-center">
-               <div class="col">
-                  <div class="banner-heading">
-                     <h1 class="banner-title">Struktur Organisasi</h1>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Struktur Organisasi Kampung</title>
 
-                  </div>
-               </div>
-               <!-- Col end-->
+   <!-- Link CSS Struktur -->
+   <link rel="stylesheet" href="../dashboard/css/style.css">
+
+   <!-- Font Awesome (untuk ikon jika diperlukan) -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+
+
+<section class="struktur-section">
+   <div class="container text-center">
+      <h2 class="judul-bagan">BAGAN & PROFIL <br> PERANGKAT KAMPUNG</h2>
+
+
+      <!-- Gambar Struktur Organisasi -->
+      <?php 
+      $struktur = mysqli_query($con, "SELECT gambar_struktur FROM tb_profile LIMIT 1");
+      $data = mysqli_fetch_array($struktur);
+      if (!empty($data['gambar_struktur'])) {
+         echo '<img src="../dashboard/images/pages/'.$data['gambar_struktur'].'" class="struktur-img" alt="Struktur Organisasi Kampung">';
+      } else {
+         echo '<p><i>Belum ada gambar struktur organisasi.</i></p>';
+      }
+      ?>
+
+
+      <div class="profil-grid">
+         <?php 
+         $pegawai = mysqli_query($con, "SELECT * FROM tb_pegawai ORDER BY id_pegawai ASC");
+         while($p = mysqli_fetch_array($pegawai)) {
+            $foto = !empty($p['foto']) ? "../dashboard/images/pages/".$p['foto'] : "../dashboard/images/pages/default.png";
+         ?>
+         <div class="profil-card">
+            <div class="foto-wrapper">
+               <img src="<?php echo $foto; ?>" class="profil-foto" alt="Foto <?php echo $p['nama']; ?>">
             </div>
-            <!-- Row end-->
+            <div class="profil-info">
+               <h5 class="profil-nama"><?php echo strtoupper($p['nama']); ?></h5>
+               <p class="profil-jabatan"><?php echo $p['jabatan']; ?></p>
+            </div>
          </div>
-         <!-- Container end-->
+         <?php } ?>
       </div>
-      <!-- Banner area end-->
-      <section class="main-container no-padding" id="main-container">
+   </div>
+</section>
 
-         <div class="about-pattern">
-            <div class="container">
-               <div class="row">
-                  <div class="col-lg-12 about-desc" align="center">
-                     <h2 class="column-title text-center"><span>Struktur</span>Desa / Kelurahan</h2>
-                     <p class="bold-text" style="justify-content-center:center; text-align: justify;"></p>
-                     <?php 
-                  $query = mysqli_query ($con, "SELECT * FROM tb_profile LIMIT 1");
-                  while($r=mysqli_fetch_array($query)){
-                     ?>
-                     <img class="img-fluid text-center" src="../dashboard/images/pages/<?php echo $r['gambar_struktur']; ?>" style="justify-content-center:center; align-items: center;" alt="">
-                  <?php } ?>
-                  </div>
-                  <!-- Col end-->
-               </div>
-               <!-- Main row end-->
-            </div>
-            <!-- Container 1 end-->
-         </div>
-         <!-- About pattern End-->
-      </section>
-      
+</body>
+</html>
