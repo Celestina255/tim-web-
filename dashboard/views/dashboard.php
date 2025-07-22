@@ -97,10 +97,10 @@
         <p class="mb-3" style="font-weight: bold;">Kepala Kampung Banjar Ausoy</p>
         
         <p>Assalamu `Alaikum Warahmatullahi Wabarakatuh</p>
-        <p>Sebuah kesyukuran yang tak terhingga kepada Allah SWT, karena di era digitalisasi sekarang ini, Pemerintah Desa Pincara mampu menghadirkan Aplikasi Website Desa yang akan mempermudah pelayanan di Kantor Desa Pincara dalam hal pelayanan Administrasi.</p>
-        <p>Tentunya keberadaan Aplikasi ini diharapkan juga dapat memberikan Informasi kepada Masyarakat yang ingin mengetahui Program atau Kegiatan Pemerintah Desa Pincara dengan mengakses melalui Fitur yang sudah disiapkan.</p>
+        <p>Sebuah kesyukuran yang tak terhingga kepada Allah SWT, karena di era digitalisasi sekarang ini, Pemerintah Desa Banjar Ausoy mampu menghadirkan Aplikasi Website Desa yang akan mempermudah pelayanan di Kantor Desa Banjar Ausoy dalam hal pelayanan Administrasi.</p>
+        <p>Tentunya keberadaan Aplikasi ini diharapkan juga dapat memberikan Informasi kepada Masyarakat yang ingin mengetahui Program atau Kegiatan Pemerintah Desa Banjar Ausoy dengan mengakses melalui Fitur yang sudah disiapkan.</p>
         <p>Besar harapan kami, untuk aplikasi ini nantinya dapat membawa perubahan signifikan dalam proses Pelayanan Pemerintahan Desa dan mampu menjadi Desa Digital yang merupakan salah satu program untuk mengurangi kesenjangan arus informasi yang terjadi di Desa.</p>
-        <p>Konsep Desa Digital merupakan Pemanfaatan Teknologi Informasi yang Terintegrasi dalam pelayanan Publik dan Kegiatan perekonomian di Desa Pincara</p>
+        <p>Konsep Desa Digital merupakan Pemanfaatan Teknologi Informasi yang Terintegrasi dalam pelayanan Publik dan Kegiatan perekonomian di Desa Banjar Ausoy </p>
         <p>Salam Dari Desa</p>
         <p>Sekian dan terima kasih<br>
         Billahi Taufiq WalHidayah<br>
