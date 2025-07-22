@@ -10,26 +10,28 @@
 /* Table of Content
 ==================================================
 1.    Typography
-2.    Global Styles
-3.    Top Bar
-4.    Header area
-5.    Slider
-6.    Features
-7.    Service
-8.    Projects
-9.    Intro Area
-10.   Call To Action
-11.   Content Area
-12.   Client
-13.   Latest News
-14.   Footer
-15.   Sub Pages
-16.   Pricing Table
-17.   Quote Area
-18.   Contact Us
-19.   News Single
-20.   Sidebar
-21.   Error Page
+2.    Sambutan
+3.    Berita
+4.    Global Styles
+5.    Top Bar
+6.    Header area
+7.    Slider
+8.    Features
+9.    Service
+10.    Projects
+11.    Intro Area
+12.   Call To Action
+13.   Content Area
+14.   Client
+15.   Latest News
+16.   Footer
+17.   Sub Pages
+18.   Pricing Table
+19.   Quote Area
+20.   Contact Us
+21.   News Single
+22.   Sidebar
+23.   Error Page
 */
 
 
@@ -85,6 +87,115 @@ h4 {
 h5 {
   font-size: 14px;
   line-height: 24px;
+}
+
+/* Sambutan Section */
+.sambutan-section {
+  padding: 80px 0;
+  background-color: #fff;
+}
+.section-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  position: relative;
+}
+.section-title:after {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background-color: #2caa50;
+}
+.img-fluid {
+  border: 5px solid #f1f8e9;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+.fw-bold {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+/* Berita Section */
+.news {
+  padding: 80px 0;
+  background-color: #f9fafb;
+}
+.subtitle {
+  font-size: 18px;
+  color: #7f8c8d;
+  margin-bottom: 40px;
+}
+.latest-post {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 100%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+.latest-post:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+}
+.latest-post-img {
+  display: block;
+  height: 220px;
+  overflow: hidden;
+}
+.img-fluid {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.post-title {
+  padding: 20px;
+}
+.post-title h4 {
+  margin-bottom: 10px;
+}
+.post-title h4 a {
+  color: #2c3e50;
+  font-size: 20px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.post-title h4 a:hover {
+  color: #2caa50;
+}
+.post-title {
+  font-size: 16px;
+  color: #7f8c8d;
+}
+.post-text {
+  padding: 0 20px 20px;
+  color: #34495e;
+}
+.btn-readmore {
+  display: block;
+  width: calc(100% - 40px);
+  margin: 0 auto 20px;
+  background-color: #2caa50;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.btn-readmore:hover {
+  background-color: #249a45;
+  color: white;
+  transform: translateY(-3px);
+}
+.btn-secondary {
+  background-color: #3498db;
+  border-color: #3498db;
+  margin-top: 30px;
+  padding: 12px 30px;
 }
 
 /* Global styles
@@ -1034,6 +1145,64 @@ ul.top-menu li a:hover {
   line-height: normal;
 }
 
+/* Topbar Taransparent with border */
+/* Topbar highlight */
+.top-bar.highlight {
+  background: #0f2765;
+  color: #fff;
+}
+.top-bar.highlight ul.top-menu li {
+   border-right: 1px solid rgba(0, 0, 0, 0.2);
+}
+.top-bar.highlight ul.top-menu li a {
+  color: #fff;
+  font-weight: 600;
+}
+.top-bar.highlight ul.top-menu li:last-child {
+  border-right: 0;
+}
+
+/* Topbar info */
+#top-bar .top-info {
+  margin: 0;
+  float: left;
+}
+#top-bar .top-info p {
+  color: #fff;
+  font-weight: 400;
+  font-size: 15px;
+}
+#top-bar .top-info i {
+  color: #fff;
+  font-weight: 400;
+  font-size: 15px;
+  font-size: 16px;
+}
+#top-bar .top-info .info-icon {
+  top: 0;
+  margin-right: 5px;
+}
+#top-bar .top-info .info-wrapper:after {
+  height: 15px;
+  top: 2px;
+  background: rgba(255, 255, 255, 0.2);
+}
+#top-bar .top-info li.last .info-wrapper:after {
+  background: none;
+}
+
+/* Top Info No telp dan E-mail di atas Modifikasi
+================================================== */
+@media (max-width: 620px) {
+  .top-info {
+  margin: 0;
+  display: none;
+}
+  }
+
+/* Header area
+================================================== */
+/* Sticky Menu  */
 
 /* ini adalah file css yang tinggal di update di dalam file style.css. NAMUN PASTIKAN BAHWA CSS LAMANYA SUDAH DIHAPUS. 
 HARUS HATI-HATI JANGAN HAPUS SEMUA ISI FILENYA NANTI TAMPILAN CSSMU YANG TERGANGGU*/
@@ -1507,7 +1676,6 @@ HARUS HATI-HATI JANGAN HAPUS SEMUA ISI FILENYA NANTI TAMPILAN CSSMU YANG TERGANG
 }
 .page-slider.page-slider-small .item {
   max-height: 500px;
-  min-height: auto;
 }
 .page-slider .owl-item .box-slider-content {
   opacity: 0;
@@ -1839,9 +2007,6 @@ h5.mb-0 .project-btn{
    font-style: normal;
 }
 
-.projects .latest-post{
-   min-height: auto;
-}
 
 /* Single project */
 
@@ -4504,9 +4669,7 @@ label {
   box-shadow: 0px 8px 15px 0px rgba(0, 0, 0, 0.1);
 }
 
-.contact-box {
-  min-height: auto;
-}
+
 .contact-box.form-box {
   width: 100%;
 }
@@ -5380,7 +5543,6 @@ label {
   padding: 5px 10px;
   line-height: 100%;
   text-transform: uppercase;
-  float: left;
   margin: 0px 10px 0 0;
   border-radius: 2px;
 }
@@ -5474,18 +5636,7 @@ label {
   padding: 5px 10px;
   line-height: 100%;
   text-transform: uppercase;
-  float: left;
   margin: 0px 10px 0 0;
   border-radius: 2px;
 }
 }
-
-
-
-
-
-
-
-
-
-
