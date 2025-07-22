@@ -1,47 +1,36 @@
-      <div class="banner-area" id="banner-area" style="background-image:url(../dashboard/images/banner/sejarah.jpg);">
-         <div class="container">
-            <div class="row justify-content-center">
-               <div class="col">
-                  <div class="banner-heading">
-                     <h1 class="banner-title">Sejarah Desa / Kelurahan</h1>
-                  </div>
-               </div>
-               <!-- Col end-->
-            </div>
-            <!-- Row end-->
-         </div>
-         <!-- Container end-->
-      </div>
-      <!-- Banner area end-->
-      <section class="main-container no-padding" id="main-container">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Sejarah Kampung</title>
 
-         <div class="about-pattern">
-            <div class="container">
-               <div class="row">
-                  <div class="col-lg-6 about-desc">
-                  <?php 
-                  $query = mysqli_query ($con, "SELECT * FROM tb_profile LIMIT 1");
-                  while($r=mysqli_fetch_array($query)){
-                     ?>
-                     <h2 class="column-title"><span>Sejarah</span>Desa/Kelurahan</h2>
-                     <p class="bold-text" style="justify-content-center:center; text-align: justify;">
-                        <?php echo $r['sejarah']; ?>.
-                  </p>
-               
-                  <a href="index.php?page=warga" class="top-right-btn btn btn-primary">Home</a>
-               </div>
-               <!-- Col end-->
-               <div class="col-lg-6 text-md-center mrt-40">
-                  <br><br>
-                  <img class="img-fluid" src="../dashboard/images/pages/<?php echo $r['gambar_sejarah']; ?>" alt="">
-               </div>
-               <?php } ?>
-               <!-- Col end-->
+   <!-- LINK ke CSS lokal -->
+   <link rel="stylesheet" href="../dashboard/css/style.css">
+
+   <!-- Font Awesome untuk ikon -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+   <section class="sejarah-section">
+      <div class="container text-center">
+         <h2 class="sejarah-title">SEJARAH KAMPUNG BANJAR AUSOY</h2>
+
+         <?php 
+         include '../koneksi.php'; // jika diperlukan
+         $query = mysqli_query ($con, "SELECT * FROM tb_profile LIMIT 1");
+         $row = mysqli_fetch_array($query);
+         if ($row && !empty($row['sejarah'])) {
+         ?>
+            <p class="sejarah-text"><?php echo nl2br($row['sejarah']); ?></p>
+         <?php } else { ?>
+            <div class="no-data-box">
+               <i class="fas fa-info-circle"></i> Belum Ada Data
             </div>
-            <!-- Main row end-->
-         </div>
-         <!-- Container 1 end-->
+         <?php } ?>
       </div>
-      <!-- About pattern End-->
    </section>
-   
+
+</body>
+</html>
