@@ -1,0 +1,39 @@
+.sejarah-section {
+   padding: 80px 20px;
+   background-color: #ffffff;
+   font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+.sejarah-title {
+   font-size: 28px;
+   font-weight: bold;
+   text-align: center;
+   text-transform: uppercase;
+   color: #2caa50; /* Hijau desa */
+   margin-bottom: 40px;
+}
+
+.sejarah-text {
+   font-size: 16px;
+   line-height: 1.8;
+   color: #333;
+   text-align: justify;
+   max-width: 800px;
+   margin: 0 auto;
+}
+
+.no-data-box {
+   display: inline-block;
+   background-color: #f8f9fa;
+   color: #6c757d;
+   padding: 12px 20px;
+   border-radius: 10px;
+   font-size: 15px;
+   border: 1px solid #e1e1e1;
+   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.no-data-box i {
+   margin-right: 6px;
+   font-size: 16px;
+}
