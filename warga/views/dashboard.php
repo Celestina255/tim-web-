@@ -1,84 +1,7 @@
-//punya dashboard
-<style>
-      * {
-         margin: 0;
-         padding: 0;
-         box-sizing: border-box;
-      }
-
-      body, html {
-         height: 100%;
-         font-family: 'Segoe UI', sans-serif;
-      }
-      .hero-section {
-         background: linear-gradient(rgba(106, 177, 106, 0.5), rgba(0, 128, 0, 0.5)),
-         url('../img/lb.jpg') center center / cover no-repeat; 
-         height: 100vh;
-         display: flex;
-         align-items: center;
-         justify-content: center;
-         text-align: center;
-         color: white;
-         padding: 80px 40px;
-         border-radius: 12px;
-         margin: 0 auto;
-      }
-
-      .hero-content h2 {
-         font-size: 22px;
-         font-weight: 400;
-          color: white;
-      }
-
-      .hero-content h1 {
-         font-size: 50px;
-         font-weight: 700;
-          color: white;
-      }
-
-      .hero-content p {
-         font-size: 14px;
-         margin-bottom: 30px;
-      }
-
-      .highlight {
-         background-color: #006400;
-         padding: 2px 6px;
-         border-radius: 4px;
-         font-weight: bold;
-      }
-
-      .menu-icons {
-         display: flex;
-         justify-content: center;
-         gap: 40px;
-         flex-wrap: wrap;
-      }
-
-      .icon-item {
-         background-color: #fff;
-         border-radius: 10px;
-         padding: 20px;
-         width: 140px;
-         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-         color: #000;
-         transition: transform 0.3s ease;
-      }
-
-      .icon-item img {
-         width: 60px;
-         height: 60px;
-         margin-bottom: 10px;
-      }
-
-      .icon-item p {
-         font-weight: bold;
-      }
-
-      .icon-item:hover {
-         transform: scale(1.05);
-      }
-   </style>
+<Head>
+   <link rel="stylesheet" href="../dashboard/css/style.css">
+</Head>
+<body>
 
    <main class="hero-section">
       <div class="hero-content">
@@ -100,8 +23,8 @@
             </div>
          </div>
       </div>
-   </main>
-//batas dashboard
+   </main>  
+   </body> 
 
             <section  class="ts-service-area service-area-pattern" id="ts-service-area">
              <div class="service-area-bg">
