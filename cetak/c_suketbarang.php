@@ -40,7 +40,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td colspan="2" align="center"><strong style="font-size: 18px;">DISTRIK <?php echo strtoupper($rd['kec']); ?></strong></td>
   </tr>
   <tr>
-    <td colspan="2" align="center"><strong style="font-size: 20 px;">KAMPUNG <?php echo strtoupper($rd['kelurahan']); ?></strong></td>
+    <td colspan="2" align="center"><strong style="font-size: 23px;">KAMPUNG <?php echo strtoupper($rd['kelurahan']); ?></strong></td>
   </tr>
   <tr>
     <td colspan="2" align="center" style="font-size: 15px; font-style: bold;">
@@ -109,7 +109,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td>Alamat</td><td>:</td><td><?php echo $r['alamat'];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo $r['kelurahan'];?></td>
   </tr>
   <tr>
-    <td></td><td></td><td>Kec. <?php echo $r['kec'];?> Kab. <?php echo $r['kab'];?></td>
+    <td></td><td></td><td>Distrik. <?php echo $r['kec'];?> Kab. <?php echo $r['kab'];?></td>
   </tr>
 
     <tr>
