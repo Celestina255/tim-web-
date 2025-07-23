@@ -39,7 +39,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td colspan="2" align="center"><strong style="font-size: 18px;">DISTRIK <?php echo strtoupper($rd['kec']); ?></strong></td>
   </tr>
   <tr>
-    <td colspan="2" align="center"><strong style="font-size: 120px;">KAMPUNG <?php echo strtoupper($rd['kelurahan']); ?></strong></td>
+    <td colspan="2" align="center"><strong style="font-size: 20px;">KAMPUNG <?php echo strtoupper($rd['kelurahan']); ?></strong></td>
   </tr>
   <tr>
     <td colspan="2" align="center" style="font-size: 15px; font-style: bold;">
