@@ -32,6 +32,9 @@
 21.   News Single
 22.   Sidebar
 23.   Error Page
+24.   Sejarah Desa
+25.   Struktur Desa
+26.   Visimisi Desa
 */
 
 
@@ -5667,3 +5670,191 @@ label {
   border-radius: 2px;
 }
 }
+/* ============================ */
+/* Sejarah */
+/* ============================ */
+.sejarah-section {
+   padding: 80px 20px;
+   background-color: #ffffff;
+   font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+.sejarah-title {
+   font-size: 28px;
+   font-weight: bold;
+   text-align: center;
+   text-transform: uppercase;
+   color: #2caa50;
+   margin-bottom: 40px;
+}
+
+.sejarah-text {
+   font-size: 16px;
+   line-height: 1.8;
+   color: #333;
+   text-align: justify;
+   max-width: 800px;
+   margin: 0 auto;
+}
+
+.no-data-box {
+   display: inline-block;
+   background-color: #f8f9fa;
+   color: #6c757d;
+   padding: 12px 20px;
+   border-radius: 10px;
+   font-size: 15px;
+   border: 1px solid #e1e1e1;
+   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.no-data-box i {
+   margin-right: 6px;
+   font-size: 16px;
+}
+/* Struktur
+=================================*/
+:root {
+   --primary-green: #2caa50;
+}
+
+.profil-grid {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+   gap: 30px;
+   justify-content: center;
+}
+
+.profil-card {
+   background-color: #ffffff;
+   border-radius: 16px;
+   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+   overflow: hidden;
+   display: flex;
+   flex-direction: column;
+   height: 100%;
+   transition: transform 0.3s ease;
+}
+
+.profil-card:hover {
+   transform: translateY(-5px);
+}
+
+.foto-wrapper {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 180px;
+   padding: 20px;
+   background-color: #eaf7ef; /* latar belakang foto yang lebih hijau */
+}
+
+.profil-foto {
+   max-height: 100%;
+   max-width: 100%;
+   object-fit: contain;
+   border-radius: 8px;
+}
+
+.profil-info {
+   padding: 15px;
+   text-align: center;
+   background-color: var(--primary-green); /* hijau penuh */
+   color: white;
+}
+
+.profil-nama {
+   font-size: 16px;
+   font-weight: bold;
+   margin: 0;
+   color: white;
+}
+
+.profil-jabatan-box {
+   background-color: var(--primary-green);
+   padding: 12px;
+   text-align: center;
+   color: white;
+   border-bottom-left-radius: 16px;
+   border-bottom-right-radius: 16px;
+   min-height: 50px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.profil-jabatan {
+   font-size: 14px;
+   margin: 0;
+   line-height: 1.4;
+}
+
+.judul-bagan {
+    color: var(--primary-green) !important;;
+   font-size: 36px;
+   font-weight: 700;
+   text-align: center;
+   margin-bottom: 30px;
+   text-transform: uppercase;
+}
+
+h2 {
+  color: #000; /* bisa menimpa */
+}
+/* Visimisi
+=========================*/
+.visimisi-wrapper {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   align-items: stretch;
+   gap: 30px;
+}
+
+.card-box {
+   flex: 1 1 300px; /* fleksibel, minimal 300px */
+   background-color: #ffffff;
+   border-radius: 12px;
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+   padding: 30px 25px;
+   min-height: 300px;
+   box-sizing: border-box;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+}
+
+.title {
+   color: #2caa50;
+   font-weight: 700;
+   font-size: 20px;
+   text-align: center;
+   margin-bottom: 20px;
+}
+
+.content {
+   font-size: 15px;
+   color: #333;
+   line-height: 1.6;
+   text-align: left;
+   margin: 0;
+   padding: 0;
+}
+
+.content li {
+   margin-bottom: 8px;
+   list-style: disc;
+   margin-left: 20px;
+}
+
+@media (max-width: 768px) {
+   .visimisi-wrapper {
+      flex-direction: column;
+   }
+
+   .card-box {
+      width: 100%;
+   }
+}
+
+
