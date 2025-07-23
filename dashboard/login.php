@@ -16,7 +16,7 @@
                               <div class="ts-contact-info"><span class="ts-contact-icon float-left"><i class="icon icon-map-marker2"></i></span>
                                  <div class="ts-contact-content">
                                     <h3 class="ts-contact-title">Alamat Sekretariat</h3>
-                                 <p>Jl. Poros SP4, Distrik Manimeri, Banjar Ausoy</p>
+                                 <p>Jl. Poros SP4, Manimeri, Banjar Ausoy</p>
                                  </div>
                                  <!-- Contact content end-->
                               </div>
