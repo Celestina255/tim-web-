@@ -16,21 +16,21 @@
                               <div class="ts-contact-info"><span class="ts-contact-icon float-left"><i class="icon icon-map-marker2"></i></span>
                                  <div class="ts-contact-content">
                                     <h3 class="ts-contact-title">Alamat Sekretariat</h3>
-                                 <p><?php echo $r['kantor']; ?></p>
+                                 <p>Jl. Poros SP4, Distrik Manimeri, Banjar Ausoy</p>
                                  </div>
                                  <!-- Contact content end-->
                               </div>
                               <div class="ts-contact-info"><span class="ts-contact-icon float-left"><i class="icon icon-phone3"></i></span>
                                  <div class="ts-contact-content">
                                     <h3 class="ts-contact-title">Telp/Hp.</h3>
-                                    <p><?php echo $r['telp']; ?></p>
+                                    <p>+62 (822) 7818 3799</p>
                                  </div>
                                  <!-- Contact content end-->
                               </div>
                               <div class="ts-contact-info last"><span class="ts-contact-icon float-left"><i class="icon icon-envelope"></i></span>
                                  <div class="ts-contact-content">
                                     <h3 class="ts-contact-title">Alamat E-mail</h3>
-                                 <p><?php echo $r['email']; ?></p>
+                                 <p>BanjarAusoy@gmail.com</p>
                                  </div>
                                  <!-- Contact content end-->
                               </div>
