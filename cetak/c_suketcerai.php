@@ -81,7 +81,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td></td><td>Agama</td><td>:</td><td><?php echo $dt[5];?></td>
   </tr>
     <tr>
-    <td></td><td valign="top">Alamat</td><td valign="top">:</td><td valign="top"><?php echo $dt[6];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo $dt[10];?><br>Distrik. <?php echo $dt[9];?> Kab. <?php echo $dt[8];?> Prov. <?php echo $dt[7];?></td>
+    <td></td><td valign="top">Alamat</td><td valign="top">:</td><td valign="top"><?php echo $dt[6];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo $dt[10];?><br>Distrik <?php echo $dt[9];?> Kabupaten <?php echo $dt[8];?> Provinsi <?php echo $dt[7];?></td>
   </tr>
 <tr>
     <td colspan="4">&nbsp;</td>
@@ -103,7 +103,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td></td><td>Agama</td><td>:</td><td><?php echo $dt[16];?></td>
   </tr>
   <tr>
-    <td></td><td valign="top">Alamat</td><td valign="top">:</td><td valign="top"><?php echo $dt[17];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo $dt[21];?><br>Distrik. <?php echo $dt[20];?> Kab. <?php echo $dt[19];?> Prov. <?php echo $dt[18];?></td>
+    <td></td><td valign="top">Alamat</td><td valign="top">:</td><td valign="top"><?php echo $dt[17];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo $dt[21];?><br>Distrik <?php echo $dt[20];?> Kabupaten <?php echo $dt[19];?> Provinsi <?php echo $dt[18];?></td>
   </tr>
   <tr>
     <td colspan="4">&nbsp;</td>
