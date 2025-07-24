@@ -1,3 +1,4 @@
+
 <link rel="stylesheet" href="../assets/css/style.css">
 <?php
 include_once "../koneksi.php";
@@ -9,12 +10,13 @@ $kodesurat = $_GET['kode'];
 # Perintah untuk mendapatkan data dari tabel Surat lain
 $query = mysqli_query ($con, "SELECT tb_jenissurat.*, tb_datasurat.*, tb_detailsurat.* from tb_jenissurat, tb_datasurat, tb_detailsurat WHERE tb_detailsurat.kode='$kodesurat'");
 while ($r = mysqli_fetch_array($query)){
-  $tgl = $r['tanggal'];
-  $bl=format_hari_tanggal($tgl);
-  $bln=explode(',',$bl);
-  $bulan=$bln['1'];
-  $hari=$bln['0'];
-  $dt=explode(';',$r['detail']);
+
+$tgl = date('Y-m-d'); // tanggal hari ini otomatis
+$bl = format_hari_tanggal($tgl);
+$bln = explode(',',$bl);
+$hari = $bln[0];
+$bulan = trim($bln[1]);
+$dt=explode(';',$r['detail']);
 ?>
 <?php 
 $query = mysqli_query ($con, "SELECT * from tb_kelurahan");
@@ -85,7 +87,7 @@ while ($rd = mysqli_fetch_array($query)){
     <td colspan="5">&nbsp;</td>
   </tr>
     <tr>
-    <td colspan="5" align="justify">Pada hari ini <?php echo strtoupper($hari);?> tanggal <?php echo IndonesiaTgl($tgl);?>, Pihak I dan Pihak II secara bersama - sama sepakat sabagai berikut :</td>
+    <td colspan="5" align="justify">Pada hari ini Pada hari ini <?php echo strtoupper($hari);?> tanggal <?php echo date('d M Y'); ?>, Pihak I dan Pihak II secara bersama - sama sepakat sabagai berikut :</td>
   </tr>
   <tr>
     <td valign="top">1.</td><td colspan="4" align="justify">Tanah dengan luas/ukuran <?php echo format_angka($dt[12]);?> Ha./M2 yang terletak di <?php echo $dt[13];?>, dengan batas - batas tanah : </td>
@@ -146,18 +148,18 @@ while ($rd = mysqli_fetch_array($query)){
     <td>1.</td><td><?php echo $dt[19];?></td><td colspan="2">(_______________)</td>
   </tr>
    <tr>
-    <td colspan="4">&nbsp;<br></td><td></td>
+    <td colspan="4">&nbsp;<br><br><br></td><td></td>
   </tr>
    <tr>
     <td>2.</td><td><?php echo $dt[20];?></td><td colspan="2">(_______________)</td>
   </tr>
-<tr><td colspan="4">
+<tr><td colspan="4"><br>
 <table width="90%" align="right" border="0" cellspacing="1" cellpadding="2" class="table-print">
   <tr>
     <td></td><td align="center" class="pull pull-right" colspan="2">Mengetahui</td>
   </tr>
   <tr>
-    <td rowspan="3" width="20%"></td><td align="center" valign="top" class="pull pull-right"><?php echo $rd['jnp']=='Desa'? "Kepala Desa" : "Lurah";?> <?php echo $rd['kelurahan'];?></td>
+    <td rowspan="3" width="20%"></td><td align="center" valign="top" class="pull pull-right"><?php echo $rd['jnp']=='Desa'? "Kepala Kampung" : "Lurah";?> <?php echo $rd['kelurahan'];?></td>
   </tr>
   <tr>
     <td align="center" class="pull pull-right"></td>
