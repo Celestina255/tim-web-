@@ -99,24 +99,28 @@ while ($r = mysqli_fetch_array($query)) {
 
   <tr>
     <td colspan="4">
-      <table width="90%" align="right" border="0" cellspacing="1" cellpadding="4" class="table-print">
-        <tr><td colspan="2">&nbsp;</td></tr>
-        <tr>
-          <td></td>
-          <td align="center" class="pull pull-right"><?php echo $rd['kelurahan']; ?>, <?php echo tgl_indonesia($tgl_sekarang); ?></td>
-        </tr>
-        <tr>
-          <td rowspan="3" width="50%"></td>
-          <td align="center" valign="top" class="pull pull-right"><?php echo $rd['jnp']=='Desa' ? "Kepala Kampung" : "Lurah"; ?> <?php echo $rd['kelurahan']; ?></td>
-        </tr>
-        <tr><td align="center" class="pull pull-right"></td></tr>
-        <tr>
-          <td align="center" class="pull pull-right"><br><br><br>
-            <u><b><?php echo $r['ttd']; ?></b></u><br>
-            NIP. <?php echo $rd['niplurah']; ?>
-          </td>
-        </tr> 
-      </table>
+      <table width="100%" border="0" cellspacing="0" cellpadding="4" style="margin-top: 30px;">
+  <tr>
+    <td width="50%"></td> <!-- Kolom kosong kiri -->
+    
+    <td width="50%" align="center">
+      <div style="font-size: 12pt; line-height: 1.5; text-align: center;">
+        Dikeluarkan di : <?php echo $rd['kelurahan']; ?><br>
+        Pada Tanggal &nbsp;&nbsp;: <?php echo tgl_indonesia($tgl_sekarang); ?>
+      </div>
+
+      <br>
+
+      <div style="font-weight: bold; font-size: 12pt;">
+        KEPALA KAMPUNG
+      </div>
+
+      <br><br><br>
+
+      <div style="text-align: center;">
+        <u><b><?php echo strtoupper($r['ttd']); ?></b></u><br>
+        NIP. <?php echo $rd['niplurah']; ?>
+      </div>
     </td>
   </tr>
 </table>
