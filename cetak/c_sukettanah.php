@@ -75,9 +75,9 @@ while ($r = mysqli_fetch_array($query)) {
   <tr><td>6.</td><td>Agama</td><td>:</td><td><?php echo $r['agama'];?></td></tr>
   <tr><td>7.</td><td>Pekerjaan</td><td>:</td><td><?php echo $r['kerjaan'];?></td></tr>
   <tr><td>8.</td><td>Alamat</td><td>:</td>
-  <td><?php echo $r['alamat'];?> <?php echo $rd['jnp']=='Desa'? "Desa" : "Kelurahan";?> <?php echo $r['kelurahan'];?></td></tr>
+  <td><?php echo $r['alamat'];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo $r['kelurahan'];?></td></tr>
   <tr>
-    <td></td><td></td><td></td><td>Distrik. <?php echo $r['kec'];?> Kab. <?php echo $r['kab'];?></td>
+    <td></td><td></td><td></td><td>Distrik <?php echo $r['kec'];?> Kabupaten <?php echo $r['kab'];?></td>
   </tr>
 
   <tr><td colspan="4">&nbsp;</td></tr>
