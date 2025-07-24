@@ -96,7 +96,7 @@ while ($r = mysqli_fetch_array($query)) {
 
 
    <tr>
-    <td colspan="4">Warga tersebut diatas adalah bernar Warga <?php echo $rd['jnp']=='Desa'? "Desa" : "Kelurahan";?> <?php echo $rd['kelurahan'];?>  dan yang bersangkutan <b>Belum Pernah Menikah</b> dengan siapapun dan Masih berstatus Perjaka / Gadis *)</td>
+    <td colspan="4">Warga tersebut diatas adalah bernar Warga <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo $rd['kelurahan'];?>  dan yang bersangkutan <b>Belum Pernah Menikah</b> dengan siapapun dan Masih berstatus Perjaka / Gadis *)</td>
   </tr>
   <tr>
     <td colspan="4">&nbsp;</td>
