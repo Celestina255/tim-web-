@@ -90,7 +90,7 @@ while ($r = mysqli_fetch_array($query)) {
   </tr>
   <tr>
     <td></td><td></td>
-    <td>Distrik <?php echo $r['kec']; ?>, Kab. <?php echo $r['kab']; ?></td>
+    <td>Distrik <?php echo $r['kec']; ?>, Kabupaten <?php echo $r['kab']; ?></td>
   </tr>
 
   <tr><td colspan="3">yang akan dikirim dengan Kendaraan/Mobil, No. Polisi / Plat : ___________</td></tr>
