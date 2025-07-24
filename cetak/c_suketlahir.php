@@ -6,7 +6,9 @@ include_once "../assets/inc.php";
 $kodesurat = $_GET['kode'];
 
 # Perintah untuk mendapatkan data dari tabel Surat 
-$query = mysqli_query ($con, "SELECT tb_jenissurat.*, tb_datasurat.*, tb_detailsurat.*, tb_penduduk.* from tb_jenissurat, tb_datasurat, tb_detailsurat, tb_penduduk WHERE tb_detailsurat.kode='$kodesurat' AND tb_detailsurat.nik=tb_penduduk.nik");
+$query = mysqli_query ($con, "SELECT tb_jenissurat.*, tb_datasurat.*, tb_detailsurat.*, tb_penduduk.* 
+from tb_jenissurat, tb_datasurat, tb_detailsurat, tb_penduduk 
+WHERE tb_detailsurat.kode='$kodesurat' AND tb_detailsurat.nik=tb_penduduk.nik");
 while ($r = mysqli_fetch_array($query)) {
   $dt = explode(';', $r['detail']);
   $tgl_sekarang = date('Y-m-d');
@@ -61,7 +63,8 @@ while ($r = mysqli_fetch_array($query)) {
 <br>
 <table align="center" class="table-list" width="800" border="0" cellspacing="1" cellpadding="2">
   <tr>
-    <td colspan="3">Yang bertanda tangan dibawah ini <?php echo $rd['jnp']=='Desa'? "Kepala Kampung" : "Lurah";?> <?php echo $rd['kelurahan'];?> Distrik <?php echo $rd['kec'];?> Kabupaten <?php echo $rd['kab'];?>, dengan ini menerangkan sesungguhnya bahwa :</td>
+    <td colspan="3">Yang bertanda tangan dibawah ini <?php echo $rd['jnp']=='Desa'? "Kepala Kampung" : "Lurah";?> <?php echo $rd['kelurahan'];?>
+    Distrik <?php echo $rd['kec'];?> Kabupaten <?php echo $rd['kab'];?>, dengan ini menerangkan sesungguhnya bahwa :</td>
   </tr>
 </table>
 <table align="center" class="table-list" width="800" border="0" cellspacing="1" cellpadding="2">
@@ -91,7 +94,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td>Alamat</td><td>:</td><td><?php echo $dt[20];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo $r['kelurahan'];?></td>
   </tr>
   <tr>
-    <td></td><td></td><td>Kec. <?php echo $r['kec'];?> Kab. <?php echo $r['kab'];?></td>
+    <td></td><td></td><td> Distrik <?php echo $r['kec'];?> Kabupaten <?php echo $r['kab'];?></td>
   </tr>
 
   </table>
@@ -124,10 +127,10 @@ while ($r = mysqli_fetch_array($query)) {
     <td></td><td>Agama</td><td>:</td><td><?php echo $dt[5];?></td>
   </tr>
     <tr>
-    <td></td><td>Alamat</td><td>:</td><td><?php echo $dt[6];?> <?php echo $rd['jnp']=='Desa'? "Desa" : "Kelurahan";?> <?php echo $r['kelurahan'];?></td>
+    <td></td><td>Alamat</td><td>:</td><td><?php echo $dt[6];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo $r['kelurahan'];?></td>
   </tr>
   <tr>
-    <td></td><td></td><td></td><td>Kec. <?php echo $r['kec'];?> Kab. <?php echo $r['kab'];?></td>
+    <td></td><td></td><td></td><td>Distrik <?php echo $r['kec'];?> Kabupaten <?php echo $r['kab'];?></td>
   </tr>
 
   <tr>
@@ -153,7 +156,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td></td><td>Alamat</td><td>:</td><td><?php echo $dt[13];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo $r['kelurahan'];?></td>
   </tr>
   <tr>
-    <td></td><td></td><td></td><td>Kec. <?php echo $r['kec'];?> Kab. <?php echo $r['kab'];?></td>
+    <td></td><td></td><td></td><td>Distrik <?php echo $r['kec'];?> Kabupaten <?php echo $r['kab'];?></td>
   </tr>
   </table>
 
