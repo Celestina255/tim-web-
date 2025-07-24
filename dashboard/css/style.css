@@ -5887,7 +5887,7 @@ h2 {
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background-color: #2caa50;
+  background-color: #ffffff;
   color: #222;
 }
 
@@ -5907,40 +5907,30 @@ body {
 }
 
 .card-box {
-  background-color: #fff;
+  background-color: #3d2d13; /* warna coklat muda seperti footer */
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
+
+
 .title {
   text-align: center;
   font-size: 2em;
-  color: #dc3545;
+  color: #f36b6b; /* merah soft */
   font-weight: 700;
   margin-bottom: 20px;
 }
 
+
 .content {
-  font-size: 1em;
-  color: #333;
-  line-height: 1.8;
+  font-size: 1.1em;
+  color: #ffffff;
+  line-height: 1.7;
   padding-left: 15px;
 }
 
 .content li {
   margin-bottom: 10px;
 }
-
-.read-more {
-  display: inline-block;
-  margin-top: 10px;
-  color: #007BFF;
-  font-size: 0.95em;
-  text-decoration: none;
-}
-
-.read-more:hover {
-  text-decoration: underline;
-}
-
