@@ -75,7 +75,7 @@ while ($r = mysqli_fetch_array($query)) {
   <tr><td>Tmp. & Tgl. Lahir </td><td>:</td><td><?php echo  $dt[17];?>, <?php echo  $dt[18];?></td></tr>
   <tr><td>Agama</td><td>:</td><td><?php echo  $dt[19];?></td></tr>
   <tr><td>Alamat</td><td>:</td><td><?php echo  $dt[20];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo  $rd['kelurahan'];?></td></tr>
-  <tr><td></td><td></td><td>Distrik. <?php echo  $rd['kec'];?> Kab. <?php echo  $rd['kab'];?></td>
+  <tr><td></td><td></td><td>Distrik <?php echo  $rd['kec'];?> Kabupten <?php echo  $rd['kab'];?></td>
   </tr>
 
 </table>
@@ -90,7 +90,7 @@ while ($r = mysqli_fetch_array($query)) {
 <tr><td></td><td>Tmp. & Tgl. Lahir </td><td>:</td><td><?php echo  $dt[3];?>, <?php echo  $dt[4];?></td></tr>
 <tr><td></td><td>Agama</td><td>:</td><td><?php echo  $dt[5];?></td></tr>
 <tr><td></td><td>Alamat</td><td>:</td><td><?php echo  $dt[6];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo  $rd['kelurahan'];?></td></tr>
-<tr><td></td><td></td><td></td><td>Kec. <?php echo  $rd['kec'];?> Kab. <?php echo  $rd['kab'];?></td></tr>
+<tr><td></td><td></td><td></td><td>Distrik <?php echo  $rd['kec'];?> Kabupaten <?php echo  $rd['kab'];?></td></tr>
 
 <tr><td><b>II.</b></td><td colspan="3"><b>IBU :</b></td> </tr>
 <tr><td></td><td>Nama</td><td>:</td><td><?php echo  $dt[8];?></td></tr>
@@ -99,10 +99,9 @@ while ($r = mysqli_fetch_array($query)) {
 <tr><td></td><td>Tmp. & Tgl. Lahir </td><td>:</td><td><?php echo  $dt[10];?>, <?php echo  $dt[11];?></td></tr>
 <tr><td></td><td>Agama</td><td>:</td><td><?php echo  $dt[12];?></td></tr>
 <tr><td></td><td>Alamat</td><td>:</td><td><?php echo  $dt[13];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo  $rd['kelurahan'];?></td></tr>
-<tr><td></td><td></td><td></td><td>Distrik. <?php echo  $rd['kec'];?> Kab. <?php echo  $rd['kab'];?></td></tr>
+<tr><td></td><td></td><td></td><td>Distrik <?php echo  $rd['kec'];?> Kabupaten <?php echo  $rd['kab'];?></td></tr>
 
   </table>
-
 <table align="center" class="table-list" width="800" border="0" cellspacing="1" cellpadding="2">
   <tr>
     <td colspan="3">&nbsp;</td>
@@ -110,9 +109,9 @@ while ($r = mysqli_fetch_array($query)) {
     <tr>
     <td colspan="3">Demikian keterangan ini dibuat, untuk dapat dipergunakan sebagaimana mestinya.</td>
   </tr>
-
 <tr><td colspan="4">
 <table width="100%" border="0" cellspacing="0" cellpadding="4" style="margin-top: 30px;">
+<br><br><br><br><br><br>
   <tr>
     <td width="50%"></td> <!-- Kolom kosong kiri -->
     
@@ -121,8 +120,6 @@ while ($r = mysqli_fetch_array($query)) {
         Dikeluarkan di : <?php echo $rd['kelurahan']; ?><br>
         Pada Tanggal &nbsp;&nbsp;: <?php echo tgl_indonesia($tgl_sekarang); ?>
       </div>
-
-      <br>
 
       <div style="font-weight: bold; font-size: 12pt;">
         KEPALA KAMPUNG
