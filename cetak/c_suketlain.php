@@ -61,7 +61,8 @@ while ($r = mysqli_fetch_array($query)) {
 <br>
 <table align="center" class="table-list" width="800" border="0" cellspacing="1" cellpadding="2">
   <tr>
-    <td colspan="3">Yang bertanda tangan dibawah ini <?php echo $rd['jnp']=='Desa'? "Kepala Kampung" : "Lurah";?> <?php echo $rd['kelurahan'];?> Distrik <?php echo $rd['kec'];?> Kabupaten <?php echo $rd['kab'];?>, dengan ini menerangkan sesungguhnya bahwa : </td>
+    <td colspan="3">Yang bertanda tangan dibawah ini <?php echo $rd['jnp']=='Desa'? "Kepala Kampung" : "Lurah";?> <?php echo $rd['kelurahan'];?> 
+      Distrik <?php echo $rd['kec'];?> Kabupaten <?php echo $rd['kab'];?>, dengan ini menerangkan sesungguhnya bahwa : </td>
   </tr>
       <tr>
     <td colspan="3">&nbsp;</td>
@@ -85,7 +86,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td>Alamat</td><td>:</td><td><?php echo $dt[7];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo $r['kelurahan'];?></td>
   </tr>
   <tr>
-    <td></td><td></td><td>Kec. <?php echo $r['kec'];?> Kab. <?php echo $r['kab'];?></td>
+    <td></td><td></td><td> Distrik <?php echo $r['kec'];?> Kabupaten <?php echo $r['kab'];?></td>
   </tr>
 
   <tr>
