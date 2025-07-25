@@ -1,4 +1,3 @@
-//code untuk dashboard halaman pertama
 <Head>
    <link rel="stylesheet" href="../dashboard/css/style.css">
 </Head>
@@ -26,36 +25,41 @@
       </div>
    </main>  
    </body> 
-//batas dashboard halaman pertama
+ <!-- Batas -->
+
+<!-- Sambutan -->
 <section class="sambutan-section py-5">
   <div class="container">
-    <div class="text-center mb-5">
-      <h2 class="section-title" style="color: #2caa50;">SAMBUTAN KEPALA KAMPUNG</h2>
+    <div class="text-center">
+      <!-- Judul tanpa garis bawah -->
+      <h2 class="section-title text-success" style="color: #2caa50;"">SAMBUTAN KEPALA KAMPUNG</h2>
     </div>
-    <div class="row d-flex align-items-start">
+    <div class="row d-flex align-items-start mt-4">
       <!-- Foto di kiri -->
       <div class="col-md-4 text-center mb-4 mb-md-0 d-flex justify-content-center align-items-start">
         <img src="../img/orang.png" alt="Kepala Desa" class="img-fluid rounded shadow-sm" style="max-width: 100%; height: auto;">
       </div>
-      <!-- Teks sambutan di kanan -->
-      <div class="col-md-8">
-        <p class="fw-bold text-uppercase mb-1" style="font-weight: bold;">SUDIRMAN</p>
-        <p class="mb-3" style="font-weight: bold;">Kepala Kampung Banjar Ausoy</p>
-        
-        <p>Assalamu `Alaikum Warahmatullahi Wabarakatuh</p>
-        <p>Sebuah kesyukuran yang tak terhingga kepada Allah SWT, karena di era digitalisasi sekarang ini, Pemerintah Desa Banjar Ausoy mampu menghadirkan Aplikasi Website Desa yang akan mempermudah pelayanan di Kantor Desa Banjar Ausoy dalam hal pelayanan Administrasi.</p>
-        <p>Tentunya keberadaan Aplikasi ini diharapkan juga dapat memberikan Informasi kepada Masyarakat yang ingin mengetahui Program atau Kegiatan Pemerintah Desa Banjar Ausoy dengan mengakses melalui Fitur yang sudah disiapkan.</p>
-        <p>Besar harapan kami, untuk aplikasi ini nantinya dapat membawa perubahan signifikan dalam proses Pelayanan Pemerintahan Desa dan mampu menjadi Desa Digital yang merupakan salah satu program untuk mengurangi kesenjangan arus informasi yang terjadi di Desa.</p>
-        <p>Konsep Desa Digital merupakan Pemanfaatan Teknologi Informasi yang Terintegrasi dalam pelayanan Publik dan Kegiatan perekonomian di Desa Banjar Ausoy </p>
-        <p>Salam Dari Desa</p>
-        <p>Sekian dan terima kasih<br>
-        Billahi Taufiq WalHidayah<br>
-        Wassalamu `Alaikum Warahmatullahi Wabarakatuh</p>
-      </div>
+     <!-- Teks sambutan di kanan -->
+<div class="col-md-8">
+  <p class="fw-bold text-uppercase mb-1">SUDIRMAN</p>
+  <p class="mb-3 fw-bold">Kepala Kampung Banjar Ausoy</p>
+
+  <div class="scrollable-text" style="max-height: 200px; overflow-y: auto; padding-right: 10px;">
+    <p>Assalamu `Alaikum Warahmatullahi Wabarakatuh</p>
+    <p>Sebuah kesyukuran yang tak terhingga kepada Allah SWT, karena di era digitalisasi sekarang ini, Pemerintah Desa Banjar Ausoy mampu menghadirkan Aplikasi Website Desa yang akan mempermudah pelayanan di Kantor Desa Banjar Ausoy dalam hal pelayanan Administrasi.</p>
+    <p>Tentunya keberadaan Aplikasi ini diharapkan juga dapat memberikan Informasi kepada Masyarakat yang ingin mengetahui Program atau Kegiatan Pemerintah Desa Banjar Ausoy dengan mengakses melalui Fitur yang sudah disiapkan.</p>
+    <p>Besar harapan kami, untuk aplikasi ini nantinya dapat membawa perubahan signifikan dalam proses Pelayanan Pemerintahan Desa dan mampu menjadi Desa Digital yang merupakan salah satu program untuk mengurangi kesenjangan arus informasi yang terjadi di Desa.</p>
+    <p>Konsep Desa Digital merupakan Pemanfaatan Teknologi Informasi yang Terintegrasi dalam pelayanan Publik dan Kegiatan perekonomian di Desa Banjar Ausoy</p>
+    <p>Salam Dari Desa</p>
+    <p>Sekian dan terima kasih<br>
+    Billahi Taufiq WalHidayah<br>
+    Wassalamu `Alaikum Warahmatullahi Wabarakatuh</p>
+  </div>
+</div>
     </div>
   </div>
 </section>
-   <!-- Service Section end-->
+<!-- Service Section end-->
 
    <!--Berita --->
   <section class="news" id="news">
@@ -89,361 +93,213 @@
          </div>
          <?php } ?>
       </div>
-      <div class="text-center">
-         <a class="btn btn-secondary" href="?page=berita" role="button">LIHAT BERITA LEBIH LENGKAP</a>
+      <div class="text-center mt-4">
+         <a class="btn-news-more" href="?page=berita" role="button">LIHAT BERITA LEBIH LENGKAP</a>
       </div>
    </div>
 </section>
       <!-- News end-->
 
-      <section class="ts-services solid-bg" id="ts-services">
-         <div class="container">
-            <!-- Title row end-->
-            <div class="row text-center">
-               <div class="col-md-12">
-                  <h2 class="section-title">Pelayanan Admnistrasi</h2>
-               </div>
-            </div>
-            <div class="row">
-               <?php 
-               $query =mysqli_query($con, "SELECT * FROM tb_jenissurat ORDER BY id ASC LIMIT 12");
-               while($r=mysqli_fetch_array($query)){
-                  ?>
-
-                  <div class="col-lg-3 col-md-12" style="padding: 20px 10px 0px;">
-                     <div class="ts-service-box">
-                        <div class="ts-service-image-wrapper">
-                           <img class="img-fluid" src="../img/file.png" alt="" style="align-items: center; padding:10% 20% 0%;">
-                        </div>
-                        <div class="ts-service-content">
-                           <h4 class="service-title"><?php echo substr($r['nmsurat'],5,35); ?></h4>
-                           <p><?php echo substr($r['keterangan'],0,50); ?></p>
-                           <p><a class="link-more" href="?page=keterangan">Read More <i class="icon icon-right-arrow2"></i></a></p>
-                        </div>
-                     </div>
-                     <!-- Service1 end-->
-                  </div>
-               <?php } ?>
-               <!-- Col 1 end-->
-            </div>
-         </div>
-         <!-- Container end-->
-      </section>
-      <!-- Service end-->
-      
-      <section class="testimonial-area" id="testimonial-area">
-         <div class="container">
-            <div class="row">
-               <div class="col-lg-6">
-                  <div class="accordion-title">
-                     <h3 class="column-title"><span>Our FAQ <small>(Frequently Asked Questions)</small></span> Pertanyaan yang sering ditanyakan</h3>
-                  </div>
-                  <div id="accordion" class="accordion-area">
-                     <div class="card">
-                        <div class="card-header" id="headingOne">
-                           <h5 class="mb-0">
-                              <a href="#" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                 Bagaimana cara mengajukan permohonan surat secara online ?
-                              </a>
-                           </h5>
-                        </div>
-                        <div class="collapse show" id="collapseOne" aria-labelledby="headingOne" data-parent="#accordion">
-                           <div class="card-body">
-                              <p>Warga hanya tinggal memastikan sudah terdaftar di Web Pelayanan Administrasi desa ini kemudian membuat akun dan login melalui menu yang tersedia dengan username dan passwordnya.</p>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="card">
-                        <div class="card-header" id="headingThree">
-                           <h5 class="mb-0">
-                              <a href="#" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                 Bagaimana jika ingin membuat/mengisi dan mencetak surat secara mandiri ?
-                              </a>
-                           </h5>
-                        </div>
-                        <div class="collapse" id="collapseThree" aria-labelledby="headingThree" data-parent="#accordion">
-                           <div class="card-body">
-                              <p>Setelah terdaftar di Web Pelayanan Administrasi Desa, warga dapat memilih menu pelayanan kemudian klik buat surat mandiri dilanjtkan dengan memilih nama surat yang diinginkan.</p>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="card">
-                        <div class="card-header" id="headingFour">
-                           <h5 class="mb-0">
-                              <a href="#" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                 Bagaimana jika data diri belum terdaftar di Web Pelayanan Administrasi ini ?
-                              </a>
-                           </h5>
-                        </div>
-                        <div class="collapse" id="collapseFour" aria-labelledby="headingFour" data-parent="#accordion">
-                           <div class="card-body">
-                              <p>Silahkan hubungi Administrator atau staff Desa/Keluarahan yang mengelolan Web Pelayanan Administrasi ini.</p>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <!-- Accordion end -->
-               </div>
-               <!-- Col end-->
-               <div class="col-lg-6 testimonial-client">
-                  <h2 class="column-title "><span>Apa kata mereka</span>  Testimoni pengguna</h2>
-                  <div class="owl-carousel owl-theme testimonial-slide owl-dark" id="testimonial-slide">
-<?php
-                     $bct="SELECT * FROM tb_testimoni WHERE status='Publish' ORDER BY id DESC LIMIT 5";
-                     $hasil=mysqli_query($con,$bct);
-                     $no=0;
-                     while ($rt = mysqli_fetch_array($hasil)) {
-                        ?>
-                        <div class="item">
-
-                           <div class="quote-item quote-square"><span class="quote-text"><?php echo $rt['testimoni']; ?></span>
-                              <div class="quote-item-footer">
-                                 <img class="testimonial-thumb" src="../file/foto/no_pic.png" alt="testimonial">
-                                 <div class="quote-item-info">
-                                    <p class="quote-author"><?php echo $rt['nama']; ?></p><span class="quote-subtext"><?php echo $rt['telp']; ?></span>
-                                 </div>
-                              </div>
-                           </div>
-                        <!-- Quote item end-->
-                     </div><?php } ?>
-                     <!-- Item 1 end-->
-                  </div>
-                  <!-- Testimonial carousel end-->
-               </div>
-               <!-- Col end-->
-            </div>
-            <!-- Content row end-->
-         </div>
-         <!-- Container end-->
-      </section>
-      <!-- Quote area end-->
-
-
-      <section class="quote-area solid-bg" id="quote-area">
-         <div class="container">
-            <div class="row">
-               <div class="col-lg-5">
-                  <div class="quote_form">
-                     <div class="col-md-12">
-                        <h2 class="column-title ">Silahkan datang pada hari dan jam kerja</h2>
-                        <div class="quote-img" align="center">
-                           <img class="img-fluid" src="../img/icon/kantor.png" alt="img" style="padding: 0px 40px 0px; width: 60%;">
-                        </div>
-                     </div>
-                     <br>
-
-                     <div class="col-md-12">
-                        <h3>
-                           <table cellpadding="4" cellspacing="5" border="0" width="100%" rules="rows">
-                              <tr>
-                                 <td>Hari</td><td>&nbsp;&nbsp;Jam/Waktu</td>
-                              </tr>
-                              <tr>
-                                 <td>Senin - Jum'at</td><td>: 08.00 - 15.30 WIB</td>
-                              </tr>
-                              <tr>
-                                 <td>Sabtu</td><td>: 08.00 - 12.00 WIB</td>
-                              </tr>
-                              <tr>
-                                 <td><span style="color: red;">Minggu</span></td><td>: <span style="color: red;">Libur</span></td>
-                              </tr>
-                              <tr>
-                                 <td colspan="2"></td>
-                              </tr>
-                           </table>
-                        </h3>
-
-                        <!-- Quote form end-->
-                     </div>
-                  </div>
-               </div>
-               <hr>
-               <!-- Col end-->
-               <div class="col-lg-7 qutoe-form-inner-le">
-                  <form action="../aksi/s_testimoni_d.php"  method="POST">
-                     <h2 class="column-title"><span>Berikan testimoni kamu disini</span> Testimoni   </h2>
-                     <div class="error-container"></div>
-                     <div class="row">
-                        <div class="col-lg-12">
-                           <div class="form-group">
-                              <input class="form-control form-name" id="nama" name="nama" placeholder="Nama lengkap" type="text" required="">
-                           </div>
-                        </div>
-                        <!-- Col end-->
-                        <div class="col-lg-12">
-                           <div class="form-group">
-                              <input class="form-control form-email" id="telp" name="telp" placeholder="No. Telp/Hp." type="text" required="">
-                           </div>
-                        </div>
-                        <div class="col-lg-12">
-                           <div class="form-group">
-                              <textarea class="form-control form-message required-field" id="testimoni" name="testimoni" placeholder="Tinggalkan testimoni kamu disini" rows="8"></textarea>
-                           </div>
-                        </div>
-                        <!-- Col 12 end-->
-                     </div>
-                     <!-- Form row end-->
-                     <div class="text-right">
-                        <button class="btn btn-primary tw-mt-30" type="submit" id="simpan" name="simpan">Kirim Testimoni</button>
-                     </div>
-                  </form>
-                  <!-- Form end-->
-               </div>
-               <!-- Col end-->
-            </div>
-            <!-- Content row end-->
-         </div>
-         <!-- Container end-->
-      </section>
-      <!-- Quote area end-->
-      <section id="ts-facts-area" class="ts-facts-area-bg bg-overlay">
-         <div class="container">
-            <div class="row ">
-               <div class="col-lg-12 col-md-12">
-                  <div class="container">
-                     <div class="row text-center">
-                        <div class="col-lg-3 col-md-3">
-                           <div class="ts-facts-bg">
-                              <img src="../img/icon/penduduk.png" alt="" style="width:100px;" />
-                              <?php 
-                              $queryw=mysqli_query($con, "SELECT COUNT(*) AS jw FROM tb_penduduk");
-                              while($rw=mysqli_fetch_array($queryw)){
-                                 ?>
-                                 <div class="ts-facts-content">
-                                    <h4 class="ts-facts-num"><span class="counterUp"><?php echo $rw['jw']; ?></span></h4>
-                                    <p class="facts-desc">Penduduk</p>
-                                    </div><?php } ?>
-                                 </div>
-                                 <!-- Facts 1 end-->
-                              </div>
-                              <!-- Col 1 end-->
-                              <div class="col-lg-3 col-md-3">
-                                 <div class="ts-facts-bg">
-                                    <img src="../img/icon/surat.png" alt="" style="width:70px;"/>
-                                    <?php 
-                                    $queryas=mysqli_query($con, "SELECT COUNT(*) AS jas FROM tb_datasurat");
-                                    while($ras=mysqli_fetch_array($queryas)){
-                                       ?>
-                                       <div class="ts-facts-content">
-                                          <h4 class="ts-facts-num"><span class="counterUp"><?php echo $ras['jas']; ?></span></h4>
-                                          <p class="facts-desc">Arsip Surat</p>
-                                          </div><?php } ?>
-                                       </div>
-                                       <!-- Facts 2 end-->
-                                    </div>
-                                    <!-- Col 2 end-->
-                                    <div class="col-lg-3 col-md-3">
-                                       <div class="ts-facts-bg">
-                                          <img src="../img/icon/permohonan.png" alt="" style="width:70px;"/>
-                                          <?php 
-                                          $querysp=mysqli_query($con, "SELECT COUNT(*) AS sp FROM tb_permohonan WHERE status='acc'");
-                                          while($rsp=mysqli_fetch_array($querysp)){
-                                           ?>
-                                           <div class="ts-facts-content">
-                                             <h4 class="ts-facts-num"><span class="counterUp"><?php echo $rsp['sp']; ?></span></h4>
-                                             <p class="facts-desc">Permohonan</p>
-                                             </div><?php } ?>
-                                          </div>
-                                          <!-- Facts 3 end-->
-                                       </div>
-                                       <!-- Col 3 end-->
-                                       <div class="col-lg-3 col-md-3">
-                                          <div class="ts-facts-bg">
-                                             <img src="../img/icon/suratmandiri.png" alt="" style="width:70px;"/>
-                                             <?php 
-                                             $querybs=mysqli_query($con, "SELECT COUNT(*) AS bs FROM tb_buatsendiri WHERE status='acc'");
-                                             while($rbs=mysqli_fetch_array($querybs)){
-                                              ?>
-                                              <div class="ts-facts-content">
-                                                <h4 class="ts-facts-num"><span class="counterUp"><?php echo $rbs['bs']; ?></span></h4>
-                                                <p class="facts-desc">Surat Mandiri</p>
-                                                </div><?php } ?>
-                                             </div>
-                                             <!-- Facts 3 end-->
-                                          </div>
-                                          <!-- En Col 4 -->
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                              <!-- Row end-->
-                           </div>
-                           <!-- Container 2 end-->
-                        </section>
-                        <!-- Facts Area End -->
-
-
-                        <section class="clients-area " id="clients-area">
-                           <div class="container">
-                              <div class="row">
-                                 <div class="col-sm-12 owl-carousel owl-theme text-center partners" id="partners-carousel">
-                                    <figure class="item partner-logo">
-                                       <a href="https://www.bpk.go.id" target="_BLANK">
-                                          <img class="img-fluid" src="../img/icon/bpk.png" alt="">
-                                       </a>
-                                    </figure>
-                                    <figure class="item partner-logo">
-                                       <a href="https://www.kemendagri.go.id">
-                                          <img class="img-fluid" src="../img/icon/kemendagri.png" alt="">
-                                       </a>
-                                    </figure>
-                                    <figure class="item partner-logo">
-                                       <a href="https://www.kemendesa.go.id">
-                                          <img class="img-fluid" src="../img/icon/kemendesa.png" alt="">
-                                       </a>
-                                    </figure>
-                                    <figure class="item partner-logo">
-                                       <a href="#">
-                                        <img class="img-fluid" src="../img/icon/bpd.png" alt="">
-                                     </a>
-                                  </figure>
-                                  <figure class="item partner-logo">
-                                    <a href="#">
-                                     <img class="img-fluid" src="../img/icon/lpm.png" alt="">
-                                  </a>
-                               </figure>
-                               <figure class="item partner-logo last">
-                                 <a href="#">
-                                  <img class="img-fluid" src="../img/icon/pkk.png" alt="">
-                               </a>
-                            </figure>
-                            <figure class="item partner-logo last">
-                              <a href="#">
-                               <img class="img-fluid" src="../img/icon/linmas.png" alt="">
-                            </a>
-                         </figure>
-                         <figure class="item partner-logo last">
-                           <a href="#">
-                            <img class="img-fluid" src="../img/icon/posyandu.png" alt="">
-                         </a>
-                      </figure>
-                      <figure class="item partner-logo last">
-                        <a href="#">
-                         <img class="img-fluid" src="../img/icon/karangtaruna.png" alt="">
-                      </a>
-                   </figure>
-                </div>
-                <!-- Owl carousel end-->
-             </div>
-             <!-- Content row end-->
-          </div>
-          <!-- Container end-->
-       </section>
-       <!-- Partners end-->
-
-       <section id="call-to-action" class="call-to-action-bg ">
-         <div class="container">
-            <div class="row">
-               <div class="col-lg-8 align-self-center">
-                  <h3 class="call-to-action-title">Informasi dan Pertanyaan</h3>
-                  <p>
-                    Kami akan melayani anda dengan baik
-                 </p>
-              </div>
-              <div class="col-lg-4 text-right">
-               <a class="btn btn-box" href="https://api.whatsapp.com/send?phone=6283824344430" target="_BLANK">Hubungi kami <br/>atau Chat +62 (838) 2434 4430</a>
-            </div>
-         </div>
+      <!-- Galeri Section -->
+      <section id="main-container" class="main-container py-5" style="background-color: #fff;">
+  <div class="container">
+    <div class="row text-center mb-4">
+      <div class="col-md-12">
+        <h2 class="section-title" style="color: #2caa50; font-weight: 700;">GALERI DESA</h2>
       </div>
-   </section>
+    </div>
+    <div class="row justify-content-center">
+      <?php 
+      $query = mysqli_query ($con, "SELECT * FROM tb_galeri ORDER BY id ASC");
+      while ($r = mysqli_fetch_array($query)){
+      ?>
+      <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch">
+        <div class="gallery-img position-relative w-100">
+          <a class="gallery-popup d-block" href="../img/galeri/<?php echo $r['foto']; ?>">
+            <img class="img-fluid w-100 rounded shadow-sm" src="../img/galeri/kecil_<?php echo $r['foto']; ?>" alt="Foto Galeri" style="height: 240px; object-fit: cover;">
+            <span class="gallery-icon position-absolute top-50 start-50 translate-middle text-white fs-4"><i class="fa fa-search"></i></span>
+          </a>
+        </div>
+      </div>
+      <?php } ?>
+    </div>
+ <!-- Tombol di tengah -->
+      <div class="text-center mt-4">
+         <a href="?page=galeri" class="btn-gallery-more">LIHAT FOTO LEBIH BANYAK</a>
+      </div>
+   </div>
+</section>
+      <!-- Galeri End -->
+
+
+<section class="faq-testimoni-section py-5" id="faq-testimoni">
+  <div class="container">
+    <div class="row text-center mb-4">
+      <div class="col-md-12">
+        <h2 class="section-title" style="color: #2caa50;">PERTANYAAN UMUM</h2>
+      </div>
+    </div>
+
+    <!-- Tambahkan ini -->
+    <div class="row justify-content-center">
+      <div class="col-md-10"> <!-- Bisa ubah ke col-md-8 kalau ingin lebih kecil -->
+
+        <div id="accordion" class="accordion-area">
+
+          <!-- FAQ Item 1 -->
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h5 class="mb-0">
+                <a class="btn btn-link d-flex align-items-center" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <span class="faq-icon"></span>
+                  <span class="ml-3">Bagaimana cara mengajukan permohonan surat secara online di website ini?</span>
+                </a>
+              </h5>
+            </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+              <div class="card-body">
+                Pastikan Anda sudah terdaftar di website ini. Setelah itu, buat akun dan login menggunakan menu yang tersedia dengan username dan password yang sudah dibuat. Terakhir, silahkan pilih menu Layanan, lalu klik "Permohonan Surat".
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ Item 2 -->
+          <div class="card">
+            <div class="card-header" id="headingTwo">
+              <h5 class="mb-0">
+                <a class="btn btn-link collapsed d-flex align-items-center" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  <span class="faq-icon"></span>
+                  <span class="ml-3">Bagaimana jika ingin membuat/mengisi dan mencetak surat secara mandiri?</span>
+                </a>
+              </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+              <div class="card-body">
+                Setelah masuk ke akun, pilih menu pelayanan, lalu klik "Buat Surat Mandiri" dan pilih jenis surat yang diinginkan.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ Item 3 -->
+          <div class="card">
+            <div class="card-header" id="headingThree">
+              <h5 class="mb-0">
+                <a class="btn btn-link collapsed d-flex align-items-center" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  <span class="faq-icon"></span>
+                  <span class="ml-3">Bagaimana jika data diri belum terdaftar di Web Pelayanan Administrasi ini?</span>
+                </a>
+              </h5>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+              <div class="card-body">
+                Jika membutuhkan bantuan atau mendapatkan kesulitan, silakan hubungi administrator atau staf desa/kelurahan yang mengelola website ini.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Testimoni Section -->
+<section class="testimoni-area py-5">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col text-center">
+        <h3 class="section-title" style="color: #2caa50; font-weight: 700;">TESTIMONI PENGGUNA</h3>
+      </div>
+    </div>
+
+    <div class="row align-items-start">
+      <!-- Kiri: Form -->
+      <div class="col-lg-4 mb-4">
+        <div class="testimoni-form-wrapper p-4 shadow-sm rounded bg-white">
+          <h5 class="mb-3 font-weight-bold">Berikan Testimoni Disini</h5>
+          <form action="../aksi/s_testimoni_d.php" method="POST">
+            <div class="form-group">
+              <input class="form-control" id="nama" name="nama" placeholder="Nama" type="text" required>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" id="testimoni" name="testimoni" placeholder="Masukkan pendapatmu disini" rows="5" required></textarea>
+            </div>
+            <div class="form-group text-center">
+              <button class="btn btn-danger btn-block" type="submit" id="simpan" name="simpan" style="width:100%">Kirim</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Kanan: Carousel -->
+      <!-- Kanan: Carousel Testimoni -->
+<div class="col-lg-8">
+  <div class="testimonial-wrapper">
+    <div class="owl-carousel owl-theme testimonial-carousel" id="testimonial-carousel">
+      <?php
+      $bct = "SELECT * FROM tb_testimoni WHERE status='Publish' ORDER BY id DESC LIMIT 9";
+      $hasil = mysqli_query($con, $bct);
+      while ($rt = mysqli_fetch_array($hasil)) {
+      ?>
+        <div class="item">
+          <div class="testimonial-card text-center p-4">
+            <div class="testimonial-img mb-3">
+              <img src="../file/foto/no_pic.png" alt="testimonial" class="rounded-circle">
+            </div>
+            <h5 class="testimonial-name"><?php echo $rt['nama']; ?></h5>
+            <p class="testimonial-text"><?php echo $rt['testimoni']; ?></p>
+          </div>
+        </div>
+      <?php } ?>
+    </div>
+
+    <!-- Navigasi (Naikkan ke atas) -->
+    <div class="testimonial-nav text-center mt-2" style="margin-top: -10px;">
+      <button class="btn btn-outline-secondary mr-1" id="prev"><i class="fa fa-chevron-left"></i></button>
+      <button class="btn btn-outline-secondary" id="next"><i class="fa fa-chevron-right"></i></button>
+    </div>
+  </div>
+</div>
+</section>
+
+
+
+<!-- Quote area start -->
+<section class="info-section">
+  <div class="container-info">
+    <!-- Card Jam Kerja + Hubungi Kami -->
+    <div class="info-card">
+      <h2 class="section-title">Silahkan datang pada hari dan jam kerja</h2>
+      <img class="office-icon" src="../img/icon/kantor.png" alt="Kantor">
+      <table class="worktime-table">
+        <tr>
+          <th>Hari</th>
+          <th>Jam/Waktu</th>
+        </tr>
+        <tr>
+          <td>Senin - Jum'at</td>
+          <td>08.00 - 15.30 WIB</td>
+        </tr>
+        <tr>
+          <td>Sabtu</td>
+          <td>08.00 - 12.00 WIB</td>
+        </tr>
+        <tr class="holiday">
+          <td>Minggu</td>
+          <td>Libur</td>
+        </tr>
+      </table>
+      <div class="cta-button">
+        <a href="https://api.whatsapp.com/send?phone=6282238030337" 
+           target="_blank" class="btn-contact">
+          Hubungi kami 
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
    <!-- Call to action end -->
