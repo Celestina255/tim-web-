@@ -146,8 +146,9 @@ include '../koneksi.php';
                         <li><a href='?page=galeri' title='Galeri'>Galeri</a></li>
                         <li><a href='?page=slider' title='Data Slider'>Slider</a></li>
                         <li><a href='?page=profil_desa' title='Profile Desa'>Profile</a></li>
-                        <li><a href='?page=transparansi' title='Transparansi'>Transparansi</a></li>
+<li><a href='?page=transparansi' title='Transparansi'>Transparansi</a></li>
                         <li><a href='?page=lembaga' title='Transparansi'>Transparansi</a></li>
+
                             </ul>
                         </li>
                         <li class="has-sub">
@@ -159,8 +160,24 @@ include '../koneksi.php';
                         <li><a href='?page=jenissurat' title='Dat Jenis Surat'>Jenis Surat</a></li>
                         <li><a href='?page=klasifikasi' title='Data Klasifikasi Surat'>Klasifikasi</a></li>
                         <li><a href='?page=staff' title='Data Staff'>Staff</a></li>
+                        <li><a href='?page=user' title='Data User'>User</a></li>
                             </ul>
                         </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-cog"></i>Pengaturan</a>
+                        <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                        <li><a href='?page=pengaturan_surat&id=1' title='Pengaturan Surat'>Surat</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-user"></i>Sistem</a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="?page=tambah_user">Register</a>
+                                </li>
                                  <li>
                                     <a href="logout.php">Keluar</a>
                                 </li>
@@ -227,7 +244,8 @@ include '../koneksi.php';
                     <li><a href='?page=penduduk' style="color: #fff;">Penduduk</a></li>
                     <li><a href='?page=jenissurat' style="color: #fff;">Jenis Surat</a></li>
                     <li><a href='?page=klasifikasi' style="color: #fff;">Klasifikasi</a></li>
-                    <li><a href='?page=staff' style="color: #fff;">Staff</a></li>
+                    <li><a href='?page=staff' style="color: #fff;" title='Data Staff'>Staff</a></li>
+                    <li><a href='?page=user' style="color: #fff;" title='Data User'>User</a></li>
                 </ul>
             </li>
 
@@ -251,7 +269,12 @@ include '../koneksi.php';
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
-                        <div class="header-button d-flex align-items-center" style="margin-left: auto;">
+                         <form class="form-header" action="" method="POST">
+                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
+                                <button class="au-btn--submit" type="submit">
+                                    <i class="zmdi zmdi-search"></i>
+                                </button>
+                            </form>
                             <?php 
                             $query = mysqli_query ($con, "SELECT count(*) AS jp FROM tb_permohonan WHERE status='onprocess' ORDER BY id ASC");
                             while ($r = mysqli_fetch_array($query)){
@@ -430,3 +453,4 @@ include '../koneksi.php';
 
 </html>
 <!-- end document-->
+ 
