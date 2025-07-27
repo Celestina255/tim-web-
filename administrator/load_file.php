@@ -245,6 +245,20 @@
 		case 'edit_profil_desa' :				
 			if(!file_exists ("page/edit_profil_desa.php")) die ("Sorry Empty Page!"); 
 			include "page/edit_profil_desa.php"; break;
+			case 'transparansi' :				
+				if(!file_exists ("page/transparansi.php")) die ("Sorry Empty Page!"); 
+				include "page/transparansi.php"; break;
+			case 'edit_transparansi' :				
+				if(!file_exists ("page/edit_transparansi.php")) die ("Sorry Empty Page!"); 
+				include "page/edit_transparansi.php"; break;
+				case 'lembaga_masyarakat' :				
+					if(!file_exists ("page/lembaga_masyarakat.php")) die ("Sorry Empty Page!"); 
+					include "page/lembaga_masyarakat.php"; break;
+				case 'edit_lembaga_masyarakat' :				
+					if(!file_exists ("page/edit_lembaga_masyarakat.php")) die ("Sorry Empty Page!"); 
+					include "page/edit_lembaga_masyarakat.php"; break;
+			
+			
 				
 //DATAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 		case 'master_desa' :				
@@ -298,6 +312,21 @@
 		case 'edit_staff' :				
 			if(!file_exists ("data/edit_staff.php")) die ("Sorry Empty Page!"); 
 			include "data/edit_staff.php"; break;
+			case 'user' :				
+				if(!file_exists ('data/user.php')) die ("Sorry Empty Page!"); 
+				include 'data/user.php';	 break;
+			case 'tambah_user' :				
+				if(!file_exists ('data/tambah_user.php')) die ("Sorry Empty Page!"); 
+				include 'data/tambah_user.php';	 break;
+			case 'edit_user' :				
+				if(!file_exists ('data/edit_user.php')) die ("Sorry Empty Page!"); 
+				include 'data/edit_user.php';	 break;
+	
+			case 'pengaturan_surat' :				
+				if(!file_exists ('page/pengaturan_surat.php')) die ("Sorry Empty Page!"); 
+				include 'page/pengaturan_surat.php';	 break;
+	
+	
 		case 'process_permohonan' :				
 			if(!file_exists ("data/process_permohonan.php")) die ("Sorry Empty Page!"); 
 			include "data/process_permohonan.php"; break;
@@ -465,11 +494,24 @@
 		case 'edit_pass' :				
 			if(!file_exists ("data/edit_password.php")) die ("Sorry Empty Page!"); 
 			include "data/edit_password.php"; break;
-		
+			case 'hapus_permohonan':
+				include "page/hapus_permohonan.php";
+				break;
+				case 'process_permohonan':
+					include "page/proses_permohonan.php";
+					break;
+					case 'daftar_permohonan':
+						include "page/data_permohonan.php";
+						break;
+						case 'acc_permohonan':
+							include "page/acc_permohonan.php";
+							break;
+							case 'acc_surat_mandiri':
+								include "page/acc_surat_mandiri.php";
+								break;
 		default:
 			if(!file_exists ("main.php")) die ("Empty Main Page!"); 
 			include "main.php";						
 		break;
 	}
 }
-?>
