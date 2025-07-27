@@ -6,26 +6,26 @@
 4.    Galeri
 5.    FAQ & Testimoni
 6.    Jam Kerja & Kontak
-4.    Global Styles
-5.    Top Bar
-6.    Header area
-7.    Slider
-8.    Features
-9.    Service
-10.    Projects
-11.    Intro Area
-12.   Call To Action
-13.   Content Area
-14.   Client
-15.   Latest News
-16.   Footer
-17.   Sub Pages
-18.   Pricing Table
-19.   Quote Area
-20.   Contact Us
-21.   News Single
-22.   Sidebar
-23.   Error Page
+7.    Global Styles
+8.    Top Bar
+9.    Header area
+10.    Slider
+11.    Features
+12.    Service
+13.    Projects
+14.    Intro Area
+15.   Call To Action
+16.   Content Area
+17.   Client
+18.   Latest News
+19.   Footer
+20.   Sub Pages
+21.   Pricing Table
+22.   Quote Area
+23.   Contact Us
+24.   News Single
+25.   Sidebar
+26.   Error Page
 */
 
 
@@ -3481,19 +3481,19 @@ p.panel-title a.collapsed {
   margin-top: 15px;
 }
 
-
 /* Footer
 ================================================== */
 .footer {
   background-color: #3D2D13;
-  padding: 55px 5px;
+  padding: 55px  2px;
   color: white;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
+  padding-right: 195px;
 }
 
 .footer-logo-img {
-  width: 120px;
+  width: 150px;
   height: auto;
 }
 
@@ -3504,66 +3504,78 @@ p.panel-title a.collapsed {
   color: #ffffff;
 }
 
-
-.footer-widget-kampung {
-  padding-left: 30px;
+.footer-widget-kampung{
+padding-left: 30px;
 }
 
-.footer-links-wrapper {
-  display: flex;
-  gap: 20px;
+.footer-widget-hubungi{
+padding-right: 30px;
 }
+
+
+.footer-widget-tlp{
+  padding-right: 1px;
+  padding-left: 1px;
+}
+
+.footer-title-tlp {
+  margin-bottom: 8px;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.footer-widget-tlp li a{
+  font-size: 14px;
+  color: #ffffff;
+  line-height: 1.5;
+}
+
+
+.footer-widget-jelajahi .footer-title {
+  padding-left: 100px;
+}
+
 
 .footer-links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer-links li {
-  margin-bottom: 5px;
-}
-
-
-.footer-links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer-links li {
-  margin-bottom: 5px;
+padding-left:100px;
 }
 
 .footer-links li a {
   color: #ffffff;
   text-decoration: none;
   display: inline-block;
-  transition: all 0.3s ease;
+  margin-bottom: 2px;
+  transition: color 0.3s ease;
 }
 
-.footer-links li a:hover {
-  color: #41cc3c;
+.footer-links li a:hover,
+.social-icons a:hover,
+.footer-widget-tlp li a:hover {
+  color: #41cc3cff;
   font-weight: bold;
-  text-shadow: 0 0 5px rgba(65, 204, 60, 0.5);
+}
+
+.footer-logo-alamat {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-info-text p {
 }
 
 .social-icons {
   display: flex;
+  justify-content: center;
   gap: 25px;
   font-size: 20px;
   margin-top: 15px;
+  margin-right: 50px;
+  padding-right: 25px;
 }
 
 .social-icons a {
   color: white;
   transition: 0.3s ease;
-  text-align: left;
-}
-
-.social-icons a:hover {
-  color: #41cc3c;
-  transform: scale(1.1);
 }
 
 .footer-bottom {
@@ -3573,25 +3585,7 @@ p.panel-title a.collapsed {
   padding-top: 15px;
   font-size: 13px;
   border-top: 1px solid #4e3a20;
-  margin-top: 20px;
-}
-
-/* Back to Top Button */
-#back-to-top {
-  position: fixed;
-  right: 40px;
-  bottom: 25px;
-  z-index: 10;
-  display: none;
-}
-
-#back-to-top .btn.btn-primary {
-  font-size: 18px;
-  padding: 6px 15px;
-  width: 44px;
-  height: 44px;
-  line-height: 30px;
-  border-radius: 100%;
+  margin-left: 250px;
 }
 /*Footer End*/
 
@@ -4525,6 +4519,7 @@ label {
    background: none;
    box-shadow:none;
 }
+
 
 
 /* News Listing
