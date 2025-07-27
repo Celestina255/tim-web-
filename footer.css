@@ -1,98 +1,88 @@
+
 /* Footer
 ================================================== */
 .footer {
   background-color: #3D2D13;
-  padding: 55px  2px;
+  padding: 70px 0px;
   color: white;
   font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  padding-right: 195px;
+  font-size: 13px;
 }
 
 .footer-logo-img {
-  width: 150px;
+  width: 120px;
   height: auto;
+  margin-right: 30px;
 }
 
 .footer-title {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   margin-bottom: 15px;
   color: #ffffff;
 }
 
-.footer-widget-kampung{
-padding-left: 30px;
+
+.footer-widget-kampung {
+  padding-left: 30px;
 }
 
-.footer-widget-hubungi{
-padding-right: 30px;
+.footer-links-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
 }
-
-
-.footer-widget-tlp{
-  padding-right: 1px;
-  padding-left: 1px;
-}
-
-.footer-title-tlp {
-  margin-bottom: 8px;
-  color: #ffffff;
-  font-size: 16px;
-}
-
-.footer-widget-tlp li a{
-  font-size: 14px;
-  color: #ffffff;
-  line-height: 1.5;
-}
-
-
-.footer-widget-jelajahi .footer-title {
-  padding-left: 100px;
-}
-
 
 .footer-links {
-padding-left:100px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 8px;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 5px;
 }
 
 .footer-links li a {
   color: #ffffff;
   text-decoration: none;
   display: inline-block;
-  margin-bottom: 2px;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-.footer-links li a:hover,
-.social-icons a:hover,
-.footer-widget-tlp li a:hover {
-  color: #41cc3cff;
+.footer-links li a:hover {
+  color: #41cc3c;
   font-weight: bold;
-}
-
-.footer-logo-alamat {
-  display: flex;
-  gap: 20px;
-}
-
-.footer-info-text p {
+  text-shadow: 0 0 5px rgba(65, 204, 60, 0.5);
 }
 
 .social-icons {
   display: flex;
-  justify-content: center;
-  gap: 25px;
+  gap: 30px;
   font-size: 20px;
   margin-top: 15px;
-  margin-right: 50px;
-  padding-right: 25px;
 }
 
 .social-icons a {
   color: white;
   transition: 0.3s ease;
+  text-align: left;
+}
+
+.social-icons a:hover {
+  color: #41cc3c;
+  transform: scale(1.1);
 }
 
 .footer-bottom {
@@ -102,6 +92,68 @@ padding-left:100px;
   padding-top: 15px;
   font-size: 13px;
   border-top: 1px solid #4e3a20;
-  margin-left: 250px;
+  margin-top: 20px;
 }
+
+/* Dropdown Menu */
+/* Dropdown Menu Footer */
+.footer .dropdown {
+  position: relative;
+}
+
+.footer .dropdown-toggle {
+  cursor: pointer;
+  display: inline-block;
+  padding: 5px 0;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.footer .dropdown-toggle:hover {
+  color: #41cc3c;
+  text-shadow: 0 0 5px rgba(65, 204, 60, 0.5);
+}
+
+.footer .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: none;
+  min-width: 180px;
+  z-index: 1000;
+  padding: 0;
+  list-style: none;
+}
+
+.footer .dropdown:hover .dropdown-menu {
+   display: block;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.footer .dropdown-menu li a {
+  color: #000;
+  text-decoration: none;
+  display: block;
+  padding: 10px 20px;
+  font-size: 13px;
+  transition: background-color 0.2s ease;
+}
+
+.footer .dropdown-menu li a:hover {
+  background-color: #222;
+  color: #ffffff;
+}
+
+.footer-links .dropdown-toggle {
+  display: inline-block;
+  padding: 2px 0;
+}
+
 /*Footer End*/
