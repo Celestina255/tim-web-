@@ -6,7 +6,8 @@ include_once "../assets/inc.php";
 $kodesurat = $_GET['kode'];
 
 # Perintah untuk mendapatkan data dari tabel Surat 
-$query = mysqli_query ($con, "SELECT tb_jenissurat.*, tb_datasurat.*, tb_detailsurat.*, tb_penduduk.* from tb_jenissurat, tb_datasurat, tb_detailsurat, tb_penduduk WHERE tb_detailsurat.kode='$kodesurat' AND tb_detailsurat.nik=tb_penduduk.nik");
+$query = mysqli_query ($con, "SELECT tb_jenissurat.*, tb_datasurat.*, tb_detailsurat.*, tb_penduduk.* 
+from tb_jenissurat, tb_datasurat, tb_detailsurat, tb_penduduk WHERE tb_detailsurat.kode='$kodesurat' AND tb_detailsurat.nik=tb_penduduk.nik");
 while ($r = mysqli_fetch_array($query)){
   $dt=explode(';',$r['detail']);
   $tgl = $r['tanggal'];
@@ -29,30 +30,37 @@ while ($rd = mysqli_fetch_array($query)){
 <h1 align="center">
 <table width="800" align="center" border="0" cellspacing="1" cellpadding="4" class="table-print">
   <tr>
-    <td rowspan="3" width="70"><img src="../img/<?php echo $rd['logo'];?>" width="60" height="60"></td>
-    <td colspan="" align="center"><strong><font size=2 color="black">PEMERINTAH KABUPATEN <?php echo strtoupper($rd['kab']);?></font></a>
-    </strong></td><td></td>
+    <td rowspan="4" width="80" style="text-align: center; vertical-align: top;">
+      <img src="../img/<?php echo $rd['logo']; ?>" style="max-width: 85px; height: auto;">
+    </td>
+    <td colspan="2" align="center"><strong style="font-size: 25px;">PEMERINTAH KABUPATEN <?php echo strtoupper($rd['kab']); ?></strong></td>
   </tr>
-    <tr>
-    <td colspan="" align="center"><strong><font size=3 color="black">KECAMATAN <?php echo strtoupper($rd['kec']);?></font></a>
-    </strong></td><td width="70"></td>
+  <tr>
+    <td colspan="2" align="center"><strong style="font-size: 18px;">DISTRIK <?php echo strtoupper($rd['kec']); ?></strong></td>
   </tr>
-    <tr>
-    <td colspan="" align="center"><strong><font size=5 color="black"><?php echo strtoupper($rd['jnp']);?> <?php echo strtoupper($rd['kelurahan']);?></font></strong></td>
-    <td width="70"></td>
+  <tr>
+    <td colspan="2" align="center"><strong style="font-size: 23px;">KAMPUNG <?php echo strtoupper($rd['kelurahan']); ?></strong></td>
   </tr>
-    <tr>
-   <td colspan="3" align="center"><hr><font size=2 color="black"><i>Sekretariat : <?php echo $rd['kantor'];?></i><hr size="3"></td>
+  <tr>
+    <td colspan="2" align="center" style="font-size: 15px; font-style: bold;">
+      Alamat : <?php echo $rd['kantor']; ?>
+    </td>
   </tr>
-    <tr>
-    <td colspan="3" align="center"><strong><font size=4 color="black"><u><?php echo strtoupper($r['nmsurat']); ?> </u></font></a>
-    </strong><br><font size=2 color="black">Nomor : <?php echo $r['no']; ?></font></td>
+  <tr>
+    <td colspan="3" align="center"><hr style="border: 1.5px double black;"></td>
+  </tr>
+
+  <tr>
+    <td colspan="3" align="center">
+      <strong><u><?php echo strtoupper($r['nmsurat']); ?></u></strong><br>
+      <font size="2">Nomor: <?php echo $r['no']; ?></font>
+    </td>
   </tr>
 </table>
 <br>
 <table align="center" class="table-list" width="800" border="0" cellspacing="1" cellpadding="2">
   <tr>
-    <td colspan="4">Yang bertanda tangan dibawah ini <?php echo $rd['jnp']=='Desa'? "Kepala Desa" : "Lurah";?> <?php echo $rd['kelurahan'];?> Kecamatan <?php echo $rd['kec'];?> Kabupaten <?php echo $rd['kab'];?>, menerangkan bahwa :</td>
+    <td colspan="4">Yang bertanda tangan dibawah ini <?php echo $rd['jnp']=='Desa'? "Kepala Kampung" : "Lurah";?> <?php echo $rd['kelurahan'];?> Distrik <?php echo $rd['kec'];?> Kabupaten <?php echo $rd['kab'];?>, dengan ini menerangkan sesungguhnya bahwa :</td>
   </tr>
     <tr>
     <td colspan="4">&nbsp;</td>
@@ -76,7 +84,7 @@ while ($rd = mysqli_fetch_array($query)){
     <td></td><td>Pekerjaan</td><td>:</td><td><?php echo $dt[7];?></td>
   </tr>
      <tr>
-    <td></td><td valign="top">Alamat</td><td valign="top">:</td><td valign="top"><?php echo $dt[8];?> <?php echo $rd['jnp']=='Desa'? "Desa" : "Kelurahan";?> <?php echo $dt[12];?><br>Kec. <?php echo $dt[11];?> Kab. <?php echo $dt[10];?> Prov. <?php echo $dt[9];?></td>
+    <td></td><td valign="top">Alamat</td><td valign="top">:</td><td valign="top"><?php echo $dt[8];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo $dt[12];?><br>Distrik <?php echo $dt[11];?> Kabupaten <?php echo $dt[10];?> Provinsi <?php echo $dt[9];?></td>
   </tr>
 <tr>
     <td colspan="4">&nbsp;</td>
@@ -84,7 +92,7 @@ while ($rd = mysqli_fetch_array($query)){
 
 
     <tr>
-    <td colspan="4">Warga tersebut diatas adalah bernar Warga <?php echo $rd['jnp']=='Desa'? "Desa" : "Kelurahan";?> <?php echo $rd['kelurahan'];?>  dan yang bersangkutan <b>Pernah Menikah</b> secara <b><?php echo $dt[27];?></b> pada <?php echo $bulannk;?> dengan :</td>
+    <td colspan="4">Warga tersebut diatas adalah bernar Warga <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo $rd['kelurahan'];?>  dan yang bersangkutan <b>Pernah Menikah</b> secara <b><?php echo $dt[27];?></b> pada <?php echo $bulannk;?> dengan :</td>
   </tr>
     <tr>
     <td></td><td>Nama </td><td>:</td><td><?php echo $dt[14];?></td>
@@ -105,7 +113,7 @@ while ($rd = mysqli_fetch_array($query)){
     <td></td><td>Pekerjaan</td><td>:</td><td><?php echo $dt[20];?></td>
   </tr>
    <tr>
-    <td></td><td valign="top">Alamat</td><td valign="top">:</td><td valign="top"><?php echo $dt[21];?> <?php echo $rd['jnp']=='Desa'? "Desa" : "Kelurahan";?> <?php echo $dt[25];?><br>Kec. <?php echo $dt[24];?> Kab. <?php echo $dt[23];?> Prov. <?php echo $dt[22];?></td>
+    <td></td><td valign="top">Alamat</td><td valign="top">:</td><td valign="top"><?php echo $dt[21];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo $dt[25];?><br>Distrik <?php echo $dt[24];?> Kabupaten <?php echo $dt[23];?> Provinsi <?php echo $dt[22];?></td>
   </tr>
   <tr>
     <td colspan="4">&nbsp;</td>
@@ -115,26 +123,32 @@ while ($rd = mysqli_fetch_array($query)){
   </tr>
 
 <tr><td colspan="4">
-<table width="90%" align="right" border="0" cellspacing="1" cellpadding="4" class="table-print">
-    <tr>
-    <td colspan="2">&nbsp;</td>
-  </tr>
-    <tr>
-    <td></td><td align="center" class="pull pull-right"><?php echo $rd['kelurahan'];?>,&nbsp;<?php echo $bulan;?></td>
-  </tr>
+<table width="100%" border="0" cellspacing="0" cellpadding="4" style="margin-top: 30px;">
   <tr>
-    <td rowspan="3" width="50%"></td><td align="center" valign="top" class="pull pull-right"><?php echo $rd['jnp']=='Desa'? "Kepala Desa" : "Lurah";?> <?php echo $rd['kelurahan'];?></td>
+    <td width="50%"></td> <!-- Kolom kosong kiri -->
+    
+    <td width="50%" align="center">
+      <div style="font-size: 12pt; line-height: 1.5; text-align: center;">
+        Dikeluarkan di : <?php echo $rd['kelurahan']; ?><br>
+        Pada Tanggal &nbsp;&nbsp;: <?php echo tgl_indonesia($tgl_sekarang); ?>
+      </div>
+
+      <br>
+
+      <div style="font-weight: bold; font-size: 12pt;">
+        KEPALA KAMPUNG
+      </div>
+
+      <br><br><br>
+
+      <div style="text-align: center;">
+        <u><b><?php echo strtoupper($r['ttd']); ?></b></u><br>
+        NIP. <?php echo $rd['niplurah']; ?>
+      </div>
+    </td>
   </tr>
-  <tr>
-    <td align="center" class="pull pull-right"></td>
-  </tr>
-  <tr>
-    <td align="center" class="pull pull-right"><br><br><br><u><b><?php echo $r['ttd'];?></b></u><br>NIP. <?php echo $rd['niplurah'];?></td>
-  </tr> 
 </table>
-</td>
-</tr>
-</table>
+
   <?php }} ?>
 </body>
 
