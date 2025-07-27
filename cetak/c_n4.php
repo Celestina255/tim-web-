@@ -8,16 +8,23 @@ $kodesurat = $_GET['kode'];
 
 # Perintah untuk mendapatkan data dari tabel Surat 
 $query = mysqli_query ($con, "SELECT tb_jenissurat.*, tb_datasurat.*, tb_detailsurat.*, tb_penduduk.* from tb_jenissurat, tb_datasurat, tb_detailsurat, tb_penduduk WHERE tb_detailsurat.kode='$kodesurat' AND tb_detailsurat.nik=tb_penduduk.nik");
-while ($r = mysqli_fetch_array($query)){
-  $dt=explode(';',$r['detail']);
-  $tgl = $r['tanggal'];
-  $bl=format_hari_tanggal($tgl);
-  $bln=explode(',',$bl);
-  $bulan=$bln['1'];
-?>
-<?php 
-$query = mysqli_query ($con, "SELECT * from tb_kelurahan");
-while ($rd = mysqli_fetch_array($query)){
+while ($r = mysqli_fetch_array($query)) {
+  $dt = explode(';', $r['detail']);
+  $tgl_sekarang = date('Y-m-d');
+  
+  function tgl_indonesia($tgl) {
+      $bulan = [
+          '01' => 'Januari', '02' => 'Februari', '03' => 'Maret',
+          '04' => 'April', '05' => 'Mei', '06' => 'Juni',
+          '07' => 'Juli', '08' => 'Agustus', '09' => 'September',
+          '10' => 'Oktober', '11' => 'November', '12' => 'Desember'
+      ];
+      $exp = explode('-', $tgl);
+      return $exp[2] . ' ' . $bulan[$exp[1]] . ' ' . $exp[0];
+  }
+
+  $query = mysqli_query($con, "SELECT * from tb_kelurahan");
+  while ($rd = mysqli_fetch_array($query)) {
 ?>
 <html>
 <head>
@@ -88,7 +95,7 @@ while ($rd = mysqli_fetch_array($query)){
     <td>7.</td><td> Pekerjaan</td><td>:</td><td><?php echo $dt[8];?></td>
   </tr>
     <tr>
-    <td valign="top">8.</td><td valign="top"> Alamat</td><td valign="top">:</td><td><?php echo $dt[13];?> <?php echo $rd['jnp']=='Desa'? "Desa" : "Kelurahan";?> <?php echo $dt[9];?> <br>Kec. <?php echo $dt[10];?> Kab. <?php echo $dt[11];?> Prov. <?php echo $dt[12];?></td>
+    <td valign="top">8.</td><td valign="top"> Alamat</td><td valign="top">:</td><td><?php echo $dt[13];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo $dt[9];?> <br>Distrik <?php echo $dt[10];?> Kabupaten <?php echo $dt[11];?> Provinsi <?php echo $dt[12];?></td>
   </tr>
       <tr>
     <td colspan="3">&nbsp;</td>
@@ -117,7 +124,7 @@ while ($rd = mysqli_fetch_array($query)){
     <td>7.</td><td> Pekerjaan</td><td>:</td><td><?php echo $dt[24];?></td>
   </tr>
     <tr>
-    <td valign="top">8.</td><td valign="top"> Alamat</td><td valign="top">:</td><td><?php echo $dt[29];?>  <?php echo $rd['jnp']=='Desa'? "Desa" : "Kelurahan";?> <?php echo $dt[25];?> <br>Kec. <?php echo $dt[26];?> Kab. <?php echo $dt[27];?> Prov. <?php echo $dt[28];?></td>
+    <td valign="top">8.</td><td valign="top"> Alamat</td><td valign="top">:</td><td><?php echo $dt[29];?>  <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo $dt[25];?> <br>Distrik <?php echo $dt[26];?> Kabupaten <?php echo $dt[27];?> Provinsi <?php echo $dt[28];?></td>
   </tr>
   </table>
   
@@ -137,7 +144,7 @@ while ($rd = mysqli_fetch_array($query)){
     <td>&nbsp;</td>
   </tr>
     <tr>
-    <td></td><td></td></data><td align="center" class="pull pull-right"> <?php echo $rd['kelurahan'];?>, <?php echo $bulan;?></td>
+    <td></td><td></td></data><td align="center" class="pull pull-right"> <?php echo $rd['kelurahan'];?>, <?php echo tgl_indonesia(date('Y-m-d')); ?></td>
   </tr>    
   <tr>
     <td align="center">Calon Suami,</td><td></td><td align="center" class="pull pull-right">Calon Istri,</td>
