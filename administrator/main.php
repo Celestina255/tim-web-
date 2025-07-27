@@ -215,7 +215,7 @@ include_once "../assets/inc.php";
                                                     $no=1;
                                                     while ($data = mysqli_fetch_assoc($query)){
                                                      ?>
-                                                     <tr>
+                                                   <tr>
                                                         <td align="center"><?php echo $no++;?></td>
                                                         <td><?php echo $data['nama'];?><br><?php echo $data['nik'];?></td>
                                                         <td><?php echo $data['nmsurat'];?></td>
@@ -224,8 +224,14 @@ include_once "../assets/inc.php";
                                                         <td><a href="../file/berkas/<?php echo $data['berkas'];?>" target="_BLANK"><?php echo $data['berkas'];?></a></td>
                                                         <td><a href="../file/fotowarga/<?php echo $data['foto'];?>" target="_BLANK"><img src="../file/fotowarga/<?php echo $data['foto'];?>" style=" width: 100px; height:  auto; border-color: white; box-shadow: 2px 1px 4px ;"></a></td>
                                                         <td align="center"><?php echo $data['status']=='onprocess'? "<a href='?page=acc_permohonan&amp;id=".$data['id']."'</a><p style='background:#00BFFF;border-radius:5%;padding:0px 10px;box-shadow:2px 1px 2px;color:white;'>Confirm</p>" : "<p style='background:grey;border-radius:5%;padding:0px 10px;box-shadow:2px 1px 2px;color:white;'>acc</p>";?>&nbsp;
-                                                        <a href="?page=<?php echo $data['page'];?>"><p style='background:#32CD32;border-radius:5%;padding:0px 10px;box-shadow:2px 1px 2px;color:white;'>Buatkan</p></a></td>
-
+                                                        <a href="?page=<?php echo $data['page'];?>"><p style='background:#32CD32;border-radius:5%;padding:0px 10px;box-shadow:2px 1px 2px;color:white;'>Buatkan</p></a>
+                                                        <a> 
+                                                            <p style='background:white;border-radius:5%;padding:0px 10px;box-shadow:2px 1px 2px;color:white;'></p>
+                                                        </a>
+                                                        <a href="page/hapus_permohonan.php?id=<?php echo $data['id']; ?>" 
+                                                    onclick="return confirm('Yakin ingin menghapus data ini?')"
+                                                    style='background:#ff4d4d;border-radius:5%;padding:0px 10px;box-shadow:2px 1px 2px;color:white;'>Hapus</a>
+                                                        </td>
                                                     </tr>
 
                                                 <?php }?>    
