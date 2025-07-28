@@ -1,4 +1,4 @@
-   <section class="main-container contact-area" id="main-container">
+   <section class="main-container contact-area" id="main-container" style="margin-top: 50px;">
       <div class="gap-10"></div>
       <div class="ts-form form-boxed" id="ts-form">
          <div class="container">
