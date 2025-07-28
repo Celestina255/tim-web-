@@ -509,6 +509,37 @@
 							case 'acc_surat_mandiri':
 								include "page/acc_surat_mandiri.php";
 								break;
+		case 'transparansi':
+   			 include "page/transparansi.php";break;
+		case 'edit_monografi_kampung':
+   			 if(!file_exists("page/edit_monografi_kampung.php")) die("Sorry Empty Page!");
+   			 include "page/edit_monografi_kampung.php"; break;
+		case 'trans_monografi':
+        	 	 include "page/trans_monografi.php"; break;
+    		case 'trans_monografi_tambah':
+        	 	 include "page/trans_monografi_tambah.php"; break;
+    		case 'trans_monografi_edit':
+        	 	 include "page/trans_monografi_edit.php"; break;
+		case 'trans_apbdes':
+   			 include "page/trans_apbdes.php"; break;
+ 		case 'trans_apbdes_tambah':
+   			 include "page/trans_apbdes_tambah.php";break;
+ 		case 'trans_apbdes_edit':
+    			 include "page/trans_apbdes_edit.php"; break;
+		case 'aksi_edit_apbdes':
+    			 include "page/aksi_edit_apbdes.php"; break;
+ 		case 'trans_idm':
+    			 include 'page/trans_idm.php'; break;
+		case 'trans_idm_tambah':
+    			 include 'page/trans_idm_tambah.php'; break;
+ 		case 'trans_idm_edit':
+    			 include 'page/trans_idm_edit.php'; break;
+		case 'hapus_idm':
+    			 include 'page/hapus_idm.php'; break;
+ 		case 'aksi_tambah_idm':
+    			 include 'page/aksi_tambah_idm.php'; break;
+ 		case 'aksi_edit_idm':
+    			 include 'page/aksi_edit_idm.php'; break;
 		default:
 			if(!file_exists ("main.php")) die ("Empty Main Page!"); 
 			include "main.php";						
