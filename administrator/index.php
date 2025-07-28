@@ -146,8 +146,7 @@ include '../koneksi.php';
                         <li><a href='?page=galeri' title='Galeri'>Galeri</a></li>
                         <li><a href='?page=slider' title='Data Slider'>Slider</a></li>
                         <li><a href='?page=profil_desa' title='Profile Desa'>Profile</a></li>
-<li><a href='?page=transparansi' title='Transparansi'>Transparansi</a></li>
-                        <li><a href='?page=lembaga' title='Transparansi'>Transparansi</a></li>
+                        <li><a href='?page=transparansi' title='Transparansi'>Transparansi</a></li>
 
                             </ul>
                         </li>
