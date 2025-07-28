@@ -1,4 +1,4 @@
-    <link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/style.css">
 <?php
 include_once "../koneksi.php";
 include_once "../assets/inc.php";
