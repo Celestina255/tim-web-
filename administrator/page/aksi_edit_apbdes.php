@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = mysqli_query($con, $query);
 
     if ($result) {
-        echo "<script>alert('Data berhasil diupdate!'); window.location.href = '../index.php?page=trans_apbdes';</script>";
+        echo "<script>alert('Data berhasil diupdate!'); window.location.href = '../index.php?page=transparansi';</script>";
     } else {
         echo "<script>alert('Gagal mengupdate data!'); window.history.back();</script>";
     }
