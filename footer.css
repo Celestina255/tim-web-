@@ -130,4 +130,17 @@
   vertical-align: middle;
 }
 
+#back-to-top {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 999;
+  display: none;
+}
+
+#back-to-top.affix {
+  display: block;
+}
+
+
 /*footer end*/
