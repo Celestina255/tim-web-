@@ -391,6 +391,16 @@
 		case 'testimoni' :				
 			if(!file_exists ("views/testimoni.php")) die ("Sorry Empty Page!"); 
 			include "views/testimoni.php"; break;
+#TRANSPARANSI
+case 'transparansi_penduduk':
+    include "page/transparansi_penduduk.php";
+    break;
+case 'transparansi_apbdes':
+    include "page/transparansi_apbdes.php";
+    break;
+case 'transparansi_idm':
+    include "page/transparansi_idm.php";
+    break;
 
 		default:
 			if(!file_exists ("utama.php")) die ("<br><br><h3 align='center'>Halaman tidak tersedia !</h3>"); 
