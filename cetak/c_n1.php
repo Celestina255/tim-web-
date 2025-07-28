@@ -41,7 +41,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td colspan="3">&nbsp;</td>
   </tr>
   <tr>
-    <td colspan="3" align="center"><strong><font size=3 color="black">FORMULIR PENGANTAR NIKAH
+    <td colspan="3" align="center"><strong><font size=3 color="black">FORMULIR SURAT PENGANTAR NIKAH
       </font>
     </strong><br><small><?php echo $r['no'];?></small></td>
   </tr>
