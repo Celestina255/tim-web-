@@ -33,6 +33,13 @@ include '../../koneksi.php';
     $acak        	= rand(1,99);
     $tujuan_foto 	= $acak.$foto_name;
     $tempat_foto 	= '../../img/'.$tujuan_foto;
+
+    $y              =$_POST['y'];
+    $st             =$_FILES['stample']['tmp_name'];
+    $st_name        =$_FILES['stample']['name'];
+    $acak2          = rand(1,99);
+    $tujuan_st      = $acak2.$st_name;
+    $tempat_st      = '../../img/'.$tujuan_st;
            
     if (isset($_POST['update'])){
     if (!$foto==""){
@@ -42,6 +49,15 @@ include '../../koneksi.php';
         copy ($foto,$tempat_foto);
     }else{
         $buat_foto=$x;
+    }
+
+    if (!$st==""){
+        $buat_st=$tujuan_st;
+        $e = '../../file/'.$y;
+        @unlink ("$e");
+        copy ($st,$tempat_st);
+    }else{
+        $buat_st=$y;
     }
     $qu=mysqli_query($con, "UPDATE tb_kelurahan SET
                 kodekelurahan  ='$kodekelurahan',
@@ -61,6 +77,7 @@ include '../../koneksi.php';
                 bendahara      ='$keu',
                 email          ='$email',
                 logo 		   ='$buat_foto',
+                stample        ='$buat_st',
                 jnp            ='$jnpem'
         WHERE id='$id'")or die (mysqli_error());
         $qu=mysqli_query($con, "UPDATE tb_kecamatan SET
