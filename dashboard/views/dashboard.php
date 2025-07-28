@@ -101,7 +101,7 @@
       <!-- News end-->
 
       <!-- Galeri Section -->
-      <section id="main-container" class="main-container py-5" style="background-color: #fff;">
+     <section id="main-container" class="main-container py-5" style="background-color: #fff;">
   <div class="container">
     <div class="row text-center mb-4">
       <div class="col-md-12">
@@ -112,23 +112,36 @@
       <?php 
       $query = mysqli_query ($con, "SELECT * FROM tb_galeri ORDER BY id ASC");
       while ($r = mysqli_fetch_array($query)){
+        $path_kecil = "../img/galeri/kecil_" . $r['foto'];
+        $path_asli = "../img/galeri/" . $r['foto'];
+        $src = file_exists($path_kecil) ? $path_kecil : $path_asli;
       ?>
       <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch">
         <div class="gallery-img position-relative w-100">
-          <a class="gallery-popup d-block" href="../img/galeri/<?php echo $r['foto']; ?>">
-            <img class="img-fluid w-100 rounded shadow-sm" src="../img/galeri/kecil_<?php echo $r['foto']; ?>" alt="Foto Galeri" style="height: 240px; object-fit: cover;">
+          <a class="gallery-popup d-block" href="<?php echo $path_asli; ?>">
+            <img class="img-fluid w-100 rounded shadow-sm" src="<?php echo $src; ?>" alt="Foto Galeri" style="height: 240px; object-fit: cover;">
             <span class="gallery-icon position-absolute top-50 start-50 translate-middle text-white fs-4"><i class="fa fa-search"></i></span>
           </a>
         </div>
       </div>
       <?php } ?>
     </div>
+
+    <!-- Tombol di tengah -->
+    <div class="text-center mt-4">
+      <a href="?page=galeri" class="btn-gallery-more">LIHAT FOTO LEBIH BANYAK</a>
+    </div>
+  </div>
+</section>
+<!-- Galeri End -->
+
  <!-- Tombol di tengah -->
       <div class="text-center mt-4">
          <a href="?page=galeri" class="btn-gallery-more">LIHAT FOTO LEBIH BANYAK</a>
       </div>
    </div>
 </section>
+
       <!-- Galeri End -->
 
 
