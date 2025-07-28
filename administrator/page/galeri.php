@@ -27,26 +27,44 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                        <?php 
-                            $query = mysqli_query ($con, "SELECT * FROM tb_galeri ORDER BY id ASC");
-                            while ($r = mysqli_fetch_array($query)){
-                         ?>
-                                        <tr>
-                                            <td><?php echo $r['id'];?></td>
-                                            <td align="center"><a href="../img/galeri/<?php echo $r['foto'];?>" target="_BLANK"><img src="../img/galeri/kecil_<?php echo $r['foto'];?>" style="width: 80px; height: auto; box-shadow: 2px 1px 4px;" ></a><br></td>
-                                            <td><?php echo $r['nama'];?></td>
-                                            <td><?php echo $r['des'];?></td>
-                                            <td><?php echo $r['tgl'];?></td>
-                                            <td><a href="?page=edit_galeri&amp;id=<?php echo $r['id'];?>"><i class="fa fa-edit"></i></a>&nbsp;<a href="../aksi/h_galeri.php?id=<?php echo $r['id'];?>"><i class="fa fa-trash"></i></a></td>
-                                        </tr>
-                                      <?php } ?>
-                                    </tbody>
-                                    </table>
-                                </div>
-                                <!-- END DATA TABLE -->
-                            </div>
-                        </div>
+                       <?php 
+              $query = mysqli_query($con, "SELECT * FROM tb_galeri ORDER BY id ASC");
+              while ($r = mysqli_fetch_array($query)) {
+                  $foto_kecil = "../img/galeri/kecil_" . $r['foto'];
+                  $foto_asli = "../img/galeri/" . $r['foto'];
 
+                  // Periksa apakah file kecil_ ada
+                  if (!file_exists($foto_kecil)) {
+                      $src = $foto_asli;
+                  } else {
+                      $src = $foto_kecil;
+                  }
+              ?>
+                <tr>
+                  <td><?= $r['id']; ?></td>
+                  <td align="center">
+                    <a href="<?= $foto_asli; ?>" target="_blank">
+                      <img src="<?= $src; ?>" style="width: 80px; height: auto; box-shadow: 2px 1px 4px;" alt="foto">
+                    </a>
+                  </td>
+                  <td><?= $r['nama']; ?></td>
+                  <td><?= $r['des']; ?></td>
+                  <td><?= $r['tgl']; ?></td>
+                  <td>
+                    <a href="?page=edit_galeri&id=<?= $r['id']; ?>"><i class="fa fa-edit"></i></a>
+                    &nbsp;
+                    <a href="../aksi/h_galeri.php?id=<?= $r['id']; ?>"><i class="fa fa-trash"></i></a>
+                  </td>
+                </tr>
+              <?php } ?>
+            </tbody>
+          </table>
+        </div>
+        <!-- END DATA TABLE -->
+      </div>
+    </div>
+  </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendors/jquery/jquery.min.js"></script>
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendors/jquery/jquery.min.js"></script>
+</body>
