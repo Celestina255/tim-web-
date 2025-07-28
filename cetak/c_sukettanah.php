@@ -86,7 +86,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td>7.</td><td>Pekerjaan</td><td>:</td><td><?php echo $r['kerjaan'];?></td>
   </tr>
     <tr>
-    <td>8.</td><td>Alamat</td><td>:</td><td><?php echo $r['alamat'];?> <?php echo $rd['jnp']=='Desa'? "Desa" : "Kelurahan";?> <?php echo $r['kelurahan'];?></td>
+    <td>8.</td><td>Alamat</td><td>:</td><td><?php echo $r['alamat'];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo $r['kelurahan'];?></td>
   </tr>
   <tr>
     <td></td><td></td><td></td><td> Distrik <?php echo $r['kec'];?> Kabupaten <?php echo $r['kab'];?></td>
