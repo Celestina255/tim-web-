@@ -1,18 +1,17 @@
-
 /* Footer
 ================================================== */
 .footer {
   background-color: #3D2D13;
-  padding: 70px 0px;
+  padding: 50px 5px; /* Tambah padding agar konten lebih melebar */
   color: white;
   font-family: 'Inter', sans-serif;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .footer-logo-img {
-  width: 120px;
+  width: 180px; /* Perbesar logo */
   height: auto;
-  margin-right: 30px;
+  margin-left: -150px;
 }
 
 .footer-title {
@@ -20,19 +19,41 @@
   font-weight: bold;
   margin-bottom: 15px;
   color: #ffffff;
+  gap: 30px;
 }
 
-
 .footer-widget-kampung {
-  padding-left: 30px;
+  padding-left: 10px; /* Perkecil padding agar lebih melebar */
+  max-width: 100%;
+}
+
+.footer-widget-hubungi {
+  padding-right: 10px;
+  max-width: 100%;
+}
+
+.footer-widget-hubungi p i {
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.footer-widget-hubungi p {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.footer-widget-jelajahi .footer-title {
+  padding-left: 0;
 }
 
 .footer-links-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 40px;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 10px 40px; /* baris x kolom */
 }
+
 
 .footer-links {
   list-style: none;
@@ -44,32 +65,28 @@
   margin-bottom: 8px;
 }
 
-.footer-links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer-links li {
-  margin-bottom: 5px;
-}
-
 .footer-links li a {
   color: #ffffff;
   text-decoration: none;
   display: inline-block;
-  transition: all 0.3s ease;
+  margin-bottom: 2px;
+  transition: color 0.3s ease;
 }
 
-.footer-links li a:hover {
-  color: #41cc3c;
+.footer-links li a:hover,
+.social-icons a:hover {
+  color: #41cc3cff;
   font-weight: bold;
-  text-shadow: 0 0 5px rgba(65, 204, 60, 0.5);
+}
+
+.footer-logo-alamat {
+  display: flex;
+  gap: 20px;
 }
 
 .social-icons {
   display: flex;
-  gap: 30px;
+  gap: 25px;
   font-size: 20px;
   margin-top: 15px;
 }
@@ -77,12 +94,6 @@
 .social-icons a {
   color: white;
   transition: 0.3s ease;
-  text-align: left;
-}
-
-.social-icons a:hover {
-  color: #41cc3c;
-  transform: scale(1.1);
 }
 
 .footer-bottom {
@@ -95,60 +106,9 @@
   margin-top: 20px;
 }
 
-/* Dropdown Menu */
-/* Dropdown Menu Footer */
-.footer .dropdown {
-  position: relative;
-}
-
-.footer .dropdown-toggle {
-  cursor: pointer;
-  display: inline-block;
-  padding: 5px 0;
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
-
-.footer .dropdown-toggle:hover {
-  color: #41cc3c;
-  text-shadow: 0 0 5px rgba(65, 204, 60, 0.5);
-}
-
-.footer .dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: #fff;
-  border: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  display: none;
-  min-width: 180px;
-  z-index: 1000;
-  padding: 0;
-  list-style: none;
-}
-
+/* Dropdown Hover */
 .footer .dropdown:hover .dropdown-menu {
-   display: block;
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.footer .dropdown-menu li a {
-  color: #000;
-  text-decoration: none;
   display: block;
-  padding: 10px 20px;
-  font-size: 13px;
-  transition: background-color 0.2s ease;
-}
-
-.footer .dropdown-menu li a:hover {
-  background-color: #222;
-  color: #ffffff;
 }
 
 .footer-links .dropdown-toggle {
@@ -156,4 +116,18 @@
   padding: 2px 0;
 }
 
-/*Footer End*/
+.footer-links li.dropdown {
+  white-space: nowrap;     /* Pastikan tidak pindah baris */
+  width: 100%;
+}
+
+.footer-links li.dropdown a.dropdown-toggle {
+  display: inline-block;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+/*footer end*/
