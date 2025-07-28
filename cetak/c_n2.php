@@ -47,7 +47,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td></td><td></td><td align="right">Model N2 &nbsp;&nbsp;&nbsp;</td>
   </tr>
   <tr>
-    <td>Perihal : <b>Permohonan Kehendak Nikah</b></td><td></td><td align="right"><?php echo $rd['kelurahan']; ?>, <?php echo tgl_indonesia(date('Y-m-d')); ?>
+    <td>Perihal : <b>Permohonan Kehendak Nikah</b></td><td></td><td align="right"><?php echo $rd['kelurahan']; ?>, <?php echo tgl_indonesia(date('Y-m-d'));?>
 &nbsp;&nbsp;&nbsp;</td>
   </tr>
   <tr>
@@ -57,7 +57,7 @@ while ($r = mysqli_fetch_array($query)) {
 $query = mysqli_query ($con, "SELECT * from tb_kua");
 while ($re = mysqli_fetch_array($query)){
 ?>
-    <td colspan="3">Kepada Yth, <br> Kepala KUA Kecamatan / PPN LN <br> Di <br>&nbsp;&nbsp;&nbsp;&nbsp;<u><?php echo $rd['kec'];?></u></td>
+    <td colspan="3">Kepada Yth, <br> Kepala KUA Distrik / PPN LN <br> Di <br>&nbsp;&nbsp;&nbsp;&nbsp;<u><?php echo $rd['kec'];?></u></td>
   </tr>
 </table>
 <br>
