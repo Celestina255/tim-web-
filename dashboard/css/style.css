@@ -3480,64 +3480,71 @@ p.panel-title a.collapsed {
   padding: 12px 30px;
   margin-top: 15px;
 }
-
 /* Footer
 ================================================== */
 .footer {
   background-color: #3D2D13;
-  padding: 55px  2px;
+  padding: 50px 5px; /* Tambah padding agar konten lebih melebar */
   color: white;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
-  padding-right: 195px;
 }
 
 .footer-logo-img {
-  width: 150px;
+  width: 180px; /* Perbesar logo */
   height: auto;
+  margin-left: -150px;
 }
 
 .footer-title {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   margin-bottom: 15px;
   color: #ffffff;
+  gap: 30px;
 }
 
-.footer-widget-kampung{
-padding-left: 30px;
+.footer-widget-kampung {
+  padding-left: 10px; /* Perkecil padding agar lebih melebar */
+  max-width: 100%;
 }
 
-.footer-widget-hubungi{
-padding-right: 30px;
+.footer-widget-hubungi {
+  padding-right: 10px;
+  max-width: 100%;
 }
 
-
-.footer-widget-tlp{
-  padding-right: 1px;
-  padding-left: 1px;
+.footer-widget-hubungi p i {
+  margin-right: 8px;
+  vertical-align: middle;
 }
 
-.footer-title-tlp {
+.footer-widget-hubungi p {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   margin-bottom: 8px;
-  color: #ffffff;
-  font-size: 16px;
 }
-
-.footer-widget-tlp li a{
-  font-size: 14px;
-  color: #ffffff;
-  line-height: 1.5;
-}
-
 
 .footer-widget-jelajahi .footer-title {
-  padding-left: 100px;
+  padding-left: 0;
+}
+
+.footer-links-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 10px 40px; /* baris x kolom */
 }
 
 
 .footer-links {
-padding-left:100px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 8px;
 }
 
 .footer-links li a {
@@ -3549,8 +3556,7 @@ padding-left:100px;
 }
 
 .footer-links li a:hover,
-.social-icons a:hover,
-.footer-widget-tlp li a:hover {
+.social-icons a:hover {
   color: #41cc3cff;
   font-weight: bold;
 }
@@ -3560,17 +3566,11 @@ padding-left:100px;
   gap: 20px;
 }
 
-.footer-info-text p {
-}
-
 .social-icons {
   display: flex;
-  justify-content: center;
   gap: 25px;
   font-size: 20px;
   margin-top: 15px;
-  margin-right: 50px;
-  padding-right: 25px;
 }
 
 .social-icons a {
@@ -3585,9 +3585,35 @@ padding-left:100px;
   padding-top: 15px;
   font-size: 13px;
   border-top: 1px solid #4e3a20;
-  margin-left: 250px;
+  margin-top: 20px;
 }
-/*Footer End*/
+
+/* Dropdown Hover */
+.footer .dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.footer-links .dropdown-toggle {
+  display: inline-block;
+  padding: 2px 0;
+}
+
+.footer-links li.dropdown {
+  white-space: nowrap;     /* Pastikan tidak pindah baris */
+  width: 100%;
+}
+
+.footer-links li.dropdown a.dropdown-toggle {
+  display: inline-block;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+/*footer end*/
+
 
 /* Sub Pages
 ================================================== */
