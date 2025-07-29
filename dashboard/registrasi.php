@@ -1,87 +1,43 @@
-      <section class="main-container contact-area" id="main-container">
-         <div class="gap-10"></div>
-         <div class="ts-form form-boxed" id="ts-form">
-            <div class="container">
-               <div class="row">
-                  <div class="contact-wrapper full-contact">
-                     <div class="col-lg-6">
-                         <h3 class="column-title">Hubungi kami</h3>
-                         <p class="contact-content">	Silahkan hubungi kami jika ada hal - hal yang ingin ditanyakan lebih lanjut atau bisa datang langsung ke kantor desa pada hari dan jam kerja.</p>
-                        <div class="contact-info-box contact-box info-box ">
-                           <div class="contact-info">
-                              <div class="ts-contact-info"><span class="ts-contact-icon float-left"><i class="icon icon-map-marker2"></i></span>
-                                 <div class="ts-contact-content">
-                                    <h3 class="ts-contact-title">Alamat Sekretariat</h3>
-                                 <p>Jl. Poros SP4, Distrik Manimeri, Banjar Ausoy</p>
-                                 </div>
-                                 <!-- Contact content end-->
-                              </div>
-                              <div class="ts-contact-info"><span class="ts-contact-icon float-left"><i class="icon icon-phone3"></i></span>
-                                 <div class="ts-contact-content">
-                                    <h3 class="ts-contact-title">Telp/Hp.</h3>
-                                    <p>+62 822 9726 3470</p>
-                                 </div>
-                                 <!-- Contact content end-->
-                              </div>
-                              <div class="ts-contact-info last"><span class="ts-contact-icon float-left"><i class="icon icon-envelope"></i></span>
-                                 <div class="ts-contact-content">
-                                    <h3 class="ts-contact-title">Alamat E-mail</h3>
-                                 <p>BanjarAusoy@gmail.com</p>
-                                 </div>
-                                 <!-- Contact content end-->
-                              </div>
-                           </div>
-                        </div>
+<section class="main-container login-wrapper" id="main-container">
+   <div class="gap-10"></div>
+   <div class="ts-form form-boxed" id="ts-form">
+      <div class="container">
+         <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+               <div class="login-box">
+                  <h3 class="login-title text-center mb-4">Mendaftar sebagai user</h3>
+                  <form class="contact-form" action="aksi/s_registrasi.php" method="POST" enctype="multipart/form-data">
+                     <div class="form-group">
+                        <label for="uname">Nama User :</label>
+                        <input type="text" name="uname" id="uname" class="form-control" placeholder="Masukkan nama pengguna" required>
                      </div>
-                     <!-- Contact info end -->
-                        <div class="col-lg-6">
-                           <h3 class="column-title">Mendaftar sebagai user</h3>
-                           <div class="contact-submit-box contact-box form-box">
-                              <form class="contact-form" id="" action="../aksi/s_registrasi.php" method="POST" enctype="multipart/form-data">
-                                 <div class="error-container"></div>
-                                 <div class="row">
-                                    <div class="col-lg-12">
-                                       <div class="form-group">
-                                          <input class="form-control form-name" id="uname" name="uname" placeholder="User Name" type="text" required="">
-                                       </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                       <div class="form-group">
-                                          <input class="form-control form-name" id="email" name="email" placeholder="Alamat E-mail" type="text" required="">
-                                       </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                       <div class="form-group">
-                                          <input class="form-control form-name" id="hp" name="hp" placeholder="No. Telp/Hp" type="text" required="">
-                                       </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                       <div class="form-group">
-                                          <input class="form-control form-name" id="kelurahan" name="kelurahan" placeholder="Nama Desa/Kelurahan" type="text" required="">
-                                       </div>
-                                    </div>
-                                      <div class="col-lg-12">
-                                       <div class="form-group">
-                                          <p>Masukkan Foto KTP Anda<input class="form-control form-name" id="foto" name="foto" type="file" required=""></p>
-                                          </div>
-                                       </div>
-                                    <!-- Col end-->
-                                    <div class="col-lg-12">
-                                       <div class="form-group">
-                                       <p>Buat password Anda<input class="form-control form-website" id="pass" name="pass" placeholder="*******" type="password" required=""></p>
-                                       </div>
-                                    </div>
-                                    <!-- Col 12 end-->
-                                 </div>
-                                 <!-- Form row end-->
-                                    <button href="?page=registrasi" class="btn btn-secondary tw-mt-30 pull pull-right" type="submit" name="reg"><i class="fa fa-save"></i> Daftar</button>
-                              </form>
-                              <!-- Form end-->
-                           </div>
-                        </div>
-                        <!-- Contact form end -->
+                     <div class="form-group">
+                        <label for="email">Alamat E-mail :</label>
+                        <input type="email" name="email" id="email" class="form-control" placeholder="contoh@mail.com" required>
                      </div>
-                  </div>
+                     <div class="form-group">
+                        <label for="hp">No. Telp/HP :</label>
+                        <input type="text" name="hp" id="hp" class="form-control" placeholder="08xxxx" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="kelurahan">Nama Desa/Kelurahan :</label>
+                        <input type="text" name="kelurahan" id="kelurahan" class="form-control" placeholder="Contoh: Banjar Ausoy" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="foto">Masukkan Foto KTP (format bebas: JPG, PNG, PDF, dll) :</label>
+                        <input type="file" name="foto" id="foto" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="pass">Kata Sandi / Password :</label>
+                        <input type="password" name="pass" id="pass" class="form-control" placeholder="Minimal 6 karakter" required>
+                     </div>
+                     <button class="btn btn-primary btn-block mt-3" type="submit" name="reg">
+                        <i class="fa fa-save"></i> Daftar
+                     </button>
+                  </form>
                </div>
             </div>
-         </section>
+         </div>
+      </div>
+   </div>
+</section>
