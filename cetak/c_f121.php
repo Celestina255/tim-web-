@@ -46,21 +46,30 @@ include_once "../assets/inc.php";
 $kodesurat = $_GET['kode'];
 
 # Perintah untuk mendapatkan data dari tabel Surat lain
-$query = mysqli_query ($con, "SELECT tb_jenissurat.*, tb_datasurat.*, tb_detailsurat.*, tb_penduduk.* from tb_jenissurat, tb_datasurat, tb_detailsurat, tb_penduduk WHERE tb_detailsurat.nik=tb_penduduk.nik AND tb_detailsurat.kode='$kodesurat'");
-while ($r = mysqli_fetch_array($query)){
-  $tgl = $r['tanggal'];
-  $bl=format_hari_tanggal($tgl);
-  $bln=explode(',',$bl);
-  $bulan=$bln['1'];
-  $jp=explode(';',$r['detail']);
-  $rtrw=substr($r['alamat'],-7);
-  $rtrwex=explode('/',$rtrw);
-  $rt=$rtrwex[0];
-  $rw=$rtrwex[1];
-?>
-<?php 
-$query = mysqli_query ($con, "SELECT * from tb_kelurahan");
-while ($rd = mysqli_fetch_array($query)){
+$query = mysqli_query ($con, "SELECT * FROM tb_detailsurat JOIN tb_staff ON tb_detailsurat.ttd=tb_staff.id_staff LEFT JOIN tb_penduduk ON tb_detailsurat.nik=tb_penduduk.nik WHERE tb_detailsurat.kode='$kodesurat'");
+while ($r = mysqli_fetch_array($query)) {
+  $dt = explode(';', $r['detail']);
+  $tgl_sekarang = date('Y-m-d');
+  
+  function tgl_indonesia($tgl) {
+      $bulan = [
+          '01' => 'Januari', '02' => 'Februari', '03' => 'Maret',
+          '04' => 'April', '05' => 'Mei', '06' => 'Juni',
+          '07' => 'Juli', '08' => 'Agustus', '09' => 'September',
+          '10' => 'Oktober', '11' => 'November', '12' => 'Desember'
+      ];
+      $exp = explode('-', $tgl);
+      return $exp[2] . ' ' . $bulan[$exp[1]] . ' ' . $exp[0];
+  }
+
+  $query = mysqli_query($con, "SELECT * from tb_kelurahan");
+  while ($rd = mysqli_fetch_array($query)) {
+    $jp = explode(';', $r['detail']);
+    $rtrw = substr($r['alamat'], -7);
+    $rtrwex = explode('/', $rtrw);
+    $rt = $rtrwex[0];
+    $rw = $rtrwex[1];
+    
 ?>
 <html>
 <head>
@@ -94,7 +103,7 @@ while ($rd = mysqli_fetch_array($query)){
     <td>PEMERINTAH KABUPATEN</td><td>:</td><td><div class="kotak-kode"><?php echo substr($rd['kodekab'],0,1);?></div></td><td width="8"><div class="kotak-kode"><?php echo substr($rd['kodekab'],1,1);?></div></td><td></td><td></td><td><div class="kotak"><?php echo strtoupper($rd['kab']);?></div></td>
   </tr>
   <tr>
-    <td>KECAMATAN</td><td>:</td><td><div class="kotak-kode"><?php echo substr($rd['kodekec'],0,1);?></div></td><td width="8"><div class="kotak-kode"><?php echo substr($rd['kodekec'],1,1);?></div></td><td></td><td></td><td><div class="kotak"><?php echo strtoupper($rd['kec']);?></div></td>
+    <td>DISTRIK</td><td>:</td><td><div class="kotak-kode"><?php echo substr($rd['kodekec'],0,1);?></div></td><td width="8"><div class="kotak-kode"><?php echo substr($rd['kodekec'],1,1);?></div></td><td></td><td></td><td><div class="kotak"><?php echo strtoupper($rd['kec']);?></div></td>
   </tr>
   <tr>
     <td>DESA/KELURAHAN</td><td>:</td><td><div class="kotak-kode"><?php echo substr($rd['kodekelurahan'],0,1);?></div></td><td width="8"><div class="kotak-kode"><?php echo substr($rd['kodekelurahan'],1,1);?></div></td><td width="8"><div class="kotak-kode"><?php echo substr($rd['kodekelurahan'],2,1);?></div></td><td width="8"><div class="kotak-kode"><?php echo substr($rd['kodekelurahan'],3,1);?></div></td><td><div class="kotak"><?php echo strtoupper($rd['kelurahan']);?></div></td>
@@ -121,14 +130,14 @@ while ($rd = mysqli_fetch_array($query)){
     <td><div class="kotak-jp">3. NIK</div></td><td colspan="3"><div class="kotak"><?php echo $r['nik'];?></div></td>
   </tr>
     <tr>
-    <td><div class="kotak-jp">4. Alamat</div></td><td colspan="3"><div class="kotak"><?php echo $r['alamat'];?>&nbsp; Kelurahan <?php echo $r['kelurahan'];?></div></td>
+    <td><div class="kotak-jp">4. Alamat</div></td><td colspan="3"><div class="kotak"><?php echo $r['alamat'];?>&nbsp; Kampung <?php echo $r['kelurahan'];?></div></td>
   </tr>
   <tr>
-    <td></td><td colspan="3"><div class="kotak">Kec. <?php echo $r['kec'];?> &nbsp;Kab. <?php echo $r['kab'];?></div></td>
+    <td></td><td colspan="3"><div class="kotak">Distrik <?php echo $r['kec'];?> &nbsp;Kabupaten <?php echo $r['kab'];?></div></td>
   </tr>
   <tr>
     <td></td><td colspan="3">
-      <table align="left" class="table-list" width="100%" border="0" cellspacing="0" cellpadding="2" style="margin-left: -2px;"><tr><td width="8%"><div class="kotak">RT </div></td><td></td><td><div class="kotak"><?php echo $rt;?></div></td><td></td><td width="8%"><div class="kotak">RW </div></td><td></td><td><div class="kotak"><?php echo $rw;?></div></td><td></td><td width="18%"><div class="kotak">Kode Pos :</div></td><td></td><td><div class="kotak">35452</div></td></td>
+      <table align="left" class="table-list" width="100%" border="0" cellspacing="0" cellpadding="2" style="margin-left: -2px;"><tr><td width="8%"><div class="kotak">RT </div></td><td></td><td><div class="kotak"><?php echo $rt;?></div></td><td></td><td width="8%"><div class="kotak">RW </div></td><td></td><td><div class="kotak"><?php echo $rw;?></div></td><td></td><td width="18%"><div class="kotak">Kode Pos :</div></td><td></td><td><div class="kotak">98143</div></td></td>
   </tr>
 </table>
 </td></tr>
@@ -140,7 +149,7 @@ while ($rd = mysqli_fetch_array($query)){
   <tr><td width="45%" height="10px"><small>Ket : Cap Jempol/Tanda tangan</small></td>
   </tr>
 </table>
-</td><td align="center" width="40%"><?php echo $rd['kelurahan'];?>,&nbsp;<?php echo $bulan;?><br><br><br><br><br><br><u><?php echo $r['nama'];?></u></td>
+</td><td align="center" width="40%"><?php echo $rd['kelurahan'];?>,&nbsp;<?php echo format_hari_tanggal(date('Y-m-d')); ?><br><br><br><br><br><br><u><?php echo $r['nama'];?></u></td>
 
 </tr>
   
@@ -154,17 +163,40 @@ while ($rd = mysqli_fetch_array($query)){
     <td colspan="5" align="center"> Mengetahui,</td>
   </tr>
   <tr>
-    <td rowspan="3" align="center" width="10%"></td><td align="left">Camat <?php echo $rd['kec'];?></td><td align="center" valign="top" class="pull pull-right"><?php echo $rd['jnp']=='Desa'? "Kepala Desa" : "Lurah";?> <?php echo $rd['kelurahan'];?></td>
+    <td rowspan="3" align="center" width="10%"></td><td align="left">Kepala Distrik <?php echo $rd['kec'];?></td><td align="center" valign="top" class="pull pull-right"><?php echo $r['jab_staff']=='Kepala Kelurahan' || $r['jab_staff']=='Kepala Desa'? "" : "a.n.";?> <?php echo $rd['jnp']=='Desa'? "Kepala Kampung" : "Kepala Kelurahan";?> <?php echo $rd['kelurahan'];?> <br><?php echo $r['jab_staff']=='Kepala Kelurahan' || $r['jab_staff']=='Kepala Desa'? "" : "$r[jab_staff]";?></td>
   </tr>
   <tr>
     <td align="center" class="pull pull-right"></td>
   </tr>
   <tr>
-    <td align="left" class="pull pull-right"><br><br><br>______________________<br>NIP.</td><td align="center" class="pull pull-right"><br><br><br><u><b><?php echo $r['ttd'];?></b></u><br>NIP. <?php echo $rd['niplurah'];?></td>
-  </tr> 
-</table>
-</td>
-</tr>
+    <td align="left" class="pull pull-right"><br><br><br><br><br>______________________<br>NIP.</td><td align="center" class="pull pull-right"><?php 
+
+    $queryrs = mysqli_query($con, "SELECT * FROM setting_surat LIMIT 1");
+    while ($rs = mysqli_fetch_array($queryrs)) {
+      if ($rs['ttd'] == 'Otomatis'):
+    ?>
+      <!-- Cap dan ttd -->
+<div style="position: relative; width: 100px; height: 100px; margin-top: 5px; margin-left: auto; margin-right: auto;">
+  <!-- Cap -->
+  <img src="../file/<?php echo $rd['stample']; ?>" 
+       style="position: absolute; top: 0; left: -15; width: 100px; height: 100px; opacity: 0.9;">
+
+  <!-- TTD -->
+  <img src="../file/ttd/<?php echo $r['ttd_staff']; ?>" 
+       style="position: absolute; top: 0; left: 5; width: 100px; height: 100px;">
+</div>
+      <!-- Akhir Cap dan ttd -->
+
+    <?php endif; } ?>
+
+    <div style="margin-top: 5px;">
+      <u><b><?php echo strtoupper($r['nama_staff']); ?></b></u><br>
+      NIP. <?php echo !empty($rd['niplurah']) ? $rd['niplurah'] : '-'; ?>
+    </div>
+  </div>
+</td></tr>
 </table>
   <?php }} ?>
 </body>
+
+</html>
