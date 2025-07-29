@@ -1,4 +1,6 @@
 <?php
+session_start();
+
  if(isset($_GET['page']))
                 {
 	switch ($_GET['page']){				
