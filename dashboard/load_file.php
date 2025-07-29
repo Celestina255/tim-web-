@@ -29,9 +29,14 @@ session_start();
 		case 'password_baru' :				
 			if(!file_exists ('password_baru.php')) die ("Sorry Empty Page!"); 
 			include 'password_baru.php';	 break;
-		case 'contact' :				
-			if(!file_exists ('views/contact.php')) die ("Sorry Empty Page!"); 
-			include 'views/contact.php';	 break;
+		case 'contact':
+			if (!isset($_SESSION['login_user'])) {
+				echo "<script>window.location.href='?page=login';</script>";
+				exit;
+			}
+			if (!file_exists('views/contact.php')) die("Sorry Empty Page!");
+			include 'views/contact.php';
+			break;
 		case 'sejarah' :				
 			if(!file_exists ('views/sejarah.php')) die ("Sorry Empty Page!"); 
 			include 'views/sejarah.php';	 break;
@@ -67,9 +72,15 @@ session_start();
 		case 'detail_berita' :				
 			if(!file_exists ('views/detail_berita.php')) die ("Sorry Empty Page!"); 
 			include 'views/detail_berita.php';	 break;	
-		case 'layanan' :				
-			if(!file_exists ('views/layanan.php')) die ("Sorry Empty Page!"); 
-			include 'views/layanan.php';	 break;	
+		case 'layanan':
+			if (!isset($_SESSION['login_user'])) {
+				echo "<script>window.location.href='?page=login';</script>";
+				exit;
+			}
+			if (!file_exists('views/layanan.php')) die("Sorry Empty Page!");
+			include 'views/layanan.php';
+			break;
+
 	#LAPORAN
 		case 'lap_pelayanan' :				
 			if(!file_exists ("laporan/lap_pelayanan.php")) die ("Sorry Empty Page!"); 
