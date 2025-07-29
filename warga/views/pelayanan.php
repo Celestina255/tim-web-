@@ -1,4 +1,4 @@
-   <section class="main-container contact-area" id="main-container" style="margin-top: 50px;">
+   <section class="main-container contact-area" id="main-container">
       <div class="gap-10"></div>
       <div class="ts-form form-boxed" id="ts-form">
          <div class="container">
@@ -80,12 +80,12 @@
                               </div>
                               <div class="col-lg-12">
                                  <div class="form-group">
-                                    <input class="form-control form-name" id="berkas" name="berkas" type="file" required="" onchange="return fileValidation()">
+                                    <p>Masukkan Foto KTP Anda<input class="form-control form-name" id="berkas" name="berkas" type="file" required="" onchange="return fileValidation()"></p>
                                  </div>
                               </div>
                               <div class="col-lg-12">
                                  <div class="form-group">
-                                    <input class="form-control form-name" id="foto" name="foto" type="file" required="" onchange="return fotoValidation()">
+                                    <p>Masukkan Foto Anda<input class="form-control form-name" id="foto" name="foto" type="file" required="" onchange="return fotoValidation()"></p>
                                  </div>
                               </div>
                               <input type="hidden" id="userid" name="userid" value="<?php echo $_SESSION['userid']; ?>">
