@@ -2,168 +2,176 @@
 include_once "../koneksi.php";
 include_once "../assets/inc.php";
 
-# Baca variabel URL
-$kodesurat = $_GET['kode'];
+$kodesurat = mysqli_real_escape_string($con, $_GET['kode']);
 
-# Perintah untuk mendapatkan data dari tabel Surat 
-$query = mysqli_query ($con, "SELECT tb_jenissurat.*, tb_datasurat.*, tb_detailsurat.*, tb_penduduk.* from tb_jenissurat, tb_datasurat, tb_detailsurat, tb_penduduk WHERE tb_detailsurat.kode='$kodesurat' AND tb_detailsurat.nik=tb_penduduk.nik");
-while ($r = mysqli_fetch_array($query)){
-  $dt=explode(';',$r['detail']);
-  $tgl = $r['tanggal'];
-  $bl=format_hari_tanggal($tgl);
-  $bln=explode(',',$bl);
-  $bulan=$bln['1'];
-  $hari=$bln['0'];
+$query = mysqli_query($con, "SELECT * FROM tb_detailsurat 
+    JOIN tb_staff ON tb_detailsurat.ttd = tb_staff.id_staff 
+    LEFT JOIN tb_penduduk ON tb_detailsurat.nik = tb_penduduk.nik 
+    WHERE tb_detailsurat.kode = '$kodesurat'");
+while ($r = mysqli_fetch_array($query)) {
+
+    // Tangkap dan pecah detail
+    $dt = explode(';', isset($r['detail']) ? $r['detail'] : '');
+    for ($i = 0; $i <= 25; $i++) {
+        if (!isset($dt[$i])) $dt[$i] = '';
+    }
+
+    // Tanggal & Hari Indonesia
+    $tgl_sekarang = date('Y-m-d');
+    $hari = date('l');
+    $hari_indonesia = [
+        'Sunday' => 'Minggu',
+        'Monday' => 'Senin',
+        'Tuesday' => 'Selasa',
+        'Wednesday' => 'Rabu',
+        'Thursday' => 'Kamis',
+        'Friday' => 'Jumat',
+        'Saturday' => 'Sabtu',
+    ];
+    $hari = $hari_indonesia[$hari];
+
+    function tgl_indonesia($tgl) {
+        $bulan = [
+            '01' => 'Januari', '02' => 'Februari', '03' => 'Maret',
+            '04' => 'April', '05' => 'Mei', '06' => 'Juni',
+            '07' => 'Juli', '08' => 'Agustus', '09' => 'September',
+            '10' => 'Oktober', '11' => 'November', '12' => 'Desember'
+        ];
+        $exp = explode('-', $tgl);
+        return $exp[2] . ' ' . $bulan[$exp[1]] . ' ' . $exp[0];
+    }
+
+    $query_kel = mysqli_query($con, "SELECT * from tb_kelurahan");
+    while ($rd = mysqli_fetch_array($query_kel)) {
 ?>
-<?php 
-$query = mysqli_query ($con, "SELECT * from tb_kelurahan");
-while ($rd = mysqli_fetch_array($query)){
-?>
+
 <html>
+<head>
+    <title>Surat Sewa Tanah</title>
+</head>
+<body onload="window.print()">
 
-<body onLoad="window.print()" >
-<h1 align="center">
-<table width="800" align="center" border="0" cellspacing="1" cellpadding="4" class="table-print">
-  <tr>
-    <td colspan="3" align="center"><strong><font size=4 color="black"><u><?php echo strtoupper($r['nmsurat']); ?> </u></font></td>
-  </tr>
-</table>
-<br>
-<table align="center" class="table-list" width="90%" border="0" cellspacing="0" cellpadding="1">
-  <tr>
-    <td colspan="5">Yang bertanda tangan dibawah ini : </td>
-  </tr>
-      <tr>
-    <td colspan="5">&nbsp;</td>
-  </tr>
-  <tr>
-    <td>I.</td><td width="30%">Nama</td><td width="2%">:</td><td colspan="2"><b><?php echo $dt[1];?></b></td>
-  </tr>
-  <tr>
-    <td></td><td>NIK</td><td>:</td><td colspan="2"><?php echo $dt[0];?></td>
-  </tr>
-    <tr>
-    <td></td><td>Jenis Kelamin</td><td>:</td><td colspan="2"><?php echo $dt[2];?></td>
-  </tr>
-      <tr>
-    <td></td><td>Tmp. & Tgl. Lahir</td><td>:</td><td colspan="2"><?php echo $dt[3];?>, <?php echo $dt[4];?></td>
-  </tr>
+    <table width="800" align="center" border="0">
+        <tr>
+            <td align="center">
+                <strong><u><font size="4"><?php echo strtoupper($r['nmsurat']); ?></font></u></strong>
+            </td>
+        </tr>
+    </table>
 
-  <tr>
-    <td></td><td>Alamat</td><td>:</td><td colspan="2"><?php echo $dt[5];?></td>
-  </tr>
-  <tr>
-    <td></td><td>Selanjutnya disebut selaku</td><td>:</td><td colspan="2">Pihak I</td>
-  </tr>
-    <tr>
-    <td></td><td>&nbsp;</td><td></td><td colspan="2"></td>
-  </tr>
-  <tr>
-    <td>II.</td><td width="30%">Nama</td><td>:</td><td colspan="2"><b><?php echo $dt[7];?></b></td>
-  </tr>
-  <tr>
-    <td></td><td>NIK</td><td>:</td><td colspan="2"><?php echo $dt[6];?></td>
-  </tr>
-    <tr>
-    <td></td><td>Jenis Kelamin</td><td>:</td><td colspan="2"><?php echo $dt[8];?></td>
-  </tr>
-      <tr>
-    <td></td><td>Tmp. & Tgl. Lahir</td><td>:</td><td colspan="2"><?php echo $dt[9];?>, <?php echo $dt[10];?></td>
-  </tr>
+    <br><br>
 
-  <tr>
-    <td></td><td>Alamat</td><td>:</td><td colspan="2"><?php echo $dt[11];?> </td>
-  </tr>
-  <tr>
-    <td></td><td>Selanjutnya disebut selaku</td><td>:</td><td colspan="2">Pihak II</td>
-  </tr>
-  <tr>
-    <td colspan="5">&nbsp;</td>
-  </tr>
-    <tr>
-    <td colspan="5" align="justify">Pada hari ini <?php echo strtoupper($hari);?> tanggal <?php echo IndonesiaTgl($tgl);?>, Pihak I dan Pihak II secara bersama - sama sepakat sabagai berikut :</td>
-  </tr>
-  <tr>
-    <td valign="top">1.</td><td colspan="4" align="justify">Tanah dengan luas/ukuran <?php echo format_angka($dt[12]);?> Ha./M2 yang terletak di <?php echo $dt[13];?>, dengan batas - batas tanah : </td>
-  </tr>
-  <tr>
-    <td></td><td> - Barat berbatasan dengan</td><td>:</td><td colspan="2"><?php echo $dt[16];?></td>
-  </tr>
-      <tr>
-    <td></td><td> - Utara berbatasan dengan</td><td>:</td><td colspan="2"><?php echo $dt[17];?></td>
-  </tr>
-      <tr>
-    <td></td><td> - Timur berbatasan dengan</td><td>:</td><td colspan="2"><?php echo $dt[18];?></td>
-  </tr>
-      <tr>
-    <td></td><td> - Selatan berbatasan dengan</td><td>:</td><td colspan="2"><?php echo $dt[19];?></td>
-  </tr>
-    <tr>
-    <td valign="top"></td><td colspan="4">adalah benar Tanah milik Pihak I;</td>
-  </tr>
-  <tr>
-    <td valign="top">2.</td><td colspan="4" align="justify">Pihak I dengan sadar menyewakan sebidang tanah tersebut pada poin 1 (satu) kepada Pihak II  selama <?php echo $dt[14];?> bulan dengan harga Rp. <?php echo format_angka($dt[15]);?>, <i>(<?php echo kekata($dt[15]);?> Rupiah)</i> ;</td>
-  </tr>
-  <tr>
-    <td valign="top">3.</td><td colspan="4" align="justify">Pihak I bersedia untuk tidak menarik kembali bidang tanah yang disewakan sebelum jangka waktu sewa habis sebagaimana disebutkan pada poin 2 (dua) diatas kecuali atas persetujuan Pihak II;</td>
-  </tr>
-  <tr>
-    <td valign="top">4.</td><td colspan="4" align="justify">Hal - hal yang belum tertuang dalam kesepakatan ini akan di selesaikan secara kekeluargaan.</td>
-  </tr>
+    <table width="90%" align="center" cellpadding="2">
+        <tr><td colspan="5">Yang bertanda tangan di bawah ini:</td></tr>
+        <tr><td colspan="5">&nbsp;</td></tr>
 
-  
-    <tr>
-    <td colspan="5">&nbsp;</td>
-  </tr>
-    <tr>
-    <td colspan="5" align="justify" align="justify">Demikian kesepatan ini dibuat, ditanda tangani oleh kedua belah Pihak dan Saksi - saksi dalam keadaan sadar dan tanpa paksaan dari siapapun.</td>
-  </tr>
+       <!-- PIHAK I -->
+<tr><td colspan="5"><b>I.</b></td></tr>
+<tr><td></td><td style="width: 35%;">Nama</td><td style="width: 2%;">:</td><td colspan="2"><?= $dt[1]; ?></td></tr>
+<tr><td></td><td>NIK</td><td>:</td><td colspan="2"><?= $dt[0]; ?></td></tr>
+<tr><td></td><td>Jenis Kelamin</td><td>:</td><td colspan="2"><?= $dt[2]; ?></td></tr>
+<tr><td></td><td>Tmp. & Tgl. Lahir</td><td>:</td><td colspan="2"><?= $dt[3]; ?>, <?= $dt[4]; ?></td></tr>
+<tr><td></td><td>Alamat</td><td>:</td><td colspan="2"><?= $dt[5]; ?></td></tr>
+<tr><td></td><td>Selanjutnya disebut</td><td>:</td><td colspan="2"><b>Pihak I</b></td></tr>
 
- <tr>
-    <td></td><td align="center"><br>Pihak II<br>Menerima Sewa</td><td><td></td><td align="center"><?php echo $rd['kelurahan'];?>,&nbsp;<?php echo $bulan;?><br>Pihak I<br>Yang Menyewakan</td>
-  </tr>
-     <tr>
-    <td colspan="5">&nbsp;<br></td><td></td>
-  </tr>
-   <tr>
-    <td colspan="4">&nbsp;<br></td><td><small style="color: grey;">Materai</small></td>
-  </tr>
-     <tr>
-    <td colspan="5">&nbsp;<br></td><td></td>
-  </tr>
-<tr>
-    <td></td><td align="center"><b><u><?php echo $dt[7];?></u></b></td><td></td><td></td><td align="center"><b><u><?php echo $dt[1];?></u></b></td>
-  </tr>
-   <tr>
-    <td colspan="4">Saksi - saksi :</td><td></td>
-  </tr>
-   <tr>
-    <td>1.</td><td><?php echo $dt[20];?></td><td colspan="2">(_______________)</td>
-  </tr>
-   <tr>
-    <td colspan="4">&nbsp;<br></td><td></td>
-  </tr>
-   <tr>
-    <td>2.</td><td><?php echo $dt[21];?></td><td colspan="2">(_______________)</td>
-  </tr>
-<tr><td colspan="4">
-<table width="90%" align="right" border="0" cellspacing="1" cellpadding="2" class="table-print">
-  <tr>
-    <td></td><td align="center" class="pull pull-right" colspan="2">Mengetahui</td>
-  </tr>
-  <tr>
-    <td rowspan="3" width="20%"></td><td align="center" valign="top" class="pull pull-right"><?php echo $rd['jnp']=='Desa'? "Kepala Desa" : "Lurah";?> <?php echo $rd['kelurahan'];?></td>
-  </tr>
-  <tr>
-    <td align="center" class="pull pull-right"></td>
-  </tr>
-  <tr>
-    <td align="center" class="pull pull-right" width="45%" colspan="2"><br><br><br><u><b><?php echo $r['ttd'];?></b></u><br>NIP. <?php echo $rd['niplurah'];?></td>
-  </tr> 
-</table>
-</td>
-</tr>
-</table>
-  <?php }} ?>
+<tr><td colspan="5">&nbsp;</td></tr>
+
+<!-- PIHAK II -->
+<tr><td colspan="5"><b>II.</b></td></tr>
+<tr><td></td><td>Nama</td><td>:</td><td colspan="2"><?= $dt[7]; ?></td></tr>
+<tr><td></td><td>NIK</td><td>:</td><td colspan="2"><?= $dt[6]; ?></td></tr>
+<tr><td></td><td>Jenis Kelamin</td><td>:</td><td colspan="2"><?= $dt[8]; ?></td></tr>
+<tr><td></td><td>Tmp. & Tgl. Lahir</td><td>:</td><td colspan="2"><?= $dt[9]; ?>, <?= $dt[10]; ?></td></tr>
+<tr><td></td><td>Alamat</td><td>:</td><td colspan="2"><?= $dt[11]; ?></td></tr>
+<tr><td></td><td>Selanjutnya disebut</td><td>:</td><td colspan="2"><b>Pihak II</b></td></tr>
+
+
+        <tr><td colspan="5">&nbsp;</td></tr>
+
+        <!-- PERNYATAAN -->
+        <tr>
+            <td colspan="5" align="justify">
+                Pada hari ini <?= strtoupper($hari); ?>, tanggal <?= tgl_indonesia($tgl_sekarang); ?>, Pihak I dan Pihak II secara bersama - sama sepakat sebagai berikut:
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top">1.</td>
+            <td colspan="4" align="justify">
+                Tanah dengan luas/ukuran <?= format_angka($dt[12]); ?> Ha./M2 yang terletak di <?= $dt[13]; ?>, dengan batas-batas:
+            </td>
+        </tr>
+        <tr><td></td><td>- Barat berbatasan dengan</td><td>:</td><td colspan="2"><?= $dt[16]; ?></td></tr>
+        <tr><td></td><td>- Utara berbatasan dengan</td><td>:</td><td colspan="2"><?= $dt[17]; ?></td></tr>
+        <tr><td></td><td>- Timur berbatasan dengan</td><td>:</td><td colspan="2"><?= $dt[18]; ?></td></tr>
+        <tr><td></td><td>- Selatan berbatasan dengan</td><td>:</td><td colspan="2"><?= $dt[19]; ?></td></tr>
+
+        <tr><td></td><td colspan="4">adalah benar milik Pihak I;</td></tr>
+
+        <tr>
+            <td valign="top">2.</td>
+            <td colspan="4" align="justify">
+                Pihak I menyewakan kepada Pihak II selama <?= $dt[14]; ?> bulan dengan harga Rp. <?= format_angka($dt[15]); ?> (<?= kekata($dt[15]); ?> Rupiah);
+            </td>
+        </tr>
+        <tr><td valign="top">3.</td><td colspan="4" align="justify">Pihak I tidak akan menarik kembali tanah sebelum masa sewa selesai, kecuali atas persetujuan Pihak II.</td></tr>
+        <tr><td valign="top">4.</td><td colspan="4" align="justify">Hal-hal yang belum diatur akan diselesaikan secara kekeluargaan.</td></tr>
+
+        <tr><td colspan="5">&nbsp;</td></tr>
+
+        <!-- TTD PIHAK -->
+        <tr>
+            <td></td>
+            <td align="center">Pihak II<br>Menerima Sewa</td>
+            <td></td>
+            <td></td>
+            <td align="center"><?= $rd['kelurahan']; ?>, <?= tgl_indonesia($tgl_sekarang); ?><br>Pihak I<br>Yang Menyewakan</td>
+        </tr>
+        <tr><td colspan="5"><br><br></td></tr>
+        <tr><td colspan="4"></td><td align="center"><small style="color: gray;">Materai</small></td></tr>
+        <tr><td colspan="5"><br></td></tr>
+        <tr>
+            <td></td>
+            <td align="center"><b><u><?= $dt[7]; ?></u></b></td>
+            <td></td>
+            <td></td>
+            <td align="center"><b><u><?= $dt[1]; ?></u></b></td>
+        </tr>
+
+        <!-- SAKSI -->
+        <tr><td colspan="4">Saksi - saksi :</td></tr>
+        <tr><td>1.</td><td><?= $dt[20]; ?></td><td colspan="2">(_______________)</td></tr>
+        <tr><td>2.</td><td><?= $dt[21]; ?></td><td colspan="2">(_______________)</td></tr>
+
+        <!-- MENGETAHUI -->
+        <tr><td colspan="5"><br></td></tr>
+        <tr>
+            <td colspan="5" align="center">
+                Mengetahui<br>
+                <?php echo ($r['jab_staff'] == 'Kepala Kelurahan' || $r['jab_staff'] == 'Kepala Desa') ? '' : 'a.n.'; ?>
+                <?php echo $rd['jnp'] == 'Desa' ? 'Kepala Kampung' : 'Kepala Kelurahan'; ?> <?= $rd['kelurahan']; ?><br>
+            </td>
+        </tr>
+
+        <!-- CAP & TTD -->
+        <tr>
+            <td colspan="5" align="center">
+                <?php
+                $queryrs = mysqli_query($con, "SELECT * from setting_surat LIMIT 1");
+                while ($rs = mysqli_fetch_array($queryrs)) {
+                    if ($rs['ttd'] == 'Otomatis'): ?>
+                        <div style="position: relative; width: 7em; height: 7em; margin: 0 auto;">
+                            <img src="../file/<?php echo $rd['stample']; ?>" style="position: absolute; top: 0; right: 25px; width: 7em; height: 7em; opacity: 0.9;">
+                            <img src="../file/ttd/<?php echo $r['ttd_staff']; ?>" style="position: absolute; top: 0; left: 10px; width: 7em; height: 7em;">
+                        </div>
+                <?php endif; } ?>
+                <br><b><u><?php echo strtoupper($r['nama_staff']); ?></u></b><br>
+                NIP. <?= !empty($rd['niplurah']) ? $rd['niplurah'] : '-'; ?>
+            </td>
+        </tr>
+    </table>
+
 </body>
 </html>
+
+<?php } } ?>
