@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../koneksi.php';
 require '../pengunjung.php';
 error_reporting(0);
