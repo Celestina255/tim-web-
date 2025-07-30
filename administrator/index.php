@@ -1,4 +1,4 @@
-<?php
+ <?php
 include 'cek.php';
 include '../koneksi.php';
 ?>
@@ -270,10 +270,6 @@ include '../koneksi.php';
                     <div class="container-fluid">
                         <div class="header-wrap">
                          <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
-                                <button class="au-btn--submit" type="submit">
-                                    <i class="zmdi zmdi-search"></i>
-                                </button>
                             </form>
                             <?php 
                             $query = mysqli_query ($con, "SELECT count(*) AS jp FROM tb_permohonan WHERE status='onprocess' ORDER BY id ASC");
