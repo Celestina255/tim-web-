@@ -1,4 +1,4 @@
-    <?php
+<?php
     include_once "../koneksi.php";
     include_once "../assets/inc.php";
 
@@ -6,23 +6,31 @@
     $kodesurat = $_GET['kode'];
 
 # Perintah untuk mendapatkan data dari tabel Surat 
-    $query = mysqli_query ($con, "SELECT tb_jenissurat.*, tb_datasurat.*, tb_detailsurat.* from tb_jenissurat, tb_datasurat, tb_detailsurat WHERE tb_detailsurat.kode='$kodesurat'");
-    while ($r = mysqli_fetch_array($query)){
-      $dt=explode(';',$r['detail']);
-      $tgl = $r['tanggal'];
-      $bl=format_hari_tanggal($tgl);
-      $bln=explode(',',$bl);
-      $bulan=$bln['1'];
-      ?>
-      <?php 
-      $query = mysqli_query ($con, "SELECT * from tb_kelurahan");
-      while ($rd = mysqli_fetch_array($query)){
-        ?>
+    $query = mysqli_query ($con, "SELECT * FROM tb_detailsurat JOIN tb_staff ON tb_detailsurat.ttd=tb_staff.id_staff LEFT JOIN tb_penduduk ON tb_detailsurat.nik=tb_penduduk.nik WHERE tb_detailsurat.kode='$kodesurat'");
+    while ($r = mysqli_fetch_array($query)) {
+      $dt = explode(';', $r['detail']);
+      $tgl_sekarang = date('Y-m-d');
+      
+      function tgl_indonesia($tgl) {
+          $bulan = [
+              '01' => 'Januari', '02' => 'Februari', '03' => 'Maret',
+              '04' => 'April', '05' => 'Mei', '06' => 'Juni',
+              '07' => 'Juli', '08' => 'Agustus', '09' => 'September',
+              '10' => 'Oktober', '11' => 'November', '12' => 'Desember'
+          ];
+          $exp = explode('-', $tgl);
+          return $exp[2] . ' ' . $bulan[$exp[1]] . ' ' . $exp[0];
+      }
+    
+      $query = mysqli_query($con, "SELECT * from tb_kelurahan");
+      while ($rd = mysqli_fetch_array($query)) {
+    ?>
+    <html>
         <body onLoad="window.print()" >
           <h1 align="center">
             <table align="center" class="table-list" width="800" border="0" cellspacing="1" cellpadding="2">
               <tr>
-                <td></td><td></td><td></b></td><td align="left"><?php echo $rd['kelurahan'];?>, <?php echo $bulan;?>&nbsp;&nbsp;&nbsp;</td>
+                <td></td><td></td><td></b></td><td align="left"><?php echo $rd['kelurahan'];?>, <?php echo format_hari_tanggal(date('Y-m-d')); ?>&nbsp;&nbsp;&nbsp;</td>
               </tr>
               <tr>
                 <td valign="top">Perihal </td><td valign="top">:</td><td valign="top" width="45%"><b>Permohonan Izin Mendirkan Bangunan (IMB)</b></td><td align="left"></td>
@@ -44,14 +52,12 @@
                     <td colspan="4">&nbsp;</td>
                   </tr>
                 </table>
-                <br>
+              
                 <table align="center" class="table-list" width="800" border="0" cellspacing="1" cellpadding="2">
                   <tr>
-                    <td colspan="3">Dengan hormat, </td>
+                    <td colspan="3">Dengan hormat, Yang bertanda tangan dibawah ini :  </td>
                   </tr>
-                  <tr>
-                    <td colspan="3">Yang bertanda tangan dibawah ini : </td>
-                  </tr>
+              
                   <tr>
                     <td colspan="3">&nbsp;</td>
                   </tr>
@@ -95,27 +101,62 @@
                     <td colspan="3" align="justify">Demikian Permohonan ini kami sampaikan, atas perhatian serta terkabulnya permohonan ini disampaikan terima kasih.</td>
                   </tr>
 
-                  <tr><td colspan="4">
-                    <table width="90%" align="right" border="0" cellspacing="1" cellpadding="4" class="table-print">
-                      <tr>
-                        <td colspan="2">&nbsp;</td>
-                      </tr>
-                      <tr>
-                        <td align="center">Mengetahui,</td><td align="center" class="pull pull-right"><?php echo $rd['kelurahan'];?>,&nbsp;<?php echo $bulan;?></td>
-                      </tr>
-                      <tr>
-                        <td width="50%" align="center"><?php echo $rd['jnp']=='Desa'? "Kepala Desa" : "Lurah";?></td><td align="center" valign="top" class="pull pull-right">Pemohon,</td>
-                      </tr>
-                      <tr>
-                        <td></td><td align="center" class="pull pull-right"></td>
-                      </tr>
+                  <tr>
+  <td colspan="4">
+    <table width="100%" border="0" cellspacing="1" cellpadding="4" class="table-print">
+      <tr>
+        <td colspan="2">&nbsp;</td>
+      </tr>
 
-                      <tr>
-                        <td align="center"><br><br><br><u><b><?php echo $r['ttd'];?></b></u><br>NIP. <?php echo $rd['niplurah'];?></td><td align="center" class="pull pull-right"><br><br><br><b><u><?php echo $dt[1];?></u></b></td>
-                      </tr> 
+      <!-- BARIS ATAS -->
+      <tr>
+        <td align="center" width="50%">
+          Mengetahui,<br>
+          Kepala Kampung <?php echo $rd['kelurahan']; ?>
+        </td>
+        <td align="center">
+          <?php echo $rd['kelurahan']; ?>,&nbsp;<?php echo format_hari_tanggal(date('Y-m-d')); ?><br>
+          Pemohon,
+        </td>
+      </tr>
 
-                    </table>
-                  </td>
-                </tr>
-              </table>
-            <?php }} ?>
+      <!-- SPASI -->
+      <tr><td colspan="2" style="height: 20px;"></td></tr>
+
+      <!-- TTD DAN CAP -->
+      <tr>
+        <td align="center">
+          <?php
+          $queryrs = mysqli_query($con, "SELECT * FROM setting_surat LIMIT 1");
+          while ($rs = mysqli_fetch_array($queryrs)) {
+              if ($rs['ttd'] == 'Otomatis') {
+                  echo '<div style="position: relative; width: 160px; height: 90px; margin: 0 auto;">';
+                  echo '<img src="../file/' . $rd['stample'] . '" style="position: absolute; left: 0; top: 0; width: 7em; height: 7em;">';
+                  echo '<img src="../file/ttd/' . $r['ttd_staff'] . '" style="position: absolute; right: 0; top: 0; width: 7em; height: 7em;">';
+                  echo '</div>';
+              } else {
+                  echo '<br><br><br>';
+              }
+          }
+          ?>
+        </td>
+        <td></td>
+      </tr>
+      <!-- NAMA DAN NIP -->
+      
+      <tr>
+        <td align="center">
+          <u><b><?php echo strtoupper($r['nama_staff']); ?></b></u><br>
+          <b>NIP. <?php echo !empty($r['nip']) ? $r['nip'] : '-'; ?></b>
+        </td>
+        <td align="center">
+          <u><b><?php echo strtoupper($r['nama']); ?></b></u>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+
+                </table>
+              <?php }} ?>
+              </html>
