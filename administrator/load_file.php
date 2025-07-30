@@ -233,6 +233,10 @@
 		case 'slider' :				
 			if(!file_exists ("page/slider.php")) die ("Sorry Empty Page!"); 
 			include "page/slider.php"; break;
+		case 'pelayanan_surat' :				
+			if(!file_exists ("page/pelayanan_surat.php")) die ("Sorry Empty Page!"); 
+			include "page/pelayanan_surat.php"; 
+			break;
 		case 'upload_slider' :				
 			if(!file_exists ("page/upload_slider.php")) die ("Sorry Empty Page!"); 
 			include "page/upload_slider.php"; break;
