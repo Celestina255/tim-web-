@@ -205,34 +205,31 @@ include_once "../assets/inc.php";
                                             <th>Tanggal</th>
                                             <th>Status</th>
                                             <th>Aksi</th>
-
                                         </tr>
                                     </thead>
-
                                     <tbody>
-                        <?php
-
-                            $query = mysqli_query ($con, "SELECT * FROM tb_buatsendiri ORDER BY id DESC");
-                            $no=1;
-                            while ($data = mysqli_fetch_assoc($query)){
-                         ?>
-                                        <tr>
-                                            <td><?php echo $no++;?></td>
-                                            <td><?php echo $data['nama'];?></td>
-                                            <td><?php echo $data['nmsurat'];?></td>
-                                            <td><?php echo $data['tgl'];?></td>
-                                            <td><?php echo $data['status'];?></td>
-                                            <td><a href="?page=acc&amp;id=<?php echo $data['id'];?>">acc</a></td>
-
-                                        </tr>
-    
-                                     <?php }?>    
-
-                                    </tbody>
-                                </table>
-                            </div>      
-                        </div>
+                                            <?php
+                                            $query = mysqli_query($con, "SELECT * FROM tb_buatsendiri ORDER BY id DESC");
+                                            $no = 1;
+                                            ?>
+                                            <?php 
+                                            while ($data = mysqli_fetch_assoc($query)) { 
+                                                ?>
+                                            <tr>
+                                        <td><?php echo $no++; ?></td>
+                                        <td><?php echo $data['nama']; ?></td>
+                                        <td><?php echo $data['nmsurat']; ?></td>
+                                        <td><?php echo IndonesiaTgl($data['tgl']);?></td>
+                                        <td><?php echo ($data['status'] == 'onprocess') ? 'diproses' : $data['status']; 
+                                            ?>
+                                        </td>
+                                        <td><a href="?page=acc&id=<?php echo $data['id']; ?>">Terima</a></td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
                     </div>
+                </div>
                             <div class="au-card recent-report"  style="box-shadow: 2px 1px 4px;">
                                 <!-- Left Panel -->
                                 <section class="welcome p-t-1s">
