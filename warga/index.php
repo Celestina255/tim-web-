@@ -52,164 +52,84 @@ error_reporting(0);
 </head>
 
 <body>
-   <div class="trending-bar-dark hidden-xs">
-      <div class="container">
-       <div class="row">
-         <div class="col-lg-11">
-            <h3 class="trending-bar-title">Trending News</h3>
-            <h3 class="tn-mobile">News</h3>
-            <div class="trending-news-slider">
-               <?php 
-               $queryb = mysqli_query ($con, "SELECT * FROM tb_berita ORDER BY id_berita ASC LIMIT 1");
-               while ($row = mysqli_fetch_array($queryb)){
-                  ?>
-                  <div class="item">
-                    <div id="marquee" class="post-content">
-                     <h2 class="post-title title-sm">
-                        <a href="?page=home">Info : <?php echo $row['judul']; ?></a>
-                     </h2>
-                  </div>
-               </div>
-            <?php } ?>
-         </div>
+  <link rel="stylesheet" href="../dashboard/css/style.css">
+<!-- ini adalah tempat dimana file cssnya harus diupdate, jangan ditambah jika sudah ada -->
+
+<!-- Letakkan navbar setelah div class="body-inner yang ada isi file php -->
+
+<!-- NAVBAR AWAL -->
+<nav class="navbar">
+  <div class="navbar-container">
+    <!-- KIRI -->
+    <div class="kampung-info">
+      <img src="../img/logo.png" alt="Logo" class="logo">
+      <div class="text-info ml-2">
+        <div class="text-bold">Kampung Banjar Ausoy</div>
+        <div>Kabupaten Teluk Bintuni</div>
       </div>
-    
-              <div class="col-md-12 col-sm-12 col-xs-12 top-nav-social-lists text-lg-right col-lg-1 ml-lg-auto">
-                  <ul class="list-unstyled mt-2 mt-lg-0">
-                      <li>
-                          <a href="#">
-                           <span class="social-icon">
-                             <i class="fa fa-facebook-f"></i>
-                          </span>
-                       </a>
-                       <a href="#">
-                        <span class="social-icon">
-                          <i class="fa fa-youtube"></i>
-                       </span>
-                    </a>
-                 </li>
-              </ul>
-           </div>
+    </div>
 
-        </div>
-     </div>
+    <!-- TENGAH -->
+    <div class="navbar-main-wrapper">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="index.php?page=home">Beranda</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Profil</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="?page=sejarah">Sejarah</a></li>
+            <li><a class="dropdown-item" href="?page=struktur">Struktur</a></li>
+            <li><a class="dropdown-item" href="?page=visimisi">Visi & Misi</a></li>
+            <li><a class="dropdown-item" href="?page=petadesa">Peta Desa</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="?page=galeri">Galeri</a></li>
+        <li class="nav-item"><a class="nav-link" href="?page=berita">Berita</a></li>
+        <li class="nav-item"><a class="nav-link" href="?page=contact">PENGADUAN</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Layanan</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="?page=pelayanan">Permohonan Surat</a></li>
+            <li><a class="dropdown-item" href="?page=surat_mandiri">Buat Surat Mandiri</a></li>
+            <li><a class="dropdown-item" href="?page=pstatus">Status</a></li>
+          </ul>
+        </li>
+
+         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">LEMBAGA MASYARAKAT</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="?page=permohonan">BUMDes</a></li>
+            <li><a class="dropdown-item" href="?page=mandiri">KARANG TARUNA</a></li>
+            <li><a class="dropdown-item" href="?page=mandiri">RT/RW</a></li>
+            <li><a class="dropdown-item" href="?page=mandiri">PKK</a></li>
+          </ul>
+        </li>
+
+       <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">TRANSPARANSI</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="?page=mandiri">DATA PENDUDUK</a></li>
+            <li><a class="dropdown-item" href="?page=permohonan">APBD</a></li>
+            <li><a class="dropdown-item" href="?page=mandiri">IDM</a></li>
+          </ul>
+        </li>
+        
+      </ul>
+    </div>
+
+    <!-- KANAN -->
+    <div class="logout-wrapper">
+      <a href="logout.php" class="top-right-btn btn btn-primary">Logout</a>
+    </div>
   </div>
-
-  <div class="body-inner">
-      <div class="site-top-2">
-         <header class="header nav-down" id="header-2">
-            <div class="container">
-               <?php 
-               $query = mysqli_query ($con, "SELECT * FROM tb_kelurahan LIMIT 1");
-               while ($r = mysqli_fetch_array($query)){
-               ?>
-               <div class="row">
-                  <div class="logo-area clearfix">
-                     <div class="logo col-lg-6 col-md-12 pull-left">
-                        <a href="?page=home">
-                           <img src="../img/<?php echo $r['logo']; ?>" alt="" style="width: 35px;margin-top: -20px;"> <span class="logo-text1">Web-</span>
-                           <span class="logo-text2"><?php echo $r['kelurahan']; ?></span>
-                        </a>
-
-                     </div>
-
-                     <!-- logo end-->
-                     <div class="col-lg-6 col-md-12 pull-right">
-                        <ul class="top-info unstyled">
-                           <li><span class="info-icon"><i class="icon icon-phone3"></i></span>
-                              <div class="info-wrapper">
-                                 <p class="info-title">24/7 Response Time</p>
-                                 <p class="info-subtitle"><?php echo $r['telp']; ?></p>
-                              </div>
-                           </li>
-                           <li><span class="info-icon"><i class="icon icon-envelope"></i></span>
-                              <div class="info-wrapper">
-                                 <p class="info-title">Send Your E-mail</p>
-                                 <p class="info-subtitle"><?php echo $r['email']; ?></p>
-                              </div>
-                           </li>
-                           
-                        </ul>
-                     </div>
-                     <!-- Col End-->
-                  </div>
-                  <!-- Logo Area End-->
-               </div>
-               <div class="row">
-                  <div class="logo-area clearfix">
-                     <div class="logo col-lg-8 col-md-12" style="margin-top:-55px; margin-bottom: -50px; text-shadow: 1px 1px 2px;">
-                        <a href="?page=home">
-                           Website Pelayanan Administrasi Desa <?php echo $r['kelurahan']; ?> 
-                        </a>
-                     </div>
-                  </div>
-                  <!-- Logo Area End-->
-               </div>
-            </div>
-         <?php } ?>
-         <!-- Container end-->
-         <div class="site-nav-inner site-navigation navigation navdown">
-            <div class="container">
-               <nav class="navbar navbar-expand-lg ">
-                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                  aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"><i class="icon icon-menu"></i></span></button>
-                  <!-- End of Navbar toggler-->
-                  <div class="collapse navbar-collapse justify-content-start" id="navbarSupportedContent">
-                     <ul class="navbar-nav">
-                        <li class="active"><a href="index.php?page=warga">Home</a>
-                        </li>
-                        <!-- li end-->
-                        <li class="nav-item dropdown"><a class="nav-link" href="#" data-toggle="dropdown">Profil<i class="fa fa-angle-down"></i></a>
-                           <ul class="dropdown-menu" role="menu">
-                              <li><a href="?page=sejarah">Sejarah</a></li>
-                              <li><a href="?page=struktur">Struktur</a></li>
-                              <li><a href="?page=visimisi">Visi & Misi</a></li>
-                              <li><a href="?page=petadesa">Peta Desa/Kelurahan</a></li>
-                           </ul>
-                        </li>
-                        <!-- li end-->
-
-                        <li class="nav-item dropdown">
-                           <a href="?page=berita">Berita Desa</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                           <a href="?page=galeri">Galeri</a>
-                        </li>
-                        <!-- li end-->
-                        <li class="nav-item dropdown">
-                           <a href="?page=contact">Contact</a>
-                        </li>
-                        <!-- li end -->
-                        <li class="nav-item dropdown"><a class="nav-link" href="#" data-toggle="dropdown">Pelayanan<i class="fa fa-angle-down"></i></a>
-                           <ul class="dropdown-menu" role="menu">
-                              <li><a href="?page=pelayanan">Permohonan Surat</a></li>
-                              <li><a href="?page=surat_mandiri">Buat Surat Mandiri</a></li>
-                           </ul>
-                        </li>
-                        <!-- li end-->
-                        <li class="nav-item dropdown"><a class="nav-link" href="#" data-toggle="dropdown">Status Permohonan<i class="fa fa-angle-down"></i></a>
-                           <ul class="dropdown-menu" role="menu">
-                              <li><a href="?page=daftar_permohonan">Permohonan Surat</a></li>
-                              <li><a href="?page=daftar_suratmandiri">Surat Mandiri</a></li>
-                           </ul>
-                        </li>
-
-                     </ul>
-                     <!--Nav ul end-->
-                  </div>
-                  <a href="logout.php" class="top-right-btn btn btn-primary">Logout</a>
-                  <!-- Top bar btn -->
-               </nav>
-               <!-- Collapse end-->
+</nav>
 
 
-
-            </div>
          </div>
-         <!-- Site nav inner end-->
-      </header>
-      <!-- Header end-->
-   </div>
+         <!-- AKHIR NAVBAR -->
+
+<!-- Letakkan di akhir body -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
    <?php include 'load_file_warga.php'; ?>
 
@@ -217,6 +137,7 @@ error_reporting(0);
       $queryy = mysqli_query ($con, "SELECT * FROM tb_kelurahan LIMIT 1");
       while ($rr = mysqli_fetch_array($queryy)){
    ?>
+
    <footer class="footer" id="footer">
       <div class="footer-main bg-overlay">
          <div class="container">
@@ -239,6 +160,7 @@ error_reporting(0);
                   </form>
                </div>
                <!-- About us end-->
+                
                <div class="col-lg-4 col-md-6 footer-widget">
                   <h3 class="widget-title">Quick Links</h3>
                   <ul class="list-dash">
