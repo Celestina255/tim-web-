@@ -117,12 +117,17 @@ while ($r = mysqli_fetch_array($query)) {
         <tr><td valign="top">3.</td><td colspan="4" align="justify">Pihak I tidak akan menarik kembali tanah sebelum masa sewa selesai, kecuali atas persetujuan Pihak II.</td></tr>
         <tr><td valign="top">4.</td><td colspan="4" align="justify">Hal-hal yang belum diatur akan diselesaikan secara kekeluargaan.</td></tr>
 
-        <tr><td colspan="5">&nbsp;</td></tr>
+        <tr>
+    <td colspan="5">&nbsp;</td>
+  </tr>
+    <tr>
+    <td colspan="5" align="justify" align="justify">Demikian kesepatan Jual - beli ini dibuat, ditanda tangani oleh kedua belah Pihak dan Saksi - saksi dalam keadaan sadar dan tanpa paksaan dari siapapun.</td>
+  </tr>
 
         <!-- TTD PIHAK -->
         <tr>
             <td></td>
-            <td align="center">Pihak II<br>Menerima Sewa</td>
+            <td align="center"><br><br>Pihak II<br>Menerima Sewa</td>
             <td></td>
             <td></td>
             <td align="center"><?= $rd['kelurahan']; ?>, <?= tgl_indonesia($tgl_sekarang); ?><br>Pihak I<br>Yang Menyewakan</td>
@@ -139,8 +144,9 @@ while ($r = mysqli_fetch_array($query)) {
         </tr>
 
         <!-- SAKSI -->
-        <tr><td colspan="4">Saksi - saksi :</td></tr>
+        <tr><td colspan="4"><br><br>Saksi - saksi :</td></tr>
         <tr><td>1.</td><td><?= $dt[20]; ?></td><td colspan="2">(_______________)</td></tr>
+        <tr><td colspan="5"><br><br></td></tr>
         <tr><td>2.</td><td><?= $dt[21]; ?></td><td colspan="2">(_______________)</td></tr>
 
         <!-- MENGETAHUI -->
@@ -172,6 +178,5 @@ while ($r = mysqli_fetch_array($query)) {
     </table>
 
 </body>
-</html>
-
 <?php } } ?>
+</html>
