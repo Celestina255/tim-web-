@@ -6,7 +6,7 @@ include_once "../assets/inc.php";
         <div class="col-md-12">
             <aside class="profile-nav alt">
                 <section class="card">
-                    <div class="card-header user-header alt bg-dark" style="box-shadow: 2px 1px 4px;">
+                    <div class="card-header" style="box-shadow: 2px 1px 4px; background-color:#3D2D13;" >
                         <?php 
                         $adm=$_SESSION['uname'];
                         $queryadm = mysqli_query ($con, "SELECT * FROM tb_admin WHERE uname='$adm'");
@@ -115,65 +115,6 @@ include_once "../assets/inc.php";
                     </div>
 
                     <!-- END STATISTIC-->
-                    <!-- STATISTIC-->
-                    <section class="statistic">
-                        <div class="section__content section__content--p10">
-                                <div class="row">
-                                    <div class="col-md-3 col-lg-3">
-                                        <div class="statistic__item" style="box-shadow: 2px 1px 4px;">
-                                            <?php 
-                                            $queryptgo=mysqli_query($con, "SELECT COUNT(*) AS jptgo FROM tb_admin WHERE status='on'");
-                                            while($rptgo=mysqli_fetch_array($queryptgo)){
-                                                ?>
-                                                <h2 class="number"><?php echo format_angka($rptgo['jptgo']); }?></h2>
-                                                <span class="desc">Petugas Online</span>
-                                                <div class="icon">
-                                                    <i class="fa fa-user"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 col-lg-3">
-                                            <div class="statistic__item" style="box-shadow: 2px 1px 4px;">
-                                                <?php 
-                                                $querywo=mysqli_query($con, "SELECT COUNT(*) AS jwo FROM tb_penduduk WHERE ket='on'");
-                                                while($rwo=mysqli_fetch_array($querywo)){
-                                                    ?>
-                                                    <h2 class="number"><?php echo format_angka($rwo['jwo']); }?></h2>
-                                                    <span class="desc">Warga Online</span>
-                                                    <div class="icon">
-                                                        <i class="fa fa-users"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3 col-lg-3">
-                                                <div class="statistic__item" style="box-shadow: 2px 1px 4px;">
-                                                    <?php 
-                                                    $querysp=mysqli_query($con, "SELECT COUNT(*) AS sp FROM tb_permohonan WHERE status='acc'");
-                                                    while($rsp=mysqli_fetch_array($querysp)){
-                                                        ?>
-                                                        <h2 class="number"><?php echo format_angka($rsp['sp']); }?></h2>
-                                                        <span class="desc">Permohonan</span>
-                                                        <div class="icon">
-                                                            <i class="fa fa-files-o"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 col-lg-3">
-                                                <div class="statistic__item" style="box-shadow: 2px 1px 4px;">
-                                                    <?php 
-                                                    $querysm=mysqli_query($con, "SELECT COUNT(*) AS sm FROM tb_buatsendiri WHERE status='acc'");
-                                                    while($rsm=mysqli_fetch_array($querysm)){
-                                                        ?>
-                                                        <h2 class="number"><?php echo format_angka($rsm['sm']); }?></h2>
-                                                        <span class="desc">Surat Mandiri</span>
-                                                        <div class="icon">
-                                                            <i class="fa fa-print"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                    </div>
-                                </section>
                                 <!-- END STATISTIC-->
                                 <div class="au-card recent-report">
                                     <!-- Left Panel -->
@@ -191,7 +132,7 @@ include_once "../assets/inc.php";
 
 
                                     <!-- Header-->
-<div class="card ">
+                                    <div class="card ">
                                         <div class="card-body animated zoomIn" style="overflow-x: scroll;">
                                             <table id="bootstrap-data-table-export0" class="table table-striped table-bordered">
                                                 <thead>
@@ -214,8 +155,8 @@ include_once "../assets/inc.php";
                                                     $query = mysqli_query ($con, "SELECT * FROM tb_permohonan ORDER BY id DESC");
                                                     $no=1;
                                                     while ($data = mysqli_fetch_assoc($query)){
-                                                     ?>
-                                                   <tr>
+                                                   ?>
+                                                     <tr>
                                                         <td align="center"><?php echo $no++;?></td>
                                                         <td><?php echo $data['nama'];?><br><?php echo $data['nik'];?></td>
                                                         <td><?php echo $data['nmsurat'];?></td>
@@ -223,18 +164,14 @@ include_once "../assets/inc.php";
                                                         <td><?php echo IndonesiaTgl($data['tgl']);?></td>
                                                         <td><a href="../file/berkas/<?php echo $data['berkas'];?>" target="_BLANK"><?php echo $data['berkas'];?></a></td>
                                                         <td><a href="../file/fotowarga/<?php echo $data['foto'];?>" target="_BLANK"><img src="../file/fotowarga/<?php echo $data['foto'];?>" style=" width: 100px; height:  auto; border-color: white; box-shadow: 2px 1px 4px ;"></a></td>
-                                                        <td align="center"><?php echo $data['status']=='onprocess'? "<a href='?page=acc_permohonan&amp;id=".$data['id']."'</a><p style='background:#00BFFF;border-radius:5%;padding:0px 10px;box-shadow:2px 1px 2px;color:white;'>Confirm</p>" : "<p style='background:grey;border-radius:5%;padding:0px 10px;box-shadow:2px 1px 2px;color:white;'>acc</p>";?>&nbsp;
+                                                        <td align="center"><?php echo $data['status']=='onprocess'? "<a href='?page=acc_permohonan&amp;id=".$data['id']."'</a><p style='background:#00BFFF;border-radius:5%;padding:0px 10px;box-shadow:2px 1px 2px;color:white;'>Terima</p>" : "<p style='background:grey;border-radius:5%;padding:0px 10px;box-shadow:2px 1px 2px;color:white;'>diterima</p>";?>&nbsp;
                                                         <a href="?page=<?php echo $data['page'];?>"><p style='background:#32CD32;border-radius:5%;padding:0px 10px;box-shadow:2px 1px 2px;color:white;'>Buatkan</p></a>
-                                                        <a> 
-                                                            <p style='background:white;border-radius:5%;padding:0px 10px;box-shadow:2px 1px 2px;color:white;'></p>
-                                                        </a>
-                                                        <a href="page/hapus_permohonan.php?id=<?php echo $data['id']; ?>" 
-                                                    onclick="return confirm('Yakin ingin menghapus data ini?')"
-                                                    style='background:#ff4d4d;border-radius:5%;padding:0px 10px;box-shadow:2px 1px 2px;color:white;'>Hapus</a>
-                                                        </td>
+                                                        <a href="hapus/hapus_permohonan.php?id=<?php echo $data['id']; ?>" onclick="return confirm('Yakin ingin menghapus permohonan ini?')">
+                                                        <p style='background:#FF0000;border-radius:5%;padding:2px 10px;box-shadow:2px 1px 2px;color:white;'>Hapus</p></a></td>
+
                                                     </tr>
 
-                                                <?php }?>    
+                                                <?php }?>   
 
                                             </tbody>
                                         </table>
@@ -255,14 +192,8 @@ include_once "../assets/inc.php";
                     </div>
                 </div>
             </section>
-
-
         <!-- Header-->
-
-
 <!-- END MODAL SUKET UMUM --> 
-
-
                         <div class="card ">
                             <div class="card-body animated zoomIn" style="overflow-x: scroll;">
                                 <table id="bootstrap-data-table-export1" class="table table-striped table-bordered">
