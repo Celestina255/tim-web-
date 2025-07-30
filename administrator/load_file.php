@@ -540,6 +540,11 @@
     			 include 'page/aksi_tambah_idm.php'; break;
  		case 'aksi_edit_idm':
     			 include 'page/aksi_edit_idm.php'; break;
+
+		case 'sambutan':
+        		include "page/sambutan.php"; break;
+    		case 'sambutan_edit':
+        		include "page/sambutan_edit.php"; break;
 		default:
 			if(!file_exists ("main.php")) die ("Empty Main Page!"); 
 			include "main.php";						
