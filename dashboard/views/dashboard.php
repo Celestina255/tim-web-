@@ -28,37 +28,25 @@
  <!-- Batas -->
 
 <!-- Sambutan -->
-<section class="sambutan-section py-5">
-  <div class="container">
-    <div class="text-center">
-      <!-- Judul tanpa garis bawah -->
-      <h2 class="section-title text-success" style="color: #2caa50;"">SAMBUTAN KEPALA KAMPUNG</h2>
-    </div>
-    <div class="row d-flex align-items-start mt-4">
-      <!-- Foto di kiri -->
-      <div class="col-md-4 text-center mb-4 mb-md-0 d-flex justify-content-center align-items-start">
-        <img src="../img/orang.png" alt="Kepala Desa" class="img-fluid rounded shadow-sm" style="max-width: 100%; height: auto;">
+  <section class="sambutan-section py-5">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title text-success" style="color: #2caa50;">SAMBUTAN KEPALA KAMPUNG</h2>
       </div>
-     <!-- Teks sambutan di kanan -->
-<div class="col-md-8">
-  <p class="fw-bold text-uppercase mb-1">SUDIRMAN</p>
-  <p class="mb-3 fw-bold">Kepala Kampung Banjar Ausoy</p>
-
-  <div class="scrollable-text" style="max-height: 200px; overflow-y: auto; padding-right: 10px;">
-    <p>Assalamu `Alaikum Warahmatullahi Wabarakatuh</p>
-    <p>Sebuah kesyukuran yang tak terhingga kepada Allah SWT, karena di era digitalisasi sekarang ini, Pemerintah Desa Banjar Ausoy mampu menghadirkan Aplikasi Website Desa yang akan mempermudah pelayanan di Kantor Desa Banjar Ausoy dalam hal pelayanan Administrasi.</p>
-    <p>Tentunya keberadaan Aplikasi ini diharapkan juga dapat memberikan Informasi kepada Masyarakat yang ingin mengetahui Program atau Kegiatan Pemerintah Desa Banjar Ausoy dengan mengakses melalui Fitur yang sudah disiapkan.</p>
-    <p>Besar harapan kami, untuk aplikasi ini nantinya dapat membawa perubahan signifikan dalam proses Pelayanan Pemerintahan Desa dan mampu menjadi Desa Digital yang merupakan salah satu program untuk mengurangi kesenjangan arus informasi yang terjadi di Desa.</p>
-    <p>Konsep Desa Digital merupakan Pemanfaatan Teknologi Informasi yang Terintegrasi dalam pelayanan Publik dan Kegiatan perekonomian di Desa Banjar Ausoy</p>
-    <p>Salam Dari Desa</p>
-    <p>Sekian dan terima kasih<br>
-    Billahi Taufiq WalHidayah<br>
-    Wassalamu `Alaikum Warahmatullahi Wabarakatuh</p>
-  </div>
-</div>
+      <div class="row d-flex align-items-start mt-4">
+        <div class="col-md-4 text-center mb-4 mb-md-0 d-flex justify-content-center align-items-start">
+          <img src="../img/sambutan/<?php echo $data['foto']; ?>" alt="Kepala Kampung" class="img-fluid rounded shadow-sm" style="max-width: 100%; height: auto;">
+        </div>
+        <div class="col-md-8">
+          <p class="fw-bold text-uppercase mb-1"><?php echo strtoupper($data['nama_kepala']); ?></p>
+          <p class="mb-3 fw-bold"><?php echo $data['jabatan']; ?></p>
+          <div class="scrollable-text" style="max-height: 200px; overflow-y: auto; padding-right: 10px;">
+            <?php echo nl2br($data['isi_sambutan']); ?>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 <!-- Service Section end-->
 
    <!--Berita --->
