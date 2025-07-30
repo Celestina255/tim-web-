@@ -63,126 +63,7 @@ include '../koneksi.php';
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li><a href='?page=home' title='Dashboard'> <i class="fas fa-home"></i>Dashboard</a></li>
-                        
-                        <li class="has-sub">
-                        <a class="js-arrow" href="#"><i class="fas fa-laptop"></i>Tata Usaha</a>
-                        <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                        <li><a href='?page=undangan' title='Surat Undangan'>Undangan</a></li>
-                        <li><a href='?page=pengantar' title='Surat Pengantar'>Pengantar</a></li>
-                        <li><a href='?page=pemberitahuan' title='Surat Pemberitahuan'>Pemberitahuan</a></li>
-                        <li><a href='?page=himbauan' title='Surat Himbauan'>Himbauan</a></li>
-                        <li><a href='?page=pdinas' title='Surat Perjalanan Dinas'>Perjalanan Dinas</a></li>
-                        <li><a href='?page=jawaban' title='Surat Jawaban'>Jawaban</a></li>
-                        <li><a href='?page=tugas' title='Surat Tugas'>Tugas</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-folder"></i>Umum</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                        <li><a href='?page=suketusaha' title='Suket Usaha'>Usaha</a></li>
-                        <li><a href='?page=sukettmpusaha' title='Suket Tempat Usaha'>Tempat Usaha</a></li>
-                        <li><a href='?page=suketpbarang' title='Suket Pengantar Barang'>Pengantar Barang</a></li>
-                        <li><a href='?page=suketpternak' title='Suket Pengantar Ternak'>Pengantar Ternak</a></li>
-                        <li><a href='?page=sukettmampuv1' title='Suket Keterangan Tidak Mampu Personal'>Tdk. Mampu V1</a></li>
-                        <li><a href='?page=sukettmampuv2' title='Suket Keterangan Tidak Mampu Keluarga'>Tdk. Mampu V2</a></li>
-                        <li><a href='?page=suketrtm' title='Suket Keterangan Rumah Tangga Miskin'>RTM</a></li>
-                        <li><a href='?page=suketpenghasilan' title='Suket Keterangan Penghasilan'>Penghasilan</a></li>
-                        <li><a href='?page=suketortu' title='Suket Keterangan Orang Tua'>Orang Tua</a></li>
-                        <li><a href='?page=suketanak' title='Suket Keterangan Anak'>Anak</a></li>
-                        <li><a href='?page=suketmenikah' title='Suket Keterangan Menikah'>Menikah</a></li>
-                        <li><a href='?page=suketkematian' title='Suket Keterangan Kematian'>Kematian</a></li>
-                        <li><a href='?page=suketbepergian' title='Suket Keterangan Bepergian'>Bepergian</a></li>
-                        <li><a href='?page=suketbedaid' title='Suket Keterangan Beda Identitas'>Beda Id</a></li>
-                        <li><a href='?page=suketdomisililbg' title='Suket Keterangan Domilisi Lembaga'>Domisili Lembaga</a></li>
-                        <li><a href='?page=suketaw' title='Suket Ahli Waris'>Ahli Waris</a></li>
-                        <li><a href='?page=skkb' title='Surat Keterangan Kelakuan Baik'>SKKB</a></li>
-                        <li><a href='?page=skck' title='Surat Pengantar SKCK'>Pengantar SKCK</a></li>
-                        <li><a href='?page=sig' title='Surat Izin Ganguan'>SIG</a></li>
-                        <li><a href='?page=simb' title='Surat Permohonan Izin Mendirikan Bangunan'>SIMB</a></li>
-                        <li><a href='?page=suketlain2' title='Suket Keterangan Lain2'>Lainnya</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-users"></i>Kependudukan</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                        <li><a href='?page=suketdomisili' title='Suket Domisili'>Domisili</a></li>
-                        <li><a href='?page=sutarpindah' title='Sutar Pindah'>Pengantar Pindah</a></li>
-                        <li><a href='?page=suketkelahiran' title='Suket Kelahiran'>Kelahiran</a></li>
-                        <li><a href='?page=suketpenguburan' title='Suket Penguburan'>Penguburan</a></li>
-                        <li><a href='?page=f121' title='Suket Permohonan KTP'>Permohonan KTP</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-heart"></i>Pernikahan</a>
-                        <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                        <li><a href='?page=n1-n6' title='Pengantar Pernikahan'>N1-N6</a></li>
-                        <li><a href='?page=pernahnikah' title='Suket Pernah Menikah'>Pernah Nikah</a></li>
-                        <li><a href='?page=belumnikah' title='Suket Belum Menikah'>Belum Nikah</a></li>
-                        <li><a href='?page=dudajanda' title='Suket Duda atau Janda'>Duda/Janda</a></li>
-                        <li><a href='?page=pstatus' title='Pernyataan Status Perkawinan'>Status</a></li>
-                        <li><a href='?page=suketcerai' title='Suket Cerai'>Cerai</a></li>
-                        
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-map"></i>Pertanahan</a>
-                        <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                        <li><a href='?page=sukettanah' title='Suket Kepemilikan Tanah'>Tanah</a></li>
-                        <li><a href='?page=sporadik' title='Pernyataan Penguasaan Fisik Bidang Tanah'>Sporadik</a></li>
-                        <li><a href='?page=sewatanah' title='Perjanjian Sewa Tanah'>Sewa Tanah</a></li>
-                        <li><a href='?page=jualbelitanah' title='Suket Jual Beli Tanah'>Jual/Beli Tanah</a></li>
-                        <li><a href='?page=gadai' title='Perjanjian Jal Beli Sanda'>Jual Beli Sanda</a></li>
-                        <li><a href='?page=pelepasantanah' title='Suket Pelepasan Tanah'>Pelepasan Tanah</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                        <a class="js-arrow" href="#"><i class="fas fa-cog"></i>Kelola Web</a>
-                        <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                        <li><a href='?page=berita' title='Berita Desa'>Berita Desa</a></li>
-                        <li><a href='?page=galeri' title='Galeri'>Galeri</a></li>
-                        <li><a href='?page=slider' title='Data Slider'>Slider</a></li>
-                        <li><a href='?page=sambutan_edit' style="color: #fff;">Sambutan</a></li>
-                        <li><a href='?page=profil_desa' title='Profile Desa'>Profile</a></li>
-                        <li><a href='?page=transparansi' title='Transparansi'>Transparansi</a></li>
-
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-list"></i>Data</a>
-                        <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                        <li><a href='?page=master_desa' title='Master Data Desa'>Master Desa</a></li>
-                        <li><a href='?page=penduduk' title='Data Penduduk'>Penduduk</a></li>
-                        <li><a href='?page=jenissurat' title='Dat Jenis Surat'>Jenis Surat</a></li>
-                        <li><a href='?page=klasifikasi' title='Data Klasifikasi Surat'>Klasifikasi</a></li>
-                        <li><a href='?page=staff' title='Data Staff'>Staff</a></li>
-                        <li><a href='?page=user' title='Data User'>User</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-cog"></i>Pengaturan</a>
-                        <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                        <li><a href='?page=pengaturan_surat&id=1' title='Pengaturan Surat'>Surat</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-user"></i>Sistem</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="?page=tambah_user">Register</a>
-                                </li>
-                                 <li>
-                                    <a href="logout.php">Keluar</a>
-                                </li>
-                            </ul>
-                        </li>
+                      
                     </ul>
                 </div>
             </nav>
@@ -207,19 +88,12 @@ include '../koneksi.php';
         <ul class="list-unstyled navbar__list">
             <li><a href='?page=home' title='Dashboard' style="color: #fff;"> <i class="fas fa-home" style="color: #fff;"></i> Dashboard</a></li>
 
-            <li class="has-sub">
-                <a class="js-arrow" href="#" style="color: #fff;">
-                    <i class="fas fa-laptop" style="color: #fff;"></i> Pelayanan
+            <li>
+             <a href='?page=pelayanan_surat' title="Pelayanan Surat" style="color: #fff;">
+                 <i class="fas fa-envelope" style="color: #fff;"></i> Pelayanan Surat
                 </a>
-                <ul class="list-unstyled navbar__sub-list js-sub-list" style="background-color: #4a3920;">
-                    <li><a href='?page=tatausaha' style="color: #fff;">Tata Usaha</a></li>
-                    <li><a href='?page=umum' style="color: #fff;">Umum</a></li>
-                    <li><a href='?page=kependudukan' style="color: #fff;">Kependudukan</a></li>
-                    <li><a href='?page=pernikahan' style="color: #fff;">Pernikahan</a></li>
-                    <li><a href='?page=pertanahan' style="color: #fff;">Pertanahan</a></li>
-                    <li><a href='?page=lainnya' style="color: #fff;">Lainnya</a></li>
-                </ul>
             </li>
+
 
             <li class="has-sub">
                 <a class="js-arrow" href="#" style="color: #fff;">
