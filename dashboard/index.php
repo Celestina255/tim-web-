@@ -80,7 +80,7 @@ error_reporting(0);
     <!-- TENGAH -->
     <div class="navbar-main-wrapper">
       <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" href="index.php?page=home">Beranda</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.php?page=warga">Beranda</a></li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Profil</a>
           <ul class="dropdown-menu">
@@ -93,11 +93,12 @@ error_reporting(0);
         <li class="nav-item"><a class="nav-link" href="?page=galeri">Galeri</a></li>
         <li class="nav-item"><a class="nav-link" href="?page=berita">Berita</a></li>
         <li class="nav-item"><a class="nav-link" href="?page=contact">PENGADUAN</a></li>
+
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Layanan</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="?page=permohonan">Permohonan Surat</a></li>
-            <li><a class="dropdown-item" href="?page=mandiri">Buat Surat Mandiri</a></li>
+            <li><a class="dropdown-item" href="?page=layanan">Permohonan Surat</a></li>
+            <li><a class="dropdown-item" href="?page=layanan">Buat Surat Mandiri</a></li>
           </ul>
         </li>
 
@@ -114,9 +115,9 @@ error_reporting(0);
        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">TRANSPARANSI</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="?page=mandiri">DATA PENDUDUK</a></li>
-            <li><a class="dropdown-item" href="?page=permohonan">APBD</a></li>
-            <li><a class="dropdown-item" href="?page=mandiri">IDM</a></li>
+            <li><a class="dropdown-item" href="?page=transparansi_penduduk">DATA PENDUDUK</a></li>
+            <li><a class="dropdown-item" href="?page=transparansi_apbdes">APBD</a></li>
+            <li><a class="dropdown-item" href="?page=transparansi_idm">IDM</a></li>
           </ul>
         </li>
         
@@ -125,14 +126,14 @@ error_reporting(0);
 
     <!-- KANAN -->
     <div class="logout-wrapper">
-       <a href="?page=login" class="top-right-btn btn btn-primary">Login</a>
-    </div>
+<a href="?page=login" class="top-right-btn btn btn-primary">Login</a>
   </div>
 </nav>
 
 
          </div>
          <!-- AKHIR NAVBAR -->
+
 
 <!-- Letakkan di akhir body -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
