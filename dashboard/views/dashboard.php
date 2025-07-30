@@ -269,36 +269,44 @@
 
 
 <!-- Quote area start -->
+<?php
+$query_jam = mysqli_query($con, "SELECT * FROM tb_jamkerja ORDER BY urutan ASC");
+$wa_number = '';
+?>
+
 <section class="info-section">
   <div class="container-info">
-    <!-- Card Jam Kerja + Hubungi Kami -->
     <div class="info-card">
-      <h2 class="section-title">Silahkan datang pada hari dan jam kerja</h2>
+      <h2 class="section-title" style="color: #2caa50;">Silahkan datang pada hari dan jam kerja</h2>
       <img class="office-icon" src="../img/icon/kantor.png" alt="Kantor">
       <table class="worktime-table">
         <tr>
           <th>Hari</th>
           <th>Jam/Waktu</th>
         </tr>
-        <tr>
-          <td>Senin - Jum'at</td>
-          <td>08.00 - 15.30 WIB</td>
+        <?php while($r = mysqli_fetch_array($query_jam)) { ?>
+        <tr<?php if(strtolower($r['hari']) == 'minggu') echo ' class="holiday text-danger"'; ?>>
+          <td><?= $r['hari']; ?></td>
+          <td><?= $r['jam']; ?></td>
         </tr>
-        <tr>
-          <td>Sabtu</td>
-          <td>08.00 - 12.00 WIB</td>
-        </tr>
-        <tr class="holiday">
-          <td>Minggu</td>
-          <td>Libur</td>
-        </tr>
+       <?php
+// Ambil nomor WA terpisah (tidak dari baris jam kerja)
+$wa_q = mysqli_query($con, "SELECT nomor_wa FROM tb_jamkerja WHERE nomor_wa IS NOT NULL AND nomor_wa != '' LIMIT 1");
+$wa_data = mysqli_fetch_assoc($wa_q);
+$wa_number = $wa_data ? $wa_data['nomor_wa'] : '';
+?>
+
+        <?php } ?>
       </table>
+
+      <?php if (!empty($wa_number)) { ?>
       <div class="cta-button">
-        <a href="https://api.whatsapp.com/send?phone=6282238030337" 
-           target="_blank" class="btn-contact">
-          Hubungi kami 
+        <a href="https://api.whatsapp.com/send?phone=<?= $wa_number ?>" 
+           target="_blank" class="btn-contact btn btn-danger mt-3">
+          Hubungi kami
         </a>
       </div>
+      <?php } ?>
     </div>
   </div>
 </section>
