@@ -3482,6 +3482,8 @@ p.panel-title a.collapsed {
   padding: 12px 30px;
   margin-top: 15px;
 }
+
+
 /* Footer
 ================================================== */
 .footer {
@@ -3612,6 +3614,18 @@ p.panel-title a.collapsed {
   overflow: hidden;
   text-overflow: ellipsis;
   vertical-align: middle;
+}
+
+#back-to-top {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 999;
+  display: none;
+}
+
+#back-to-top.affix {
+  display: block;
 }
 
 /*footer end*/
