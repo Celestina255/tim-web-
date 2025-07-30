@@ -5,20 +5,45 @@ include_once "../assets/inc.php";
 # Baca variabel URL
 $kodesurat = $_GET['kode'];
 # Perintah untuk mendapatkan data dari tabel Surat 
-$query = mysqli_query ($con, "SELECT tb_jenissurat.*, tb_datasurat.*, tb_detailsurat.*, tb_penduduk.* from tb_jenissurat, tb_datasurat, tb_detailsurat, tb_penduduk WHERE tb_detailsurat.kode='$kodesurat' AND tb_detailsurat.nik=tb_penduduk.nik");
-while ($r = mysqli_fetch_array($query)){
-  $dt=explode(';',$r['detail']);
-  $tgl = $r['tanggal'];
-  $bl=format_hari_tanggal($tgl);
-  $bln=explode(',',$bl);
-  $bulan=$bln['1'];
-  $hari=$bln['0'];
-?>
-<?php 
-$query = mysqli_query ($con, "SELECT * from tb_kelurahan");
-while ($rd = mysqli_fetch_array($query)){
+$query = mysqli_query ($con, "SELECT * FROM tb_detailsurat JOIN tb_staff ON tb_detailsurat.ttd=tb_staff.id_staff LEFT JOIN tb_penduduk ON tb_detailsurat.nik=tb_penduduk.nik WHERE tb_detailsurat.kode='$kodesurat'");
+while ($r = mysqli_fetch_array($query)) {
+
+  // Tangkap dan pecah detail
+  $dt = explode(';', isset($r['detail']) ? $r['detail'] : '');
+  for ($i = 0; $i <= 25; $i++) {
+      if (!isset($dt[$i])) $dt[$i] = '';
+  }
+
+  // Tanggal & Hari Indonesia
+  $tgl_sekarang = date('Y-m-d');
+  $hari = date('l');
+  $hari_indonesia = [
+      'Sunday' => 'Minggu',
+      'Monday' => 'Senin',
+      'Tuesday' => 'Selasa',
+      'Wednesday' => 'Rabu',
+      'Thursday' => 'Kamis',
+      'Friday' => 'Jumat',
+      'Saturday' => 'Sabtu',
+  ];
+  $hari = $hari_indonesia[$hari];
+
+  function tgl_indonesia($tgl) {
+      $bulan = [
+          '01' => 'Januari', '02' => 'Februari', '03' => 'Maret',
+          '04' => 'April', '05' => 'Mei', '06' => 'Juni',
+          '07' => 'Juli', '08' => 'Agustus', '09' => 'September',
+          '10' => 'Oktober', '11' => 'November', '12' => 'Desember'
+      ];
+      $exp = explode('-', $tgl);
+      return $exp[2] . ' ' . $bulan[$exp[1]] . ' ' . $exp[0];
+  }
+
+  $query_kel = mysqli_query($con, "SELECT * from tb_kelurahan");
+  while ($rd = mysqli_fetch_array($query_kel)) {
 ?>
 
+<html>
 <body onLoad="window.print()" >
 <h1 align="center">
 <table width="800" align="center" border="0" cellspacing="1" cellpadding="4" class="table-print">
@@ -78,13 +103,19 @@ while ($rd = mysqli_fetch_array($query)){
   <tr>
     <td colspan="5">&nbsp;</td>
   </tr>
+    <!-- PERNYATAAN -->
     <tr>
-    <td colspan="5" align="justify">Pada hari ini <?php echo strtoupper($hari);?> tanggal <?php echo IndonesiaTgl($tgl);?>, Pihak I dan Pihak II secara bersama - sama sepakat sabagai berikut :</td>
-  </tr>
-  <tr>
-    <td valign="top">1.</td><td colspan="4" align="justify">Tanah dengan luas/ukuran <?php echo format_angka($dt[12]);?> Ha./M2 yang terletak di <?php echo $dt[13];?>, dengan batas - batas tanah : </td>
-  </tr>
-  <tr>
+            <td colspan="5" align="justify">
+                Pada hari ini <?= strtoupper($hari); ?>, tanggal <?= tgl_indonesia($tgl_sekarang); ?>, Pihak I dan Pihak II secara bersama - sama sepakat sebagai berikut:
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top">1.</td>
+            <td colspan="4" align="justify">
+                Tanah dengan luas/ukuran <?= format_angka($dt[12]); ?> Ha./M2 yang terletak di <?= $dt[13]; ?>, dengan batas-batas:
+            </td>
+        </tr>
     <td></td><td> - Barat berbatasan dengan</td><td>:</td><td colspan="2"><?php echo $dt[15];?></td>
   </tr>
       <tr>
@@ -112,49 +143,59 @@ while ($rd = mysqli_fetch_array($query)){
     <td colspan="5" align="justify" align="justify">Demikian kesepatan Jual - beli ini dibuat, ditanda tangani oleh kedua belah Pihak dan Saksi - saksi dalam keadaan sadar dan tanpa paksaan dari siapapun.</td>
   </tr>
 
- <tr>
-    <td></td><td align="center"><br>Pihak II<br>Membeli </td><td><td></td><td align="center"><?php echo $rd['kelurahan'];?>,&nbsp;<?php echo $bulan;?><br>Pihak I<br>Yang Menjual</td>
-  </tr>
+     <!-- TTD PIHAK -->
      <tr>
-    <td colspan="5">&nbsp;<br></td><td></td>
-  </tr>
-   <tr>
-    <td colspan="4">&nbsp;<br></td><td><small style="color: grey;">Materai</small></td>
-  </tr>
-     <tr>
-    <td colspan="5">&nbsp;<br></td><td></td>
-  </tr>
-<tr>
-    <td></td><td align="center"><b><u><?php echo $dt[7];?></u></b></td><td></td><td></td><td align="center"><b><u><?php echo $dt[1];?></u></b></td>
-  </tr>
-   <tr>
-    <td colspan="4">Saksi - saksi :</td><td></td>
-  </tr>
-   <tr>
-    <td>1.</td><td><?php echo $dt[19];?></td><td colspan="2">(_______________)</td>
-  </tr>
-   <tr>
-    <td colspan="4">&nbsp;<br></td><td></td>
-  </tr>
-   <tr>
-    <td>2.</td><td><?php echo $dt[20];?></td><td colspan="2">(_______________)</td>
-  </tr>
-<tr><td colspan="4">
-<table width="90%" align="right" border="0" cellspacing="1" cellpadding="2" class="table-print">
-  <tr>
-    <td></td><td align="center" class="pull pull-right" colspan="2">Mengetahui</td>
-  </tr>
-  <tr>
-    <td rowspan="3" width="20%"></td><td align="center" valign="top" class="pull pull-right"><?php echo $rd['jnp']=='Desa'? "Kepala Desa" : "Lurah";?> <?php echo $rd['kelurahan'];?></td>
-  </tr>
-  <tr>
-    <td align="center" class="pull pull-right"></td>
-  </tr>
-  <tr>
-    <td align="center" class="pull pull-right" width="45%" colspan="2"><br><br><br><u><b><?php echo $r['ttd'];?></b></u><br>NIP. <?php echo $rd['niplurah'];?></td>
-  </tr> 
-</table>
-</td>
-</tr>
-</table>
-  <?php }} ?>
+            <td></td>
+            <td align="center"><br><br>Pihak II<br>Membeli</td>
+            <td></td>
+            <td></td>
+            <td align="center"><?= $rd['kelurahan']; ?>, <?= tgl_indonesia($tgl_sekarang); ?><br>Pihak I<br>Yang Menjual</td>
+        </tr>
+        <tr><td colspan="5"><br><br></td></tr>
+        <tr><td colspan="4"></td><td align="center"><small style="color: gray;">Materai</small></td></tr>
+        <tr><td colspan="5"><br></td></tr>
+        <tr>
+            <td></td>
+            <td align="center"><b><u><?= $dt[7]; ?></u></b></td>
+            <td></td>
+            <td></td>
+            <td align="center"><b><u><?= $dt[1]; ?></u></b></td>
+        </tr>
+
+        <!-- SAKSI -->
+        <tr><td colspan="4"><br><br>Saksi - saksi :</td></tr>
+        <tr><td>1.</td><td><?= $dt[20]; ?></td><td colspan="2">(_______________)</td></tr>
+        <tr><td colspan="5"><br><br></td></tr>
+        <tr><td>2.</td><td><?= $dt[21]; ?></td><td colspan="2">(_______________)</td></tr>
+
+        <!-- MENGETAHUI -->
+        <tr><td colspan="5"><br></td></tr>
+        <tr>
+            <td colspan="5" align="center"><br><br><br><br><br><br><br>
+                Mengetahui<br>
+                <?php echo ($r['jab_staff'] == 'Kepala Kelurahan' || $r['jab_staff'] == 'Kepala Desa') ? '' : 'a.n.'; ?>
+                <?php echo $rd['jnp'] == 'Desa' ? 'Kepala Kampung' : 'Kepala Kelurahan'; ?> <?= $rd['kelurahan']; ?><br>
+            </td>
+        </tr>
+
+        <!-- CAP & TTD -->
+        <tr>
+            <td colspan="5" align="center">
+                <?php
+                $queryrs = mysqli_query($con, "SELECT * from setting_surat LIMIT 1");
+                while ($rs = mysqli_fetch_array($queryrs)) {
+                    if ($rs['ttd'] == 'Otomatis'): ?>
+                        <div style="position: relative; width: 7em; height: 7em; margin: 0 auto;">
+                            <img src="../file/<?php echo $rd['stample']; ?>" style="position: absolute; top: 0; right: 25px; width: 7em; height: 7em; opacity: 0.9;">
+                            <img src="../file/ttd/<?php echo $r['ttd_staff']; ?>" style="position: absolute; top: 0; left: 10px; width: 7em; height: 7em;">
+                        </div>
+                <?php endif; } ?>
+                <br><b><u><?php echo strtoupper($r['nama_staff']); ?></u></b><br>
+                NIP. <?= !empty($rd['niplurah']) ? $rd['niplurah'] : '-'; ?>
+            </td>
+        </tr>
+    </table>
+
+</body>
+<?php } } ?>
+</html>
