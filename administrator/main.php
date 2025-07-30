@@ -116,69 +116,90 @@ include_once "../assets/inc.php";
 
                     <!-- END STATISTIC-->
                                 <!-- END STATISTIC-->
-                                <div class="au-card recent-report">
+                     <div class="au-card recent-report">
                                     <!-- Left Panel -->
-                                    <section class="welcome p-t-1s">
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <h1 class="title-5">DATA PERMOHONAN SURAT 
-                                                    </h1>
-                                                    <hr class="line-seprate">
-                                                </div>
-                                            </div>
+                         <section class="welcome p-t-1s">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                             <h1 class="title-5">DATA PERMOHONAN SURAT 
+                                             </h1>
+                                             <hr class="line-seprate">
                                         </div>
-                                    </section>
+                                    </div>
+                                 </div>
+                         </section>
 
 
                                     <!-- Header-->
-                                    <div class="card ">
-                                        <div class="card-body animated zoomIn" style="overflow-x: scroll;">
-                                            <table id="bootstrap-data-table-export0" class="table table-striped table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th>No</th>
-                                                        <th>Nama / NIK Pemohon</th>
-                                                        <th>Nama Surat</th>
-                                                        <th>No. Hp</th>
-                                                        <th>Tanggal</th>
-                                                        <th>Lamp</th>
-                                                        <th>Foto</th>
-                                                        <th>Opsi</th>
+        <div class="card ">
+            <div class="card-body animated zoomIn" style="overflow-x: scroll;">
+                <table id="bootstrap-data-table-export0" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama / NIK Pemohon</th>
+                            <th>Nama Surat</th>
+                            <th>No. Hp</th>
+                            <th>Tanggal</th>
+                            <th>Lamp</th>
+                            <th>Foto</th>
+                            <th>Opsi</th>
 
-                                                    </tr>
-                                                </thead>
+                        </tr>
+                    </thead>
 
-                                                <tbody>
-                                                    <?php
+                    <tbody>
+                        <?php
 
-                                                    $query = mysqli_query ($con, "SELECT * FROM tb_permohonan ORDER BY id DESC");
-                                                    $no=1;
-                                                    while ($data = mysqli_fetch_assoc($query)){
-                                                   ?>
-                                                     <tr>
-                                                        <td align="center"><?php echo $no++;?></td>
-                                                        <td><?php echo $data['nama'];?><br><?php echo $data['nik'];?></td>
-                                                        <td><?php echo $data['nmsurat'];?></td>
-                                                        <td><?php echo $data['hp'];?></td>
-                                                        <td><?php echo IndonesiaTgl($data['tgl']);?></td>
-                                                        <td><a href="../file/berkas/<?php echo $data['berkas'];?>" target="_BLANK"><?php echo $data['berkas'];?></a></td>
-                                                        <td><a href="../file/fotowarga/<?php echo $data['foto'];?>" target="_BLANK"><img src="../file/fotowarga/<?php echo $data['foto'];?>" style=" width: 100px; height:  auto; border-color: white; box-shadow: 2px 1px 4px ;"></a></td>
-                                                        <td align="center"><?php echo $data['status']=='onprocess'? "<a href='?page=acc_permohonan&amp;id=".$data['id']."'</a><p style='background:#00BFFF;border-radius:5%;padding:0px 10px;box-shadow:2px 1px 2px;color:white;'>Terima</p>" : "<p style='background:grey;border-radius:5%;padding:0px 10px;box-shadow:2px 1px 2px;color:white;'>diterima</p>";?>&nbsp;
-                                                        <a href="?page=<?php echo $data['page'];?>"><p style='background:#32CD32;border-radius:5%;padding:0px 10px;box-shadow:2px 1px 2px;color:white;'>Buatkan</p></a>
-                                                        <a href="hapus/hapus_permohonan.php?id=<?php echo $data['id']; ?>" onclick="return confirm('Yakin ingin menghapus permohonan ini?')">
-                                                        <p style='background:#FF0000;border-radius:5%;padding:2px 10px;box-shadow:2px 1px 2px;color:white;'>Hapus</p></a></td>
+                        $query = mysqli_query($con, "SELECT * FROM tb_permohonan ORDER BY id DESC");
+                        $no = 1;
+                        while ($data = mysqli_fetch_assoc($query)) {
+                            ?>
+                        <tr>
+                            <td align="center"><?php echo $no++; ?></td>
+                            <td><?php echo $data['nama']; ?><br><?php echo $data['nik']; ?></td>
+                            <td><?php echo $data['nmsurat']; ?></td>
+                            <td><?php echo $data['hp']; ?></td>
+                            <td><?php echo IndonesiaTgl($data['tgl']); ?></td>
+                            <td><a href="../file/berkas/<?php echo $data['berkas']; ?>" target="_BLANK">
+                                    <img src="../file/berkas/<?php echo $data['berkas']; ?>"
+                                        style="width: 100px; height: auto; border-color: white; box-shadow: 2px 1px 4px;"></a>
+                            </td>
+                            <td><a href="../file/fotowarga/<?php echo $data['foto']; ?>" target="_BLANK"><img
+                                        src="../file/fotowarga/<?php echo $data['foto']; ?>"
+                                        style=" width: 100px; height:  auto; border-color: white; box-shadow: 2px 1px 4px ;"></a>
+                            </td>
+                            <td align="center"> <?php if ($data['status'] == 'onprocess') { ?><a
+                                    href="?page=acc_permohonan&id=<?php echo $data['id']; ?>"
+                                    class="btn btn-info btn-sm w-100 mb-2" style="font-size: 13px;">
+                                    <i class="fa fa-check"></i> Terima</a>
+                                <?php } else { ?>
+                                <div class="btn btn-secondary btn-sm w-100 mb-2" style="font-size: 13px;">
+                                    <i class="fa fa-check-circle"></i> Diterima
+                                </div> <?php } ?>
 
-                                                    </tr>
-
-                                                <?php }?>   
-
-                                            </tbody>
-                                        </table>
-                                    </div>      
+                                <!-- Bagian bawah: ikon Buat & Hapus -->
+                                <div class="d-flex justify-content-center gap-1">
+                                    <a href="?page=<?php echo $data['page']; ?>" class="btn btn-success btn-sm"
+                                        title="Buat Surat">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a href="hapus/hapus_permohonan.php?id=<?php echo $data['id']; ?>"
+                                        onclick="return confirm('Yakin ingin menghapus permohonan ini?')"
+                                        class="btn btn-danger btn-sm" title="Hapus">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
                                 </div>
+                            </td>
 
-                            </div>
+                        </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 <div class="au-card recent-report">
     <!-- Left Panel -->
             <section class="welcome p-t-1s">
