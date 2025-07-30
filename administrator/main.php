@@ -200,57 +200,60 @@ include_once "../assets/inc.php";
             </div>
         </div>
     </div>
-<div class="au-card recent-report">
+<div class="au-card recent-report" style="box-shadow: 2px 1px 4px;">
     <!-- Left Panel -->
-            <section class="welcome p-t-1s">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1 class="title-5">DATA SURAT YANG DIBUAT MANDIRI
-                            </h1>
-                            <hr class="line-seprate">
-                        </div>
-                    </div>
+    <section class="welcome p-t-1s">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="title-5">DATA SURAT YANG DIBUAT MANDIRI</h1>
+                    <hr class="line-seprate">
                 </div>
-            </section>
-        <!-- Header-->
-<!-- END MODAL SUKET UMUM --> 
-                        <div class="card ">
-                            <div class="card-body animated zoomIn" style="overflow-x: scroll;">
-                                <table id="bootstrap-data-table-export1" class="table table-striped table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama</th>
-                                            <th>Surat</th>
-                                            <th>Tanggal</th>
-                                            <th>Status</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                            <?php
-                                            $query = mysqli_query($con, "SELECT * FROM tb_buatsendiri ORDER BY id DESC");
-                                            $no = 1;
-                                            ?>
-                                            <?php 
-                                            while ($data = mysqli_fetch_assoc($query)) { 
-                                                ?>
-                                            <tr>
-                                        <td><?php echo $no++; ?></td>
-                                        <td><?php echo $data['nama']; ?></td>
-                                        <td><?php echo $data['nmsurat']; ?></td>
-                                        <td><?php echo IndonesiaTgl($data['tgl']);?></td>
-                                        <td><?php echo ($data['status'] == 'onprocess') ? 'diproses' : $data['status']; 
-                                            ?>
-                                        </td>
-                                        <td><a href="?page=acc&id=<?php echo $data['id']; ?>">Terima</a></td>
-                                    </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+            </div>
+        </div>
+    </section>
+    <div class="card">
+        <div class="card-body animated zoomIn" style="overflow-x: scroll;">
+            <table id="bootstrap-data-table-export1" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Surat</th>
+                        <th>Tanggal</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $query = mysqli_query($con, "SELECT * FROM tb_buatsendiri ORDER BY id DESC");
+                    $no = 1;
+                    while ($data = mysqli_fetch_assoc($query)) {
+                    ?>
+                    <tr>
+                        <td><?php echo $no++; ?></td>
+                        <td><?php echo $data['nama']; ?></td>
+                        <td><?php echo $data['nmsurat']; ?></td>
+                        <td><?php echo IndonesiaTgl($data['tgl']); ?></td>
+                        <td>
+                            <?php 
+                            if ($data['status'] == 'onprocess') {
+                                echo 'diproses';
+                            } else {
+                                echo $data['status'];
+                            }
+                            ?>
+                        </td>
+                        <td><a href="?page=acc&id=<?php echo $data['id']; ?>">Terima</a></td>
+                    </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
                             <div class="au-card recent-report"  style="box-shadow: 2px 1px 4px;">
                                 <!-- Left Panel -->
                                 <section class="welcome p-t-1s">
