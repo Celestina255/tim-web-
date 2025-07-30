@@ -1348,17 +1348,19 @@ HARUS HATI-HATI JANGAN HAPUS SEMUA ISI FILENYA NANTI TAMPILAN CSSMU YANG TERGANG
   justify-content: space-between;
   align-items: center;
 
-  position: fixed;
+  position: Sticky;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000;}
+  z-index: 999;
+}
 
 .navbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  
 }
 
 /* Logo & Info */
