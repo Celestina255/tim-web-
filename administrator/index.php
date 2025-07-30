@@ -49,7 +49,7 @@ include '../koneksi.php';
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="?page=home">
-                            <img src="../img/icon/logo.png" alt="app-surdes" />
+                            <img src="../img/logo.png" alt="app-surdes" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
