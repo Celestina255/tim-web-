@@ -1,107 +1,154 @@
-    <?php
-    include_once "../koneksi.php";
-    include_once "../assets/inc.php";
+<?php
+include_once "../koneksi.php";
+include_once "../assets/inc.php";
 
-# Baca variabel URL
-    $kodesurat = $_GET['kode'];
+// Fungsi ubah tanggal ke format Indonesia
+function tgl_indo($tgl) {
+    $bulan = [
+        '01'=>'Januari','02'=>'Februari','03'=>'Maret','04'=>'April','05'=>'Mei','06'=>'Juni',
+        '07'=>'Juli','08'=>'Agustus','09'=>'September','10'=>'Oktober','11'=>'November','12'=>'Desember'
+    ];
+    $exp = explode('-', $tgl);
+    if (count($exp) != 3 || !array_key_exists($exp[1], $bulan)) {
+        return '-';
+    }
+    return (int)$exp[2] . ' ' . $bulan[$exp[1]] . ' ' . $exp[0];
+}
 
-# Perintah untuk mendapatkan data dari tabel Surat 
-    $query = mysqli_query ($con, "SELECT tb_jenissurat.*, tb_datasurat.*, tb_detailsurat.* from tb_jenissurat, tb_datasurat, tb_detailsurat WHERE tb_detailsurat.kode='$kodesurat'");
-    while ($r = mysqli_fetch_array($query)){
-      $dt=explode(';',$r['detail']);
-      $tgl = $r['tanggal'];
-      $bl=format_hari_tanggal($tgl);
-      $bln=explode(',',$bl);
-      $bulan=$bln['1'];
-      ?>
-      <?php 
-      $query = mysqli_query ($con, "SELECT * from tb_kelurahan");
-      while ($rd = mysqli_fetch_array($query)){
-        ?>
+// Ambil data surat
+$kodesurat = $_GET['kode'];
+$query = mysqli_query($con, "SELECT * FROM tb_detailsurat 
+    JOIN tb_staff ON tb_detailsurat.ttd=tb_staff.id_staff 
+    LEFT JOIN tb_penduduk ON tb_detailsurat.nik=tb_penduduk.nik 
+    WHERE tb_detailsurat.kode='$kodesurat'");
 
-        <body onLoad="window.print()" >
-          <h1 align="center">
-            <table width="800" align="center" border="0" cellspacing="1" cellpadding="4" class="table-print">
-              <tr>
-                <td rowspan="3" width="70"><img src="../img/<?php echo $rd['logo'];?>" width="60" height="60"></td>
-                <td colspan="" align="center"><strong><font size=2 color="black">PEMERINTAH KABUPATEN <?php echo strtoupper($rd['kab']);?></font></a>
-                </strong></td><td></td>
-              </tr>
-              <tr>
-                <td colspan="" align="center"><strong><font size=3 color="black">KECAMATAN <?php echo strtoupper($rd['kec']);?></font></a>
-                </strong></td><td width="70"></td>
-              </tr>
-              <tr>
-                <td colspan="" align="center"><strong><font size=5 color="black"><?php echo strtoupper($rd['jnp']);?> <?php echo strtoupper($rd['kelurahan']);?></font></strong></td>
-                <td width="70"></td>
-              </tr>
-              <tr>
-               <td colspan="3" align="center"><hr><font size=2 color="black"><i>Sekretariat : <?php echo $rd['kantor'];?></i><hr size="3"></td>
-               </tr>
-               <tr>
-                <td colspan="3" align="center"><strong><font size=4 color="black"><u><?php echo strtoupper($r['nmsurat']); ?> </u></font></a>
-                </strong><br><font size=2 color="black">Nomor : <?php echo $r['no']; ?></font></td>
-              </tr>
+while ($r = mysqli_fetch_array($query)) {
+    $dt = explode(';', $r['detail']);
+    $tanggal_surat = tgl_indo($r['tanggal']);
+
+    $query_desa = mysqli_query($con, "SELECT * FROM tb_kelurahan");
+    while ($rd = mysqli_fetch_array($query_desa)) {
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Surat Izin Gangguan</title>
+    <style>
+        body { font-family: Arial, sans-serif; font-size: 14px; }
+        .table-print, .table-list { width: 800px; margin: auto; }
+        .table-list td { padding: 4px; }
+    </style>
+</head>
+<body onload="window.print()">
+
+<!-- KOP SURAT -->
+<table width="800" align="center" border="0" cellspacing="1" cellpadding="4" class="table-print">
+  <tr>
+    <td rowspan="4" width="80" style="text-align: center; vertical-align: top;">
+      <img src="../img/<?php echo $rd['logo']; ?>" style="max-width: 85px; height: auto;">
+    </td>
+    <td colspan="2" align="center"><strong style="font-size: 25px;">PEMERINTAH KABUPATEN <?php echo strtoupper($rd['kab']); ?></strong></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><strong style="font-size: 18px;">DISTRIK <?php echo strtoupper($rd['kec']); ?></strong></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><strong style="font-size: 23px;">KAMPUNG <?php echo strtoupper($rd['kelurahan']); ?></strong></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center" style="font-size: 15px; font-style: bold;">
+      Alamat : <?php echo $rd['kantor']; ?>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" align="center"><hr style="border: 1.5px double black;"><br></td>
+  </tr>
+  <tr>
+    <td colspan="3" align="center">
+      <strong><u><?php echo strtoupper($r['nmsurat']); ?></u></strong><br>
+      <font size="2">Nomor: <?php echo $r['no']; ?></font>
+    </td>
+  </tr>
+</table>
+<!-- ISI SURAT -->
+<table class="table-list" border="0" cellpadding="2">
+    <tr><td colspan="3" align="justify">
+        Yang bertanda tangan di bawah ini adalah warga <?php echo $dt[4]; ?>, menyatakan bahwa kami tidak keberatan atas pendirian/renovasi/perluasan bangunan untuk <b><?php echo $dt[3]; ?></b> milik <b><?php echo $dt[1]; ?></b>, sepanjang tidak mengganggu lingkungan sekitar.<br><br>
+        Adapun warga yang menyetujui izin gangguan ini adalah sebagai berikut:
+    </td></tr>
+    <tr><td colspan="3">&nbsp;</td></tr>
+    <tr>
+        <td colspan="3">
+            <table width="100%" border="1" cellspacing="0" cellpadding="4">
+                <tr>
+                    <th width="5%">No</th>
+                    <th width="35%">Nama</th>
+                    <th width="40%">Alamat</th>
+                    <th width="20%">Tanda Tangan</th>
+                </tr>
+                <?php
+                $jumlah = $dt[5];
+                for ($i = 1; $i <= $jumlah; $i++) {
+                    echo "<tr>
+                            <td align='center'>$i</td>
+                            <td></td>
+                            <td></td>
+                            <td align='center'>..................</td>
+                          </tr>";
+                }
+                ?>
             </table>
+        </td>
+    </tr>
+    <tr><td colspan="3">&nbsp;</td></tr>
+    <tr><td colspan="3" align="justify">
+        Demikian surat izin gangguan ini dibuat dengan sebenarnya untuk keperluan pengajuan Surat Izin Mendirikan Bangunan (SIMB).
+    </td></tr>
+</table>
 
-            <table align="center" class="table-list" width="800" border="0" cellspacing="1" cellpadding="2">
-              <tr>
-                <td colspan="3" align="justify">Yang bertanda tangan dibawah ini adalah Warga <?php echo $dt[4];?>, Menyatakan bahwa kami benar - benar tidak keberatan adanya Pendirian, Renovasi, Perluasan Bangunan/Bangun Bangunan yang diperuntukan <b><?php echo $dt[3];?></b> milik <?php echo $dt[1];?> sepanjang tidak mengganggu lingkungan tempat warga sekitar tinggal, <br><br>Adapun yang menyetujui surat izin gangguan ini adalah nama – nama sebagai berikut : </td>
-              </tr>
-              <tr>
-                <td colspan="3">&nbsp;</td>
-              </tr>
-              <tr>
-                <td colspan="4">
-                  <table align="center" class="table-list" width="95%" border="1" cellspacing="1" cellpadding="2">
-                    <tr>
-                      <td width="5%" align="center">No</td><td width="30%" align="center">Nama</td><td width="40%" align="center">Alamat</td><td width="25%" align="center">Tanda Tangan</td>
-                    </tr>
-                    <?php
-                    $jr=$dt['5'];
-                    for($x=1;$x<=$jr;$x++){ ?>
-                     <tr>
-                      <td width="5%" align="center"><?php echo $x; ?>.</td><td width="30%"></td><td width="40%"></td><td width="25%" align="center"><small>.....................</small></td>
-                    </tr>
-                  <?php } ?>
-                </table>
-              </td>
+<!-- TTD -->
+<br>
+<table class="table-list" border="0" cellpadding="4">
+    <tr>
+        <td align="center">Ketua RT</td>
+        <td align="center">Ketua RW</td>
+    </tr>
+    <tr>
+        <td height="70px" align="center"><br><br>__________________</td>
+        <td height="70px" align="center"><br><br>__________________</td>
+    </tr>
+          <!-- MENGETAHUI -->
+          <tr><td colspan="5"><br></td></tr>
+        <tr>
+            <td colspan="5" align="center">
+                Mengetahui<br>
+                <?php echo ($r['jab_staff'] == 'Kepala Kelurahan' || $r['jab_staff'] == 'Kepala Desa') ? '' : 'a.n.'; ?>
+                <?php echo $rd['jnp'] == 'Desa' ? 'Kepala Kampung' : 'Kepala Kelurahan'; ?> <?= $rd['kelurahan']; ?><br>
+            </td>
+        </tr>
 
-              <tr>
-                <td colspan="3">&nbsp;</td>
-              </tr>
-              <tr>
-                <td colspan="3" align="justify">Demikian Surat izin gangguan ini dibuat dengan sebenarnya, untuk dipergunakan sebagai salah satu persyaratan pengajuan Surat Izin Mendirikan Bangunan (SIMB).</td>
-              </tr>
+        <!-- CAP & TTD -->
+        <tr>
+            <td colspan="5" align="center">
+                <?php
+                $queryrs = mysqli_query($con, "SELECT * from setting_surat LIMIT 1");
+                while ($rs = mysqli_fetch_array($queryrs)) {
+                    if ($rs['ttd'] == 'Otomatis'): ?>
+                        <div style="position: relative; width: 7em; height: 7em; margin: 0 auto;">
+                            <img src="../file/<?php echo $rd['stample']; ?>" style="position: absolute; top: 0; right: 25px; width: 7em; height: 7em; opacity: 0.9;">
+                            <img src="../file/ttd/<?php echo $r['ttd_staff']; ?>" style="position: absolute; top: 0; left: 10px; width: 7em; height: 7em;">
+                        </div>
+                <?php endif; } ?>
+                <br><b><u><?php echo strtoupper($r['nama_staff']); ?></u></b><br>
+                NIP. <?= !empty($rd['niplurah']) ? $rd['niplurah'] : '-'; ?>
+            </td>
+        </tr>
+        <td colspan="2" align="right"><?php echo $rd['kelurahan']; ?>, <?php echo format_hari_tanggal(date('Y-m-d')); ?></td>
+    </tr>
+</table>
 
-              <tr><td colspan="4">
-                <table width="100%" align="center" border="0" cellspacing="1" cellpadding="4" class="table-print">
-                  <tr>
-                    <td colspan="2">&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td></td><td align="center" class="pull pull-right"><?php echo $rd['kelurahan'];?>,&nbsp;<?php echo $bulan;?></td>
-                  </tr>
-                  <tr>
-                    <td width="50%" align="center">Ketua RT</td><td align="center" valign="top" class="pull pull-right">Ketua RW,</td>
-                  </tr>
-                  <tr>
-                    <td></td><td align="center" class="pull pull-right"></td>
-                  </tr>
-                  <tr>
-                    <td align="center"><br><br><br>_________________</td><td align="center" class="pull pull-right"><br><br><br>_________________</td>
-                  </tr> 
-                  <tr>
-                    <td align="center" valign="top" class="pull pull-right" colspan="2">Mengetahui, <br><?php echo $rd['jnp']=='Desa'? "Kepala Desa" : "Lurah";?> <?php echo $rd['kelurahan'];?></td>
-                  </tr>
-                  <tr>
-                    <td align="center" class="pull pull-right" colspan="2"></td>
-                  </tr>
-                  <tr>
-                    <td align="center" class="pull pull-right" colspan="2"><br><br><br><u><b><?php echo $r['ttd'];?></b></u><br>NIP. <?php echo $rd['niplurah'];?></td>
-                  </tr> 
-                </table>
-              </td>
-            </tr>
-          </table>
-        <?php }} ?>
+</body>
+<?php } } ?>
+</html>
+
