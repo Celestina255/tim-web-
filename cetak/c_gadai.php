@@ -160,15 +160,15 @@ while ($r = mysqli_fetch_array($query)) {
 
   </tr>
   <tr>
-    <td colspan="5">&nbsp;</td>
+  <td colspan="5">&nbsp;</td>
   </tr>
    <!-- TTD PIHAK -->
    <tr>
             <td></td>
-            <td align="center">Pihak II<br>Menerima Sewa</td>
+            <td align="center">Pihak II<br>Menerima Gadai</td>
             <td></td>
             <td></td>
-            <td align="center"><?= $rd['kelurahan']; ?>, <?= tgl_indonesia($tgl_sekarang); ?><br>Pihak I<br>Yang Menyewakan</td>
+            <td align="center"><?= $rd['kelurahan']; ?>, <?= tgl_indonesia($tgl_sekarang); ?><br>Pihak I<br>Yang Menggadai</td>
         </tr>
         <tr><td colspan="5"><br><br></td></tr>
         <tr><td colspan="4"></td><td align="center"><small style="color: gray;">Materai</small></td></tr>
