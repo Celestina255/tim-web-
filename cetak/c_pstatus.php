@@ -7,12 +7,23 @@ $kodesurat = $_GET['kode'];
 
 # Perintah untuk mendapatkan data dari tabel Surat 
 $query = mysqli_query ($con, "SELECT tb_jenissurat.*, tb_datasurat.*, tb_detailsurat.*, tb_penduduk.* from tb_jenissurat, tb_datasurat, tb_detailsurat, tb_penduduk WHERE tb_detailsurat.kode='$kodesurat' AND tb_detailsurat.nik=tb_penduduk.nik");
-while ($r = mysqli_fetch_array($query)){
-  $dt=explode(';',$r['detail']);
-?>
-<?php 
-$query = mysqli_query ($con, "SELECT * from tb_kelurahan");
-while ($rd = mysqli_fetch_array($query)){
+while ($r = mysqli_fetch_array($query)) {
+  $dt = explode(';', $r['detail']);
+  $tgl_sekarang = date('Y-m-d');
+  
+  function tgl_indonesia($tgl) {
+      $bulan = [
+          '01' => 'Januari', '02' => 'Februari', '03' => 'Maret',
+          '04' => 'April', '05' => 'Mei', '06' => 'Juni',
+          '07' => 'Juli', '08' => 'Agustus', '09' => 'September',
+          '10' => 'Oktober', '11' => 'November', '12' => 'Desember'
+      ];
+      $exp = explode('-', $tgl);
+      return $exp[2] . ' ' . $bulan[$exp[1]] . ' ' . $exp[0];
+  }
+
+  $query = mysqli_query($con, "SELECT * from tb_kelurahan");
+  while ($rd = mysqli_fetch_array($query)) {
 ?>
 <html>
 
@@ -51,10 +62,10 @@ while ($rd = mysqli_fetch_array($query)){
     <td></td><td>Pekerjaan</td><td>:</td><td><?php echo $r['kerjaan'];?></td>
   </tr>
   <tr>
-    <td></td><td>Alamat</td><td>:</td><td><?php echo $r['alamat'];?> <?php echo $rd['jnp']=='Desa'? "Desa" : "Kelurahan";?> <?php echo $r['kelurahan'];?></td>
+    <td></td><td>Alamat</td><td>:</td><td><?php echo $r['alamat'];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo $r['kelurahan'];?></td>
   </tr>
   <tr>
-    <td></td><td></td><td></td><td>Kec. <?php echo $r['kec'];?> Kab. <?php echo $r['kab'];?></td>
+    <td></td><td></td><td></td><td>Distrik <?php echo $r['kec'];?> Kabupaten <?php echo $r['kab'];?></td>
   </tr>
 <tr>
     <td colspan="4">&nbsp;</td>
@@ -77,7 +88,7 @@ while ($rd = mysqli_fetch_array($query)){
     <td>&nbsp;</td>
   </tr>
     <tr>
-    <td align="center" class="pull pull-right"><?php echo $rd['kelurahan'];?>, &nbsp;<?php echo IndonesiaTgl($r['tanggal']);?></td>
+    <td align="center" class="pull pull-right"><?php echo $rd['kelurahan'];?>, &nbsp;<?php echo format_hari_tanggal(date('Y-m-d')); ?> </td>
   </tr>    <tr>
     <td align="center" class="pull pull-right">Yang menyatakan,</td>
   </tr>
