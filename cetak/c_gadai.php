@@ -165,10 +165,10 @@ while ($r = mysqli_fetch_array($query)) {
    <!-- TTD PIHAK -->
    <tr>
             <td></td>
-            <td align="center">Pihak II<br>Menerima Gadai</td>
+            <td align="center"><br><br>Pihak II<br>Menerima Gadai</td>
             <td></td>
             <td></td>
-            <td align="center"><?= $rd['kelurahan']; ?>, <?= tgl_indonesia($tgl_sekarang); ?><br>Pihak I<br>Yang Menggadai</td>
+            <td align="center"><?= $rd['kelurahan']; ?>, <?= tgl_indonesia($tgl_sekarang); ?><br>Pihak I<br>Yang Menggadaikan</td>
         </tr>
         <tr><td colspan="5"><br><br></td></tr>
         <tr><td colspan="4"></td><td align="center"><small style="color: gray;">Materai</small></td></tr>
