@@ -145,6 +145,7 @@ include '../koneksi.php';
                         <li><a href='?page=berita' title='Berita Desa'>Berita Desa</a></li>
                         <li><a href='?page=galeri' title='Galeri'>Galeri</a></li>
                         <li><a href='?page=slider' title='Data Slider'>Slider</a></li>
+                        <li><a href='?page=sambutan_edit' style="color: #fff;">Sambutan</a></li>
                         <li><a href='?page=profil_desa' title='Profile Desa'>Profile</a></li>
                         <li><a href='?page=transparansi' title='Transparansi'>Transparansi</a></li>
 
