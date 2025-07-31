@@ -9,25 +9,41 @@ $query = mysqli_query($con, "SELECT * FROM tb_detailsurat
   WHERE tb_detailsurat.kode = '$kodesurat'");
 
 while ($r = mysqli_fetch_array($query)) {
-  $dt = explode(';', $r['detail']);
-  $tgl_sekarang = date('Y-m-d');
-  $hari = date('l');
 
-  function tgl_indonesia($tgl) {
-    $bulan = [
-      '01' => 'Januari', '02' => 'Februari', '03' => 'Maret',
-      '04' => 'April', '05' => 'Mei', '06' => 'Juni',
-      '07' => 'Juli', '08' => 'Agustus', '09' => 'September',
-      '10' => 'Oktober', '11' => 'November', '12' => 'Desember'
-    ];
-    $exp = explode('-', $tgl);
-    return $exp[2] . ' ' . $bulan[$exp[1]] . ' ' . $exp[0];
+  // Tangkap dan pecah detail
+  $dt = explode(';', isset($r['detail']) ? $r['detail'] : '');
+  for ($i = 0; $i <= 25; $i++) {
+      if (!isset($dt[$i])) $dt[$i] = '';
   }
 
-  $query_kel = mysqli_query($con, "SELECT * FROM tb_kelurahan");
+  // Tanggal & Hari Indonesia
+  $tgl_sekarang = date('Y-m-d');
+  $hari = date('l');
+  $hari_indonesia = [
+      'Sunday' => 'Minggu',
+      'Monday' => 'Senin',
+      'Tuesday' => 'Selasa',
+      'Wednesday' => 'Rabu',
+      'Thursday' => 'Kamis',
+      'Friday' => 'Jumat',
+      'Saturday' => 'Sabtu',
+  ];
+  $hari = $hari_indonesia[$hari];
+
+  function tgl_indonesia($tgl) {
+      $bulan = [
+          '01' => 'Januari', '02' => 'Februari', '03' => 'Maret',
+          '04' => 'April', '05' => 'Mei', '06' => 'Juni',
+          '07' => 'Juli', '08' => 'Agustus', '09' => 'September',
+          '10' => 'Oktober', '11' => 'November', '12' => 'Desember'
+      ];
+      $exp = explode('-', $tgl);
+      return $exp[2] . ' ' . $bulan[$exp[1]] . ' ' . $exp[0];
+  }
+
+  $query_kel = mysqli_query($con, "SELECT * from tb_kelurahan");
   while ($rd = mysqli_fetch_array($query_kel)) {
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,12 +93,16 @@ while ($r = mysqli_fetch_array($query)) {
   <tr><td>Tempat/Tgl Lahir</td><td>: <?php echo $dt[9]; ?>, <?php echo $dt[10]; ?></td></tr>
   <tr><td>Alamat</td><td>: <?php echo $dt[11]; ?></td></tr>
 </table>
-
+<tr>
+    <td></td><td>Selanjutnya disebut selaku</td><td>:</td><td colspan="2">Pihak II</td>
+  </tr>
+  <tr>
+    <td colspan="5">&nbsp;</td>
+  </tr>
 <br>
-
-<p style="text-align:justify;">
-Telah terjadi gadai tanah dari PIHAK I kepada PIHAK II yang terletak di <?php echo $dt[13]; ?> seluas <?php echo $dt[12]; ?> m², dengan harga Rp. <?php echo format_angka($dt[14]); ?> (<?php echo kekata($dt[14]); ?> Rupiah).
-</p>
+<tr>
+    <td colspan="5" align="justify">Adapun Pelepasan Hak Milik atas Tanah dimaksud terjadi dikarenakan pada hari  <?= strtoupper($hari); ?> tanggal <?= tgl_indonesia($tgl_sekarang); ?> Pihak I telah menjual sebidang tanah dengan luas/ukuran <?php echo format_angka($dt[12]);?> Ha./M2 yang terletak di <?php echo $dt[13];?> kepada Pihak II dengan harga <b>Rp. <?php echo format_angka($dt[14]);?></b>, <i>(<?php echo kekata($dt[14]);?> Rupiah)</i>, dengan batas - batas tanah : </td>
+  </tr>
 
 <p>Batas-batas tanah sebagai berikut:</p>
 <ul>
@@ -98,8 +118,8 @@ Telah terjadi gadai tanah dari PIHAK I kepada PIHAK II yang terletak di <?php ec
 
 <table width="100%">
   <tr>
-    <td align="center">Pihak II<br><br><br><br><u><?php echo $dt[7]; ?></u></td>
-    <td align="center"><?php echo $rd['kelurahan']; ?>, <?php echo tgl_indonesia($tgl_sekarang); ?><br>Pihak I<br><br><br><br><u><?php echo $dt[1]; ?></u></td>
+    <td align="center"><br>Pihak II<br>Membeli<br><br><br><br><u><?php echo $dt[7]; ?></u></td>
+    <td align="center"><?php echo $rd['kelurahan']; ?>, <?php echo tgl_indonesia($tgl_sekarang); ?><br>Pihak I<br>Yang Menjual<br><br><br><br><u><?php echo $dt[1]; ?></u></td>
   </tr>
 </table>
 
