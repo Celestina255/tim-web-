@@ -346,6 +346,10 @@
 		case 'acc_permohonan' :				
 			if(!file_exists ("data/acc_permohonan.php")) die ("Sorry Empty Page!"); 
 			include "data/acc_permohonan.php"; break;
+	#PENGADUAN
+		case 'pengaduan':
+    		include 'page/pengaduan.php';
+   			break;
 
 	# EDIT SURAT UMUM
 		case 'edit_undangan' :				
