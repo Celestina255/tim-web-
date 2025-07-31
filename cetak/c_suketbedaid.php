@@ -59,7 +59,7 @@ while ($r = mysqli_fetch_array($query)) {
 <br>
 <table align="center" class="table-list" width="800" border="0" cellspacing="1" cellpadding="2">
   <tr>
-    <td colspan="3" align="justify">Yang bertanda tangan dibawah ini <?php echo $rd['jnp']=='Desa'? "Kepala Kampung" : "Lurah";?> <?php echo $rd['kelurahan'];?> Distrik <?php echo $rd['kec'];?> Kabupaten <?php echo $rd['kab'];?>, Dengan ini menerangkan sesungguhnya bahwa Identitas Warga Kelurahan <?php echo $rd['kelurahan'];?>  dibawah ini terdapat perbedaan antara <?php echo $dt[7];?>  dengan <?php echo $dt[15];?>  sebagai berikut :</td>
+    <td colspan="3" align="justify">Yang bertanda tangan dibawah ini <?php echo $rd['jnp']=='Desa'? "Kepala Kampung" : "Lurah";?> <?php echo $rd['kelurahan'];?> Distrik <?php echo $rd['kec'];?> Kabupaten <?php echo $rd['kab'];?>, Dengan ini menerangkan sesungguhnya bahwa Identitas Warga Kampung <?php echo $rd['kelurahan'];?>  dibawah ini terdapat perbedaan antara <?php echo $dt[7];?>  dengan <?php echo $dt[15];?>  sebagai berikut :</td>
   </tr>
     <tr>
     <td colspan="3">&nbsp;</td>
