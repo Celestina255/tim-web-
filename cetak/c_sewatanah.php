@@ -111,17 +111,17 @@ while ($r = mysqli_fetch_array($query)) {
         <tr>
             <td valign="top">2.</td>
             <td colspan="4" align="justify">
-                Pihak I menyewakan kepada Pihak II selama <?= $dt[14]; ?> bulan dengan harga Rp. <?= format_angka($dt[15]); ?> (<?= kekata($dt[15]); ?> Rupiah);
+            Pihak I dengan sadar menyewakan sebidang tanah tersebut pada poin 1 (satu) kepada Pihak II  selama <?= $dt[14]; ?> bulan dengan harga Rp. <?= format_angka($dt[15]); ?> (<?= kekata($dt[15]); ?> Rupiah);
             </td>
         </tr>
-        <tr><td valign="top">3.</td><td colspan="4" align="justify">Pihak I tidak akan menarik kembali tanah sebelum masa sewa selesai, kecuali atas persetujuan Pihak II.</td></tr>
-        <tr><td valign="top">4.</td><td colspan="4" align="justify">Hal-hal yang belum diatur akan diselesaikan secara kekeluargaan.</td></tr>
+        <tr><td valign="top">3.</td><td colspan="4" align="justify">Pihak I bersedia untuk tidak menarik kembali bidang tanah yang disewakan sebelum jangka waktu sewa habis sebagaimana disebutkan pada poin 2 (dua) diatas kecuali atas persetujuan Pihak II;</td></tr>
+        <tr><td valign="top">4.</td><td colspan="4" align="justify">Hal - hal yang belum tertuang dalam kesepakatan ini akan di selesaikan secara kekeluargaan.</td></tr>
 
         <tr>
     <td colspan="5">&nbsp;</td>
   </tr>
     <tr>
-    <td colspan="5" align="justify" align="justify">Demikian kesepatan Jual - beli ini dibuat, ditanda tangani oleh kedua belah Pihak dan Saksi - saksi dalam keadaan sadar dan tanpa paksaan dari siapapun.</td>
+    <td colspan="5" align="justify" align="justify">Demikian kesepatan ini dibuat, ditanda tangani oleh kedua belah Pihak dan Saksi - saksi dalam keadaan sadar dan tanpa paksaan dari siapapun.</td>
   </tr>
 
         <!-- TTD PIHAK -->
