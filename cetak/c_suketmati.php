@@ -78,7 +78,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td>Alamat</td><td>:</td><td><?php echo $dt[9];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo  $rd['kelurahan'];?></td>
   </tr>
   <tr>
-    <td></td><td></td><td>Kec. <?php echo  $rd['kec'];?> Kabupaten <?php echo  $rd['kab'];?></td>
+    <td></td><td></td><td>Distrik <?php echo  $rd['kec'];?> Kabupaten <?php echo  $rd['kab'];?></td>
   </tr>
   <tr>
     <td colspan="3">Warga tersebut diatas adalah benar Warga <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo $rd['kelurahan'];?> yang telah Meninggal Dunia / Mati berdasarkan Laporan dari : </td>
@@ -99,7 +99,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td>Alamat</td><td>:</td><td><?php echo $dt[17];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo  $rd['kelurahan'];?></td>
   </tr>
   <tr>
-    <td></td><td></td><td>Kec. <?php echo  $rd['kec'];?> Kab. <?php echo  $rd['kab'];?></td>
+    <td></td><td></td><td>Distrik <?php echo  $rd['kec'];?> Kabupaten <?php echo  $rd['kab'];?></td>
   </tr>
       <tr>
     <td>Hubungan dengan Alm./Almh.</td><td>:</td><td><?php echo $dt[18];?></td>
