@@ -65,7 +65,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td colspan="4">&nbsp;</td>
   </tr>
     <tr>
-    <td>II.</td><td colspan="3">MANTAN SUAMI :</td>
+    <td>I.</td><td colspan="3">MANTAN SUAMI :</td>
   </tr>
   <tr>
     <td></td><td>Nama</td><td>:</td><td><?php echo $dt[1];?></td>
