@@ -83,7 +83,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td>2.</td><td>RT/RW</td><td>:</td><td colspan="2"><?php echo $dt[4];?></td>
   </tr>
   <tr>
-    <td>3.</td><td><?php echo $rd['jnp']=='Desa'? "Desa" : "Kelurahan";?></td><td>:</td><td colspan="2"><?php echo $dt[5];?></td>
+    <td>3.</td><td><?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?></td><td>:</td><td colspan="2"><?php echo $dt[5];?></td>
   </tr>
   <tr>
     <td>4.</td><td>Kota Administrasi</td><td>:</td><td colspan="2"><?php echo $dt[6];?></td>
