@@ -8,7 +8,7 @@ $message = $_POST['message'];
 $name=stripslashes($name);
 $telp=stripslashes($telp);
 $message=stripslashes($message);
-$message= "Name: $name, Message: $message";
+
 
 $pesan=(isset($_POST['pesan']));
 if($pesan){
