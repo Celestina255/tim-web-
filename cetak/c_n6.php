@@ -119,9 +119,9 @@ while ($r = mysqli_fetch_array($query)) {
 
   <br>
   <table width="97%" align="center">
-    <tr><td>Telah meninggal dunia pada tanggal</td><td>:</td><td><?php echo tgl_indonesia($dt[21]); ?></td></tr>
-    <tr><td>Di</td><td>:</td><td><?php echo $dt[23]; ?></td></tr>
-    <tr><td colspan="3">Yang bersangkutan adalah <b><?php echo $dt[18]; ?></b> dari:</td></tr>
+    <tr><td>Telah meninggal dunia pada tanggal : <?php echo tgl_indonesia($dt[21]); ?></td></tr>
+    <tr><td><br>Di :                                 <?php echo $dt[23]; ?></td></tr>
+    <tr><td colspan="3"><br>Yang bersangkutan adalah <b><?php echo $dt[18]; ?></b> dari:</td></tr>
   </table>
 
   <br>
