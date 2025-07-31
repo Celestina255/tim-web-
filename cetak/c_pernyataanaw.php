@@ -7,8 +7,7 @@ include_once "../assets/inc.php";
 $kodesurat = $_GET['kode'];
 
 # Perintah untuk mendapatkan data dari tabel data surat
-$query = mysqli_query ($con, "SELECT tb_jenissurat.*, tb_datasurat.*, tb_ahliwaris.*, tb_detailsurat.*, tb_penduduk.* from tb_jenissurat, tb_datasurat, tb_ahliwaris, tb_detailsurat, tb_penduduk
-WHERE tb_detailsurat.kode='$kodesurat' AND tb_detailsurat.nik=tb_penduduk.nik");
+$query = mysqli_query ($con, "SELECT * FROM tb_detailsurat JOIN tb_staff ON tb_detailsurat.ttd=tb_staff.id_staff LEFT JOIN tb_penduduk ON tb_detailsurat.nik=tb_penduduk.nik WHERE tb_detailsurat.kode='$kodesurat'");
 while ($r = mysqli_fetch_array($query)){
   $dt=explode(';',$r['detail']);
   $tgl = $r['tanggal'];
@@ -100,16 +99,40 @@ while ($raww = mysqli_fetch_array($queryy)){
     <td width="30%"><?php echo $noo++;?>. <?php echo $raww['nm'];?><br>&nbsp;</td><td>(___________)<br>&nbsp;</td>
   </tr><?php } ?>
   <tr>
-    <td><u>Saksi - saksi :</u></td><td></td><td align="center" class="pull pull-right"><?php echo $rd['kelurahan'];?>,&nbsp;<?php echo $bulan;?><br>Mengetahui,<br><?php echo $rd['jnp']=='Desa'? "Kepala Desa" : "Lurah";?> <?php echo $rd['kelurahan'];?></td>
+    <td><u>Saksi - saksi :</u></td><td></td><td align="center" class="pull pull-right"><?php echo $r['jab_staff']=='Kepala Kelurahan' || $r['jab_staff']=='Kepala Desa'? "" : "a.n.";?> <?php echo $rd['jnp']=='Desa'? "Kepala Desa" : "Kepala Kelurahan";?> <?php echo $rd['kelurahan'];?> <br><?php echo $r['jab_staff']=='Kepala Kelurahan' || $r['jab_staff']=='Kepala Desa'? "" : "$r[jab_staff]";?></td>
   </tr>
   <tr>
-    <td>1. ______________________</td><td>(___________)</td><td><br>&nbsp;</td>
+    <td>1. ______________________</td><td>(___________)</td><td rowspan="3" align="center" valign="top" class="pull pull-right"> <?php 
+    $queryrs = mysqli_query($con, "SELECT * FROM setting_surat LIMIT 1");
+    while ($rs = mysqli_fetch_array($queryrs)) {
+      if ($rs['ttd'] == 'Otomatis'):
+    ?>
+      <!-- Cap dan ttd -->
+      <div style="margin-top: 10px; text-align: center;">
+  <div style="display: inline-block; position: relative; width: 100px; height: 100px;">
+    <!-- Cap digeser sedikit ke kiri -->
+    <img src="../file/<?php echo $rd['stample']; ?>" 
+         style="position: absolute; top: 0; left: -35px; width: 100px; height: 100px; opacity: 0.9;">
+
+    <!-- Tanda Tangan tetap -->
+    <img src="../file/ttd/<?php echo $r['ttd_staff']; ?>" 
+         style="position: absolute; top: 0; left: 0; width: 100px; height: 100px;">
+  </div>
+</div>
+
+      <?php endif; } ?>
+
+<div style="margin-top: 5px;">
+  <u><b><?php echo strtoupper($r['nama_staff']); ?></b></u><br>
+  NIP. <?php echo !empty($rd['niplurah']) ? $rd['niplurah'] : '-'; ?>
+</div>
   </tr>
   <tr>
     <td>2. ______________________</td><td>(___________)</td><td><br>&nbsp;</td>
   </tr>
   <tr>
-    <td>3. ______________________</td><td>(___________)</td><td align="center" valign="top" class="pull pull-right"><u><b><?php echo $r['ttd'];?></b></u><br>NIP. <?php echo $rd['niplurah'];?></td>
+    <td>3. ______________________</td><td>(___________)</td><td align="center" valign="top" class="pull pull-right">
+    </td>
   </tr>
   
 </table>
