@@ -43,14 +43,26 @@ while ($r = mysqli_fetch_array($query)) {
 
 <!-- KOP SURAT -->
 <table width="800" align="center" border="0" cellpadding="4" class="kop">
-  <tr>
-    <td rowspan="4" width="80"><img src="../img/<?php echo $rd['logo']; ?>" style="max-width: 85px;"></td>
-    <td colspan="2" class="header-title">PEMERINTAH KABUPATEN <?php echo strtoupper($rd['kab']); ?></td>
+<tr>
+    <td rowspan="4" width="80" style="text-align: center; vertical-align: top;">
+      <img src="../img/<?php echo $rd['logo']; ?>" style="max-width: 85px; height: auto;">
+    </td>
+    <td colspan="2" align="center"><strong style="font-size: 25px;">PEMERINTAH KABUPATEN <?php echo strtoupper($rd['kab']); ?></strong></td>
   </tr>
-  <tr><td colspan="2">DISTRIK <?php echo strtoupper($rd['kec']); ?></td></tr>
-  <tr><td colspan="2">KAMPUNG <?php echo strtoupper($rd['kelurahan']); ?></td></tr>
-  <tr><td colspan="2">Alamat: <?php echo $rd['kantor']; ?></td></tr>
-  <tr><td colspan="3"><hr style="border: 1.5px double black;"></td></tr>
+  <tr>
+    <td colspan="2" align="center"><strong style="font-size: 18px;">DISTRIK <?php echo strtoupper($rd['kec']); ?></strong></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><strong style="font-size: 23px;">KAMPUNG <?php echo strtoupper($rd['kelurahan']); ?></strong></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center" style="font-size: 15px; font-style: bold;">
+      Alamat : <?php echo $rd['kantor']; ?>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" align="center"><hr style="border: 1.5px double black;"><br></td>
+  </tr>
 </table>
 
 <!-- INFORMASI SURAT DAN TUJUAN -->
