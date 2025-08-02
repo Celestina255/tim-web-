@@ -81,6 +81,9 @@ while ($r = mysqli_fetch_array($query)) {
     <td valign="top"><b><?php echo $dt[0]; ?></b></td>
   </tr>
 </table>
+   <tr>
+    <td colspan="4">&nbsp;</td>
+  </tr>   
 <table align="center" class="table-list" width="800" border="0" cellspacing="1" cellpadding="2">
 <tr>      
 <td></td><td></td><td>Kepada Yth,</td>
