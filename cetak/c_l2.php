@@ -6,18 +6,28 @@ include '../assets/inc.php';
 $kodesurat = $_GET['kode'];
 
 # Perintah untuk mendapatkan data dari tabel 
-$query = mysqli_query ($con, "SELECT tb_jenissurat.*, tb_datasurat.*, tb_detailsurat.* from tb_jenissurat, tb_datasurat, tb_detailsurat 
-WHERE tb_detailsurat.kode='$kodesurat'");
-while ($rs = mysqli_fetch_array($query)){
-  $tgl = $rs['tanggal'];
-  $bl=format_hari_tanggal($tgl);
-  $bln=explode(',',$bl);
-  $bulan=$bln['1'];
-  $dt=explode(';',$rs['detail']);
-?>
-<?php 
-$query = mysqli_query ($con, "SELECT * from tb_kelurahan");
-while ($rd = mysqli_fetch_array($query)){
+$query = mysqli_query ($con, "SELECT * FROM tb_detailsurat JOIN tb_staff ON tb_detailsurat.ttd=tb_staff.id_staff WHERE tb_detailsurat.kode='$kodesurat'");
+while ($r = mysqli_fetch_array($query)) {
+  $dt = explode(';', $r['detail']);
+  $tgl_sekarang = date('Y-m-d');
+  $tgl2 = $dt[2];
+  $bl2 = format_hari_tanggal($tgl2);
+  $bln2 = explode(',', $bl2);
+  $hari2 = $bln2[0];
+
+  function tgl_indonesia($tgl) {
+    $bulan = [
+      '01' => 'Januari', '02' => 'Februari', '03' => 'Maret',
+      '04' => 'April', '05' => 'Mei', '06' => 'Juni',
+      '07' => 'Juli', '08' => 'Agustus', '09' => 'September',
+      '10' => 'Oktober', '11' => 'November', '12' => 'Desember'
+    ];
+    $exp = explode('-', $tgl);
+    return $exp[2] . ' ' . $bulan[$exp[1]] . ' ' . $exp[0];
+  }
+
+  $query_kel = mysqli_query($con, "SELECT * from tb_kelurahan");
+  while ($rd = mysqli_fetch_array($query_kel)) {
 ?>
 <html>
 <body onLoad="window.print()" >
@@ -31,44 +41,58 @@ while ($rd = mysqli_fetch_array($query)){
     <td colspan="5">&nbsp;</td>
   </tr>
   <tr>
-    <td width="25%">Lampiran SPPD Nomor</td><td>: <?php echo $rs['no']; ?></td>
+    <td width="25%">Lampiran SPPD Nomor</td><td>: <?php echo $r['no']; ?></td>
   </tr>
     <tr>
-    <td>Tanggal</td><td>: <?php echo $bulan; ?></td>
+    <td>Tanggal</td><td>: <?php echo tgl_indonesia($tgl_sekarang); ?></td>
   </tr>
   <tr>
     <td colspan="5">&nbsp;</td>
   </tr>
 </table>
 <table align="center" class="table-list" width="800" border="1" cellspacing="0" cellpadding="4">
-    <tr>
-    <td align="center">NO</td><td width="50%">PERINCIAN BIAYA</td><td align="center">JUMLAH</td><td>KETERANGAN</td>
-  </tr>
-  <tr>
-    <td align="center">1.</td><td width="50%">Uang harian, Uang saku, Uang makan & Transfort lokal</td><td align="right">Rp. <?php echo format_angka($dt[13]);?></td><td>-</td>
-  </tr>
-  <tr>
-    <td align="center">2.</td><td width="50%">Biaya Transfort</td><td align="right">Rp. <?php echo format_angka($dt[14]);?></td><td>-</td>
-  </tr>
-    <tr>
-    <td align="center">3.</td><td width="50%">Biaya Penginapan</td><td align="right">Rp. <?php echo format_angka($dt[15]);?></td><td>-</td>
-  </tr>
-    <tr>
-    <td align="center">4.</td><td width="50%">Uang Representatif</td><td align="right">Rp. <?php echo format_angka($dt[16]);?></td><td>-</td>
-  </tr>
-    <tr>
-    <td align="center">5.</td><td width="50%">Sewa Kendaraan dalam Kota</td><td align="right">Rp. <?php echo format_angka($dt[17]);?></td><td>-</td>
-  </tr>
+<tr>
+  <td align="center">1.</td>
+  <td width="50%">Uang harian, Uang saku, Uang makan & Transfort lokal</td>
+  <td align="right">Rp. <?php echo format_angka(floatval($dt[13])); ?></td>
+  <td>-</td>
+</tr>
+<tr>
+  <td align="center">2.</td>
+  <td width="50%">Biaya Transfort</td>
+  <td align="right">Rp. <?php echo format_angka(floatval($dt[14])); ?></td>
+  <td>-</td>
+</tr>
+<tr>
+  <td align="center">3.</td>
+  <td width="50%">Biaya Penginapan</td>
+  <td align="right">Rp. <?php echo format_angka(floatval($dt[15])); ?></td>
+  <td>-</td>
+</tr>
+<tr>
+  <td align="center">4.</td>
+  <td width="50%">Uang Representatif</td>
+  <td align="right">Rp. <?php echo format_angka(floatval($dt[16])); ?></td>
+  <td>-</td>
+</tr>
+<tr>
+  <td align="center">5.</td>
+  <td width="50%">Sewa Kendaraan dalam Kota</td>
+  <td align="right">Rp. <?php echo format_angka(floatval($dt[17])); ?></td>
+  <td>-</td>
+</tr>
+
   <?php 
 $query = mysqli_query ($con, "SELECT * from tb_detailsurat WHERE kode='$kodesurat'");
 while ($rp = mysqli_fetch_array($query)){
   $dtl=explode(';',$rp['detail']);
-  $u=$dtl[13];
-  $t=$dtl[14];
-  $i=$dtl[15];
-  $r=$dtl[16];
-  $s=$dtl[17];
-  $jumlah=$u+$t+$i+$r+$s;
+  $u = floatval(preg_replace('/[^\d.]/', '', $dtl[13]));
+  $t = floatval(preg_replace('/[^\d.]/', '', $dtl[14]));
+  $i = floatval(preg_replace('/[^\d.]/', '', $dtl[15]));
+  $r = floatval(preg_replace('/[^\d.]/', '', $dtl[16]));
+  $s = floatval(preg_replace('/[^\d.]/', '', $dtl[17]));
+  $jumlah = $u + $t + $i + $r + $s;
+  
 ?>
 
       <tr>
@@ -92,7 +116,7 @@ while ($rp = mysqli_fetch_array($query)){
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td></td><td align="center" class="pull pull-right"><?php echo $rd['kelurahan'];?>, &nbsp;<?php echo $bulan;?></td>
+    <td></td><td align="center" class="pull pull-right"><?php echo $rd['kelurahan'];?>, &nbsp;<?php echo tgl_indonesia($tgl_sekarang); ?></td>
   </tr>
     <tr>
     <td align="center">Telah dibayar sejumlah <br>Rp. <?php echo format_angka($jumlah);?></td><td align="center" class="pull pull-right">Telah menerima jumlah uang sebesar <br> Rp. <?php echo format_angka($jumlah);?></td>
