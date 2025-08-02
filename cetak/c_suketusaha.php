@@ -86,8 +86,8 @@ while ($r = mysqli_fetch_array($query)) {
       <tr>
     <td colspan="3">&nbsp;</td>
   </tr>
-    <tr>
-    <td colspan="3">Nama tersebut adalah benar Warga <?php echo $rd['jnp'];?> Kampung<?php echo $rd['kelurahan'];?> yang memiliki Usaha sebagai berikut :</td>
+     <tr>
+    <td colspan="3">Nama tersebut adalah benar Warga <?php echo $rd['jnp'];?> / Kampung  <?php echo $rd['kelurahan'];?> yang memiliki Usaha sebagai berikut :</td>
   </tr>
     <tr>
     <td>Jenis/Bidang Usaha</td><td>:</td><td><?php echo $dt[0];?></td>
