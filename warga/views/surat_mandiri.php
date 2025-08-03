@@ -19,13 +19,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['page']) && $_POST['pa
                         <select class="form-control form-name" name="page" id="page" onchange="this.form.submit()" style="font-size: 16px;">
                            <option value="" selected>-- Pilih Nama Surat--</option>
                            <?php 
-                           $qry = $con->query("SELECT * FROM tb_jenissurat WHERE kategori!='Tata Usaha' ORDER BY id ASC");
-                           while($data = $qry->fetch_assoc()){ ?>
+                           $qry = $con->query("SELECT * FROM tb_jenissurat WHERE kategori!='Tata Usaha' ORDER BY nmsurat ASC");
+
+                           $surat_terpakai = [];
+                           while($data = $qry->fetch_assoc()) {
+                              if (!in_array($data['nmsurat'], $surat_terpakai)) {
+                                 $surat_terpakai[] = $data['nmsurat'];
+                           ?>
                               <option value="<?= $data['page'];?>" 
                                  <?php if(isset($_POST['page']) && $_POST['page'] == $data['page']) echo "selected"; ?>>
                                  <?= $data['nmsurat'];?>
                               </option>
-                           <?php } ?>
+                           <?php 
+                              }
+                           } 
+                           ?>
                         </select>
                      </div>
                   </form>
