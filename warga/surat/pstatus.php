@@ -31,9 +31,14 @@ $userid = $_SESSION['userid'];
 $query = mysqli_query($con, "
     SELECT b.*, j.nmsurat, p.nama 
     FROM tb_buatsendiri b
+    INNER JOIN (
+        SELECT MAX(id) AS id
+        FROM tb_buatsendiri
+        WHERE userid = '$userid'
+        GROUP BY kode_jenis
+    ) latest ON b.id = latest.id
     JOIN tb_jenissurat j ON j.kode = b.kode_jenis
     JOIN tb_penduduk p ON p.nik = b.nik
-    WHERE b.userid = '$userid' AND b.status != 'acc'
     ORDER BY b.id DESC
 ");
 
@@ -82,14 +87,18 @@ if (mysqli_num_rows($query) == 0) {
                 <tbody>
 <?php
 $no = 1;
-
 $query = mysqli_query($con, "
-    SELECT b.*, j.nmsurat, p.nama 
-    FROM tb_buatsendiri b
-    JOIN tb_jenissurat j ON j.kode = b.kode_jenis
-    JOIN tb_penduduk p ON p.nik = b.nik
-    WHERE b.userid = '$userid'
-    ORDER BY b.id DESC
+    SELECT d.*, p.nama
+    FROM tb_detailsurat d
+    JOIN tb_penduduk p ON d.nik = p.nik
+    WHERE d.userid = '$userid'
+    AND d.id IN (
+        SELECT MAX(id)
+        FROM tb_detailsurat
+        WHERE userid = '$userid'
+        GROUP BY kode_surat
+    )
+    ORDER BY d.id DESC
 ");
 
 if (mysqli_num_rows($query) == 0) {
@@ -111,17 +120,16 @@ if (mysqli_num_rows($query) == 0) {
             <td>'.date("d-m-Y", strtotime($data['tgl'])).'</td>
             <td>'.$status_display.'</td>
             <td class="text-end">';
-
         if ($data['status'] == 'acc') {
             echo '<a href="../cetak/c_pstatus.php?kode='.$data['kode_surat'].'" target="_blank" class="btn btn-sm btn-primary">
                     <i class="fa fa-print"></i> Cetak</a>';
         } else {
             echo '<span class="text-muted">-</span>';
         }
-
         echo '</td></tr>';
     }
 }
+
 ?>
                 </tbody>
             </table>
