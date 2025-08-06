@@ -43,6 +43,16 @@ while ($r = mysqli_fetch_array($query)) {
         $exp = explode('-', $tgl);
         return $exp[2] . ' ' . $bulan[$exp[1]] . ' ' . $exp[0];
     }
+    function tgl_lahir_indo($tgl) {
+      $bulan = [
+          '01' => 'Januari', '02' => 'Februari', '03' => 'Maret',
+          '04' => 'April', '05' => 'Mei', '06' => 'Juni',
+          '07' => 'Juli', '08' => 'Agustus', '09' => 'September',
+          '10' => 'Oktober', '11' => 'November', '12' => 'Desember'
+      ];
+      $exp = explode('/', $tgl); // format di database: 07/09/1968
+      return (int)$exp[0] . ' ' . $bulan[$exp[1]] . ' ' . $exp[2];
+  }
 
     $query_kel = mysqli_query($con, "SELECT * from tb_kelurahan");
     while ($rd = mysqli_fetch_array($query_kel)) {
@@ -77,7 +87,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td></td><td>Jenis Kelamin</td><td>:</td><td colspan="2"><?php echo $dt[2];?></td>
   </tr>
       <tr>
-    <td></td><td>Tmp. & Tgl. Lahir</td><td>:</td><td colspan="2"><?php echo ucwords(strtolower($dt[3]));?>, <?php echo $dt[4];?></td>
+    <td></td><td>Tempat / Tanggal Lahir</td><td>:</td><td colspan="2"><?php echo ucwords(strtolower($dt[3]));?>, <?php echo tgl_lahir_indo($dt[4]);?></td>
   </tr>
 
   <tr>
@@ -99,7 +109,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td></td><td>Jenis Kelamin</td><td>:</td><td colspan="2"><?php echo $dt[8];?></td>
   </tr>
       <tr>
-    <td></td><td>Tmp. & Tgl. Lahir</td><td>:</td><td colspan="2"><?php echo ucwords(strtolower($dt[9]));?>, <?php echo $dt[10];?></td>
+    <td></td><td>Tempat / Tanggal Lahir </td><td>:</td><td colspan="2"><?php echo ucwords(strtolower($dt[9]));?>,<?php echo tgl_lahir_indo($dt[10]);?></td>
   </tr>
 
   <tr>
@@ -115,7 +125,7 @@ while ($r = mysqli_fetch_array($query)) {
         <!-- PERNYATAAN -->
         <tr>
             <td colspan="5" align="justify">
-                Pada hari ini <?= strtoupper($hari); ?>, tanggal <?= tgl_indonesia($tgl_sekarang); ?>, Pihak I dan Pihak II secara bersama - sama sepakat sebagai berikut:
+                Pada hari ini <?= strtoupper($hari); ?>, <?= tgl_indonesia($tgl_sekarang); ?>, Pihak I dan Pihak II secara bersama - sama sepakat sebagai berikut:
             </td>
         </tr>
 
@@ -183,8 +193,8 @@ while ($r = mysqli_fetch_array($query)) {
 
         <!-- SAKSI -->
         <tr><td colspan="4"><br><br><br><br><br><br><br>Saksi - saksi :</td></tr>
-        <tr><td>1.</td><td><?= $dt[20]; ?></td><td colspan="2">(_______________)</td></tr>
-        <tr><td>2.</td><td><?= $dt[21]; ?></td><td colspan="2"><br><br><br>(_______________)<br><br><br><br></td></tr>
+        <tr><td>1.</td><td><?= $dt[19]; ?></td><td colspan="2">(_______________)</td></tr>
+        <tr><td>2.</td><td><?= $dt[20]; ?></td><td colspan="2"><br><br><br>(_______________)<br><br><br><br></td></tr>
 
         <!-- MENGETAHUI -->
         <tr><td colspan="5"><br></td></tr>
