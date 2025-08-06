@@ -101,7 +101,7 @@ while ($r = mysqli_fetch_array($query)) {
         <!-- PERNYATAAN -->
         <tr>
             <td colspan="5" align="justify">
-                Pada hari ini <?= strtoupper($hari); ?>, tanggal <?= tgl_indonesia($tgl_sekarang); ?>, Pihak I dan Pihak II secara bersama - sama sepakat sebagai berikut:
+                Pada hari ini <?= strtoupper($hari); ?>, <?= tgl_indonesia($tgl_sekarang); ?>, Pihak I dan Pihak II secara bersama - sama sepakat sebagai berikut:
             </td>
         </tr>
 
