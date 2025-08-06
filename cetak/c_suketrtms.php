@@ -136,7 +136,18 @@ $queryrs = mysqli_query ($con, "SELECT * from setting_surat LIMIT 1");
 while ($rs = mysqli_fetch_array($queryrs)){
 ?>
   <tr>
-    <td align="center"><br><br><br><br>_______________________</td><td align="center" class="pull pull-right"><u><b><?php if ($rs['ttd'] == 'Otomatis'): ?> <img src="../file/ttd/<?php echo $r['ttd_staff']; ?>" style="border: 1px solid white; width: 7em; height: 7em; margin-right: 10em; margin-top: -1em;"><img src="../file/<?php echo $rd['stample']; ?>" style="border: 1px solid white; width: 7em; height: 7em; margin-left: -14em; margin-top: -1em;"><?php else :?><span>&nbsp;<br><br><br></span><?php endif; ?><br><u><b><?php echo strtoupper($r['nama_staff']);?></b></u></td>
+    <td align="center"><br><br><br><br>_______________________</td><td align="center" class="pull pull-right"><u><b><?php if ($rs['ttd'] == 'Otomatis'): ?> 
+      <div style="position: relative; width: 150px; height: 120px; margin: 0 auto;">
+  <!-- Cap stempel di bawah, agak ke kiri -->
+  <img src="../file/<?php echo $rd['stample']; ?>" 
+       style="position: absolute; bottom: 0; left: 0; width: 90px; height: 90px; opacity: 0.9; z-index: 1;">
+
+  <!-- TTD di atas cap stempel, agak ke kanan -->
+  <img src="../file/ttd/<?php echo $r['ttd_staff']; ?>" 
+       style="position: absolute; bottom: 20px; left: 25px; width: 90px; height: 90px; z-index: 2;">
+</div>
+
+      <?php else :?><span>&nbsp;<br><br><br></span><?php endif; ?><br><u><b><?php echo strtoupper($r['nama_staff']);?></b></u></td>
   </tr> 
 <?php } ?>
   <tr>
