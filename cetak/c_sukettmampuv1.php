@@ -10,6 +10,7 @@ $query = mysqli_query ($con, "SELECT * FROM tb_detailsurat JOIN tb_staff ON tb_d
 while ($r = mysqli_fetch_array($query)) {
   $dt = explode(';', $r['detail']);
   $tgl_sekarang = date('Y-m-d');
+  $tgl_lahir = $r['tgl_lahir'];
   
   function tgl_indonesia($tgl) {
       $bulan = [
@@ -21,6 +22,16 @@ while ($r = mysqli_fetch_array($query)) {
       $exp = explode('-', $tgl);
       return $exp[2] . ' ' . $bulan[$exp[1]] . ' ' . $exp[0];
   }
+  function tgl_lahir_indo($tgl) {
+    $bulan = [
+        '01' => 'Januari', '02' => 'Februari', '03' => 'Maret',
+        '04' => 'April', '05' => 'Mei', '06' => 'Juni',
+        '07' => 'Juli', '08' => 'Agustus', '09' => 'September',
+        '10' => 'Oktober', '11' => 'November', '12' => 'Desember'
+    ];
+    $exp = explode('/', $tgl); // format di database: 07/09/1968
+    return (int)$exp[0] . ' ' . $bulan[$exp[1]] . ' ' . $exp[2];
+}
 
   $query = mysqli_query($con, "SELECT * from tb_kelurahan");
   while ($rd = mysqli_fetch_array($query)) {
@@ -75,7 +86,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td>Jenis Kelamin</td><td>:</td><td><?php echo $r['jk'];?></td>
   </tr>
       <tr>
-    <td>Tmp. & Tgl. Lahir</td><td>:</td><td><?php echo $r['tmp_lahir'];?>, <?php echo $r['tgl_lahir'];?> </td>
+    <td>Tmp. & Tgl. Lahir</td><td>:</td><td><?php echo $r['tmp_lahir'];?>, <?php echo tgl_lahir_indo($tgl_lahir);?> </td>
   </tr>
     <tr>
     <td>Agama</td><td>:</td><td><?php echo $r['agama'];?></td>
