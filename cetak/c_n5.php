@@ -10,6 +10,7 @@ $query = mysqli_query ($con, "SELECT tb_jenissurat.*, tb_datasurat.*, tb_details
 while ($r = mysqli_fetch_array($query)) {
   $dt = explode(';', $r['detail']);
   $tgl_sekarang = date('Y-m-d');
+  $tgl_lahir = $r['tgl_lahir'];
   
   function tgl_indonesia($tgl) {
       $bulan = [
@@ -21,6 +22,16 @@ while ($r = mysqli_fetch_array($query)) {
       $exp = explode('-', $tgl);
       return $exp[2] . ' ' . $bulan[$exp[1]] . ' ' . $exp[0];
   }
+  function tgl_lahir_indo($tgl) {
+    $bulan = [
+        '01' => 'Januari', '02' => 'Februari', '03' => 'Maret',
+        '04' => 'April', '05' => 'Mei', '06' => 'Juni',
+        '07' => 'Juli', '08' => 'Agustus', '09' => 'September',
+        '10' => 'Oktober', '11' => 'November', '12' => 'Desember'
+    ];
+    $exp = explode('/', $tgl); // format di database: 07/09/1968
+    return (int)$exp[0] . ' ' . $bulan[$exp[1]] . ' ' . $exp[2];
+}
 
   $query = mysqli_query($con, "SELECT * from tb_kelurahan");
   while ($rd = mysqli_fetch_array($query)) {
@@ -76,7 +87,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td></td><td>3. </td><td>NIK</td><td>:</td><td><?php echo $dt[32];?></td>
   </tr>
   <tr>
-    <td></td><td>4. </td><td>Tmp. & Tgl. Lahir </td><td>:</td><td><?php echo $dt[36];?>, <?php echo $dt[37];?></td>
+    <td></td><td>4. </td><td>Tempat / Tanggal Lahir </td><td>:</td><td><?php echo $dt[36];?>,  <?php echo tgl_lahir_indo($dt[37]);?></td>
   </tr>
   <tr>
     <td></td><td>5. </td><td>Kewarganegaraan</td><td>:</td><td><?php echo $dt[38];?></td>
@@ -104,7 +115,7 @@ while ($r = mysqli_fetch_array($query)) {
   </tr>
 
   <tr>
-    <td></td><td>4. </td><td>Tmp. & Tgl. Lahir </td><td>:</td><td><?php echo $dt[51];?>, <?php echo $dt[52];?></td>
+    <td></td><td>4. </td><td>Tempat / Tanggal Lahir </td><td>:</td><td><?php echo $dt[51];?>,  <?php echo tgl_lahir_indo($dt[52]);?></td>
   </tr>
   <tr>
     <td></td><td>5. </td><td>Kewarganegaraan</td><td>:</td><td><?php echo $dt[53];?></td>
@@ -139,7 +150,7 @@ while ($rc = mysqli_fetch_array($querycalon)){
     <td></td><td>3.</td><td> NIK</td><td>:</td><td><?php echo $rc['nik'];?></td>
   </tr>
 
-    <td></td><td>4.</td><td> Tmp. & Tgl. Lahir </td><td>:</td><td><?php echo $rc['tmp_lahir'];?>, <?php echo $rc['tgl_lahir'];?></td>
+    <td></td><td>4.</td><td> Tempat / Tanggal Lahir </td><td>:</td><td><?php echo $rc['tmp_lahir'];?>, <?php echo tgl_lahir_indo($tgl_lahir);?> </td>
   </tr>
   <tr>
     <td></td><td>5.</td><td> Kewarganegaraan</td><td>:</td><td><?php echo $rc['kwng'];?></td>
@@ -177,7 +188,7 @@ while ($rc = mysqli_fetch_array($querycalon)){
     <td></td><td>3.</td><td> NIK</td><td>:</td><td><?php echo $rc['nik'];?></td>
   </tr>
   <tr>
-    <td></td><td>4.</td><td> Tmp. & Tgl. Lahir </td><td>:</td><td><?php echo $rc['tmp_lahir'];?>, <?php echo $rc['tgl_lahir'];?></td>
+    <td></td><td>4.</td><td> Tempat / Tanggal Lahir </td><td>:</td><td><?php echo $rc['tmp_lahir'];?>,  <?php echo tgl_lahir_indo($tgl_lahir);?> </td>
   </tr>
   <tr>
     <td></td><td>5.</td><td> Kewarganegaraan</td><td>:</td><td><?php echo $rc['kwng'];?></td>
