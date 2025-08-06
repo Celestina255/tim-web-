@@ -40,6 +40,16 @@ while ($r = mysqli_fetch_array($query)) {
         $exp = explode('-', $tgl);
         return $exp[2] . ' ' . $bulan[$exp[1]] . ' ' . $exp[0];
     }
+    function tgl_lahir_indo($tgl) {
+        $bulan = [
+            '01' => 'Januari', '02' => 'Februari', '03' => 'Maret',
+            '04' => 'April', '05' => 'Mei', '06' => 'Juni',
+            '07' => 'Juli', '08' => 'Agustus', '09' => 'September',
+            '10' => 'Oktober', '11' => 'November', '12' => 'Desember'
+        ];
+        $exp = explode('/', $tgl); // format di database: 07/09/1968
+        return (int)$exp[0] . ' ' . $bulan[$exp[1]] . ' ' . $exp[2];
+    }
 
     $query_kel = mysqli_query($con, "SELECT * from tb_kelurahan");
     while ($rd = mysqli_fetch_array($query_kel)) {
@@ -70,7 +80,7 @@ while ($r = mysqli_fetch_array($query)) {
 <tr><td></td><td style="width: 35%;">Nama</td><td style="width: 2%;">:</td><td colspan="2"><?= $dt[1]; ?></td></tr>
 <tr><td></td><td>NIK</td><td>:</td><td colspan="2"><?= $dt[0]; ?></td></tr>
 <tr><td></td><td>Jenis Kelamin</td><td>:</td><td colspan="2"><?= $dt[2]; ?></td></tr>
-<tr><td></td><td>Tmp. & Tgl. Lahir</td><td>:</td><td colspan="2"><?= $dt[3]; ?>, <?= $dt[4]; ?></td></tr>
+<tr><td></td><td>Tempat / Tanggal Lahir </td><td>:</td><td colspan="2"><?= $dt[3]; ?>, <?php echo tgl_lahir_indo($dt[4]); ?></td></tr>
 <tr><td></td><td>Alamat</td><td>:</td><td colspan="2"><?= $dt[5]; ?></td></tr>
 <tr><td></td><td>Selanjutnya disebut</td><td>:</td><td colspan="2"><b>Pihak I</b></td></tr>
 
@@ -81,7 +91,7 @@ while ($r = mysqli_fetch_array($query)) {
 <tr><td></td><td>Nama</td><td>:</td><td colspan="2"><?= $dt[7]; ?></td></tr>
 <tr><td></td><td>NIK</td><td>:</td><td colspan="2"><?= $dt[6]; ?></td></tr>
 <tr><td></td><td>Jenis Kelamin</td><td>:</td><td colspan="2"><?= $dt[8]; ?></td></tr>
-<tr><td></td><td>Tmp. & Tgl. Lahir</td><td>:</td><td colspan="2"><?= $dt[9]; ?>, <?= $dt[10]; ?></td></tr>
+<tr><td></td><td>Tempat / Tanggal Lahir</td><td>:</td><td colspan="2"><?= $dt[9]; ?>,<?php echo tgl_lahir_indo($dt[10]); ?></td></tr>
 <tr><td></td><td>Alamat</td><td>:</td><td colspan="2"><?= $dt[11]; ?></td></tr>
 <tr><td></td><td>Selanjutnya disebut</td><td>:</td><td colspan="2"><b>Pihak II</b></td></tr>
 
