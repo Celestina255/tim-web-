@@ -54,25 +54,49 @@ while ($r = mysqli_fetch_array($query)) {
   <tr>
     <td colspan="3" align="center"><hr style="border: 1.5px double black;"><br></td>
   </tr>
-  
 </table>
 <br>
 <table align="center" class="table-list" width="800" border="0" cellspacing="1" cellpadding="2">
+  <!-- TANGGAL DI ATAS, RATA KANAN -->
   <tr>
-    <td>Nomor</td><td>:</td><td><?php echo $r['no'];?></td><td><?php echo $rd['kelurahan'];?>,&nbsp;<?php echo format_hari_tanggal(date('Y-m-d')); ?></td>
+    <td colspan="3"></td>
+    <td align="right">
+  <nobr><?php echo $rd['kelurahan']; ?>,&nbsp;<?php echo tgl_indonesia($tgl_sekarang); ?></nobr>
+</td>
+
   </tr>
+
+  <!-- BARIS NOMOR DAN KEPADA -->
   <tr>
-    <td>Lampiran</td><td>:</td><td>-</td><td>Kepada,</td>
+    <td width="20%">Nomor</td>
+    <td width="2%">:</td>
+    <td width="48%"><?php echo $r['no']; ?></td>
+    <td width="30%">Kepada,</td>
   </tr>
+
+  <!-- BARIS LAMPIRAN -->
   <tr>
-    <td>Perihal</td><td>:</td><td><b>Permohonan Pencatatan Pernyataan Ahli Waris</b></td><td>Yth. Bapak Kepala Distrik <?php echo $rd['kec'];?></td>
+    <td>Lampiran</td>
+    <td>:</td>
+    <td>-</td>
+    <td>Yth. Bapak Kepala Distrik <?php echo $rd['kec']; ?></td>
   </tr>
+
+  <!-- BARIS PERIHAL -->
   <tr>
-    <td colspan="3">&nbsp;</td><td>di-</td>
+    <td>Perihal</td>
+    <td>:</td>
+    <td><b>Permohonan Pencatatan Pernyataan Ahli Waris</b></td>
+    <td>di-</td>
   </tr>
+
+  <!-- TUJUAN -->
   <tr>
-    <td colspan="3">&nbsp;</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u><?php echo $rd['kec'];?></u></b></td>
+    <td colspan="3"></td>
+    <td><b><u><?php echo $rd['kec']; ?></u></b></td>
   </tr>
+</table>
+<table>
   <tr>
     <td colspan="4">&nbsp;<br><br><br></td>
   </tr>
