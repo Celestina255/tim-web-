@@ -56,6 +56,7 @@ while ($r = mysqli_fetch_array($query)) {
     </td>
   </tr>
 </table>
+<br>
 <table align="center" class="table-list" width="100%" border="0" cellspacing="1" cellpadding="2">
   <tr>
     <td colspan="3">Yang bertanda tangan dibawah ini <?php echo $rd['jnp']=='Desa'? "Kepala Kampung" : "Lurah";?> <?php echo $rd['kelurahan'];?> Distrik <?php echo $rd['kec'];?> Kabupaten <?php echo $rd['kab'];?>, Dengan ini menerangkan sesungguhnya bahwa :</td>
@@ -115,7 +116,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td>Hari</td><td>:</td><td><?php echo $dt[20];?></td>
   </tr>
     <tr>
-    <td>Tanggal</td><td>:</td><td><?php echo IndonesiaTgl($dt[21]);?></td>
+    <td>Tanggal</td><td>:</td><td><?php echo tgl_indonesia($dt[21]);?></td>
   </tr>
     <tr>
     <td>Waktu</td><td>:</td><td><?php echo $dt[22];?> WIB</td>
