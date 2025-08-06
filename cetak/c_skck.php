@@ -23,6 +23,16 @@ while ($r = mysqli_fetch_array($query)) {
         $exp = explode('-', $tgl);
         return $exp[2] . ' ' . $bulan[$exp[1]] . ' ' . $exp[0];
     }
+    function tgl_lahir_indo($tgl) {
+        $bulan = [
+            '01' => 'Januari', '02' => 'Februari', '03' => 'Maret',
+            '04' => 'April', '05' => 'Mei', '06' => 'Juni',
+            '07' => 'Juli', '08' => 'Agustus', '09' => 'September',
+            '10' => 'Oktober', '11' => 'November', '12' => 'Desember'
+        ];
+        $exp = explode('/', $tgl); // format di database: 07/09/1968
+        return (int)$exp[0] . ' ' . $bulan[$exp[1]] . ' ' . $exp[2];
+    }
 
     $query2 = mysqli_query($con, "SELECT * from tb_kelurahan");
     while ($rd = mysqli_fetch_array($query2)) {
@@ -122,7 +132,7 @@ while ($r = mysqli_fetch_array($query)) {
     <tr><td width="30%">Nama</td><td width="2%">:</td><td><?php echo $dt[1]; ?></td></tr>
     <tr><td>NIK</td><td>:</td><td><?php echo $dt[0]; ?></td></tr>
     <tr><td>Jenis Kelamin</td><td>:</td><td><?php echo $dt[2]; ?></td></tr>
-    <tr><td>Tempat/Tgl Lahir</td><td>:</td><td><?php echo $dt[3]; ?>, <?php echo IndonesiaTgl($dt[4]); ?></td></tr>
+    <tr><td>Tempat/Tgl Lahir</td><td>:</td><td><?php echo $dt[3]; ?>,<?php echo tgl_lahir_indo($dt[4]); ?></td></tr>
     <tr><td>Pekerjaan</td><td>:</td><td><?php echo $dt[5]; ?></td></tr>
     <tr><td>Alamat</td><td>:</td><td><?php echo $dt[6]; ?></td></tr>
     <tr><td colspan="3" align="justify">SKCK tersebut akan digunakan untuk <?php echo $dt[7]; ?>.</td></tr>
