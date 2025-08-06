@@ -1,450 +1,206 @@
 <?php
-include 'cek.php';
-include '../koneksi.php';
+include_once "../koneksi.php";
+include_once "../assets/inc.php";
+
+# Baca variabel URL
+$kodesurat = $_GET['kode'];
+
+## Perintah untuk mendapatkan data dari tabel Surat 
+$query = mysqli_query ($con, "SELECT * FROM tb_detailsurat JOIN tb_staff ON tb_detailsurat.ttd=tb_staff.id_staff LEFT JOIN tb_penduduk ON tb_detailsurat.nik=tb_penduduk.nik WHERE tb_detailsurat.kode='$kodesurat'");
+while ($r = mysqli_fetch_array($query)) {
+  $dt = explode(';', $r['detail']);
+  $tgl_sekarang = date('Y-m-d');
+  
+  function tgl_indonesia($tgl) {
+      $bulan = [
+          '01' => 'Januari', '02' => 'Februari', '03' => 'Maret',
+          '04' => 'April', '05' => 'Mei', '06' => 'Juni',
+          '07' => 'Juli', '08' => 'Agustus', '09' => 'September',
+          '10' => 'Oktober', '11' => 'November', '12' => 'Desember'
+      ];
+      $exp = explode('-', $tgl);
+      return $exp[2] . ' ' . $bulan[$exp[1]] . ' ' . $exp[0];
+  }
+  function tgl_lahir_indo($tgl) {
+    $bulan = [
+        '01' => 'Januari', '02' => 'Februari', '03' => 'Maret',
+        '04' => 'April', '05' => 'Mei', '06' => 'Juni',
+        '07' => 'Juli', '08' => 'Agustus', '09' => 'September',
+        '10' => 'Oktober', '11' => 'November', '12' => 'Desember'
+    ];
+    $exp = explode('/', $tgl); // format di database: 07/09/1968
+    return (int)$exp[0] . ' ' . $bulan[$exp[1]] . ' ' . $exp[2];
+}
+  $query = mysqli_query($con, "SELECT * from tb_kelurahan");
+  while ($rd = mysqli_fetch_array($query)) {
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Required meta tags-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="au theme template">
-    <meta name="author" content="Hau Nguyen">
-    <meta name="keywords" content="au theme template">
+<html>
+<body onLoad="window.print()" >
+<h1 align="center">
+<table width="800" align="center" border="0" cellspacing="1" cellpadding="4" class="table-print">
+  <tr>
+    <td rowspan="4" width="80" style="text-align: center; vertical-align: top;">
+      <img src="../img/<?php echo $rd['logo']; ?>" style="max-width: 85px; height: auto;">
+    </td>
+    <td colspan="2" align="center"><strong style="font-size: 25px;">PEMERINTAH KABUPATEN <?php echo strtoupper($rd['kab']); ?></strong></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><strong style="font-size: 18px;">DISTRIK <?php echo strtoupper($rd['kec']); ?></strong></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><strong style="font-size: 23px;">KAMPUNG <?php echo strtoupper($rd['kelurahan']); ?></strong></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center" style="font-size: 15px; font-style: bold;">
+      Alamat : <?php echo $rd['kantor']; ?>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" align="center"><hr style="border: 1.5px double black;"><br></td>
+  </tr>
+  <tr>
+    <td colspan="3" align="center">
+      <strong><u><?php echo strtoupper($r['nmsurat']); ?></u></strong><br>
+      <font size="2">Nomor: <?php echo $r['no']; ?></font>
+    </td>
+  </tr>
+</table>
+<table align="center" class="table-list" width="800" border="0" cellspacing="1" cellpadding="2">
+  <tr>
+    <br>
+    <td colspan="3">Yang bertanda tangan dibawah ini <?php echo $rd['jnp']=='Desa'? "Kepala Kampung" : "Lurah";?> <?php echo $rd['kelurahan'];?> Distrik <?php echo $rd['kec'];?> Kabupaten <?php echo $rd['kab'];?>, dengan ini menerangkan sesungguhnya bahwa :</td>
+  </tr>
+</table>
+<table align="center" class="table-list" width="800" border="0" cellspacing="1" cellpadding="2">
+  <tr>
+    <td colspan="3">&nbsp;</td>
+  </tr>
 
-    <!-- Title Page-->
-    <title>app-surdes</title>
+  <tr>
+    <td>Nama</td><td>:</td><td><b><?php echo $dt[15];?></b></td>
+  </tr>
+  <tr>
+    <td>NIK</td><td>:</td><td><?php echo  $dt[14];?></td>
+  </tr>
+    <tr>
+    <td>Jenis Kelamin</td><td>:</td><td><?php echo  $dt[16];?></td>
+  </tr>
+  <tr>
+    <td>Tmp. & Tgl. Lahir </td><td>:</td><td><?php echo  $dt[17];?>, <?php echo tgl_lahir_indo($dt[18]);?></td>
+  </tr>
+    <tr>
+    <td>Agama</td><td>:</td><td><?php echo  $dt[19];?></td>
+  </tr>
+    <tr>
+    <td>Alamat</td><td>:</td><td><?php echo  $dt[20];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo  $rd['kelurahan'];?></td>
+  </tr>
+  <tr>
+    <td></td><td></td><td>Distrik. <?php echo  $rd['kec'];?> Kabupaten <?php echo  $rd['kab'];?></td>
+  </tr>
+  </table>
+<table align="center" class="table-list" width="100%" border="0" cellspacing="1" cellpadding="2">
+    <tr>
+    <td colspan="4">&nbsp;</td>
+  </tr>
+    <tr>
+    <td colspan="4">Warga tersebut diatas adalah Benar Anak dari Ayah dan Ibu sebagai berikut :</td>
+  </tr>
+  <tr>
+    <td colspan="4">&nbsp;</td>
+  </tr>
+  <tr>
+    <td><b>I.</b></td><td colspan="3"><b>AYAH :</b></td>
+  </tr>
+  <tr>
+    <td></td><td>Nama</td><td>:</td><td><?php echo  $dt[1];?></td>
+  </tr>
+  <tr>
+    <td></td><td>NIK</td><td>:</td><td><?php echo  $dt[0];?></td>
+  </tr>
+    <tr>
+    <td></td><td>Jenis Kelamin</td><td>:</td><td><?php echo  $dt[2];?></td>
+  </tr>
+  <tr>
+    <td></td><td>Tmp. & Tgl. Lahir </td><td>:</td><td><?php echo  $dt[3];?>, <?php echo tgl_lahir_indo($dt[4]);?></td>
+  </tr>
+    <tr>
+    <td></td><td>Agama</td><td>:</td><td><?php echo  $dt[5];?></td>
+  </tr>
+  <tr>
+    <td></td><td>Alamat</td><td>:</td><td><?php echo  $dt[6];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo  $rd['kelurahan'];?></td>
+  </tr>
+  <tr>
+    <td></td><td></td><td></td><td>Distrik <?php echo  $rd['kec'];?> Kabupaten <?php echo  $rd['kab'];?></td>
+  </tr>
 
-    <!-- Fontfaces CSS-->
-    <link href="../css/font-face.css" rel="stylesheet" media="all">
-    <link href="../vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <link href="../vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
-    <link href="../vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
 
-    <!-- Bootstrap CSS-->
-    <link href="../vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+  <tr>
+    <td><b>II.</b></td><td colspan="3"><b>IBU :</b></td>
+  </tr>
 
-    <!-- Vendor CSS-->
-    <link href="../vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-    <link href="../vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-    <link href="../vendor/wow/animate.css" rel="stylesheet" media="all">
-    <link href="../vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-    <link href="../vendor/slick/slick.css" rel="stylesheet" media="all">
-    <link href="../vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="../vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+  <tr>
+    <td></td><td>Nama</td><td>:</td><td><?php echo  $dt[8];?></td>
+  </tr>
+  <tr>
+    <td></td><td>NIK</td><td>:</td><td><?php echo  $dt[7];?></td>
+  </tr>
+    <tr>
+    <td></td><td>Jenis Kelamin</td><td>:</td><td><?php echo $dt[9];?></td>
+  </tr>
+  <tr>
+    <td></td><td>Tmp. & Tgl. Lahir </td><td>:</td><td><?php echo  $dt[10];?>, <?php echo tgl_lahir_indo($dt[11]);?></td>
+  </tr>
+    <tr>
+    <td></td><td>Agama</td><td>:</td><td><?php echo  $dt[12];?></td>
+  </tr>
+    <tr>
+    <td></td><td>Alamat</td><td>:</td><td><?php echo  $dt[13];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo  $rd['kelurahan'];?></td>
+  </tr>
+  <tr>
+    <td></td><td></td><td></td><td>Distrik <?php echo  $rd['kec'];?> Kabupaten <?php echo  $rd['kab'];?></td>
+  </tr>
 
-    <!-- Main CSS-->
-    <link href="../assets/css/theme.css" rel="stylesheet" media="all">
-    <!-- Custom styles for this page -->
-    <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/tambahdata.css">
+  </table>
 
-</head>
+<table align="center" class="table-list" width="800" border="0" cellspacing="1" cellpadding="2">
+  <tr>
+    <td colspan="3">&nbsp;</td>
+  </tr>
+    <tr>
+    <td colspan="3">Demikian keterangan ini dibuat, untuk dapat dipergunakan sebagaimana mestinya.</td>
+  </tr>
 
-<body class="animsition">
-    <div class="page-wrapper">
-        <!-- HEADER MOBILE-->
-        <header class="header-mobile d-block d-lg-none">
-            <div class="header-mobile__bar">
-                <div class="container-fluid">
-                    <div class="header-mobile-inner">
-                        <a class="logo" href="?page=home">
-                            <img src="../img/icon/logo.png" alt="app-surdes" />
-                        </a>
-                        <button class="hamburger hamburger--slider" type="button">
-                            <span class="hamburger-box">
-                                <span class="hamburger-inner"></span>
-                            </span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <nav class="navbar-mobile">
-                <div class="container-fluid">
-                    <ul class="navbar-mobile__list list-unstyled">
-                        <li><a href='?page=home' title='Dashboard'> <i class="fas fa-home"></i>Dashboard</a></li>
-                        
-                        <li class="has-sub">
-                        <a class="js-arrow" href="#"><i class="fas fa-laptop"></i>Tata Usaha</a>
-                        <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                        <li><a href='?page=undangan' title='Surat Undangan'>Undangan</a></li>
-                        <li><a href='?page=pengantar' title='Surat Pengantar'>Pengantar</a></li>
-                        <li><a href='?page=pemberitahuan' title='Surat Pemberitahuan'>Pemberitahuan</a></li>
-                        <li><a href='?page=himbauan' title='Surat Himbauan'>Himbauan</a></li>
-                        <li><a href='?page=pdinas' title='Surat Perjalanan Dinas'>Perjalanan Dinas</a></li>
-                        <li><a href='?page=jawaban' title='Surat Jawaban'>Jawaban</a></li>
-                        <li><a href='?page=tugas' title='Surat Tugas'>Tugas</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-folder"></i>Umum</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                        <li><a href='?page=suketusaha' title='Suket Usaha'>Usaha</a></li>
-                        <li><a href='?page=sukettmpusaha' title='Suket Tempat Usaha'>Tempat Usaha</a></li>
-                        <li><a href='?page=suketpbarang' title='Suket Pengantar Barang'>Pengantar Barang</a></li>
-                        <li><a href='?page=suketpternak' title='Suket Pengantar Ternak'>Pengantar Ternak</a></li>
-                        <li><a href='?page=sukettmampuv1' title='Suket Keterangan Tidak Mampu Personal'>Tdk. Mampu V1</a></li>
-                        <li><a href='?page=sukettmampuv2' title='Suket Keterangan Tidak Mampu Keluarga'>Tdk. Mampu V2</a></li>
-                        <li><a href='?page=suketrtm' title='Suket Keterangan Rumah Tangga Miskin'>RTM</a></li>
-                        <li><a href='?page=suketpenghasilan' title='Suket Keterangan Penghasilan'>Penghasilan</a></li>
-                        <li><a href='?page=suketortu' title='Suket Keterangan Orang Tua'>Orang Tua</a></li>
-                        <li><a href='?page=suketanak' title='Suket Keterangan Anak'>Anak</a></li>
-                        <li><a href='?page=suketmenikah' title='Suket Keterangan Menikah'>Menikah</a></li>
-                        <li><a href='?page=suketkematian' title='Suket Keterangan Kematian'>Kematian</a></li>
-                        <li><a href='?page=suketbepergian' title='Suket Keterangan Bepergian'>Bepergian</a></li>
-                        <li><a href='?page=suketbedaid' title='Suket Keterangan Beda Identitas'>Beda Id</a></li>
-                        <li><a href='?page=suketdomisililbg' title='Suket Keterangan Domilisi Lembaga'>Domisili Lembaga</a></li>
-                        <li><a href='?page=suketaw' title='Suket Ahli Waris'>Ahli Waris</a></li>
-                        <li><a href='?page=skkb' title='Surat Keterangan Kelakuan Baik'>SKKB</a></li>
-                        <li><a href='?page=skck' title='Surat Pengantar SKCK'>Pengantar SKCK</a></li>
-                        <li><a href='?page=sig' title='Surat Izin Ganguan'>SIG</a></li>
-                        <li><a href='?page=simb' title='Surat Permohonan Izin Mendirikan Bangunan'>SIMB</a></li>
-                        <li><a href='?page=suketlain2' title='Suket Keterangan Lain2'>Lainnya</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-users"></i>Kependudukan</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                        <li><a href='?page=suketdomisili' title='Suket Domisili'>Domisili</a></li>
-                        <li><a href='?page=sutarpindah' title='Sutar Pindah'>Pengantar Pindah</a></li>
-                        <li><a href='?page=suketkelahiran' title='Suket Kelahiran'>Kelahiran</a></li>
-                        <li><a href='?page=suketpenguburan' title='Suket Penguburan'>Penguburan</a></li>
-                        <li><a href='?page=f121' title='Suket Permohonan KTP'>Permohonan KTP</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-heart"></i>Pernikahan</a>
-                        <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                        <li><a href='?page=n1-n6' title='Pengantar Pernikahan'>N1-N6</a></li>
-                        <li><a href='?page=pernahnikah' title='Suket Pernah Menikah'>Pernah Nikah</a></li>
-                        <li><a href='?page=belumnikah' title='Suket Belum Menikah'>Belum Nikah</a></li>
-                        <li><a href='?page=dudajanda' title='Suket Duda atau Janda'>Duda/Janda</a></li>
-                        <li><a href='?page=pstatus' title='Pernyataan Status Perkawinan'>Status</a></li>
-                        <li><a href='?page=suketcerai' title='Suket Cerai'>Cerai</a></li>
-                        
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-map"></i>Pertanahan</a>
-                        <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                        <li><a href='?page=sukettanah' title='Suket Kepemilikan Tanah'>Tanah</a></li>
-                        <li><a href='?page=sporadik' title='Pernyataan Penguasaan Fisik Bidang Tanah'>Sporadik</a></li>
-                        <li><a href='?page=sewatanah' title='Perjanjian Sewa Tanah'>Sewa Tanah</a></li>
-                        <li><a href='?page=jualbelitanah' title='Suket Jual Beli Tanah'>Jual/Beli Tanah</a></li>
-                        <li><a href='?page=gadai' title='Perjanjian Jal Beli Sanda'>Jual Beli Sanda</a></li>
-                        <li><a href='?page=pelepasantanah' title='Suket Pelepasan Tanah'>Pelepasan Tanah</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                        <a class="js-arrow" href="#"><i class="fas fa-cog"></i>Kelola Web</a>
-                        <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                        <li><a href='?page=berita' title='Berita Desa'>Berita Desa</a></li>
-                        <li><a href='?page=galeri' title='Galeri'>Galeri</a></li>
-                        <li><a href='?page=slider' title='Data Slider'>Slider</a></li>
-                        <li><a href='?page=profil_desa' title='Profile Desa'>Profile</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-list"></i>Data</a>
-                        <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                        <li><a href='?page=master_desa' title='Master Data Desa'>Master Desa</a></li>
-                        <li><a href='?page=penduduk' title='Data Penduduk'>Penduduk</a></li>
-                        <li><a href='?page=jenissurat' title='Dat Jenis Surat'>Jenis Surat</a></li>
-                        <li><a href='?page=klasifikasi' title='Data Klasifikasi Surat'>Klasifikasi</a></li>
-                        <li><a href='?page=staff' title='Data Staff'>Staff</a></li>
-                        <li><a href='?page=user' title='Data User'>User</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-cog"></i>Pengaturan</a>
-                        <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                        <li><a href='?page=pengaturan_surat&id=1' title='Pengaturan Surat'>Surat</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-user"></i>Sistem</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="?page=tambah_user">Register</a>
-                                </li>
-                                <li>
-                                    <a href="logout.php">Keluar</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <!-- END HEADER MOBILE-->
-
-        <!-- MENU SIDEBAR-->
-        <aside class="menu-sidebar d-none d-lg-block">
-            <div class="logo">
-                <a href='?page=home'>
-                    <img src="../img/icon/logo.png" alt="app-surdes" />
-                </a>
-            </div>
-
-            <div class="menu-sidebar__content js-scrollbar1">
-                <nav class="navbar-sidebar">
-                    <ul class="list-unstyled navbar__list">
-                        <li><a href='?page=home' title='Dashboard'> <i class="fas fa-home"></i>Dashboard</a></li>
-                        <li class="has-sub">
-                        <a class="js-arrow" href="#"><i class="fas fa-laptop"></i>Pelayanan</a>
-                        <ul class="list-unstyled navbar__sub-list js-sub-list">
-                        <li><a href='?page=tatausaha' title='Surat Undangan'>Tata Usaha</a></li>
-                        <li><a href='?page=umum' title='Surat Pengantar'>Umum</a></li>
-                        <li><a href='?page=kependudukan' title='Surat Himbauan'>Kependudukan</a></li>
-                        <li><a href='?page=pernikahan' title='Surat Perjalanan Dinas'>Pernikahan</a></li>
-                        <li><a href='?page=pertanahan' title='Surat Jawaban'>Pertanahan</a></li>
-                        <li><a href='?page=lainnya' title='Surat Tugas'>Lainnya</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-cog"></i>Kelola Web</a>
-                        <ul class="list-unstyled navbar__sub-list js-sub-list">
-                        <li><a href='?page=berita' title='Berita Desa'>Berita Desa</a></li>
-                        <li><a href='?page=galeri' title='Galeri'>Galeri</a></li>
-                        <li><a href='?page=slider' title='Data Slider'>Slider</a></li>
-                        <li><a href='?page=profil_desa' title='Profile Desa'>Profile</a></li>
-                            </ul>
-                        </li>
-                         <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-list"></i>Data</a>
-                        <ul class="list-unstyled navbar__sub-list js-sub-list">
-                        <li><a href='?page=master_desa' title='Master Data Desa'>Master Desa</a></li>
-                        <li><a href='?page=penduduk' title='Data Penduduk'>Penduduk</a></li>
-                        <li><a href='?page=jenissurat' title='Dat Jenis Surat'>Jenis Surat</a></li>
-                        <li><a href='?page=klasifikasi' title='Data Klasifikasi Surat'>Klasifikasi</a></li>
-                        <li><a href='?page=staff' title='Data Staff'>Staff</a></li>
-                        <li><a href='?page=user' title='Data User'>User</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-cog"></i>Pengaturan</a>
-                        <ul class="list-unstyled navbar__sub-list js-sub-list">
-                        <li><a href='?page=pengaturan_surat&id=1' title='Pengaturan Surat'>Surat</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-user"></i>Sistem</a>
-                              <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="?page=tambah_user">Register</a>
-                                </li>
-                                <li>
-                                    <a href="logout.php">Keluar</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                    </ul>
-                </nav>
-            </div>
-        </aside>
-        <!-- END MENU SIDEBAR-->
-
-        <!-- PAGE CONTAINER-->
-        <div class="page-container">
-            <!-- HEADER DESKTOP-->
-            <header class="header-desktop">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="header-wrap">
-                            <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
-                                <button class="au-btn--submit" type="submit">
-                                    <i class="zmdi zmdi-search"></i>
-                                </button>
-                            </form>
-                            <?php 
-                            $query = mysqli_query ($con, "SELECT count(*) AS jp FROM tb_permohonan WHERE status='onprocess' ORDER BY id ASC");
-                            while ($r = mysqli_fetch_array($query)){
-                            ?>
-                            <div class="header-button">
-                                <div class="noti-wrap">
-                                    <div class="noti__item js-item-menu">
-                                        <i class="zmdi zmdi-notifications"></i>
-                                        <span class="quantity"><?php echo $r['jp'];?></span>
-                                        <div class="mess-dropdown js-dropdown">
-                                            <div class="mess__title">
-                                                <p>Ada <?php echo $r['jp'];?> permohonan surat</p>
-                                            </div><?php } ?>
-                            <?php 
-                            $queryy = mysqli_query ($con, "SELECT * FROM tb_permohonan WHERE status='onprocess' ORDER BY id ASC limit 4");
-                            while ($rr = mysqli_fetch_array($queryy)){
-                            ?>
-                                            <div class="mess__item">
-                                                <div class="image img-cir img-40">
-                                                    <?php echo ($rr['foto']!=null ? "<img src='../file/fotowarga/$rr[foto]'" : "<img src='../file/foto/no_pic.png'>").  "alt='' />" ?>
-                                                </div>
-                                                <div class="content">
-                                                    <p><a href="?page=<?php echo $rr['page'];?>"><?php echo $rr['nama'];?></a> <small><span class="date pull pull-right"><?php echo $rr['tgl'];?></span></small>
-                                                    <br><?php echo $rr['nmsurat'];?></p>
-                                                    
-                                                </div>
-                                            </div><?php } ?>
-                                            
-                                            <div class="mess__footer">
-                                                <a href="?page=daftar_permohonan">Lihat semua permohonan</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                  <?php 
-                            $queryb = mysqli_query ($con, "SELECT count(*) AS jb FROM tb_buatsendiri WHERE status='onprocess' ORDER BY id ASC");
-                            while ($ry = mysqli_fetch_array($queryb)){
-                            ?>
-                                    <div class="noti__item js-item-menu">
-                                        <i class="zmdi zmdi-file"></i>
-                                        <span class="quantity"><?php echo $ry['jb'];?></span>
-                                        <div class="notifi-dropdown js-dropdown">
-                                            <div class="notifi__title">
-                                                <p>Ada <?php echo $ry['jb'];?> Surat yg dibuat sendiri</p>
-                                            </div><?php } ?>
-                                             <?php 
-                            $queryx = mysqli_query ($con, "SELECT * FROM tb_buatsendiri WHERE status='onprocess' ORDER BY id ASC limit 4");
-                            while ($rx = mysqli_fetch_array($queryx)){
-                            ?>
-                                            <div class="notifi__item">
-                                                <div class="bg-c1 img-cir img-40">
-                                                    <i class="zmdi zmdi-email-open"></i>
-                                                </div>
-                                                <div class="content">
-                                                    <p><a href="?page=acc&amp;id=<?php echo $rx['id'];?>"><?php echo $rx['nama'];?></a> <span class="date pull pull-right"><?php echo $rx['tgl'];?></span><br><?php echo $rx['nmsurat'];?></p>
-                                                    
-                                                </div>
-                                            </div><?php } ?>
-
-                                            <div class="notifi__footer">
-                                                <a href="?page=daftar_suratmandiri">Semua Surat Mandiri</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                            <?php 
-                            $adm=$_SESSION['uname'];
-                            $queryadm = mysqli_query ($con, "SELECT * FROM tb_admin WHERE uname='$adm'");
-                            while ($radm = mysqli_fetch_array($queryadm)){
-                            ?>
-                                <div class="account-wrap">
-                                    <div class="account-item clearfix js-item-menu">
-                                        <div class="image" style="border-radius: 50%;">
-                                           <?php echo ($radm['foto']!=null ? "<img src='../file/foto/$radm[foto]'" : "<img src='../file/foto/no_pic.png'>").  "alt='' />" ?>
-                                        </div>
-                                        <div class="content">
-                                            <a class="js-acc-btn" href="#"><?php echo $radm['uname'];?></a>
-                                        </div>
-                                        <div class="account-dropdown js-dropdown">
-                                            <div class="info clearfix">
-                                                <div class="image"  style="border-radius: 50%;">
-                                                    <a href="#">
-                                                        <?php echo ($radm['foto']!=null ? "<img src='../file/foto/$radm[foto]'" : "<img src='../file/foto/no_pic.png'>").  "alt='' />" ?>
-                                                    </a>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="name">
-                                                        <a href="#"><?php echo $radm['uname'];?></a>
-                                                    </h5>
-                                                    <span class="email"><?php echo $radm['email'];?></span>
-                                                </div>
-                                            </div>
-                                            <div class="account-dropdown__body">
-                                                <div class="account-dropdown__item">
-                                                    <a href="?page=adm&amp;uname=<?php echo $radm['uname'];?>">
-                                                        <i class="zmdi zmdi-account"></i>Akun</a>
-                                                </div>
-                                            </div><?php } ?>
-                                            <div class="account-dropdown__footer">
-                                                <a href="logout.php">
-                                                    <i class="zmdi zmdi-power"></i>Logout</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-            <!-- HEADER DESKTOP-->
-
-            <!-- MAIN CONTENT-->
-            <div class="main-content">
-                <div class="section__content section__content--p10">
-                    <div class="container-fluid">
-                            <div class="col-lg-12">
-
-                                    <?php 
-                                        include 'load_file.php';
-                                        ?>
-
-                            </div>                   
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="copyright">
-                                    <p>Copyright © 2023 <b>sdc</b>. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- END MAIN CONTENT-->
-            <!-- END PAGE CONTAINER-->
-        </div>
-
+  <tr><td colspan="4">
+<!-- Container geser ke kanan tapi isi tetap rata kiri -->
+<div style="width: 40%; float: right; text-align: left;">
+    <div style="font-size: 12pt; line-height: 1.5;"><br><br><br><br>
+      Dikeluarkan di : <?php echo $rd['kelurahan']; ?><br>
+      Pada Tanggal &nbsp;&nbsp;: <?php echo tgl_indonesia($tgl_sekarang); ?>
     </div>
-<!-- jQuery 3 -->
-<script src="../assets/js/jquery.min.js"></script> <!-- untuk Pemanggilan data penduduk -->
 
-    <!-- Jquery JS-->
-    <!-- <script src="vendor/jquery-3.2.1.min.js"></script>--><!-- Tabrakan dengan Jquery panggil data penduduk-->
-    <!-- Bootstrap JS-->
-    <script src="../vendor/bootstrap-4.1/popper.min.js"></script>
-    <script src="../vendor/bootstrap-4.1/bootstrap.min.js"></script>
-    <!-- Vendor JS       -->
-    <script src="../vendor/slick/slick.min.js">
-    </script>
-    <script src="../vendor/wow/wow.min.js"></script>
-    <script src="../vendor/animsition/animsition.min.js"></script>
-    <script src="../vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-    </script>
-    <script src="../vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="../vendor/counter-up/jquery.counterup.min.js">
-    </script>
-    <script src="../vendor/circle-progress/circle-progress.min.js"></script>
-    <script src="../vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="../vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="../vendor/select2/select2.min.js">
-    </script>
+    <div style="font-weight: bold; font-size: 12pt; margin-top: 5px;">
+      KEPALA KAMPUNG
+    </div>
 
-    <!-- Main JS-->
-    <script src="../assets/js/main.js"></script>
+    <?php 
+    $queryrs = mysqli_query($con, "SELECT * FROM setting_surat LIMIT 1");
+    while ($rs = mysqli_fetch_array($queryrs)) {
+      if ($rs['ttd'] == 'Otomatis'):
+    ?>
+      <!-- Cap dan ttd -->
+      <div style="margin-top: 5px; display: flex; align-items: center; gap: 10px;">
+        <img src="../file/<?php echo $rd['stample']; ?>" style="width: 90px; height: 90px; opacity: 0.9;">
+        <img src="../file/ttd/<?php echo $r['ttd_staff']; ?>" style="width: 90px; height: 90px; margin-left: -35px;">
+      </div>
+    <?php endif; } ?>
 
-
-    <!-- Page level plugins -->
-    <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <script src="../assets/js/datatable/datatables-init.js"></script>
-
-
+    <div style="margin-top: 5px;">
+      <u><b><?php echo strtoupper($r['nama_staff']); ?></b></u><br>
+      NIP. <?php echo !empty($rd['niplurah']) ? $rd['niplurah'] : '-'; ?>
+    </div>
+  </div>
+</td></tr>
+</table>
+  <?php }} ?>
 </body>
-
 </html>
-<!-- end document-->
