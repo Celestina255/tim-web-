@@ -30,7 +30,7 @@
           <h1 align="center">
             <table align="center" class="table-list" width="800" border="0" cellspacing="1" cellpadding="2">
               <tr>
-                <td></td><td></td><td></b></td><td align="left"><?php echo $rd['kelurahan'];?>, <?php echo format_hari_tanggal(date('Y-m-d')); ?>&nbsp;&nbsp;&nbsp;</td>
+                <td></td><td></td><td></b></td><td align="left"><?php echo $rd['kelurahan'];?>, <?php echo tgl_indonesia($tgl_sekarang); ?>&nbsp;&nbsp;&nbsp;</td>
               </tr>
               <tr>
                 <td valign="top">Perihal </td><td valign="top">:</td><td valign="top" width="45%"><b>Permohonan Izin Mendirkan Bangunan (IMB)</b></td><td align="left"></td>
@@ -115,7 +115,7 @@
           Kepala Kampung <?php echo $rd['kelurahan']; ?>
         </td>
         <td align="center">
-          <?php echo $rd['kelurahan']; ?>,&nbsp;<?php echo format_hari_tanggal(date('Y-m-d')); ?><br>
+          <?php echo $rd['kelurahan']; ?>,&nbsp<?php echo tgl_indonesia($tgl_sekarang); ?><br>
           Pemohon,
         </td>
       </tr>
