@@ -5,7 +5,7 @@ include_once "../assets/inc.php";
 # Baca variabel URL
 $kodesurat = $_GET['kode'];
 
-## Perintah untuk mendapatkan data dari tabel Surat 
+# Perintah untuk mendapatkan data dari tabel Surat 
 $query = mysqli_query ($con, "SELECT * FROM tb_detailsurat JOIN tb_staff ON tb_detailsurat.ttd=tb_staff.id_staff LEFT JOIN tb_penduduk ON tb_detailsurat.nik=tb_penduduk.nik WHERE tb_detailsurat.kode='$kodesurat'");
 while ($r = mysqli_fetch_array($query)) {
   $dt = explode(';', $r['detail']);
@@ -31,6 +31,7 @@ while ($r = mysqli_fetch_array($query)) {
     $exp = explode('/', $tgl); // format di database: 07/09/1968
     return (int)$exp[0] . ' ' . $bulan[$exp[1]] . ' ' . $exp[2];
 }
+
   $query = mysqli_query($con, "SELECT * from tb_kelurahan");
   while ($rd = mysqli_fetch_array($query)) {
 ?>
@@ -65,105 +66,86 @@ while ($r = mysqli_fetch_array($query)) {
     </td>
   </tr>
 </table>
+<br>
 <table align="center" class="table-list" width="800" border="0" cellspacing="1" cellpadding="2">
   <tr>
-    <br>
-    <td colspan="3">Yang bertanda tangan dibawah ini <?php echo $rd['jnp']=='Desa'? "Kepala Kampung" : "Lurah";?> <?php echo $rd['kelurahan'];?> Distrik <?php echo $rd['kec'];?> Kabupaten <?php echo $rd['kab'];?>, dengan ini menerangkan sesungguhnya bahwa :</td>
+    <td colspan="3">Yang bertanda tangan dibawah ini <?php echo $rd['jnp']=='Desa'? "Kepala Kampung" : "Lurah";?>
+ <?php echo $rd['kelurahan'];?>  <?php echo $rd['kec'];?> Kabupaten <?php echo $rd['kab'];?>, Dengan ini menerangkan sesungguhnya bahwa :</td>
   </tr>
 </table>
 <table align="center" class="table-list" width="800" border="0" cellspacing="1" cellpadding="2">
   <tr>
-    <td colspan="3">&nbsp;</td>
-  </tr>
-
-  <tr>
-    <td>Nama</td><td>:</td><td><b><?php echo $dt[15];?></b></td>
-  </tr>
-  <tr>
-    <td>NIK</td><td>:</td><td><?php echo  $dt[14];?></td>
-  </tr>
-    <tr>
-    <td>Jenis Kelamin</td><td>:</td><td><?php echo  $dt[16];?></td>
-  </tr>
-  <tr>
-    <td>Tmp. & Tgl. Lahir </td><td>:</td><td><?php echo  $dt[17];?>, <?php echo tgl_lahir_indo($dt[18]);?></td>
-  </tr>
-    <tr>
-    <td>Agama</td><td>:</td><td><?php echo  $dt[19];?></td>
-  </tr>
-    <tr>
-    <td>Alamat</td><td>:</td><td><?php echo  $dt[20];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo  $rd['kelurahan'];?></td>
-  </tr>
-  <tr>
-    <td></td><td></td><td>Distrik. <?php echo  $rd['kec'];?> Kabupaten <?php echo  $rd['kab'];?></td>
-  </tr>
-  </table>
-<table align="center" class="table-list" width="100%" border="0" cellspacing="1" cellpadding="2">
-    <tr>
-    <td colspan="4">&nbsp;</td>
-  </tr>
-    <tr>
-    <td colspan="4">Warga tersebut diatas adalah Benar Anak dari Ayah dan Ibu sebagai berikut :</td>
-  </tr>
-  <tr>
-    <td colspan="4">&nbsp;</td>
-  </tr>
-  <tr>
     <td><b>I.</b></td><td colspan="3"><b>AYAH :</b></td>
   </tr>
   <tr>
-    <td></td><td>Nama</td><td>:</td><td><?php echo  $dt[1];?></td>
+    <td></td><td>Nama</td><td>:</td><td><?php echo $dt[1];?></td>
   </tr>
   <tr>
-    <td></td><td>NIK</td><td>:</td><td><?php echo  $dt[0];?></td>
+    <td></td><td>NIK</td><td>:</td><td><?php echo $dt[0];?></td>
   </tr>
     <tr>
-    <td></td><td>Jenis Kelamin</td><td>:</td><td><?php echo  $dt[2];?></td>
-  </tr>
-  <tr>
-    <td></td><td>Tmp. & Tgl. Lahir </td><td>:</td><td><?php echo  $dt[3];?>, <?php echo tgl_lahir_indo($dt[4]);?></td>
+    <td></td><td>Jenis Kelamin</td><td>:</td><td><?php echo $dt[2];?></td>
   </tr>
     <tr>
-    <td></td><td>Agama</td><td>:</td><td><?php echo  $dt[5];?></td>
+    <td></td><td>Agama</td><td>:</td><td><?php echo $dt[5];?></td>
   </tr>
-  <tr>
-    <td></td><td>Alamat</td><td>:</td><td><?php echo  $dt[6];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo  $rd['kelurahan'];?></td>
+    <tr>
+    <td></td><td>Alamat</td><td>:</td><td><?php echo $dt[6]?>  <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?>
+ <?php echo $rd['kelurahan'];?></td>
   </tr>
-  <tr>
-    <td></td><td></td><td></td><td>Distrik <?php echo  $rd['kec'];?> Kabupaten <?php echo  $rd['kab'];?></td>
-  </tr>
-
 
   <tr>
     <td><b>II.</b></td><td colspan="3"><b>IBU :</b></td>
   </tr>
 
   <tr>
-    <td></td><td>Nama</td><td>:</td><td><?php echo  $dt[8];?></td>
+    <td></td><td width="25%">Nama</td><td>:</td><td><?php echo $dt[8];?></td>
   </tr>
   <tr>
-    <td></td><td>NIK</td><td>:</td><td><?php echo  $dt[7];?></td>
+    <td></td><td>NIK</td><td>:</td><td><?php echo $dt[7];?></td>
   </tr>
     <tr>
     <td></td><td>Jenis Kelamin</td><td>:</td><td><?php echo $dt[9];?></td>
   </tr>
-  <tr>
-    <td></td><td>Tmp. & Tgl. Lahir </td><td>:</td><td><?php echo  $dt[10];?>, <?php echo tgl_lahir_indo($dt[11]);?></td>
+    <tr>
+    <td></td><td>Agama</td><td>:</td><td><?php echo $dt[12];?></td>
   </tr>
     <tr>
-    <td></td><td>Agama</td><td>:</td><td><?php echo  $dt[12];?></td>
+    <td></td><td>Alamat</td><td>:</td><td><?php echo $dt[13];?>  <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?>
+ <?php echo $rd['kelurahan'];?></td>
   </tr>
-    <tr>
-    <td></td><td>Alamat</td><td>:</td><td><?php echo  $dt[13];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?> <?php echo  $rd['kelurahan'];?></td>
-  </tr>
-  <tr>
-    <td></td><td></td><td></td><td>Distrik <?php echo  $rd['kec'];?> Kabupaten <?php echo  $rd['kab'];?></td>
-  </tr>
-
   </table>
 
 <table align="center" class="table-list" width="800" border="0" cellspacing="1" cellpadding="2">
   <tr>
+    <td colspan="3">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="3">Adalah benar Ayah dan Ibu kandung dari : </td>
+  </tr>
+  <tr>
+    <td colspan="3">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Nama</td><td>:</td><td><b><?php echo $dt[15];?></b></td>
+  </tr>
+  <tr>
+    <td>NIK</td><td>:</td><td><?php echo $dt[14];?></td>
+  </tr>
+    <tr>
+    <td>Jenis Kelamin</td><td>:</td><td><?php echo $dt[16];?></td>
+  </tr>
+      <tr>
+    <td>Tmp. & Tgl. Lahir</td><td>:</td><td><?php echo $dt[17];?>, <?php echo tgl_lahir_indo ($dt[18]);?></td>
+  </tr>
+    <tr>
+    <td>Agama</td><td>:</td><td><?php echo $dt[19];?></td>
+  </tr>
+    <tr>
+    <td>Alamat</td><td>:</td><td><?php echo $dt[20];?> <?php echo $rd['jnp']=='Desa'? "Kampung" : "Kelurahan";?>
+ <?php echo $rd['kelurahan'];?></td>
+  </tr>
+      <tr>
     <td colspan="3">&nbsp;</td>
   </tr>
     <tr>
@@ -171,9 +153,9 @@ while ($r = mysqli_fetch_array($query)) {
   </tr>
 
   <tr><td colspan="4">
-<!-- Container geser ke kanan tapi isi tetap rata kiri -->
-<div style="width: 40%; float: right; text-align: left;">
-    <div style="font-size: 12pt; line-height: 1.5;"><br><br><br><br>
+  <!-- Container geser ke kanan tapi isi tetap rata kiri -->
+  <div style="width: 40%; float: right; text-align: left;">
+    <div style="font-size: 12pt; line-height: 1.5;">
       Dikeluarkan di : <?php echo $rd['kelurahan']; ?><br>
       Pada Tanggal &nbsp;&nbsp;: <?php echo tgl_indonesia($tgl_sekarang); ?>
     </div>
