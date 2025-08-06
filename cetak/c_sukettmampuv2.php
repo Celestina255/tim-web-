@@ -10,6 +10,7 @@ $query = mysqli_query ($con, "SELECT * FROM tb_detailsurat JOIN tb_staff ON tb_d
 while ($r = mysqli_fetch_array($query)) {
   $dt = explode(';', $r['detail']);
   $tgl_sekarang = date('Y-m-d');
+  $tgl_lahir = $r['tgl_lahir'];
   
   function tgl_indonesia($tgl) {
       $bulan = [
@@ -21,6 +22,16 @@ while ($r = mysqli_fetch_array($query)) {
       $exp = explode('-', $tgl);
       return $exp[2] . ' ' . $bulan[$exp[1]] . ' ' . $exp[0];
   }
+  function tgl_lahir_indo($tgl) {
+    $bulan = [
+        '01' => 'Januari', '02' => 'Februari', '03' => 'Maret',
+        '04' => 'April', '05' => 'Mei', '06' => 'Juni',
+        '07' => 'Juli', '08' => 'Agustus', '09' => 'September',
+        '10' => 'Oktober', '11' => 'November', '12' => 'Desember'
+    ];
+    $exp = explode('/', $tgl); // format di database: 07/09/1968
+    return (int)$exp[0] . ' ' . $bulan[$exp[1]] . ' ' . $exp[2];
+}
 
   $query = mysqli_query($con, "SELECT * from tb_kelurahan");
   while ($rd = mysqli_fetch_array($query)) {
@@ -50,7 +61,9 @@ while ($r = mysqli_fetch_array($query)) {
   <tr>
     <td colspan="3" align="center"><hr style="border: 1.5px double black;"></td>
   </tr>
+  
   <tr>
+
     <td colspan="3" align="center">
       <strong><u><?php echo strtoupper($r['nmsurat']); ?></u></strong><br>
       <font size="2">Nomor: <?php echo $r['no']; ?></font>
@@ -75,7 +88,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td></td><td>NIK</td><td>:</td><td><?php echo $dt[0];?></td>
   </tr>
     <tr>
-    <td></td><td>Tmp.&Tgl. Lahir</td><td>:</td><td><?php echo ucwords($dt[2]);?>, &nbsp;<?php echo $dt[3];?></td>
+    <td></td><td>Tmp.&Tgl. Lahir</td><td>:</td><td><?php echo ucwords($dt[2]);?>,&nbsp;<?php echo tgl_lahir_indo($dt[3]);?></td>
   </tr>
     <tr>
     <td></td><td>Agama</td><td>:</td><td><?php echo $dt[4];?></td>
@@ -97,7 +110,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td></td><td>NIK</td><td>:</td><td><?php echo $dt[6];?></td>
   </tr>
     <tr>
-    <td></td><td>Tmp.&Tgl. Lahir</td><td>:</td><td><?php echo ucwords($dt[8]);?>, &nbsp; <?php echo $dt[9];?></td>
+    <td></td><td>Tmp.&Tgl. Lahir</td><td>:</td><td><?php echo ucwords($dt[8]);?>,&nbsp; <?php echo tgl_lahir_indo($dt[9]);?></td>
   </tr>
     <tr>
     <td></td><td>Agama</td><td>:</td><td><?php echo $dt[10];?></td>
