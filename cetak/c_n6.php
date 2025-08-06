@@ -23,7 +23,16 @@ while ($r = mysqli_fetch_array($query)) {
     $exp = explode('-', $tgl);
     return $exp[2] . ' ' . $bulan[$exp[1]] . ' ' . $exp[0];
   }
-
+  function tgl_lahir_indo($tgl) {
+    $bulan = [
+        '01' => 'Januari', '02' => 'Februari', '03' => 'Maret',
+        '04' => 'April', '05' => 'Mei', '06' => 'Juni',
+        '07' => 'Juli', '08' => 'Agustus', '09' => 'September',
+        '10' => 'Oktober', '11' => 'November', '12' => 'Desember'
+    ];
+    $exp = explode('/', $tgl); // format di database: 07/09/1968
+    return (int)$exp[0] . ' ' . $bulan[$exp[1]] . ' ' . $exp[2];
+}
   $query_kel = mysqli_query($con, "SELECT * from tb_kelurahan");
   while ($rd = mysqli_fetch_array($query_kel)) {
 ?>
@@ -93,10 +102,25 @@ while ($r = mysqli_fetch_array($query)) {
     <tr>
       <td></td><td></td><td align="right">Model N6&nbsp;&nbsp;&nbsp;</td>
     </tr>
-    <tr><td>DESA/KELURAHAN</td><td>:</td><td><?php echo strtoupper($rd['kelurahan']); ?></td></tr>
-    <tr><td>DISTRIK</td><td>:</td><td><?php echo strtoupper($rd['kec']); ?></td></tr>
-    <tr><td>KABUPATEN</td><td>:</td><td><?php echo strtoupper($rd['kab']); ?></td></tr>
   </table>
+  <table width="100%" style="margin-top: 10px; margin-bottom: 20px;">
+  <tr>
+    <td width="40%">DESA/KELURAHAN</td>
+    <td width="2%">:</td>
+    <td><?php echo strtoupper($rd['kelurahan']); ?></td>
+  </tr>
+  <tr>
+    <td>DISTRIK</td>
+    <td>:</td>
+    <td><?php echo strtoupper($rd['kec']); ?></td>
+  </tr>
+  <tr>
+    <td>KABUPATEN</td>
+    <td>:</td>
+    <td><?php echo strtoupper($rd['kab']); ?></td>
+  </tr>
+</table>
+
 
   <br>
   <table width="97%" align="center">
@@ -111,7 +135,7 @@ while ($r = mysqli_fetch_array($query)) {
     <tr><td>2.</td><td>Bin / Binti</td><td>:</td><td><?php echo $dt[2]; ?></td></tr>
     <tr><td>3.</td><td>NIK</td><td>:</td><td><?php echo $dt[0]; ?></td></tr>
     <tr><td>4.</td><td>Jenis Kelamin</td><td>:</td><td><?php echo $dt[3]; ?></td></tr>
-    <tr><td>5.</td><td>Tmp. & Tgl. Lahir</td><td>:</td><td><?php echo $dt[4]; ?>, <?php echo $dt[5]; ?></td></tr>
+    <tr><td>5.</td><td>Tempat / Tanggal Lahir</td><td>:</td><td><?php echo $dt[4]; ?>, <?php echo tgl_lahir_indo($dt[5]); ?></td></tr>
     <tr><td>6.</td><td>Kewarganegaraan</td><td>:</td><td><?php echo $dt[6]; ?></td></tr>
     <tr><td>7.</td><td>Agama</td><td>:</td><td><?php echo $dt[7]; ?></td></tr>
     <tr><td>8.</td><td>Alamat</td><td>:</td><td><?php echo $dt[8]; ?></td></tr>
@@ -130,7 +154,7 @@ while ($r = mysqli_fetch_array($query)) {
     <tr><td>2.</td><td>Bin / Binti</td><td>:</td><td><?php echo $dt[11]; ?></td></tr>
     <tr><td>3.</td><td>NIK</td><td>:</td><td><?php echo $dt[9]; ?></td></tr>
     <tr><td>4.</td><td>Jenis Kelamin</td><td>:</td><td><?php echo $dt[12]; ?></td></tr>
-    <tr><td>5.</td><td>Tmp. & Tgl. Lahir</td><td>:</td><td><?php echo $dt[13]; ?>, <?php echo $dt[14]; ?></td></tr>
+    <tr><td>5.</td><td>Tempat / Tangga Lahir</td><td>:</td><td><?php echo $dt[13]; ?>,  <?php echo tgl_lahir_indo($dt[14]); ?></td></tr>
     <tr><td>6.</td><td>Kewarganegaraan</td><td>:</td><td><?php echo $dt[15]; ?></td></tr>
     <tr><td>7.</td><td>Agama</td><td>:</td><td><?php echo $dt[16]; ?></td></tr>
     <tr><td>8.</td><td>Alamat</td><td>:</td><td><?php echo $dt[17]; ?></td></tr>
