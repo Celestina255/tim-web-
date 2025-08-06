@@ -86,7 +86,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td>Jenis Kelamin</td><td>:</td><td><?php echo  $dt[16];?></td>
   </tr>
   <tr>
-    <td>Tmp. & Tgl. Lahir </td><td>:</td><td><?php echo  $dt[17];?>, <?php echo tgl_lahir_indo($dt[18]);?></td>
+    <td>Tempat / Tanggal Lahir </td><td>:</td><td><?php echo  $dt[17];?>, <?php echo tgl_lahir_indo($dt[18]);?></td>
   </tr>
     <tr>
     <td>Agama</td><td>:</td><td><?php echo  $dt[19];?></td>
@@ -121,7 +121,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td></td><td>Jenis Kelamin</td><td>:</td><td><?php echo  $dt[2];?></td>
   </tr>
   <tr>
-    <td></td><td>Tmp. & Tgl. Lahir </td><td>:</td><td><?php echo  $dt[3];?>, <?php echo tgl_lahir_indo($dt[4]);?></td>
+    <td></td><td>Tempat / Tanggal Lahir </td><td>:</td><td><?php echo  $dt[3];?>, <?php echo tgl_lahir_indo($dt[4]);?></td>
   </tr>
     <tr>
     <td></td><td>Agama</td><td>:</td><td><?php echo  $dt[5];?></td>
@@ -148,7 +148,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td></td><td>Jenis Kelamin</td><td>:</td><td><?php echo $dt[9];?></td>
   </tr>
   <tr>
-    <td></td><td>Tmp. & Tgl. Lahir </td><td>:</td><td><?php echo  $dt[10];?>, <?php echo tgl_lahir_indo($dt[11]);?></td>
+    <td></td><td>Tempat / Tanggal Lahir </td><td>:</td><td><?php echo  $dt[10];?>, <?php echo tgl_lahir_indo($dt[11]);?></td>
   </tr>
     <tr>
     <td></td><td>Agama</td><td>:</td><td><?php echo  $dt[12];?></td>
