@@ -64,22 +64,36 @@ while ($r = mysqli_fetch_array($query)) {
       <tr>
     <td colspan="3">&nbsp;</td>
   </tr>
+  </table>
+
+  <table style="width: 100%; border-collapse: collapse;">
   <tr>
-    <td>Nama Lembaga</td><td>:</td><td><?php echo $dt[0];?></td>
-  </tr>
-  <tr>
-    <td>Bidang</td><td>:</td><td><?php echo $dt[1];?></td>
-  </tr>
-    <tr>
-    <td>Nama Pimpinan/Ketua</td><td>:</td><td><?php echo $dt[2];?></td>
-  </tr>
-    <tr>
-    <td>Berdiri Sejak</td><td>:</td><td><?php echo $dt[4];?></td>
-  </tr>
-    <tr>
-    <td>Alamat</td><td>:</td><td><?php echo $dt[3];?></td>
+    <td style="width: 25%;">Nama Lembaga</td>
+    <td style="width: 2%;">:</td>
+    <td><?php echo $dt[0];?></td>
   </tr>
   <tr>
+    <td>Bidang</td>
+    <td>:</td>
+    <td><?php echo $dt[1];?></td>
+  </tr>
+  <tr>
+    <td>Nama Pimpinan/Ketua</td>
+    <td>:</td>
+    <td><?php echo $dt[2];?></td>
+  </tr>
+  <tr>
+    <td>Berdiri Sejak</td>
+    <td>:</td>
+    <td><?php echo $dt[4];?></td>
+  </tr>
+  <tr>
+    <td>Alamat</td>
+    <td>:</td>
+    <td><?php echo $dt[3];?></td>
+  </tr>
+</table>
+<table>
     <td colspan="3">&nbsp;</td>
   </tr>
     <tr>
