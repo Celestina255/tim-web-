@@ -2,19 +2,6 @@
 include_once "../koneksi.php";
 include_once "../assets/inc.php";
 
-// Fungsi ubah tanggal ke format Indonesia
-function tgl_indo($tgl) {
-    $bulan = [
-        '01'=>'Januari','02'=>'Februari','03'=>'Maret','04'=>'April','05'=>'Mei','06'=>'Juni',
-        '07'=>'Juli','08'=>'Agustus','09'=>'September','10'=>'Oktober','11'=>'November','12'=>'Desember'
-    ];
-    $exp = explode('-', $tgl);
-    if (count($exp) != 3 || !array_key_exists($exp[1], $bulan)) {
-        return '-';
-    }
-    return (int)$exp[2] . ' ' . $bulan[$exp[1]] . ' ' . $exp[0];
-}
-
 // Ambil data surat
 $kodesurat = $_GET['kode'];
 $query = mysqli_query($con, "SELECT * FROM tb_detailsurat 
@@ -24,10 +11,21 @@ $query = mysqli_query($con, "SELECT * FROM tb_detailsurat
 
 while ($r = mysqli_fetch_array($query)) {
     $dt = explode(';', $r['detail']);
-    $tanggal_surat = tgl_indo($r['tanggal']);
+    $tgl_sekarang = date('Y-m-d');
 
-    $query_desa = mysqli_query($con, "SELECT * FROM tb_kelurahan");
-    while ($rd = mysqli_fetch_array($query_desa)) {
+    function tgl_indonesia($tgl) {
+        $bulan = [
+            '01' => 'Januari', '02' => 'Februari', '03' => 'Maret',
+            '04' => 'April', '05' => 'Mei', '06' => 'Juni',
+            '07' => 'Juli', '08' => 'Agustus', '09' => 'September',
+            '10' => 'Oktober', '11' => 'November', '12' => 'Desember'
+        ];
+        $exp = explode('-', $tgl);
+        return $exp[2] . ' ' . $bulan[$exp[1]] . ' ' . $exp[0];
+    }
+
+    $query2 = mysqli_query($con, "SELECT * from tb_kelurahan");
+    while ($rd = mysqli_fetch_array($query2)) {
 ?>
 
 <!DOCTYPE html>
@@ -144,7 +142,7 @@ while ($r = mysqli_fetch_array($query)) {
                 NIP. <?= !empty($rd['niplurah']) ? $rd['niplurah'] : '-'; ?>
             </td>
         </tr>
-        <td colspan="2" align="right"><?php echo $rd['kelurahan']; ?>, <?php echo format_hari_tanggal(date('Y-m-d')); ?></td>
+        <td colspan="2" align="right"><?php echo $rd['kelurahan']; ?>, <?php echo tgl_indonesia($tgl_sekarang); ?></td>
     </tr>
 </table>
 
