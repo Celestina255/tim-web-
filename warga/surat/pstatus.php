@@ -1,19 +1,37 @@
-<?php
-include_once "../koneksi.php"; // koneksi database
-include_once "../assets/inc.php"; // styling dan header
+<?php 
+include_once "../koneksi.php"; 
+include_once "../assets/inc.php"; 
 session_start();
 ?>
+
+<style>
+    .status-btn {
+        padding: 5px 12px;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: bold;
+        color: white;
+        border: none;
+        display: inline-block;
+        text-align: center;
+        min-width: 100px;
+        box-shadow: 1px 2px 4px rgba(0,0,0,0.2);
+    }
+    .status-diproses { background-color: #007bff; }
+    .status-ditolak { background-color: #dc3545; }
+    .status-diterima { background-color: #28a745; }
+</style>
 
 <div class="container mt-4">
     <h3 class="text-center mb-4">STATUS SURAT</h3>
 
-    <!-- ======= STATUS SURAT PERMOHONAN (PINDAH KE ATAS) ======= -->
+    <!-- STATUS SURAT PERMOHONAN -->
     <div class="card mb-4">
         <div class="card-header bg-success text-white">
             <h5 class="mb-0"><i class="fa fa-envelope"></i> STATUS SURAT PERMOHONAN</h5>
         </div>
-        <div class="card-body">
-            <table id="table-permohonan" class="table table-bordered table-striped">
+        <div class="card-body animated zoomIn" style="overflow-x: auto;">
+            <table id="bootstrap-data-table-export0" class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -24,56 +42,42 @@ session_start();
                     </tr>
                 </thead>
                 <tbody>
-<?php
-$no = 1;
-$userid = $_SESSION['userid'];
-
-$query = mysqli_query($con, "
-    SELECT b.*, j.nmsurat, p.nama 
-    FROM tb_buatsendiri b
-    INNER JOIN (
-        SELECT MAX(id) AS id
-        FROM tb_buatsendiri
-        WHERE userid = '$userid'
-        GROUP BY kode_jenis
-    ) latest ON b.id = latest.id
-    JOIN tb_jenissurat j ON j.kode = b.kode_jenis
-    JOIN tb_penduduk p ON p.nik = b.nik
-    ORDER BY b.id DESC
-");
-
-if (mysqli_num_rows($query) == 0) {
-    echo '<tr><td colspan="5" class="text-center">Belum ada data</td></tr>';
-} else {
-    while ($data = mysqli_fetch_assoc($query)) {
-        if ($data['status'] == 'ditolak') {
-            $status_display = "Surat Ditolak";
-        } else {
-            $status_display = "Surat Sedang Diproses";
-        }
-
-        echo '<tr>
-            <td>'.$no++.'</td>
-            <td>'.$data['nama'].'</td>
-            <td>'.$data['nmsurat'].'</td>
-            <td>'.date("d-m-Y", strtotime($data['tgl'])).'</td>
-            <td>'.$status_display.'</td>
-        </tr>';
-    }
-}
-?>
+                <?php
+                $userid = $_SESSION['userid'];
+                $query1 = mysqli_query ($con, "SELECT * FROM tb_permohonan WHERE userid='$userid' ORDER BY id DESC");
+                $no = 1;
+                while ($data = mysqli_fetch_assoc($query1)) {
+                ?>
+                    <tr>
+                        <td><?= $no++; ?></td>
+                        <td><?= $data['nama']; ?></td>
+                        <td><?= $data['nmsurat']; ?></td>
+                        <td><?= IndonesiaTgl($data['tgl']); ?></td>
+                        <td align="center">
+                            <a href="?page=tunggu_permohonan&id=<?= $data['id']; ?>">
+                                <?php if ($data['status'] == 'onprocess'): ?>
+                                    <span class="status-btn status-diproses">Diproses</span>
+                                <?php elseif ($data['status'] == 'ditolak'): ?>
+                                    <span class="status-btn status-ditolak">Permohonan Ditolak<br>(Silahkan klik disini)</span>
+                                <?php elseif ($data['status'] == 'diterima'): ?>
+                                    <span class="status-btn status-diterima">Permohonan Diterima<br>(Silahkan klik disini)</span>
+                                <?php endif; ?>
+                            </a>
+                        </td>
+                    </tr>
+                <?php } ?>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <!-- ======= STATUS SURAT MANDIRI (PINDAH KE BAWAH) ======= -->
-    <div class="card mb-4">
+    <!-- STATUS SURAT MANDIRI -->
+    <div class="card mb-5">
         <div class="card-header bg-success text-white">
             <h5 class="mb-0"><i class="fa fa-envelope"></i> STATUS SURAT MANDIRI</h5>
         </div>
-        <div class="card-body">
-            <table id="table-mandiri" class="table table-bordered table-striped">
+        <div class="card-body animated zoomIn" style="overflow-x: auto;">
+            <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -81,56 +85,32 @@ if (mysqli_num_rows($query) == 0) {
                         <th>Surat</th>
                         <th>Tanggal</th>
                         <th>Status</th>
-                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-<?php
-$no = 1;
-$query = mysqli_query($con, "
-    SELECT d.*, p.nama
-    FROM tb_detailsurat d
-    JOIN tb_penduduk p ON d.nik = p.nik
-    WHERE d.userid = '$userid'
-    AND d.id IN (
-        SELECT MAX(id)
-        FROM tb_detailsurat
-        WHERE userid = '$userid'
-        GROUP BY kode_surat
-    )
-    ORDER BY d.id DESC
-");
-
-if (mysqli_num_rows($query) == 0) {
-    echo '<tr><td colspan="6" class="text-center">Belum ada data</td></tr>';
-} else {
-    while ($data = mysqli_fetch_assoc($query)) {
-        if ($data['status'] == 'acc') {
-            $status_display = "Surat Diterima";
-        } elseif ($data['status'] == 'ditolak') {
-            $status_display = "Surat Ditolak";
-        } else {
-            $status_display = "Surat Sedang Diproses";
-        }
-
-        echo '<tr>
-            <td>'.$no++.'</td>
-            <td>'.$data['nama'].'</td>
-            <td>'.$data['nmsurat'].'</td>
-            <td>'.date("d-m-Y", strtotime($data['tgl'])).'</td>
-            <td>'.$status_display.'</td>
-            <td class="text-end">';
-        if ($data['status'] == 'acc') {
-            echo '<a href="../cetak/c_pstatus.php?kode='.$data['kode_surat'].'" target="_blank" class="btn btn-sm btn-primary">
-                    <i class="fa fa-print"></i> Cetak</a>';
-        } else {
-            echo '<span class="text-muted">-</span>';
-        }
-        echo '</td></tr>';
-    }
-}
-
-?>
+                <?php
+                $query2 = mysqli_query ($con, "SELECT * FROM tb_buatsendiri WHERE userid='$userid' ORDER BY id DESC");
+                $no = 1;
+                while ($data = mysqli_fetch_assoc($query2)) {
+                ?>
+                    <tr>
+                        <td><?= $no++; ?></td>
+                        <td><?= $data['nama']; ?></td>
+                        <td><?= $data['nmsurat']; ?></td>
+                        <td><?= IndonesiaTgl($data['tgl']); ?></td>
+                        <td align="center">
+                            <a href="?page=tunggu_suratmandiri&id=<?= $data['id']; ?>">
+                                <?php if ($data['status'] == 'onprocess'): ?>
+                                    <span class="status-btn status-diproses">Diproses</span>
+                                <?php elseif ($data['status'] == 'ditolak'): ?>
+                                    <span class="status-btn status-ditolak">Ditolak</span>
+                                <?php elseif ($data['status'] == 'diterima'): ?>
+                                    <span class="status-btn status-diterima">Diterima</span>
+                                <?php endif; ?>
+                            </a>
+                        </td>
+                    </tr>
+                <?php } ?>
                 </tbody>
             </table>
         </div>
@@ -140,8 +120,8 @@ if (mysqli_num_rows($query) == 0) {
 <!-- SCRIPT DATATABLE -->
 <script src="../assets/js/jquery.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $('#table-mandiri').DataTable();
-        $('#table-permohonan').DataTable();
+    $(document).ready(function() {
+        $('#bootstrap-data-table-export').DataTable();
+        $('#bootstrap-data-table-export0').DataTable();
     });
 </script>
