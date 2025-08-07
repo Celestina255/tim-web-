@@ -1,78 +1,50 @@
 <?php
-
 include_once "../assets/inc.php";
 ?>
-
-                <div class="container mt-4">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h3 class="title-5">STATUS PEMBUATAN SURAT MANDIRI
-                            </h3>
-                            <hr class="line-seprate">
-                        </div>
+<div class="container mt-4">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="title-5" align="center">INFO 
+                        </h2>
                     </div>
+
                 </div>
-                <div class="container mt-2">
-                        <div class="card">
-                            <div class="card-body animated zoomIn scroll">
-                                <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama</th>
-                                            <th>Surat</th>
-                                            <th>Tanggal</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-                        <?php
-                        $userid = $_SESSION['userid'];
-                            $query = mysqli_query ($con, "SELECT * FROM tb_buatsendiri WHERE userid='$userid' ORDER BY id DESC");
-                            $no=1;
-                            while ($data = mysqli_fetch_assoc($query)){
-                         ?>
-                                        <tr>
-                                            <td><?php echo $no++;?></td>
-                                            <td><?php echo $data['nama'];?></td>
-                                            <td><?php echo $data['nmsurat'];?></td>
-                                            <td><?php echo IndonesiaTgl($data['tgl']);?></td>
-                                            <td align="center"><a href="?page=tunggu_suratmandiri&id=<?php echo $data['id'];?>"><?php if ($data['status']=='onprocess') : ?> <p style='background:blue;border-radius:5%;padding:0px 5px;box-shadow:2px 1px 2px;color:white;'>On Process</p><?php elseif($data['status']=='ditolak') : ?> <p style='background:red;border-radius:5%;padding:0px 5px;box-shadow:2px 1px 2px;color:white;'>Permohonan ditolak</p>  <?php elseif ($data['status']=='acc') : ?> <p style='background:grey;border-radius:5%;padding:0px 5px;box-shadow:2px 1px 2px;color:white;'>Sudah acc</p><?php endif; ?></a>
-                            </td>
-
-                                        </tr>
-    
-                                     <?php }?>    
-
-                                    </tbody>
-                                </table>
-                            </div>      
+<div class="container mt-2">
+        <form action=""  method="" class="form-horizontal">
+            <div class="row form-group">
+                 <?php
+                $id =$_GET['id'];
+                $kode =$_GET['kode'];
+                $data=mysqli_query($con, "SELECT COUNT(tb_buatsendiri.kode_surat) AS kds, tb_jenissurat.*, tb_buatsendiri.* FROM tb_jenissurat, tb_buatsendiri WHERE tb_jenissurat.kode=tb_buatsendiri.kode_jenis AND tb_buatsendiri.id='$id' OR kode_surat='$kode' LIMIT 1 ");
+                $no=1;
+                while($row =mysqli_fetch_array($data)){ 
+                    ?> 
+                    <?php if ($row['status'] == 'onprocess'): ?> 
+                        <div class="col-md-12"><h4 align="center"><img src="../assets/loading.gif" style="text-decoration: none; width: 100px;"><br><strong><?php echo $row['nmsurat'];?></strong><br> sedang ditinjau oleh Admin/staff Desa</h4> </div>
+                        
+                    <?php elseif ($row['status'] == 'diterima'): ?>
+                        <hr>
+                        <div class="col-md-12" style="justify-content: center; text-align: center; border: none;"><h4 align="center">Klik icon printer untuk mencetak surat kamu</h4> 
+                                 <div class="card" >
+                                    <a href="../cetak/c_<?php echo $row['page'];?>.php?kode=<?php echo $row['kode_surat'];?>" target="_BLANK" class="btn"><img src="../assets/animasiprint.gif" style="text-decoration: none"></i><br><?php echo $row['nmsurat'];?>
+                                </a>                                    
+                            </div>
                         </div>
- 
-              </div>
+                    <?php elseif($row['kode_surat']=='0000') : ?>
+                        <div class="col-md-12"><h4 align="center">Maaf, Surat Anda belum dapat kami proses</h4> </div>
+                        <div class="col-md-12"><h4 align="center">"<?php echo $row['keterangan'];?>"</h4> 
+                        </div>
+                    <?php endif; ?>
+                </div>
+                 <div class="text-center mt-4">
+         <a href="../warga/index.php?page=pstatus" class="btn btn-primary">Kembali</a>
+      </div>
+            </form>
+            <?php 
+        }
+                                                //mysql_close($host);
+        ?>
+    </div>
 
-              <!-- /.row -->
-
-<br>
-<!-- jQuery 3 -->
-<script src="../assets/js/jquery.min.js"></script> <!-- untuk Pemanggilan data penduduk -->
-
-
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-          $('#bootstrap-data-table-export').DataTable();
-      } );
-  </script>
-
-<script>
-    jQuery(document).ready(function() {
-        jQuery(".standardSelect").chosen({
-            disable_search_threshold: 10,
-            no_results_text: "Oops, nothing found!",
-            width: "100%"
-        });
-    });
-</script>
+</div>
 
