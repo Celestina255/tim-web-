@@ -26,6 +26,7 @@
 24.   News Single
 25.   Sidebar
 26.   Error Page
+27.   Profile Desa(struktur, visimisi, sejarah, dan peta)
 */
 
 
@@ -5687,7 +5688,6 @@ label {
 .red-text:hover, .holiday td:hover, .btn-box:hover {
   color: #ffffff !important;
 }
-/* ============================ */
 /* Sejarah */
 /* ============================ */
 .sejarah-section {
@@ -5854,7 +5854,7 @@ body {
 .title {
   text-align: center;
   font-size: 2em;
-  color: #f36b6b; /* merah soft */
+  color: #2caa50; 
   font-weight: 700;
   margin-bottom: 20px;
 }
@@ -5870,3 +5870,82 @@ body {
 .content li {
   margin-bottom: 10px;
 }
+
+/* ====== PETA DESA (match contoh kiri) ====== */
+.section-peta{
+  background: #f7f7f7;
+  padding:48px 0 64px;
+}
+.peta-title{
+  color: #2caa50;        /* merah judul */
+  font-weight:800;
+  letter-spacing:.2px;
+  margin-bottom:24px;
+}
+.peta-grid{
+  display:grid;
+  grid-template-columns: 1.15fr 1fr; /* info sedikit lebih lebar */
+  gap:20px;
+}
+.card-soft{
+  background:#fff;
+  border-radius:16px;
+  border:1px solid #ececec;
+  box-shadow:0 6px 18px rgba(0,0,0,.08);
+  overflow:hidden;
+}
+.card-soft__body{ padding:22px 26px; }
+
+.peta-group-title{
+  font-weight:700; color:#222; margin-bottom:10px;
+}
+.peta-cols{
+  display:grid; grid-template-columns:1fr 1fr; gap:12px 24px;
+}
+.peta-item + .peta-item{ margin-top:12px; }
+
+.peta-label{
+  font-weight:700; font-size:14px; color:#222; margin-bottom:2px;
+}
+.peta-label.strong{ font-weight:800; }
+.peta-value{
+   color: #363636; font-size:14.5px;
+   text-align: left; } 
+  
+
+.peta-divider{
+  border:0; border-top:1px solid #e9e9e9; margin:14px 0 6px;
+}
+
+.peta-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* label | nilai (mulai di kolom kanan) */
+  column-gap: 24px;
+  align-items: center;
+  padding: 12px 0;
+  border-top: 1px solid #eee;
+}
+.peta-row:first-of-type{ border-top:none; }
+
+.peta-map-card{ padding:10px; }
+.peta-map{
+  width:100%; height:420px; display:block;
+  border:0; border-radius:16px;
+}
+
+/* Placeholder */
+.peta-map.placeholder{
+  height:420px; display:grid; place-items:center;
+  color:#666; text-align:center;
+}
+
+/* Responsif */
+@media (max-width: 992px){
+  .peta-grid{ grid-template-columns:1fr; }
+  .peta-map{ height:360px; }
+}
+@media (max-width: 576px){
+  .card-soft__body{ padding:18px; }
+  .peta-map{ height:300px; }
+}
+
