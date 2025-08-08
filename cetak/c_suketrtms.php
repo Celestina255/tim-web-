@@ -8,8 +8,11 @@ $kodesurat = $_GET['kode'];
 # Perintah untuk mendapatkan data dari tabel Surat 
 $query = mysqli_query ($con, "SELECT * FROM tb_detailsurat JOIN tb_staff ON tb_detailsurat.ttd=tb_staff.id_staff LEFT JOIN tb_penduduk ON tb_detailsurat.nik=tb_penduduk.nik WHERE tb_detailsurat.kode='$kodesurat'");
 while ($r = mysqli_fetch_array($query)) {
-  $dt = explode(';', $r['detail']);
-  $tgl_sekarang = date('Y-m-d');
+$qcamat = mysqli_query($con, "SELECT * FROM tb_kecamatan LIMIT 1");
+$camat = mysqli_fetch_array($qcamat);
+$dt = explode(';', $r['detail']);
+$tgl_sekarang = date('Y-m-d');
+
   
   function tgl_indonesia($tgl) {
       $bulan = [
@@ -21,6 +24,16 @@ while ($r = mysqli_fetch_array($query)) {
       $exp = explode('-', $tgl);
       return $exp[2] . ' ' . $bulan[$exp[1]] . ' ' . $exp[0];
   }
+  function tgl_lahir_indo($tgl) {
+    $bulan = [
+        '01' => 'Januari', '02' => 'Februari', '03' => 'Maret',
+        '04' => 'April', '05' => 'Mei', '06' => 'Juni',
+        '07' => 'Juli', '08' => 'Agustus', '09' => 'September',
+        '10' => 'Oktober', '11' => 'November', '12' => 'Desember'
+    ];
+    $exp = explode('/', $tgl); // format di database: 07/09/1968
+    return (int)$exp[0] . ' ' . $bulan[$exp[1]] . ' ' . $exp[2];
+}
 
   $query = mysqli_query($con, "SELECT * from tb_kelurahan");
   while ($rd = mysqli_fetch_array($query)) {
@@ -50,12 +63,16 @@ while ($r = mysqli_fetch_array($query)) {
   <tr>
     <td colspan="3" align="center"><hr style="border: 1.5px double black;"></td>
   </tr>
+  </table>
+  <br>
+  <table width="800" align="center" border="0" cellspacing="1" cellpadding="4" class="table-print">
   <tr>
     <td colspan="3" align="center">
       <strong><u><?php echo strtoupper($r['nmsurat']); ?></u></strong><br>
       <font size="2">Nomor: <?php echo $r['no']; ?></font>
     </td>
   </tr>
+  </table>
 </table>
 <br>
 <table align="center" class="table-list" width="800" border="0" cellspacing="1" cellpadding="2">
@@ -75,7 +92,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td></td><td>NIK</td><td>:</td><td><?php echo $dt[0];?></td>
   </tr>
     <tr>
-    <td></td><td>Tmp.&Tgl. Lahir</td><td>:</td><td><?php echo $dt[2];?>, &nbsp;<?php echo $dt[3];?></td>
+    <td></td><td>Tmp.&Tgl. Lahir</td><td>:</td><td><?php echo $dt[2];?>, &nbsp;<?php echo tgl_lahir_indo ($dt[3]);?></td>
   </tr>
     <tr>
     <td></td><td>Agama</td><td>:</td><td><?php echo $dt[4];?></td>
@@ -97,7 +114,7 @@ while ($r = mysqli_fetch_array($query)) {
     <td></td><td>NIK</td><td>:</td><td><?php echo $dt[6];?></td>
   </tr>
     <tr>
-    <td></td><td>Tmp.&Tgl. Lahir</td><td>:</td><td><?php echo $dt[8];?>, &nbsp; <?php echo $dt[9];?></td>
+    <td></td><td>Tmp.&Tgl. Lahir</td><td>:</td><td><?php echo $dt[8];?>, &nbsp; <?php echo tgl_lahir_indo ($dt[9]);?></td>
   </tr>
     <tr>
     <td></td><td>Agama</td><td>:</td><td><?php echo $dt[10];?></td>
@@ -136,26 +153,52 @@ $queryrs = mysqli_query ($con, "SELECT * from setting_surat LIMIT 1");
 while ($rs = mysqli_fetch_array($queryrs)){
 ?>
   <tr>
-    <td align="center"><br><br><br><br>_______________________</td><td align="center" class="pull pull-right"><u><b><?php if ($rs['ttd'] == 'Otomatis'): ?> 
+    <td align="center"><br><br><br><br><br><br>_______________________</td><td align="center" class="pull pull-right"><u><b><?php if ($rs['ttd'] == 'Otomatis'): ?> 
       <div style="position: relative; width: 150px; height: 120px; margin: 0 auto;">
   <!-- Cap stempel di bawah, agak ke kiri -->
   <img src="../file/<?php echo $rd['stample']; ?>" 
-       style="position: absolute; bottom: 0; left: 0; width: 90px; height: 90px; opacity: 0.9; z-index: 1;">
-
+       style="position: absolute; bottom: 20; left: 0; width: 100px; height: 100px; opacity: 0.9; z-index: 1;">
   <!-- TTD di atas cap stempel, agak ke kanan -->
   <img src="../file/ttd/<?php echo $r['ttd_staff']; ?>" 
-       style="position: absolute; bottom: 20px; left: 25px; width: 90px; height: 90px; z-index: 2;">
+       style="position: absolute; bottom: 20px; left: 50px; width: 90px; height: 90px; z-index: 2;">
 </div>
 
-      <?php else :?><span>&nbsp;<br><br><br></span><?php endif; ?><br><u><b><?php echo strtoupper($r['nama_staff']);?></b></u></td>
+      <?php else :?><?php endif; ?><div style="margin-top: 5px; line-height: 1.5;">
+  <span style="display: inline-block; text-decoration: underline; font-weight: bold;">
+    <?php echo strtoupper($r['nama_staff']); ?>
+  </span><br>
+  <span style="display: inline-block; text-decoration: none; font-weight: normal;">
+    NIP. <?php echo !empty($rd['niplurah']) ? $rd['niplurah'] : '-'; ?>
+  </span>
+</div>
+
+
+
+  </div>
+</td>
+        
   </tr> 
+      </table>
+      <br><br><br>
+      <tr><td colspan="4">
+<table width="100%" align="center" border="0" cellspacing="1" cellpadding="4" class="table-print">
 <?php } ?>
   <tr>
-    <td align="center" colspan="2">Kepala Distrik <?php echo $rd['kec'];?></td>
+    <td align="center" colspan="2">Kepala Distrik <?php echo $camat['kecamatan'];?></td>
   </tr> 
   <tr>
-    <td align="center" colspan="2"><br><br><br><br><b>__________________</b><br>NIP. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-  </tr>
+  <td align="center" colspan="2" style="line-height: 1.8;">
+    <br><br><br><br>
+    <span style="text-decoration: underline; font-weight: bold;">
+      <?php echo strtoupper($camat['nama_camat']); ?>
+    </span><br>
+    <span style="font-weight: normal;">
+      NIP. <?php echo !empty($camat['nip_camat']) ? $camat['nip_camat'] : '-'; ?>
+    </span>
+  </td>
+</tr>
+
+
 </table>
 </td>
 </tr>
