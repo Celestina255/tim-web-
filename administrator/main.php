@@ -131,8 +131,8 @@ include_once "../assets/inc.php";
                          </section>
 
 
-                                    <!-- Header-->
-        <div class="card ">
+                                    <!-- PERUBAHAN ADA DIBAGIAN BAWAH INI-->
+         <div class="card ">
             <div class="card-body animated zoomIn" style="overflow-x: scroll;">
                 <table id="bootstrap-data-table-export0" class="table table-striped table-bordered">
                     <thead>
@@ -142,7 +142,6 @@ include_once "../assets/inc.php";
                             <th>Nama Surat</th>
                             <th>No. Hp</th>
                             <th>Tanggal</th>
-                            <th>Lamp</th>
                             <th>Foto</th>
                             <th>Opsi</th>
 
@@ -156,50 +155,63 @@ include_once "../assets/inc.php";
                         $no = 1;
                         while ($data = mysqli_fetch_assoc($query)) {
                             ?>
-                        <tr>
-                            <td align="center"><?php echo $no++; ?></td>
-                            <td><?php echo $data['nama']; ?><br><?php echo $data['nik']; ?></td>
-                            <td><?php echo $data['nmsurat']; ?></td>
-                            <td><?php echo $data['hp']; ?></td>
-                            <td><?php echo IndonesiaTgl($data['tgl']); ?></td>
-                            <td><a href="../file/berkas/<?php echo $data['berkas']; ?>" target="_BLANK">
-                                    <img src="../file/berkas/<?php echo $data['berkas']; ?>"
-                                        style="width: 100px; height: auto; border-color: white; box-shadow: 2px 1px 4px;"></a>
-                            </td>
-                            <td><a href="../file/fotowarga/<?php echo $data['foto']; ?>" target="_BLANK"><img
-                                        src="../file/fotowarga/<?php echo $data['foto']; ?>"
-                                        style=" width: 100px; height:  auto; border-color: white; box-shadow: 2px 1px 4px ;"></a>
-                            </td>
-                            <td align="center"> <?php if ($data['status'] == 'onprocess') { ?><a
-                                    href="?page=acc_permohonan&id=<?php echo $data['id']; ?>"
-                                    class="btn btn-info btn-sm w-100 mb-2" style="font-size: 13px;">
-                                    <i class="fa fa-check"></i> Terima</a>
-                                <?php } else { ?>
-                                <div class="btn btn-secondary btn-sm w-100 mb-2" style="font-size: 13px;">
-                                    <i class="fa fa-check-circle"></i> Diterima
-                                </div> <?php } ?>
+                            <tr>
+                                <td align="center"><?php echo $no++; ?></td>
+                                <td><?php echo $data['nama']; ?><br><?php echo $data['nik']; ?></td>
+                                <td><?php echo $data['nmsurat']; ?></td>
+                                <td><?php echo $data['hp']; ?></td>
+                                <td><?php echo IndonesiaTgl($data['tgl']); ?></td>
+                                <td><a href="../file/fotowarga/<?php echo $data['foto']; ?>" target="_BLANK"><img
+                                            src="../file/fotowarga/<?php echo $data['foto']; ?>"
+                                            style=" width: 100px; height:  auto; border-color: white; box-shadow: 2px 1px 4px ;"></a>
+                                </td>
+                                <td align="center">
+                                    <?php if ($data['status'] == 'onprocess') { ?>
+                                        <a href="?page=acc_permohonan&id=<?php echo $data['id']; ?>"
+                                            class="btn btn-info btn-sm w-100 mb-2" style="font-size: 13px;">
+                                            <i class="fa fa-check"></i> Terima
+                                        </a>
+                                    <?php } elseif ($data['status'] == 'diterima') { ?>
+                                        <div class="btn btn-secondary btn-sm w-100 mb-2" style="font-size: 13px;">
+                                            <i class="fa fa-check-circle"></i> Diterima
+                                        </div>
+                                    <?php } elseif ($data['status'] == 'ditolak') { ?>
+                                        <div class="btn btn-danger btn-sm w-100 mb-2" style="font-size: 13px;">
+                                            <i class="fa fa-times-circle"></i> Ditolak
+                                        </div>
+                                    <?php } ?>
 
-                                <!-- Bagian bawah: ikon Buat & Hapus -->
-                                <div class="d-flex justify-content-center gap-1">
-                                    <a href="?page=<?php echo $data['page']; ?>" class="btn btn-success btn-sm"
-                                        title="Buat Surat">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    <a href="hapus/hapus_permohonan.php?id=<?php echo $data['id']; ?>"
-                                        onclick="return confirm('Yakin ingin menghapus permohonan ini?')"
-                                        class="btn btn-danger btn-sm" title="Hapus">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                </div>
-                            </td>
+                                    <!-- Tombol Buat Surat -->
+                                    <div class="mb-2">
+                                        <a href="?page=<?php echo $data['page']; ?>" class="btn btn-success btn-sm w-100"
+                                            style="font-size: 13px;">
+                                            <i class="fa fa-edit"></i> Buat Surat
+                                        </a>
+                                    </div>
 
-                        </tr>
+                                    <!-- Tombol Hapus -->
+                                    <div>
+                                        <a href="hapus/hapus_permohonan.php?id=<?php echo $data['id']; ?>"
+                                            onclick="return confirm('Yakin ingin menghapus permohonan ini?')"
+                                            class="btn btn-sm w-100"
+                                            style="font-size: 13px; background-color: #000; color: #fff;">
+                                            <i class="fa fa-trash"></i> Hapus
+                                        </a>
+                                    </div>
+
+                                </td>
+
+
+                            </tr>
                         <?php } ?>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+ <!-- SAMPAI BAGIAN DIATAS INI-->
+
+
 <div class="au-card recent-report" style="box-shadow: 2px 1px 4px;">
     <!-- Left Panel -->
     <section class="welcome p-t-1s">
