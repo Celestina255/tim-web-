@@ -1,263 +1,167 @@
 <?php
-//include '../sesi.php';
 include '../koneksi.php';
-
 ?>
+
 <body>
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <h4>PROFILE DESA/KELURAHAN</h4>
-            </div>
-            <div class="card-body">
-                <div class="custom-tab">
-                    <div class="card-body card-block">
- 
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <h4>PROFILE DESA/KELURAHAN</h4>
+        </div>
+        <div class="card-body">
+            <div class="custom-tab">
+                <div class="card-body card-block">
+                    <?php
+                    $query = mysqli_query($con, "SELECT * FROM tb_profile LIMIT 1");
+                    $d = mysqli_fetch_array($query);
+                    ?>
 
+                    <form action="update/u_profile_desa.php" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="<?= $d['id_profil']; ?>">
 
-                            <nav><?php
-//include '../sesi.php';
-include '../koneksi.php';
+                        <nav>
+                            <div class="nav nav-tabs" role="tablist">
+                                <a class="nav-item nav-link active" data-toggle="tab" href="#sejarah" role="tab">SEJARAH</a>
+                                <a class="nav-item nav-link" data-toggle="tab" href="#visi" role="tab">VISI & MISI</a>
+                                <a class="nav-item nav-link" data-toggle="tab" href="#struktur" role="tab">STRUKTUR ORGANISASI</a>
+                                <a class="nav-item nav-link" data-toggle="tab" href="#peta" role="tab">PETA DESA</a>
+                            </div>
+                        </nav>
 
-?>
-<body>
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <h4>PROFILE DESA/KELURAHAN</h4>
-            </div>
-            <div class="card-body">
-                <div class="custom-tab">
-                    <div class="card-body card-block">
- 
+                        <br>
 
+                        <div class="tab-content pl-3 pt-2">
 
-                            <nav>
-                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <a class="nav-item nav-link active" id="custom-nav-home-tab" data-toggle="tab" href="#sejarah" role="tab" aria-controls="custom-nav-home" aria-selected="true">SEJARAH</a>
-                                    <a class="nav-item nav-link" id="custom-nav-profile-tab" data-toggle="tab" href="#visi" role="tab" aria-controls="custom-nav-profile" aria-selected="false">VISI & MISI</a>
-                                    <a class="nav-item nav-link" id="custom-nav-st-tab" data-toggle="tab" href="#st" role="tab" aria-controls="custom-nav-st" aria-selected="false">STRUKTUR ORGANISASI</a>
-                                    <a class="nav-item nav-link" id="custom-nav-peta-tab" data-toggle="tab" href="#peta" role="tab" aria-controls="custom-nav-peta" aria-selected="false">PETA DESA</a>
-                                </div>
-                            </nav>
-                            <br>
-                            <?php
-                            $query = mysqli_query($con, "SELECT * FROM tb_profile LIMIT 1");
-                            while ($d = mysqli_fetch_array($query)){
-                                ?>
-                        <form action="update/u_profile_desa.php"  method="post" onsubmit="return validasi_input(this)"  enctype="multipart/form-data" class="form-horizontal">
-                        <div class="tab-content pl-3 pt-2" id="nav-tabContent">
-                                <div class="tab-pane fade show active" id="sejarah" role="tabpanel" aria-labelledby="custom-nav-home-tab">
-                                    <h6 class="label">SEJARAH DESA/KELURAHAN :</h6>
-                                    <hr>       
-                                    <div class="row form-group">
-                                        <div class="col-12 col-md-12"><textarea rows="12" name="sejarah" class="form-control"><?php echo $d['sejarah']; ?></textarea>
-                                        <input type="hidden" id="id" name="id" value="<?php echo $d['id_profil']; ?>" class="form-control">
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-
-                                <div class="tab-pane fade" id="visi" role="tabpanel" aria-labelledby="custom-nav-profile-tab">
-                                    <h6 class="label">VISI DESA/KELURAHAN :</h6>
-                                    <hr>        
-                                    <div class="row form-group">
-                                        <div class="col-12 col-md-12"><textarea rows="2" name="visi" class="form-control"><?php echo $d['visi']; ?></textarea>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <h6 class="label">MISI DESA/KELURAHAN :</h6>
-                                    <hr>
-                                    <div class="row form-group">
-                                        <div class="col-12 col-md-12"><textarea rows="15" name="misi" class="form-control"><?php echo $d['misi']; ?></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="st" role="tabpanel" aria-labelledby="custom-nav-misi-tab">
-                                    <h6 class="label">STRUKTUR ORGANISASI DESA/KELURAHAN :</h6>
-                                    <hr>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label for="st" class=" form-control-label"></label></div>
-                                        <div class="col-12 col-md-4"><img src="../dashboard/images/pages/<?php echo $d['gambar_struktur']; ?>"></div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label for="gst" class=" form-control-label">Upload Gambar Struktur</label></div>
-                                        <div class="col-12 col-md-9"><input type="file" id="gst" name="gst" class="form-control"></div>
-                                    </div>
-                                    
-                                </div>
-                                <div class="tab-pane fade" id="peta" role="tabpanel" aria-labelledby="custom-nav-peta-tab">
-                                    <h6 class="label">PETA WILAYAH DESA : </h6>
-                                    <hr>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label for="gpeta" class=" form-control-label">Link Peta (Google Map)</label></div>
-                                        <div class="col-12 col-md-9"><textarea rows="4" id="peta" name="peta" class="form-control"><?php echo $d['peta']; ?></textarea></div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label for="peta" class=" form-control-label"></label></div>
-                                        <div class="col-12 col-md-4"><img src="../dashboard/images/pages/<?php echo $d['gambar_peta']; ?>"></div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label for="peta" class=" form-control-label">Upload Gambar Peta</label></div>
-                                        <div class="col-12 col-md-9"><input type="file" id="gpeta" name="gpeta" class="form-control"></div>
-                                    </div>
-                                </div>
+                            <!-- SEJARAH -->
+                            <div class="tab-pane fade show active" id="sejarah">
+                                <h6>SEJARAH DESA/KELURAHAN:</h6>
                                 <hr>
-                                <div class="row form-group">
-                                    <div class="col col-md-6"><button type="reset" class="btn btn-secondary btn-sm pull pull-left">Reset</button></div>
-                                    <div class="col col-md-6"><button type="submit" name="update" class="btn btn-primary btn-sm pull pull-right">Update</button></div>
+                                <textarea rows="12" name="sejarah" class="form-control"><?= $d['sejarah']; ?></textarea>
+                            </div>
 
+                            <!-- VISI & MISI -->
+                            <div class="tab-pane fade" id="visi">
+                                <h6>VISI:</h6>
+                                <hr>
+                                <textarea rows="3" name="visi" class="form-control"><?= $d['visi']; ?></textarea>
+
+                                <h6 class="mt-4">MISI:</h6>
+                                <hr>
+                                <textarea rows="10" name="misi" class="form-control"><?= $d['misi']; ?></textarea>
+                            </div>
+
+                            <!-- STRUKTUR ORGANISASI -->
+                            <div class="tab-pane fade" id="struktur">
+                                <h6>STRUKTUR ORGANISASI DESA/KELURAHAN:</h6>
+                                <hr>
+                                <div class="mb-3">
+                                    <?php if (!empty($d['gambar_struktur'])): ?>
+                                        <img src="../dashboard/images/pages/<?= $d['gambar_struktur']; ?>" width="300">
+                                    <?php else: ?>
+                                        <i>Belum ada gambar struktur organisasi.</i>
+                                    <?php endif; ?>
                                 </div>
-                            </form>
+                                <input type="file" name="gst" class="form-control">
+
+                                <hr>
+                                <h6 class="mt-4">DAFTAR PERANGKAT KAMPUNG:</h6>
+                                <?php
+                                $pegawai = mysqli_query($con, "SELECT * FROM tb_pegawai ORDER BY id_pegawai ASC");
+                                while ($p = mysqli_fetch_array($pegawai)) {
+                                    $foto = !empty($p['foto']) ? "../dashboard/images/pages/".$p['foto'] : "../dashboard/images/pages/default.png";
+                                ?>
+                                    <div class="card mb-3 p-3 shadow-sm">
+                                        <div class="row">
+                                            <input type="hidden" name="id_pegawai[]" value="<?= $p['id_pegawai']; ?>">
+                                            <div class="col-md-2 text-center">
+                                                <img src="<?= $foto; ?>" width="100" class="rounded mb-2">
+                                                <input type="file" name="foto_pegawai_<?= $p['id_pegawai']; ?>" class="form-control form-control-sm mt-2">
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="form-group">
+                                                    <label>Nama Pegawai</label>
+                                                    <input type="text" name="nama_pegawai_<?= $p['id_pegawai']; ?>" class="form-control" value="<?= $p['nama']; ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Jabatan</label>
+                                                    <input type="text" name="jabatan_pegawai_<?= $p['id_pegawai']; ?>" class="form-control" value="<?= $p['jabatan']; ?>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            </div>
+
+                            <!-- PETA DESA -->
+                            <div class="tab-pane fade" id="peta">
+                                <h6>PETA WILAYAH DESA:</h6>
+                                <hr>
+                                <label>Link Google Map (Embed)</label>
+                                <textarea name="peta" rows="4" class="form-control"><?= $d['peta']; ?></textarea>
+                                <small class="form-text text-muted">Google Maps → Bagikan → Sematkan peta → salin URL di atribut src.</small>
+
+                                <hr>
+                                <h6>Batas Desa</h6>
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <label>Utara</label>
+                                        <input type="text" name="batas_utara" class="form-control" value="<?= $d['batas_utara']; ?>">
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <label>Timur</label>
+                                        <input type="text" name="batas_timur" class="form-control" value="<?= $d['batas_timur']; ?>">
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <label>Selatan</label>
+                                        <input type="text" name="batas_selatan" class="form-control" value="<?= $d['batas_selatan']; ?>">
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <label>Barat</label>
+                                        <input type="text" name="batas_barat" class="form-control" value="<?= $d['batas_barat']; ?>">
+                                    </div>
+                                </div>
+
+                                <hr>
+                                <h6>Luas & Jumlah Penduduk</h6>
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <label>Luas Desa (m²)</label>
+                                        <input type="number" name="luas_desa" class="form-control" value="<?= $d['luas_desa']; ?>">
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <label>Jumlah Penduduk (jiwa)</label>
+                                        <input type="number" name="jumlah_penduduk" class="form-control" value="<?= $d['jumlah_penduduk']; ?>">
+                                    </div>
+                                </div>
+
+                                <hr>
+                                <div class="mb-3">
+                                    <label>Peta Saat Ini:</label><br>
+                                    <?php if (!empty($d['gambar_peta'])): ?>
+                                        <img src="../dashboard/images/pages/<?= $d['gambar_peta']; ?>" width="300">
+                                    <?php else: ?>
+                                        <i>Belum ada gambar peta.</i>
+                                    <?php endif; ?>
+                                </div>
+                                <input type="file" name="gpeta" class="form-control">
+                            </div>
                         </div>
-                        <?php } ?>
+
+                        <hr>
+                        <div class="row form-group">
+                            <div class="col-md-6">
+                                <button type="reset" class="btn btn-secondary btn-sm">Reset</button>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <button type="submit" name="update" class="btn btn-primary btn-sm">Update</button>
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-    <script src="../assets/js/jquery.min.js"></script> <!-- untuk Pemanggilan data penduduk -->
-
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-          $('#bootstrap-data-table-export').DataTable();
-      } );
-  </script>
-
-  <script>
-    jQuery(document).ready(function() {
-        jQuery(".standardSelect").chosen({
-            disable_search_threshold: 10,
-            no_results_text: "Oops, nothing found!",
-            width: "100%"
-        });
-    });
-</script>
-
-
-</body>
-</html>
-
-                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <a class="nav-item nav-link active" id="custom-nav-home-tab" data-toggle="tab" href="#sejarah" role="tab" aria-controls="custom-nav-home" aria-selected="true">SEJARAH</a>
-                                    <a class="nav-item nav-link" id="custom-nav-profile-tab" data-toggle="tab" href="#visi" role="tab" aria-controls="custom-nav-profile" aria-selected="false">VISI & MISI</a>
-                                    <a class="nav-item nav-link" id="custom-nav-st-tab" data-toggle="tab" href="#st" role="tab" aria-controls="custom-nav-st" aria-selected="false">STRUKTUR ORGANISASI</a>
-                                    <a class="nav-item nav-link" id="custom-nav-peta-tab" data-toggle="tab" href="#peta" role="tab" aria-controls="custom-nav-peta" aria-selected="false">PETA DESA</a>
-                                </div>
-                            </nav>
-                            <br>
-                            <?php
-                            $query = mysqli_query($con, "SELECT * FROM tb_profile LIMIT 1");
-                            while ($d = mysqli_fetch_array($query)){
-                                ?>
-                        <form action="update/u_profile_desa.php"  method="post" onsubmit="return validasi_input(this)"  enctype="multipart/form-data" class="form-horizontal">
-                        <div class="tab-content pl-3 pt-2" id="nav-tabContent">
-                                <div class="tab-pane fade show active" id="sejarah" role="tabpanel" aria-labelledby="custom-nav-home-tab">
-                                    <h6 class="label">SEJARAH DESA/KELURAHAN :</h6>
-                                    <hr>       
-                                    <div class="row form-group">
-                                        <div class="col-12 col-md-12"><textarea rows="12" name="sejarah" class="form-control"><?php echo $d['sejarah']; ?></textarea>
-                                        <input type="hidden" id="id" name="id" value="<?php echo $d['id_profil']; ?>" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label for="gsejarah" class=" form-control-label"></label></div>
-                                        <div class="col-12 col-md-4"><img src="../dashboard/images/pages/<?php echo $d['gambar_sejarah']; ?>"></div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label for="gsj" class=" form-control-label">Upload Gambar Sejarah</label></div>
-                                        <div class="col-12 col-md-9"><input type="file" id="gsj" name="gsj" class="form-control"></div>
-                                    </div>
-                                </div>
-
-                                <div class="tab-pane fade" id="visi" role="tabpanel" aria-labelledby="custom-nav-profile-tab">
-                                    <h6 class="label">VISI DESA/KELURAHAN :</h6>
-                                    <hr>        
-                                    <div class="row form-group">
-                                        <div class="col-12 col-md-12"><textarea rows="2" name="visi" class="form-control"><?php echo $d['visi']; ?></textarea>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <h6 class="label">MISI DESA/KELURAHAN :</h6>
-                                    <hr>
-                                    <div class="row form-group">
-                                        <div class="col-12 col-md-12"><textarea rows="15" name="misi" class="form-control"><?php echo $d['misi']; ?></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label for="gvisi" class=" form-control-label"></label></div>
-                                        <div class="col-12 col-md-4"><img src="../dashboard/images/pages/<?php echo $d['gambar_visi']; ?>"></div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label for="gvisi" class=" form-control-label">Upload Gambar Visi Misi</label></div>
-                                        <div class="col-12 col-md-9"><input type="file" id="gvisi" name="gvisi" class="form-control"></div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="st" role="tabpanel" aria-labelledby="custom-nav-misi-tab">
-                                    <h6 class="label">STRUKTUR ORGANISASI DESA/KELURAHAN :</h6>
-                                    <hr>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label for="st" class=" form-control-label"></label></div>
-                                        <div class="col-12 col-md-4"><img src="../dashboard/images/pages/<?php echo $d['gambar_struktur']; ?>"></div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label for="gst" class=" form-control-label">Upload Gambar Struktur</label></div>
-                                        <div class="col-12 col-md-9"><input type="file" id="gst" name="gst" class="form-control"></div>
-                                    </div>
-                                    
-                                </div>
-                                <div class="tab-pane fade" id="peta" role="tabpanel" aria-labelledby="custom-nav-peta-tab">
-                                    <h6 class="label">PETA WILAYAH DESA : </h6>
-                                    <hr>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label for="gpeta" class=" form-control-label">Link Peta (Google Map)</label></div>
-                                        <div class="col-12 col-md-9"><textarea rows="4" id="peta" name="peta" class="form-control"><?php echo $d['peta']; ?></textarea></div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label for="peta" class=" form-control-label"></label></div>
-                                        <div class="col-12 col-md-4"><img src="../dashboard/images/pages/<?php echo $d['gambar_peta']; ?>"></div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3"><label for="peta" class=" form-control-label">Upload Gambar Peta</label></div>
-                                        <div class="col-12 col-md-9"><input type="file" id="gpeta" name="gpeta" class="form-control"></div>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row form-group">
-                                    <div class="col col-md-6"><button type="reset" class="btn btn-secondary btn-sm pull pull-left">Reset</button></div>
-                                    <div class="col col-md-6"><button type="submit" name="update" class="btn btn-primary btn-sm pull pull-right">Update</button></div>
-
-                                </div>
-                            </form>
-                        </div>
-                        <?php } ?>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-    <script src="../assets/js/jquery.min.js"></script> <!-- untuk Pemanggilan data penduduk -->
-
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-          $('#bootstrap-data-table-export').DataTable();
-      } );
-  </script>
-
-  <script>
-    jQuery(document).ready(function() {
-        jQuery(".standardSelect").chosen({
-            disable_search_threshold: 10,
-            no_results_text: "Oops, nothing found!",
-            width: "100%"
-        });
-    });
-</script>
-
-
 </body>
 </html>
