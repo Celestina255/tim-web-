@@ -1341,6 +1341,7 @@ ul.top-menu li a:hover {
 /* ini adalah file css yang tinggal di update di dalam file style.css. NAMUN PASTIKAN BAHWA CSS LAMANYA SUDAH DIHAPUS. 
 HARUS HATI-HATI JANGAN HAPUS SEMUA ISI FILENYA NANTI TAMPILAN CSSMU YANG TERGANGGU*/
 
+/* ======= NAVBAR UTAMA ======= */
 .navbar {
   background-color: #3D2D13;
   padding: 0.5rem 1rem;
@@ -1348,7 +1349,7 @@ HARUS HATI-HATI JANGAN HAPUS SEMUA ISI FILENYA NANTI TAMPILAN CSSMU YANG TERGANG
   justify-content: space-between;
   align-items: center;
 
-   position: fixed;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -1359,13 +1360,11 @@ body {
   padding-top: 81px; /* untuk menghindari konten tertutup navbar */
 }
 
-
 .navbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  
 }
 
 /* Logo & Info */
@@ -1380,7 +1379,7 @@ body {
 }
 
 .kampung-info .text-info {
-  color: #ffffff; /* putih */
+  color: #ffffff;
   font-family: 'Inter', sans-serif;
   line-height: 1.5;
 }
@@ -1393,7 +1392,7 @@ body {
 
 .kampung-info .text-info div:last-child {
   font-size: 15px;
-   color: white;
+  color: white;
 }
 
 /* Menu Tengah */
@@ -1456,7 +1455,7 @@ body {
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #ffffffff;
+  background-color: #ffffff;
   border: none;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   display: none;
@@ -1469,7 +1468,7 @@ body {
 }
 
 .dropdown-menu .dropdown-item {
-  color: #000000ff !important;
+  color: #000000 !important;
   font-size: 14px;
   padding: 10px 20px;
   white-space: nowrap;
@@ -1482,19 +1481,243 @@ body {
 }
 
 /* Tombol Logout */
+.logout-wrapper {
+  margin-right: 20px;
+  margin-left: 10px;
+}
 
- .logout-wrapper {
-    margin-right: 20px;
-    margin-left: 10px;
+/* ======= RESPONSIVE MENU ======= */
+
+/* Tombol hamburger */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Tampilan Mobile & Tablet */
+@media screen and (max-width: 1350px) {
+  .navbar-container {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-@media (min-width: 992px) {
-  .navbar-container {
-    flex-direction: row;
-    align-items: center;
+  .hamburger {
+    display: block;
+    align-self: flex-end;
+    margin: 10px 20px;
+  }
+
+  .navbar-main-wrapper {
+    display: none !important;
+  }
+
+  .navbar-main-wrapper.active {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #3D2D13;
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .navbar-nav > li {
+    width: 100%;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .navbar-nav > li > a {
+    display: block;
+    padding: 12px 20px;
+    margin-right: 0;
+  }
+
+  .nav-link {
+    width: 100%;
+  }
+
+  .navbar-nav .dropdown-menu {
+    position: static;
+    background-color: #2e1f0e;
+    box-shadow: none;
+    display: none;
+    padding-left: 15px;
+  }
+
+  .navbar-nav li.dropdown:hover > .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-menu .dropdown-item {
+    color: #fff !important;
+    padding: 10px 20px;
+  }
+
+  .logout-wrapper {
+    width: 100%;
+    text-align: right;
+    padding: 10px 20px;
+  }
+
+  .top-right-btn {
+    margin-top: 10px;
   }
 }
 
+/* Ukuran Font Responsive */
+@media screen and (max-width: 480px) {
+  .kampung-info .text-info .text-bold {
+    font-size: 16px;
+  }
+  .kampung-info .text-info div:last-child {
+    font-size: 13px;
+  }
+  .navbar .nav-link {
+    font-size: 13px;
+  }
+}
+
+/*Akhir Navbar*/
+
+/* Sidebar Style */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -280px;
+  width: 280px;
+  height: 100%;
+  background-color: #3D2D13;
+  color: white;
+  transition: left 0.3s ease;
+  z-index: 1100;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+.sidebar .close-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: white;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.sidebar-nav {
+  list-style: none;
+  padding: 0;
+  margin-top: 60px;
+}
+
+.sidebar-nav li {
+  margin-bottom: 10px;
+}
+
+.sidebar-nav > li > a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 10px 15px;
+  font-weight: 600;
+  background-color: transparent;
+  border-radius: 5px;
+}
+
+.sidebar-nav li a:hover {
+  background-color: #4f3b21;
+}
+
+/* Dropdown */
+.sidebar-dropdown > a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar-submenu {
+  display: none;
+  padding-left: 15px;
+}
+
+
+/* TAMPILKAN submenu secara otomatis saat hover */
+.sidebar-dropdown:hover .sidebar-submenu {
+  display: block;
+   background-color: #ffffff;
+}
+
+.sidebar-submenu li a {
+  display: block;
+  width: 100%;
+  padding: 10px 10px; /* ubah dari 15px jadi 20px agar lebih rata */
+  background-color: transparent;
+  color: #000;
+  text-decoration: none;
+  box-sizing: border-box;
+  text-align: left; /* pastikan rata kiri */
+}
+
+.sidebar-submenu {
+  display: none;
+  margin: 0;
+  padding: 0;
+}
+.sidebar-submenu li {
+  margin: 0;
+  width: 100%;
+}
+
+
+
+.sidebar-dropdown .sidebar-submenu:hover {
+  background-color: #ffffff;
+  color: #ffffff !important;
+}
+
+.sidebar-dropdown .sidebar-submenu li a:hover {
+  color: white !important;
+    background-color: #4f3b21;
+  color: #fff;
+}
+
+/* Tampilkan submenu saat aktif */
+.sidebar-dropdown.active .sidebar-submenu {
+  display: block;
+}
+
+/* Login Button */
+.sidebar-login {
+  margin-top: 30px;
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 280px; /* dimulai dari ujung sidebar */
+  width: calc(100% - 280px); /* sisa layar di luar sidebar */
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1099;
+  display: none;
+}
+
+.sidebar-overlay.active {
+  display: block;
+}
+
+/*Akhir NAvbar*/
 /* Slider
 ================================================== */
 /*--dashboard halaman pertama--*/
