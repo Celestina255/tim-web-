@@ -1,22 +1,27 @@
 <?php
 include '../../koneksi.php';
-$id		= $_POST['id'];
-$ket	= $_POST['keterangan'];
 
-$terima=(isset($_POST['terima'])); 
-$tolak=(isset($_POST['tolak']));
+$id   = $_POST['id'];
+$ket  = $_POST['keterangan'];
 
-if ($terima){
-	mysqli_query($con, "UPDATE tb_permohonan SET keterangan='$ket', status='acc' WHERE id='$id'");
+$terima = isset($_POST['terima']);
+$tolak  = isset($_POST['tolak']);
 
-	echo "<script>alert('Permohonan sudah di acc..!'); window.location = '../index.php?page=process_permohonan_all'</script>"; 
+if ($terima) {
+    // Update status jadi diterima
+    mysqli_query($con, "UPDATE tb_permohonan SET keterangan='$ket', status='diterima' WHERE id='$id'");
+    echo "<script>alert('Permohonan Surat Diterima'); window.location = '../index.php?page=process_permohonan_all';</script>";
+} elseif ($tolak) {
+    // Cek apakah alasan penolakan kosong
+    if (empty($ket)) {
+        echo "<script>alert('Silahkan Isi Alasan Penolakan Surat'); window.location = '../index.php?page=acc_permohonan&id=$id';</script>";
+        exit();
+    }
 
-}else if($tolak){
-	if(!empty($ket)){
-		mysqli_query($con, "UPDATE tb_permohonan SET keterangan='$ket', status='ditolak' WHERE id='$id'");
-		echo "<script>alert('Permohonan sudah ditolak..!'); window.location = '../index.php?page=process_permohonan_all'</script>"; 
-	}
-	echo "<script>alert('Alasan penolakan wajib diisi..!'); window.location = '../index.php?page=acc_permohonan&id=$id'</script>"; 
+    // Update status jadi ditolak
+    mysqli_query($con, "UPDATE tb_permohonan SET keterangan='$ket', status='ditolak' WHERE id='$id'");
+    echo "<script>alert('Permohonan Surat Ditolak'); window.location = '../index.php?page=process_permohonan_all';</script>";
 }
 ?>
+
 
