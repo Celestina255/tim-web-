@@ -256,8 +256,33 @@ include_once "../assets/inc.php";
                                 echo $data['status'];
                             }
                             ?>
+                        <!--Pembaharun bagian surat mandiri untuk aksi -->
                         </td>
-                        <td><a href="?page=acc&id=<?php echo $data['id']; ?>">Terima</a></td>
+                        <td>
+                         </a>
+                            <?php if ($data['status'] == 'onprocess') { ?>
+                                <a href="?page=acc&id=<?php echo $data['id']; ?>" class="btn btn-success btn-sm w-100 mb-2" style="font-size: 13px;">
+                                    <i class="fa fa-check"></i> Terima
+                                </a>
+                            <?php } elseif ($data['status'] == 'diterima') { ?>
+                                <div class="btn btn-secondary btn-sm w-100 mb-2" style="font-size: 13px;">
+                                    <i class="fa fa-check-circle"></i> Diterima
+                                </div>
+                            <?php } elseif ($data['status'] == 'ditolak') { ?>
+                                <div class="btn btn-danger btn-sm w-100 mb-2" style="font-size: 13px;">
+                                    <i class="fa fa-times-circle"></i> Ditolak
+                                </div>
+                            <?php } ?>
+                                <!-- Tombol Hapus -->
+                                    <div>
+                                        <a href="hapus/hapus_permohonan.php?id=<?php echo $data['id']; ?>"
+                                            onclick="return confirm('Yakin ingin menghapus permohonan ini?')"
+                                            class="btn btn-sm w-100"
+                                            style="font-size: 13px; background-color: #000; color: #fff;">
+                                            <i class="fa fa-trash"></i> Hapus
+                                        </a>
+                                    </div>
+                            
                     </tr>
                     <?php } ?>
                 </tbody>
