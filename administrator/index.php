@@ -167,10 +167,11 @@ include '../koneksi.php';
                             $queryy = mysqli_query ($con, "SELECT * FROM tb_permohonan WHERE status='onprocess' ORDER BY id ASC limit 4");
                             while ($rr = mysqli_fetch_array($queryy)){
                             ?>
-                                            <div class="mess__item">
-                                                <div class="image img-cir img-40">
-                                                    <?php echo ($rr['foto']!=null ? "<img src='../file/fotowarga/$rr[foto]'" : "<img src='../file/foto/no_pic.png'>").  "alt='' />" ?>
+                                           <div class="notifi__item">
+                                                <div class="bg-c1 img-cir img-40">
+                                                 <i class="zmdi zmdi-email-open"></i>
                                                 </div>
+                                
                                                 <div class="content">
                                                     <p><a href="?page=<?php echo $rr['page'];?>"><?php echo $rr['nama'];?></a> <small><span class="date pull pull-right"><?php echo $rr['tgl'];?></span></small>
                                                     <br><?php echo $rr['nmsurat'];?></p>
