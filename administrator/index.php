@@ -172,11 +172,14 @@ include '../koneksi.php';
                                                  <i class="zmdi zmdi-email-open"></i>
                                                 </div>
                                 
-                                                <div class="content">
-                                                    <p><a href="?page=<?php echo $rr['page'];?>"><?php echo $rr['nama'];?></a> <small><span class="date pull pull-right"><?php echo $rr['tgl'];?></span></small>
-                                                    <br><?php echo $rr['nmsurat'];?></p>
-                                                    
-                                                </div>
+                                               <div class="content">
+                                                <p><a href="?page=acc_permohonan&id=<?php echo $rr['id']; ?>"><?php echo $rr['nama']; ?></a>
+                                                <span class="date pull pull-right">
+                                                    <?php echo $rr['tgl']; ?>
+                                                </span>
+                                                <br><?php echo $rr['nmsurat']; ?>
+                                                </p>
+                                                    </div>
                                             </div><?php } ?>
                                             
                                             <div class="mess__footer">
