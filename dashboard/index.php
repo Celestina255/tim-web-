@@ -206,107 +206,111 @@ error_reporting(0);
 <?php include 'load_file.php'; ?>
 
    
+
 <!-- Footer start-->
 <footer class="footer" id="footer">
   <div class="container">
-    <div class="row">
+    <div class="row align-items-start">
 
-      <!-- Kolom 1: Logo -->
-      <div class="col-lg-2 col-md-4 footer-widget text-center">
-        <img src="../img/logo.png" alt="Logo" class="footer-logo-img">
+      <!-- Kolom 1: Logo + Alamat (digabung agar responsif rapi) -->
+      <div class="col-lg-6 col-md-12">
+        <div class="footer-hero">
+          <img src="../img/logo.png" alt="Logo" class="footer-logo-img" />
+          <div class="footer-widget-kampung">
+            <h3 class="footer-title">Pemerintah Kampung Banjar Ausoy</h3>
+            <p>
+              Jalan Poros Manimeri Bintuni SP IV<br>
+              Kampung Banjar Ausoy, Kecamatan Manimeri,<br>
+              Kabupaten Teluk Bintuni<br>
+              Provinsi Papua Barat, 98364
+            </p>
+          </div>
+        </div>
       </div>
 
-      <!-- Kolom 2: Teks dan alamat -->
-      <div class="col-lg-4 col-md-8 footer-widget-kampung">
-        <h3 class="footer-title">Pemerintah Kampung Banjar Ausoy</h3>
-        <p>
-          Jalan Poros Manimeri Bintuni SP IV<br>
-          Kampung Banjar Ausoy, Kecamatan Manimeri,<br>
-          Kabupaten Teluk Bintuni<br>
-          Provinsi Papua Barat, 98364
-        </p>
-      </div>
-
-      <!-- Kolom 3: Hubungi Kami -->
-      <div class="col-lg-3 col-md-6 footer-widget-hubungi">
+      <!-- Kolom 2: Hubungi Kami -->
+      <div class="col-lg-3 col-md-6 col-sm-6 footer-widget-hubungi">
         <h3 class="footer-title">Hubungi Kami</h3>
         <p><i class="fa fa-phone"></i> 082199656081</p>
         <p><i class="fa fa-envelope"></i> banjarausoysp4@gmail.co.id</p>
         <div class="social-icons">
-          <a href="#"><i class="fa fa-instagram"></i></a>
-          <a href="#"><i class="fa fa-facebook"></i></a>
-          <a href="#"><i class="fa fa-whatsapp"></i></a>
-          <a href="#"><i class="fa fa-youtube"></i></a>
-          <a href="#"><i class="fa fa-tiktok"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-tiktok"></i></a>
         </div>
       </div>
 
-      <!-- Kolom 4: Navigasi Jelajahi -->
-<div class="col-lg-3 col-md-6 footer-widget-jelajahi">
-  <h3 class="footer-title">Jelajahi</h3><div class="footer-links-wrapper">
-  <ul class="footer-links">
-    <li><a href="?page=warga">Beranda</a></li>
-    <li><a href="?page=berita">Berita</a></li>
-    <li><a href="?page=login_act">Pengaduan</a></li>
-  </ul>
-  <ul class="footer-links">
-    <li class="dropdown">
-      <a class="dropdown-toggle" href="#" data-toggle="dropdown">Profil</a>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="?page=sejarah">Sejarah</a></li>
-        <li><a class="dropdown-item" href="?page=struktur">Struktur</a></li>
-        <li><a class="dropdown-item" href="?page=visimisi">Visi & Misi</a></li>
-        <li><a class="dropdown-item" href="?page=petadesa">Peta Desa</a></li>
-      </ul>
-    </li>
+      <!-- Kolom 3: Jelajahi -->
+      <div class="col-lg-3 col-md-6 col-sm-6 footer-widget-jelajahi ml-lg-auto">
+        <h3 class="footer-title">Jelajahi</h3>
+        <div class="footer-links-wrapper">
+          <ul class="footer-links">
+            <li class="dropdown">
+              <a class="dropdown-toggle" href="#" data-toggle="dropdown">Profil</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="?page=sejarah">Sejarah</a></li>
+                <li><a class="dropdown-item" href="?page=struktur">Struktur</a></li>
+                <li><a class="dropdown-item" href="?page=visimisi">Visi & Misi</a></li>
+                <li><a class="dropdown-item" href="?page=petadesa">Peta Desa</a></li>
+              </ul>
+            </li>
 
-    <li class="dropdown">
-      <a class="dropdown-toggle" href="#" data-toggle="dropdown">Transparansi</a>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="?page=transparansi_penduduk">Data Penduduk</a></li>
-        <li><a class="dropdown-item" href="?page=transparansi_apbdes">APBD</a></li>
-        <li><a class="dropdown-item" href="?page=transparansi_idm">IDM</a></li>
-      </ul>
-    </li>
+             <li class="dropdown">
+              <a class="dropdown-toggle" href="#" data-toggle="dropdown">Transparansi</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="?page=transparansi_penduduk">Data Penduduk</a></li>
+                <li><a class="dropdown-item" href="?page=transparansi_apbdes">APBD</a></li>
+                <li><a class="dropdown-item" href="?page=transparansi_idm">IDM</a></li>
+              </ul>
+            </li>
 
-    <li class="dropdown">
-      <a class="dropdown-toggle" href="#" data-toggle="dropdown">Lembaga Masyarakat</a>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="?page=permohonan">BUMDes</a></li>
-        <li><a class="dropdown-item" href="?page=mandiri">Karang Taruna</a></li>
-        <li><a class="dropdown-item" href="?page=mandiri">RT/RW</a></li>
-        <li><a class="dropdown-item" href="?page=mandiri">PKK</a></li>
-      </ul>
-    </li>
+            <li><a href="?page=warga">Beranda</a></li>
 
-    <li class="dropdown">
-      <a class="dropdown-toggle" href="#" data-toggle="dropdown">Layanan</a>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="?page=pelayanan">Permohonan Surat</a></li>
-        <li><a class="dropdown-item" href="?page=surat_mandiri">Buat Surat Mandiri</a></li>
-      </ul>
-    </li>
-  </ul>
-</div>
+            <li><a href="?page=login_act">Pengaduan</a></li>
+          </ul>
+          <ul class="footer-links">
 
+            <li class="dropdown">
+              <a class="dropdown-toggle" href="#" data-toggle="dropdown">Lembaga Masyarakat</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="?page=permohonan">BUMDes</a></li>
+                <li><a class="dropdown-item" href="?page=mandiri">Karang Taruna</a></li>
+                <li><a class="dropdown-item" href="?page=mandiri">RT/RW</a></li>
+                <li><a class="dropdown-item" href="?page=mandiri">PKK</a></li>
+              </ul>
+            </li>
+
+              <li class="dropdown">
+              <a class="dropdown-toggle" href="#" data-toggle="dropdown">Layanan</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="?page=pelayanan">Permohonan Surat</a></li>
+                <li><a class="dropdown-item" href="?page=surat_mandiri">Buat Surat Mandiri</a></li>
+              </ul>
+            </li>
+
+              <li><a href="?page=berita">Berita</a></li>
+
+          </ul>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <!-- Copyright -->
   <div class="footer-bottom">
     <div class="container text-center">
       <p>© 2025 - Website Kampung Banjar Ausoy Powered by KKN Tematik Unipa 2025</p>
     </div>
   </div>
 
-    <div class="back-to-top affix" id="back-to-top" data-spy="affix" data-offset-top="10">
+  <div class="back-to-top affix" id="back-to-top" data-spy="affix" data-offset-top="10">
     <button class="btn btn-primary" title="Back to Top">
       <i class="fa fa-angle-double-up"></i>
     </button>
   </div>
 </footer>
-
 <!-- Footer end-->
 
       <!-- End Back to Top-->
