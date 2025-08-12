@@ -3713,151 +3713,439 @@ p.panel-title a.collapsed {
 }
 
 
-/* Footer
-================================================== */
-.footer {
-  background-color: #3D2D13;
-  padding: 50px 5px; /* Tambah padding agar konten lebih melebar */
-  color: white;
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
+/* ==============================
+   FOOTER – BASE (desktop / umum)
+   ============================== */
+.footer{
+  background:#3D2D13;
+  padding:50px 5px;
+  color:#fff;
+  font-family:'Inter',sans-serif;
+  font-size:14px;
+  overflow:visible; /* izinkan overlay dropdown */
 }
 
-.footer-logo-img {
-  width: 180px; /* Perbesar logo */
-  height: auto;
-  margin-left: -150px;
+/* kolom/teks umum */
+.footer-title{
+  font-size:18px;
+  font-weight:700;
+  margin:0 0 12px;
+  color:#fff;
 }
 
-.footer-title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: #ffffff;
-  gap: 30px;
+.footer-bottom{
+  margin-top: 50px;
+  margin-bottom: 0px !important;
 }
 
-.footer-widget-kampung {
-  padding-left: 10px; /* Perkecil padding agar lebih melebar */
-  max-width: 100%;
+.footer-links{ list-style:none; padding:0; margin:0; }
+.footer-links li{ margin:0 0 8px; }
+.footer-links a{ color:#fff; text-decoration:none; transition:.25s; }
+.footer-links a:hover{ color:#41cc3c; font-weight:700; }
+
+/* layout hero (logo + alamat) – desktop */
+.footer-hero{ display:flex; align-items:flex-start; gap:22px; }
+.footer-logo{ margin-right:20px; }
+.footer-logo-img{
+  display:block;
+  height:auto;
+  max-width:120px;      /* aman default */
+  transition:transform .25s, filter .25s, width .25s, margin .25s;
+}
+.footer-logo-img:hover{ transform:scale(1.02); filter:drop-shadow(0 2px 4px rgba(0,0,0,.25)); }
+
+.footer-widget-hubungi{
+  margin-left:-50px;
 }
 
-.footer-widget-hubungi {
-  padding-right: 10px;
-  max-width: 100%;
-}
+/* kolom hubungi */
+.footer-widget-hubungi p{ display:flex; align-items:center; gap:8px; margin:0 0 8px; }
+.footer-widget-hubungi p i{ width:18px; text-align:center; }
 
-.footer-widget-hubungi p i {
-  margin-right: 8px;
-  vertical-align: middle;
-}
+/*  Fix ikon jadi muncul & spacing rapi (brand pakai .fab)  */
+.social-icons i { width:auto; }
 
-.footer-widget-hubungi p {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 8px;
-}
+/* Hilangkan margin negatif yang bikin kolom tengah “beda” */
+.footer-widget-hubungi { margin-left: -50 !important; }
 
-.footer-widget-jelajahi .footer-title {
-  padding-left: 0;
-}
-
-.footer-links-wrapper {
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  gap: 10px 40px; /* baris x kolom */
+/* Jaga grid rapi saat medium screen (tablet) */
+@media (min-width: 768px) and (max-width: 991.98px){
+  .footer .footer-links-wrapper{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(160px,1fr));
+    column-gap:40px;
+    row-gap:8px;
+  }
+  .footer .footer-widget-jelajahi a{ white-space:nowrap; }
 }
 
 
-.footer-links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+/* sosmed */
+.social-icons{ display:flex; gap:32px; font-size:20px; margin-top:12px; }
+.social-icons a{ color:#fff; transition:.25s; }
+.social-icons a:hover{ color:#41cc3c; }
+
+/* Jelajahi – 2 kolom (desktop) */
+.footer-links-wrapper{
+  display:grid;
+  grid-template-columns:repeat(2, auto);
+  gap:10px 40px;
+}
+.footer .footer-widget-jelajahi a{ white-space:nowrap; } /* cegah patah "Lembaga Masyarakat" */
+
+/* ===== Dropdown footer (overlay, tidak dorong layout) ===== */
+.footer .dropdown{ position:relative; }
+.footer .dropdown-menu{
+  display:none;
+  position:absolute;   /* kunci: keluar dari flow */
+  top:100%;
+  left:0;
+  transform:translateY(6px);
+  z-index:1060;
+  margin:0;
+  padding:8px 0;
+  min-width:200px;
+  max-height:280px;    /* kalau item banyak -> scroll */
+  overflow:auto;
+  background:#fff;
+  border:0;
+  border-radius:8px;
+  box-shadow:0 10px 24px rgba(0,0,0,.18);
+}
+.footer .dropdown:hover .dropdown-menu,
+.footer .dropdown.show > .dropdown-menu{ display:block; }
+.footer .dropdown-menu .dropdown-item{
+  color:#3D2D13; background:transparent; padding:8px 14px; font-weight:500;
+}
+.footer .dropdown-menu .dropdown-item:hover,
+.footer .dropdown-menu .dropdown-item:focus{
+  background:#3D2D13; color:#fff;
 }
 
-.footer-links li {
-  margin-bottom: 8px;
+/* back-to-top selalu di atas dropdown */
+#back-to-top{ position:fixed; right:25px; bottom:25px; z-index:2000; }
+
+/* ==============================
+   TUNING DESKTOP (tanpa ganggu mobile)
+   ============================== */
+/* geser logo lebih kiri hanya di layar besar */
+@media (min-width:1200px){
+  .footer-logo-img{ margin-left:-120px; width:180px; } /* sesuaikan -120 jika ingin lebih mepet */
+}
+@media (min-width:992px) and (max-width:1199.98px){
+  .footer-logo-img{ margin-left:-60px; width:170px; }
 }
 
-.footer-links li a {
-  color: #ffffff;
-  text-decoration: none;
-  display: inline-block;
-  margin-bottom: 2px;
-  transition: color 0.3s ease;
+/* ==============================
+   TABLET (≤ 992px)
+   ============================== */
+/* Ukuran tablet (medium screen) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .footer-widget-hubungi,
+  .footer-widget-jelajahi {
+    margin-top: 20px; /* beri jarak antar widget */
+  }
+
+  .footer-info,
+  .footer-contact,
+  .footer-links {
+    flex: 1 1 30%;
+    text-align: left;
+  }
+
+  .footer-links {
+    margin-top: 0; /* biar sejajar */
+  }
 }
 
-.footer-links li a:hover,
-.social-icons a:hover {
-  color: #41cc3cff;
-  font-weight: bold;
+/* ==============================
+   MOBILE (≤ 576px) – rapi & tidak terpotong
+   ============================== */
+@media (max-width:576px){
+  .footer{ padding:35px 14px; }
+
+  /* Hapus margin negatif bawaan grid bootstrap agar tidak “kepotong” */
+  .footer .row{ margin-left:0 !important; margin-right:0 !important; }
+
+  /* Susun grid 2 baris:
+     Baris 1: [logo | teks alamat]
+     Baris 2: [hubungi | jelajahi] */
+  .footer .container{ padding-left:12px; padding-right:12px; }
+  .footer .row{
+    display:grid !important;                 /* override display:flex bawaan bootstrap */
+    grid-template-columns:92px 1fr;          /* logo 92px, teks fleksibel */
+    grid-template-areas:
+      "logo teks"
+      "hubungi jelajahi";
+    column-gap:12px;
+    row-gap:16px;
+    align-items:start;
+  }
+
+  /* Mapping area sesuai urutan HTML: (1) logo (2) teks (3) hubungi (4) jelajahi */
+  .footer .row > div:nth-child(1){ grid-area:logo;    text-align:left; }
+  .footer .row > div:nth-child(2){ grid-area:teks; }
+  .footer .row > div:nth-child(3){ grid-area:hubungi; }
+  .footer .row > div:nth-child(4){ grid-area:jelajahi; }
+
+  /* Logo kecil & aman (tanpa margin minus) */
+  .footer-logo-img{
+    width:88px !important; height:auto !important; margin-left:0 !important;
+    flex:0 0 88px !important; display:block !important;
+  }
+
+  /* Rapikan offset/padding kolom */
+  .footer .footer-widget-kampung,
+  .footer .footer-widget-hubungi,
+  .footer .footer-widget-jelajahi,
+  .footer .footer-widget.text-center{
+    padding-left:0 !important; padding-right:0 !important;
+    margin-left:0 !important;  margin-right:0 !important;
+    text-align:left !important;
+  }
+
+  /* Jelajahi: 2 kolom versi ringkas, tetap senada desktop */
+  .footer-links-wrapper{
+    display:grid !important;
+    grid-template-columns:repeat(2, minmax(120px,1fr)) !important;
+    column-gap:24px !important;
+    row-gap:6px !important;
+    grid-auto-rows:min-content !important;
+  }
+  .footer .footer-widget-jelajahi a{ white-space:nowrap !important; }
+
+  /* Sosmed sedikit dirapatkan & boleh membungkus */
+  .social-icons{ gap:14px; font-size:18px; flex-wrap:wrap; }
+
+  /* Dropdown tetap overlay di mobile juga */
+  .footer, .footer .container, .footer .row, .footer .footer-widget-jelajahi{ overflow:visible !important; }
+  .footer .dropdown-menu,
+  .footer .dropdown-menu.show{
+    position:absolute !important;
+    top:100% !important; left:0 !important; transform:translateY(6px) !important;
+    z-index:1060 !important;
+  }
 }
 
-.footer-logo-alamat {
-  display: flex;
-  gap: 20px;
+/* =========================
+   FOOTER – RESPONSIVE PATCH (FINAL)
+   Tempel DI PALING BAWAH file CSS kamu
+   ========================= */
+
+/* 0) Pastikan dropdown footer overlay (tidak dorong layout) */
+.footer,
+.footer .container,
+.footer .row,
+.footer .footer-widget-jelajahi { overflow: visible !important; }
+.footer .dropdown{ position:relative !important; }
+.footer .dropdown-menu,
+.footer .dropdown-menu.show{
+  position:absolute !important;
+  top:100% !important;
+  left:0 !important;
+  transform:translateY(6px) !important;
+  float:none !important;
+  z-index:1060 !important;
+  margin:0 !important;
+  min-width:200px;
+  max-height:280px;
+  overflow:auto;
+  background:#fff;
+  border:0;
+  border-radius:8px;
+  box-shadow:0 10px 24px rgba(0,0,0,.18);
+}
+.footer .dropdown:hover > .dropdown-menu,
+.footer .dropdown.show  > .dropdown-menu{ display:block !important; }
+.footer .dropdown-menu .dropdown-item{
+  color:#3D2D13 !important;
+  background:transparent !important;
+  padding:8px 14px;
+  font-weight:500;
+}
+.footer .dropdown-menu .dropdown-item:hover{ background:#3D2D13 !important; color:#fff !important; }
+
+/* 1) Default mobile improvements (≤ 700px) 
+      - Logo di kiri, teks di kanan
+      - Baris berikutnya Hubungi & Jelajahi sejajar
+*/
+@media (max-width:700px){
+  /* hilangkan margin negatif/padding yang bikin kepotong */
+  .footer .row{ margin-left:0 !important; margin-right:0 !important; }
+  .footer .footer-widget-kampung,
+  .footer .footer-widget-hubungi,
+  .footer .footer-widget-jelajahi,
+  .footer .footer-widget.text-center{
+    padding-left:0 !important; padding-right:0 !important;
+    margin-left:0 !important;  margin-right:0 !important;
+    text-align:left !important;
+  }
+
+  /* grid 2×2: [logo | teks] lalu [hubungi | jelajahi] */
+  .footer .container{ padding-left:12px; padding-right:12px; }
+  .footer .row{
+    display:grid !important;               /* override flex bootstrap */
+    grid-template-columns: 92px 1fr !important;
+    grid-template-areas:
+      "logo teks"
+      "hubungi jelajahi" !important;
+    column-gap:12px !important;
+    row-gap:16px !important;
+    align-items:start !important;
+  }
+
+  /* mapping 4 kolom sesuai urutan HTML kamu */
+  .footer .row > div:nth-child(1){ grid-area:logo !important; }
+  .footer .row > div:nth-child(2){ grid-area:teks !important; }
+  .footer .row > div:nth-child(3){ grid-area:hubungi !important; }
+  .footer .row > div:nth-child(4){ grid-area:jelajahi !important; }
+
+  /* logo kecil rapi */
+  .footer .footer-logo-img{
+    width:88px !important;
+    height:auto !important;
+    margin-left:0 !important;              /* buang margin minus */
+    flex:0 0 88px !important;
+    display:block !important;
+  }
+
+  /* Jelajahi: 2 kolom seperti desktop */
+  .footer .footer-links-wrapper{
+    display:grid !important;
+    grid-template-columns: repeat(2, minmax(120px, 1fr)) !important;
+    column-gap:24px !important;
+    row-gap:6px !important;
+    grid-auto-rows:min-content !important;
+  }
+  .footer .footer-widget-jelajahi a{ white-space:nowrap !important; }
+
+  /* ikon sosmed sedikit dirapatkan */
+  .footer .social-icons{ gap:14px !important; font-size:18px !important; flex-wrap:wrap !important; }
 }
 
-.social-icons {
-  display: flex;
-  gap: 25px;
-  font-size: 20px;
-  margin-top: 15px;
+/* 2) Mode “dimepetin banget” (≤ 480px)
+      - Hubungi turun DI BAWAH Pemerintah
+      - Jelajahi DI BAWAH Hubungi (stack vertikal)
+*/
+@media (max-width:480px){
+  .footer .row{
+    grid-template-areas:
+      "logo teks"
+      "hubungi hubungi"
+      "jelajahi jelajahi" !important;
+    grid-template-columns: 92px 1fr !important;
+  }
 }
 
-.social-icons a {
-  color: white;
-  transition: 0.3s ease;
+/* 3) Desktop tetap seperti semula (tidak diubah), 
+      tapi pastikan baris tidak paksa nowrap di luar desktop */
+@media (min-width:992px){
+  /* kalau kamu pernah set .footer .row { flex-wrap:nowrap; } di luar desktop,
+     aturan ini membiarkan desktop tetap rapih tanpa mengganggu mobile */
 }
 
-.footer-bottom {
-  background-color: #3D2D13;
-  color: white;
-  text-align: center;
-  padding-top: 15px;
-  font-size: 13px;
-  border-top: 1px solid #4e3a20;
-  margin-top: 20px;
+/* 4) Back-to-top harus selalu di atas dropdown/menu */
+#back-to-top{
+  position:fixed !important;
+  right:25px !important;
+  bottom:25px !important;
+  z-index:2000 !important;
 }
 
-/* Dropdown Hover */
-.footer .dropdown:hover .dropdown-menu {
-  display: block;
+/* ===== FOOTER – RESPONSIVE PATCH (append at the very end) ===== */
+
+/* Dropdown tetap overlay, tidak mendorong footer (aman di semua ukuran) */
+.footer,
+.footer .container,
+.footer .row,
+.footer .footer-widget-jelajahi { overflow: visible !important; }
+.footer .dropdown { position: relative !important; }
+.footer .dropdown-menu,
+.footer .dropdown-menu.show{
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  transform: translateY(6px) !important;
+  float: none !important;
+  z-index: 1060 !important;
 }
 
-.footer-links .dropdown-toggle {
-  display: inline-block;
-  padding: 2px 0;
+/* ---------- Tablet & layar dipersempit (<= 768px) ---------- */
+@media (max-width: 768px){
+  /* Pastikan .row tetap flex dan boleh melipat baris */
+  .footer .row{ display:flex !important; flex-wrap:wrap !important; }
+
+  /* Netralisir offset & minus margin agar tidak terpotong */
+  .footer .row{ margin-left:0 !important; margin-right:0 !important; }
+  .footer .footer-widget-hubungi,
+  .footer .footer-widget-jelajahi{
+    margin-left:0 !important;
+  }
+
+  /* Logo mengecil, tanpa margin negatif */
+  .footer .footer-logo-img{ width:100px !important; height:auto !important; margin-left:0 !important; }
+
+  /* “Jelajahi” dua kolom + jarak yang enak */
+  .footer .footer-widget-jelajahi{ margin-top:16px !important; }
+  .footer .footer-links-wrapper{
+    display:grid !important;
+    grid-template-columns: repeat(2, minmax(120px, 1fr)) !important;
+    column-gap:28px !important;
+    row-gap:6px !important;
+  }
+  .footer .footer-widget-jelajahi a{ white-space:nowrap !important; } /* cegah patah baris */
 }
 
-.footer-links li.dropdown {
-  white-space: nowrap;     /* Pastikan tidak pindah baris */
-  width: 100%;
+/* ---------- HP kecil / sangat sempit (<= 480px) ---------- */
+/* Urutan: [Logo] [Teks alamat] -> [Hubungi Kami] -> [Jelajahi] */
+@media (max-width: 480px){
+  .footer .row{ display:flex !important; flex-wrap:wrap !important; }
+
+  /* Masing-masing kolom full-width */
+  .footer .row > div{ width:100% !important; }
+
+  /* Atur urutan kolom tanpa ubah HTML */
+  .footer .row > div:nth-child(1){ order:1; } /* logo */
+  .footer .row > div:nth-child(2){ order:2; } /* teks alamat */
+  .footer .row > div:nth-child(3){ order:3; } /* hubungi kami -> naik tepat di bawah alamat */
+  .footer .row > div:nth-child(4){ order:4; } /* jelajahi */
+
+  /* Ukuran & jarak elemen */
+  .footer { padding: 32px 14px !important; }
+  .footer .footer-logo-img{ width:84px !important; height:auto !important; }
+  .footer .footer-title{ margin-top:6px !important; }
+
+  /* “Jelajahi” tetap dua kolom (versi ringkas) + jarak atas */
+  .footer .footer-widget-jelajahi{ margin-top:18px !important; }
+  .footer .footer-links-wrapper{
+    display:grid !important;
+    grid-template-columns: repeat(2, minmax(120px, 1fr)) !important;
+    column-gap:22px !important;
+    row-gap:6px !important;
+  }
+
+  /* Sosmed agak dirapatkan */
+  .footer .social-icons{ gap:14px !important; font-size:18px !important; flex-wrap:wrap !important; }
 }
 
-.footer-links li.dropdown a.dropdown-toggle {
-  display: inline-block;
-  max-width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  vertical-align: middle;
+/* Tombol back-to-top selalu di atas dropdown */
+#back-to-top{
+  position: fixed !important;
+  right: 25px !important;
+  bottom: 25px !important;
+  z-index: 2000 !important;
 }
 
-#back-to-top {
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  z-index: 999;
-  display: none;
-}
 
-#back-to-top.affix {
-  display: block;
-}
 
-/*footer end*/
+/*Footer End*/
 
 
 /* Sub Pages
