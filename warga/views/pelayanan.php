@@ -1,5 +1,5 @@
 <div class="col-lg-6 mx-auto">
-   <h3 class="text-center mb-4">Form Permohonan Surat Online</h3>
+   <h3 class="text-center mb-4" style="color: green;">Form Permohonan Surat Online</h3>
    <div class="contact-submit-box contact-box form-box">
       <form class="contact-form" action="../aksi/kirim_pengajuan.php" method="POST" enctype="multipart/form-data" onSubmit="return validasi(this)">
          <div class="error-container"></div>
@@ -51,7 +51,7 @@
 
             <!-- Tombol Submit -->
             <div class="col-lg-12 text-center">
-               <button class="btn btn-danger px-4 mt-3" type="submit" name="kirim">
+               <button class="btn btn-success px-4 mt-3" type="submit" name="kirim">
                   <i class="fa fa-paper-plane-o"></i> Kirim Permohonan
                </button>
             </div>
