@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['page']) && $_POST['pa
       <div class="container">
          <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10">
-               <h3 class="column-title text-center mb-4">Silahkan Pilih Nama Surat yang akan kamu buat</h3>
+               <h3 class="column-title text-center mb-4" style="color: green;">Silahkan Pilih Nama Surat yang akan kamu buat</h3>
                <div class="contact-submit-box contact-box form-box p-4 shadow-sm rounded bg-white">
                   <form class="contact-form" action="" method="POST">
                      <div class="form-group">
