@@ -38,7 +38,7 @@ $total_halaman_mandiri = ceil($jumlah_data_mandiri / $batas_mandiri);
 </style>
 
 <div class="container mt-4">
-    <h3 class="text-center mb-4">STATUS SURAT</h3>
+    <h3 class="text-center mb-4" style="color: green;">STATUS SURAT</h3>
 
     <!-- STATUS SURAT PERMOHONAN -->
     <div class="card mb-4">
