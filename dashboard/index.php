@@ -193,7 +193,7 @@ error_reporting(0);
   </ul>
 
   <div class="sidebar-login">
- <a href="?page=login" class="btn btn-danger w-100 mt-3">Login</a>
+ <a href="?page=login" class="top-right-btn btn btn-primarybtn btn-danger w-100 mt-3">Login</a>
   </div>
 </div>
 <!-- SIDEBAR RESPONSIF AKHIR -->
