@@ -63,7 +63,7 @@
                      <!-- Col 12 end-->
                   </div>
                   <!-- Form row end-->
-                  <button class="btn btn-primary tw-mt-30" type="submit" name="pesan"><i class="fa fa-paper-plane-o"></i> Kirim Pesan</button>
+                  <button class="btn btn-success tw-mt-30" type="submit" name="pesan"><i class="fa fa-paper-plane-o"></i> Kirim Pesan</button>
                </form>
                <!-- Form end-->
             </div>
