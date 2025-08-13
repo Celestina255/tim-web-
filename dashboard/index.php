@@ -123,7 +123,7 @@ error_reporting(0);
         </li>
       </ul>
       <div class="logout-wrapper">
-        <a href="?page=login" class="btn btn-danger w-100 mt-3">Login</a>
+        <a href="?page=login" class="top-right-btn btn btn-primary">Login</a>
   </div>
     </div>
   </div>
