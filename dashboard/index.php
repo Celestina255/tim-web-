@@ -65,9 +65,9 @@ error_reporting(0);
 <!-- Letakkan navbar setelah div class="body-inner yang ada isi file php -->
 
 <!-- NAVBAR AWAL -->
+<!-- NAVBAR (hanya satu) -->
 <nav class="navbar">
   <div class="navbar-container">
-    <!-- KIRI: Logo dan Nama -->
     <div class="kampung-info" id="kampungInfo">
       <img src="../img/logo.png" alt="Logo" class="logo">
       <div class="text-info ml-2">
@@ -76,12 +76,10 @@ error_reporting(0);
       </div>
     </div>
 
-    <!-- TOMBOL HAMBURGER -->
     <button class="hamburger" id="hamburger">
       <i class="fa fa-bars"></i>
     </button>
 
-    <!-- MENU UTAMA NAVBAR (Desktop) -->
     <div class="navbar-main-wrapper">
       <ul class="navbar-nav">
         <li class="nav-item"><a class="nav-link" href="index.php?page=warga">Beranda</a></li>
@@ -122,34 +120,31 @@ error_reporting(0);
           </ul>
         </li>
       </ul>
+
       <div class="logout-wrapper">
         <a href="?page=login" class="top-right-btn btn btn-primary">Login</a>
-  </div>
+      </div>
     </div>
   </div>
 </nav>
-<!-- NAVBAR AKHIR -->
 
-<!-- SIDEBAR RESPONSIF -->
-<div class="sidebar" id="sidebar">
-
+<!-- Overlay (di luar sidebar, satu kali saja) -->
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-<div class="sidebar-header d-flex align-items-center mb-3">
-  <img src="../img/logo.png" alt="Logo" style="height: 55px; margin-right: 10px;">
-  <div>
-    <div style="font-weight: bold; font-size: 16px;">Kampung Banjar Ausoy</div>
-    <div style="font-size: 13px;">Kabupaten Teluk Bintuni</div>
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-header d-flex align-items-center mb-3">
+    <img src="../img/logo.png" alt="Logo" style="height:55px;margin-right:10px;">
+    <div>
+      <div style="font-weight:bold;font-size:16px;">Kampung Banjar Ausoy</div>
+      <div style="font-size:13px;">Kabupaten Teluk Bintuni</div>
+    </div>
   </div>
-</div>
 
-  <button class="close-btn" id="closeSidebar">
-    <i class="fa fa-times"></i>
-  </button>
+  <button class="close-btn" id="closeSidebar"><i class="fa fa-times"></i></button>
 
   <ul class="sidebar-nav">
     <li><a href="index.php?page=warga">Beranda</a></li>
-
     <li class="sidebar-dropdown">
       <a href="#">Profil <i class="fa fa-chevron-down toggle-icon"></i></a>
       <ul class="sidebar-submenu">
@@ -159,11 +154,9 @@ error_reporting(0);
         <li><a href="?page=petadesa">Peta Desa</a></li>
       </ul>
     </li>
-
     <li><a href="?page=galeri">Galeri</a></li>
     <li><a href="?page=berita">Berita</a></li>
     <li><a href="?page=contact">Pengaduan</a></li>
-
     <li class="sidebar-dropdown">
       <a href="#">Layanan <i class="fa fa-chevron-down toggle-icon"></i></a>
       <ul class="sidebar-submenu">
@@ -171,7 +164,6 @@ error_reporting(0);
         <li><a href="?page=layanan">Buat Surat Mandiri</a></li>
       </ul>
     </li>
-
     <li class="sidebar-dropdown">
       <a href="#">Lembaga Masyarakat <i class="fa fa-chevron-down toggle-icon"></i></a>
       <ul class="sidebar-submenu">
@@ -181,7 +173,6 @@ error_reporting(0);
         <li><a href="?page=mandiri">PKK</a></li>
       </ul>
     </li>
-
     <li class="sidebar-dropdown">
       <a href="#">Transparansi <i class="fa fa-chevron-down toggle-icon"></i></a>
       <ul class="sidebar-submenu">
@@ -193,9 +184,10 @@ error_reporting(0);
   </ul>
 
   <div class="sidebar-login">
- <a href="?page=login" class="top-right-btn btn btn-primarybtn btn-danger w-100 mt-3">Login</a>
+    <a href="?page=login" class="top-right-btn btn btn-primary">Login</a>
   </div>
 </div>
+
 <!-- SIDEBAR RESPONSIF AKHIR -->
          <!-- AKHIR NAVBAR -->
 
@@ -393,40 +385,47 @@ $(document).ready(function(){
 
 <!-- SCRIPT NAVBAR FINAL -->
 <script>
-  const hamburger = document.getElementById('hamburger');
-  const sidebar = document.getElementById('sidebar');
-  const closeSidebar = document.getElementById('closeSidebar');
-  const overlay = document.getElementById('sidebarOverlay');
+  const hamburger   = document.getElementById('hamburger');
+  const sidebar     = document.getElementById('sidebar');
+  const closeBtn    = document.getElementById('closeSidebar');
+  const overlay     = document.getElementById('sidebarOverlay');
   const kampungInfo = document.getElementById('kampungInfo');
 
-  // Fungsi buka sidebar
-  hamburger.addEventListener('click', () => {
+  function openSidebar() {
     sidebar.classList.add('active');
     overlay.classList.add('active');
-    kampungInfo.style.display = 'none'; // Sembunyikan logo saat sidebar dibuka
-  });
+    document.body.classList.add('no-scroll');
+    if (kampungInfo) kampungInfo.style.display = 'none';
+  }
 
-  // Fungsi tutup sidebar dengan tombol X
-  closeSidebar.addEventListener('click', () => {
+  function closeSidebarFn() {
     sidebar.classList.remove('active');
     overlay.classList.remove('active');
-    kampungInfo.style.display = 'flex'; // Tampilkan logo kembali
-  });
+    document.body.classList.remove('no-scroll');
+    if (kampungInfo) kampungInfo.style.display = 'flex';
+  }
 
-  // Fungsi tutup sidebar dengan klik overlay
-  overlay.addEventListener('click', () => {
-    sidebar.classList.remove('active');
-    overlay.classList.remove('active');
-    kampungInfo.style.display = 'flex';
-  });
+  hamburger.addEventListener('click', openSidebar);
+  closeBtn.addEventListener('click', closeSidebarFn);
+  overlay.addEventListener('click', closeSidebarFn);
 
-  // Fungsi untuk handle saat layar diperbesar kembali
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 1350) {
-      sidebar.classList.remove('active');
-      overlay.classList.remove('active');
-      kampungInfo.style.display = 'flex'; // Logo muncul saat full screen
+  document.addEventListener('click', function (e) {
+    const isMobile = window.innerWidth <= 1350;
+    if (!isMobile) return;
+    if (!sidebar.classList.contains('active')) return;
+    if (!sidebar.contains(e.target) && !hamburger.contains(e.target)) {
+      closeSidebarFn();
     }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+      closeSidebarFn();
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1350) closeSidebarFn();
   });
 </script>
 
