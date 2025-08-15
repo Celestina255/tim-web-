@@ -51,10 +51,10 @@ $q = mysqli_query($con, "SELECT * FROM tb_kelurahan LIMIT 1");
 $r = mysqli_fetch_array($q);
 ?>
 
-<!-- NAVBAR -->
+<!-- NAVBAR AWAL -->
+<!-- NAVBAR (hanya satu) -->
 <nav class="navbar">
   <div class="navbar-container">
-    <!-- KIRI: Logo dan Nama -->
     <div class="kampung-info" id="kampungInfo">
       <img src="../img/logo.png" alt="Logo" class="logo">
       <div class="text-info ml-2">
@@ -63,16 +63,13 @@ $r = mysqli_fetch_array($q);
       </div>
     </div>
 
-    <!-- TOMBOL HAMBURGER -->
-    <button class="hamburger" id="hamburger" aria-label="Menu">
+    <button class="hamburger" id="hamburger">
       <i class="fa fa-bars"></i>
     </button>
 
-    <!-- MENU UTAMA NAVBAR (Desktop) -->
     <div class="navbar-main-wrapper">
       <ul class="navbar-nav">
         <li class="nav-item"><a class="nav-link" href="index.php?page=warga">Beranda</a></li>
-
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#">Profil</a>
           <ul class="dropdown-menu">
@@ -82,11 +79,9 @@ $r = mysqli_fetch_array($q);
             <li><a class="dropdown-item" href="?page=petadesa">Peta Desa</a></li>
           </ul>
         </li>
-
         <li class="nav-item"><a class="nav-link" href="?page=galeri">Galeri</a></li>
         <li class="nav-item"><a class="nav-link" href="?page=berita">Berita</a></li>
         <li class="nav-item"><a class="nav-link" href="?page=contact">Pengaduan</a></li>
-
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#">Layanan</a>
           <ul class="dropdown-menu">
@@ -94,7 +89,6 @@ $r = mysqli_fetch_array($q);
             <li><a class="dropdown-item" href="?page=layanan">Buat Surat Mandiri</a></li>
           </ul>
         </li>
-
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#">Lembaga Masyarakat</a>
           <ul class="dropdown-menu">
@@ -104,7 +98,6 @@ $r = mysqli_fetch_array($q);
             <li><a class="dropdown-item" href="?page=mandiri">PKK</a></li>
           </ul>
         </li>
-
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#">Transparansi</a>
           <ul class="dropdown-menu">
@@ -117,16 +110,16 @@ $r = mysqli_fetch_array($q);
 
       <div class="logout-wrapper">
         <a href="logout.php" class="top-right-btn btn btn-primary">Logout</a>
-      </div>
+ </div>
     </div>
   </div>
 </nav>
-<!-- /NAVBAR -->
 
-<!-- SIDEBAR RESPONSIF -->
+<!-- Overlay (di luar sidebar, satu kali saja) -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
-  <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
   <div class="sidebar-header d-flex align-items-center mb-3">
     <img src="../img/logo.png" alt="Logo" style="height:55px;margin-right:10px;">
     <div>
@@ -135,13 +128,10 @@ $r = mysqli_fetch_array($q);
     </div>
   </div>
 
-  <button class="close-btn" id="closeSidebar" aria-label="Tutup">
-    <i class="fa fa-times"></i>
-  </button>
+  <button class="close-btn" id="closeSidebar"><i class="fa fa-times"></i></button>
 
   <ul class="sidebar-nav">
     <li><a href="index.php?page=warga">Beranda</a></li>
-
     <li class="sidebar-dropdown">
       <a href="#">Profil <i class="fa fa-chevron-down toggle-icon"></i></a>
       <ul class="sidebar-submenu">
@@ -151,11 +141,9 @@ $r = mysqli_fetch_array($q);
         <li><a href="?page=petadesa">Peta Desa</a></li>
       </ul>
     </li>
-
     <li><a href="?page=galeri">Galeri</a></li>
     <li><a href="?page=berita">Berita</a></li>
     <li><a href="?page=contact">Pengaduan</a></li>
-
     <li class="sidebar-dropdown">
       <a href="#">Layanan <i class="fa fa-chevron-down toggle-icon"></i></a>
       <ul class="sidebar-submenu">
@@ -163,7 +151,6 @@ $r = mysqli_fetch_array($q);
         <li><a href="?page=layanan">Buat Surat Mandiri</a></li>
       </ul>
     </li>
-
     <li class="sidebar-dropdown">
       <a href="#">Lembaga Masyarakat <i class="fa fa-chevron-down toggle-icon"></i></a>
       <ul class="sidebar-submenu">
@@ -173,7 +160,6 @@ $r = mysqli_fetch_array($q);
         <li><a href="?page=mandiri">PKK</a></li>
       </ul>
     </li>
-
     <li class="sidebar-dropdown">
       <a href="#">Transparansi <i class="fa fa-chevron-down toggle-icon"></i></a>
       <ul class="sidebar-submenu">
@@ -186,9 +172,11 @@ $r = mysqli_fetch_array($q);
 
   <div class="sidebar-login">
     <a href="logout.php" class="top-right-btn btn btn-primary">Logout</a>
-  </div>
+ </div>
 </div>
-<!-- /SIDEBAR -->
+
+<!-- SIDEBAR RESPONSIF AKHIR -->
+         <!-- AKHIR NAVBAR -->
 
 <?php include 'load_file_warga.php'; ?>
 
@@ -307,42 +295,49 @@ $r = mysqli_fetch_array($q);
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script src="js/custom.js"></script>
 
-<!-- SCRIPT NAVBAR -->
+<!-- SCRIPT NAVBAR FINAL -->
 <script>
-  const hamburger = document.getElementById('hamburger');
-  const sidebar = document.getElementById('sidebar');
-  const closeSidebar = document.getElementById('closeSidebar');
-  const overlay = document.getElementById('sidebarOverlay');
+  const hamburger   = document.getElementById('hamburger');
+  const sidebar     = document.getElementById('sidebar');
+  const closeBtn    = document.getElementById('closeSidebar');
+  const overlay     = document.getElementById('sidebarOverlay');
   const kampungInfo = document.getElementById('kampungInfo');
 
-  hamburger.addEventListener('click', () => {
+  function openSidebar() {
     sidebar.classList.add('active');
     overlay.classList.add('active');
+    document.body.classList.add('no-scroll');
     if (kampungInfo) kampungInfo.style.display = 'none';
+  }
+
+  function closeSidebarFn() {
+    sidebar.classList.remove('active');
+    overlay.classList.remove('active');
+    document.body.classList.remove('no-scroll');
+    if (kampungInfo) kampungInfo.style.display = 'flex';
+  }
+
+  hamburger.addEventListener('click', openSidebar);
+  closeBtn.addEventListener('click', closeSidebarFn);
+  overlay.addEventListener('click', closeSidebarFn);
+
+  document.addEventListener('click', function (e) {
+    const isMobile = window.innerWidth <= 1350;
+    if (!isMobile) return;
+    if (!sidebar.classList.contains('active')) return;
+    if (!sidebar.contains(e.target) && !hamburger.contains(e.target)) {
+      closeSidebarFn();
+    }
   });
 
-  if (closeSidebar) {
-    closeSidebar.addEventListener('click', () => {
-      sidebar.classList.remove('active');
-      overlay.classList.remove('active');
-      if (kampungInfo) kampungInfo.style.display = 'flex';
-    });
-  }
-
-  if (overlay) {
-    overlay.addEventListener('click', () => {
-      sidebar.classList.remove('active');
-      overlay.classList.remove('active');
-      if (kampungInfo) kampungInfo.style.display = 'flex';
-    });
-  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+      closeSidebarFn();
+    }
+  });
 
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 1350) {
-      sidebar.classList.remove('active');
-      overlay.classList.remove('active');
-      if (kampungInfo) kampungInfo.style.display = 'flex';
-    }
+    if (window.innerWidth > 1350) closeSidebarFn();
   });
 </script>
 </body>
